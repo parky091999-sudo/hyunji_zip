@@ -23,26 +23,49 @@ logger = logging.getLogger(__name__)
 
 API_URL = "https://openapi.naver.com/v1/search/shop.json"
 
-# 뷰티 할인 탐색 키워드 - 순서대로 시도, 충분한 상품 모이면 중단
-BEAUTY_KEYWORDS = [
-    "스킨케어 특가",
-    "에센스 할인",
-    "선크림 할인",
-    "앰플 특가",
-    "수분크림 할인",
-    "마스크팩 특가",
-    "토너 할인",
-    "세럼 특가",
-    "클렌징 할인",
-    "아이크림 특가",
+# 카테고리별 키워드 — (키워드, 카테고리힌트) 튜플
+SEARCH_KEYWORDS = [
+    # 뷰티
+    ("스킨케어 추천", "뷰티"),
+    ("선크림 추천", "뷰티"),
+    ("에센스 추천", "뷰티"),
+    ("마스크팩 추천", "뷰티"),
+    ("클렌징 추천", "뷰티"),
+    # 생활용품
+    ("주방용품 추천", "생활"),
+    ("생활용품 특가", "생활"),
+    ("욕실용품 추천", "생활"),
+    # 식품
+    ("간식 추천", "식품"),
+    ("건강식품 추천", "식품"),
+    ("음료 추천", "식품"),
+    # 패션/잡화
+    ("여성의류 추천", "패션"),
+    ("가방 추천", "패션"),
 ]
 
-MIN_LPRICE = 3_000        # 너무 싼 상품 제외 (원)
-PREFER_COUPANG = True    # 쿠팡 판매 상품 우선 필터
+MIN_LPRICE = 3_000
+
+# 상품명에서 제거할 광고성/불필요 패턴
+_NAME_NOISE = re.compile(
+    r"(\[.*?\])"                   # [특가] [타임딜] 등 대괄호 문구
+    r"|(\(.*?직영.*?\))"           # (본사직영) 등
+    r"|(,\s*\d+개$)"               # 끝의 수량 표기 ",  1개"
+    r"|(\s{2,})",                  # 연속 공백
+    re.IGNORECASE,
+)
 
 
 def _strip_html(text: str) -> str:
     return re.sub(r"<[^>]+>", "", text).strip()
+
+
+def _clean_name(name: str) -> str:
+    """상품명에서 광고성 문구 제거"""
+    cleaned = _NAME_NOISE.sub(" ", name).strip()
+    # 앞뒤 특수문자 정리
+    cleaned = re.sub(r"^[\s\-_,/|]+|[\s\-_,/|]+$", "", cleaned)
+    return cleaned if cleaned else name
 
 
 def _fetch_items(keyword: str, display: int = 30) -> list[dict]:
@@ -64,11 +87,13 @@ def _calc_discount_rate(lprice: int, hprice: int) -> int:
     return 0
 
 
-def _to_product(item: dict) -> dict | None:
+def _to_product(item: dict, category_hint: str = "") -> dict | None:
     """네이버 API 응답 → 파이프라인 공통 포맷"""
-    name = _strip_html(item.get("title", ""))
-    if not name:
+    raw_name = _strip_html(item.get("title", ""))
+    if not raw_name:
         return None
+
+    name = _clean_name(raw_name)
 
     lprice = int(item.get("lprice", 0) or 0)
     hprice = int(item.get("hprice", 0) or 0)
@@ -88,14 +113,15 @@ def _to_product(item: dict) -> dict | None:
         "badge": item.get("mallName", ""),
         "brand": item.get("brand", ""),
         "category": item.get("category3", item.get("category2", "")),
+        "category_hint": category_hint,
         "mall_name": item.get("mallName", ""),
         "source": "naver_shopping",
         "scraped_at": datetime.now().isoformat(),
     }
 
 
-def scrape_beauty_deals(max_items: int = MAX_PRODUCTS_PER_RUN) -> list[dict]:
-    """뷰티 상품 수집 (네이버 쇼핑 API) — 쿠팡 판매 상품 우선"""
+def scrape_deals(max_items: int = MAX_PRODUCTS_PER_RUN) -> list[dict]:
+    """상품 수집 (네이버 쇼핑 API) — 다양한 카테고리, 쿠팡 판매 상품 우선"""
     if not NAVER_CLIENT_ID or not NAVER_CLIENT_SECRET:
         logger.error("네이버 API 키 미설정 — .env에 NAVER_CLIENT_ID, NAVER_CLIENT_SECRET 추가 필요")
         return []
@@ -104,7 +130,7 @@ def scrape_beauty_deals(max_items: int = MAX_PRODUCTS_PER_RUN) -> list[dict]:
     all_products: list[dict] = []
     seen_names: set[str] = set()
 
-    for keyword in BEAUTY_KEYWORDS:
+    for keyword, cat_hint in SEARCH_KEYWORDS:
         if len(coupang_products) >= max_items:
             break
         try:
@@ -113,7 +139,7 @@ def scrape_beauty_deals(max_items: int = MAX_PRODUCTS_PER_RUN) -> list[dict]:
             logger.info(f"  → {len(items)}개 항목 수신")
 
             for item in items:
-                product = _to_product(item)
+                product = _to_product(item, category_hint=cat_hint)
                 if not product:
                     continue
                 key = product["name"][:15]
@@ -124,7 +150,7 @@ def scrape_beauty_deals(max_items: int = MAX_PRODUCTS_PER_RUN) -> list[dict]:
                 is_coupang = "쿠팡" in product["mall_name"]
                 if is_coupang:
                     coupang_products.append(product)
-                    logger.info(f"  [쿠팡] {product['name'][:40]} | {product['price']}")
+                    logger.info(f"  [쿠팡/{cat_hint}] {product['name'][:40]} | {product['price']}")
                 else:
                     all_products.append(product)
 
@@ -134,7 +160,6 @@ def scrape_beauty_deals(max_items: int = MAX_PRODUCTS_PER_RUN) -> list[dict]:
         except Exception as e:
             logger.warning(f"키워드 오류 ({keyword}): {e}")
 
-    # 쿠팡 상품 있으면 우선, 부족하면 전체로 채움
     result = coupang_products[:max_items]
     if len(result) < max_items:
         needed = max_items - len(result)
@@ -144,6 +169,10 @@ def scrape_beauty_deals(max_items: int = MAX_PRODUCTS_PER_RUN) -> list[dict]:
 
     logger.info(f"최종 수집: {len(result)}개 (쿠팡 {len(coupang_products)}개 포함)")
     return result
+
+
+# 하위 호환용 alias
+scrape_beauty_deals = scrape_deals
 
 
 def save_products(products: list[dict], filename: str = "products.json"):

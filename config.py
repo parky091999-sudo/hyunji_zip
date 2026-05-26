@@ -8,9 +8,13 @@ THREADS_USERNAME = os.getenv("THREADS_USERNAME")
 THREADS_PASSWORD = os.getenv("THREADS_PASSWORD")
 
 # 네이버 개발자센터 - 검색 API (쇼핑)
-# https://developers.naver.com/apps → 애플리케이션 등록 → 검색 API 선택
 NAVER_CLIENT_ID = os.getenv("NAVER_CLIENT_ID", "")
 NAVER_CLIENT_SECRET = os.getenv("NAVER_CLIENT_SECRET", "")
+
+# 쿠팡파트너스 수익화 활성화 여부
+# False: 링크만 게시, 광고 고지 없음 (수익 발생 전)
+# True:  [광고] 표시 + 공정위 고지문 자동 추가 (파트너스 가입 후 True로 변경)
+COUPANG_PARTNERS_ACTIVE = False
 
 # 스케줄 시간 (24시간 기준)
 SCHEDULE_TIMES = ["09:00", "13:00", "19:00"]

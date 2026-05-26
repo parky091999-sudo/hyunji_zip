@@ -18,7 +18,7 @@ import json
 sys.path.append(os.path.dirname(__file__))
 from config import SCHEDULE_TIMES, MAX_PRODUCTS_PER_RUN, LOG_DIR, NAVER_CLIENT_ID, DATA_DIR
 from scraper.coupang import scrape_homepage_deals
-from scraper.naver_shopping import scrape_beauty_deals, save_products
+from scraper.naver_shopping import scrape_deals, save_products
 from generator.content import generate_posts_batch
 from poster.threads import post_all_products
 
@@ -66,8 +66,8 @@ async def run_pipeline():
 
     # 1단계: 상품 수집 (네이버 쇼핑 API 우선 → 쿠팡 홈 폴백)
     if NAVER_CLIENT_ID:
-        logger.info("[1/3] 네이버 쇼핑 API로 뷰티 상품 수집...")
-        products = scrape_beauty_deals(max_items=MAX_PRODUCTS_PER_RUN)
+        logger.info("[1/3] 네이버 쇼핑 API로 상품 수집...")
+        products = scrape_deals(max_items=MAX_PRODUCTS_PER_RUN)
     else:
         products = []
 

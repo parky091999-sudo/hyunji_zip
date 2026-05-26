@@ -277,6 +277,7 @@ async def add_comment(page: Page, post_url: str | None, comment_text: str):
 async def post_all_products(contents: list[dict]) -> list[str]:
     """
     여러 상품을 하나의 브라우저 세션으로 포스팅 (로그인 1회)
+    상품당 2개 게시글: 글1(자연스러운 추천) → 글2(링크)
     반환: 성공적으로 포스팅된 상품의 product_url 목록
     """
     posted_urls: list[str] = []
@@ -297,23 +298,29 @@ async def post_all_products(contents: list[dict]) -> list[str]:
             page = await login(context)
 
             for i, content in enumerate(contents, 1):
-                post_text = content["post_text"]
-                comment_text = content["comment_text"]
-                image_url = content["product"].get("image_url")
+                post_text_1 = content["post_text_1"]
+                post_text_2 = content.get("post_text_2", "")
+                image_url = content.get("image_url") or content["product"].get("image_url")
                 name = content["product"].get("name", "")[:40]
                 product_url = content["product"].get("product_url", "")
 
                 logger.info(f"[{i}/{len(contents)}] 포스팅: {name}")
                 try:
-                    post_url = await post_thread(page, post_text, image_url)
-                    if comment_text:
-                        await asyncio.sleep(3)
-                        await add_comment(page, post_url, comment_text)
+                    # 글1: 자연스러운 추천 (이미지 포함)
+                    await post_thread(page, post_text_1, image_url)
+                    logger.info(f"  글1 완료")
+
+                    # 글2: 링크 (이미지 없음, 짧은 간격 후)
+                    if post_text_2:
+                        await asyncio.sleep(8)
+                        await post_thread(page, post_text_2, None)
+                        logger.info(f"  글2(링크) 완료")
+
                     logger.info(f"[{i}/{len(contents)}] 완료")
                     posted_urls.append(product_url)
 
                     if i < len(contents):
-                        logger.info("다음 포스팅까지 60초 대기...")
+                        logger.info("다음 상품까지 60초 대기...")
                         await asyncio.sleep(60)
                 except Exception as e:
                     logger.error(f"[{i}] 포스팅 실패: {e}")
