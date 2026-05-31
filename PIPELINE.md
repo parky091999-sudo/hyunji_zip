@@ -1,6 +1,20 @@
 # 꿀픽 파이프라인 운영 문서
 
-> 집 PC / 직장 PC / 핸드폰 어디서든 이 파일을 읽고 Claude에게 붙여넣으면 작업 맥락 공유 가능
+> 집 PC / 직장 PC / 핸드폰 어디서든 이 파일을 Claude에게 붙여넣으면 작업 맥락 공유 가능
+
+---
+
+## 현재 상태 (2026-05-31 기준)
+
+| 항목 | 상태 |
+|------|------|
+| Threads 계정 | `@kkul_pick711` (신규, 공개) |
+| Threads 포스팅 방식 | **공식 API** (Playwright 제거, 봇탐지 없음) |
+| 포스팅 주기 | 매일 1개, 오전 9~11시 랜덤 |
+| 상품 코드 | 001번부터 새로 시작 |
+| GitHub Actions | 정상 작동 중 |
+| GitHub Pages | https://parky091999-sudo.github.io/coupang-pipeline/ |
+| 프로필 사진 | data/profile_pic.png (Threads 앱에서 수동 업로드 필요) |
 
 ---
 
@@ -11,29 +25,64 @@ YouTube 트렌딩 영상
     ↓  Groq AI → 상품명 추출
 네이버 쇼핑 API → 쿠팡 상품 매칭
     ↓
-별점 4.5+ / 리뷰 100+ 필터 (Playwright)
+별점 4.5+ / 리뷰 100+ 필터
     ↓
 Groq AI → 쓰레드 포스팅 텍스트 생성
     ↓
-Threads 자동 포스팅 (Playwright)
+Threads 공식 API 포스팅 (Graph API)
     ↓
 docs/index.html  (상품 페이지)  ← GitHub Pages 공개
 docs/feed.html   (피드 페이지)  ← GitHub Pages 공개
 ```
 
-**실행 주기:** 매일 09:00 KST (GitHub Actions 자동)  
-**1회 수집:** 상품 3개 → Threads 게시글 3개 → 페이지 업데이트
+**실행 주기:** 매일 09:00 KST (GitHub Actions) + 0~120분 랜덤 딜레이 → 실제 포스팅 9~11시 사이  
+**1회 수집:** 상품 1개 → Threads 게시글 1개 → 페이지 업데이트
 
 ---
 
 ## 페이지 URL
 
-| 페이지 | 경로 | 설명 |
-|--------|------|------|
-| 상품 목록 | `docs/index.html` | 전체 등록 상품 카드 |
-| 피드 기록 | `docs/feed.html`  | 게시된/생성된 포스팅 |
+| 페이지 | URL |
+|--------|-----|
+| 상품 목록 | https://parky091999-sudo.github.io/coupang-pipeline/ |
+| 피드 기록 | https://parky091999-sudo.github.io/coupang-pipeline/feed.html |
 
-GitHub Pages 활성화 후: `https://<계정>.github.io/<저장소명>/`
+---
+
+## Threads API 정보
+
+| 항목 | 값 |
+|------|-----|
+| 계정 | @kkul_pick711 |
+| User ID | 26569579222744382 |
+| Meta 앱 이름 | kkul_pick |
+| Meta 앱 ID | 787758504303097 |
+| 토큰 만료 | 2026-07-30 (60일, 만료 전 갱신 필요) |
+
+**토큰 갱신 방법 (60일마다):**
+1. Meta Developer → 이용 사례 → Threads API → 설정 → 액세스 토큰 생성하기
+2. 브라우저 주소창:
+```
+https://graph.threads.net/access_token?grant_type=th_exchange_token&client_id=787758504303097&client_secret=앱시크릿&access_token=새단기토큰
+```
+3. 새 장기 토큰을 GitHub Secret `THREADS_ACCESS_TOKEN` 에 업데이트
+4. 로컬 `.env` 파일도 업데이트
+
+---
+
+## GitHub Secrets 현재 등록 목록
+
+Settings → Secrets and variables → Actions
+
+| Secret 이름 | 설명 |
+|------------|------|
+| `ANTHROPIC_API_KEY` | Claude AI |
+| `GROQ_API_KEY` | Groq AI (무료) |
+| `NAVER_CLIENT_ID` | 네이버 쇼핑 API |
+| `NAVER_CLIENT_SECRET` | 네이버 쇼핑 API |
+| `YOUTUBE_API_KEY` | YouTube Data API v3 |
+| `THREADS_ACCESS_TOKEN` | Threads 공식 API 장기 토큰 (60일) |
+| `THREADS_USER_ID` | 26569579222744382 |
 
 ---
 
@@ -42,10 +91,9 @@ GitHub Pages 활성화 후: `https://<계정>.github.io/<저장소명>/`
 ```
 coupang_pipeline/
 ├── main.py                  ← 파이프라인 진입점 (python main.py)
-├── config.py                ← 설정 상수 (품질 필터, 스케줄 등)
+├── config.py                ← 설정 (품질 필터, 포스팅 수 등)
 ├── generate_page.py         ← 상품 페이지 생성 (docs/index.html)
 ├── generate_feed_page.py    ← 피드 페이지 생성 (docs/feed.html)
-├── preview.py               ← 로컬 드라이런 (브라우저 미리보기)
 ├── scraper/
 │   ├── naver_shopping.py    ← 네이버 쇼핑 API 스크래퍼
 │   └── youtube_trending.py  ← YouTube 트렌딩 → 상품 탐지
@@ -53,12 +101,13 @@ coupang_pipeline/
 │   ├── content.py           ← Groq AI 게시글 생성
 │   └── registry.py          ← 상품 코드 레지스트리 관리
 ├── poster/
-│   ├── threads.py           ← Threads 자동 포스터
-│   └── threads_login.py     ← 쿠키 저장 (최초 1회)
+│   ├── threads.py           ← Threads 공식 API 포스터
+│   └── comment_replier.py   ← 댓글 자동 대댓글 (API 기반)
 ├── data/
-│   ├── product_registry.json ← 등록 상품 목록 + 차단 목록 (git 추적)
-│   ├── feed_posts.json       ← 포스팅 기록 (git 추적)
-│   └── posted_ids.json       ← 중복 포스팅 방지 (git 추적)
+│   ├── product_registry.json ← 등록 상품 + 차단 목록
+│   ├── feed_posts.json       ← 포스팅 기록
+│   ├── posted_ids.json       ← 중복 포스팅 방지
+│   └── profile_pic.png       ← Threads 프로필 사진
 ├── docs/
 │   ├── index.html            ← 상품 페이지 (GitHub Pages)
 │   └── feed.html             ← 피드 페이지 (GitHub Pages)
@@ -69,187 +118,85 @@ coupang_pipeline/
 
 ---
 
-## 환경 변수 (.env)
+## 수동 조작
 
-```env
-ANTHROPIC_API_KEY=sk-ant-...          # Claude AI (콘텐츠 생성)
-GROQ_API_KEY=gsk_...                  # Groq AI (무료, 상품명추출+게시글)
-NAVER_CLIENT_ID=...                   # 네이버 개발자센터 앱 ID
-NAVER_CLIENT_SECRET=...               # 네이버 앱 시크릿
-YOUTUBE_API_KEY=AIza...               # YouTube Data API v3
-THREADS_USERNAME=@아이디              # Threads 계정
-THREADS_PASSWORD=비밀번호             # Threads 비밀번호
-```
-
----
-
-## GitHub 초기 설정 (최초 1회)
-
+### 파이프라인 1회 실행 (포스팅 포함)
 ```bash
-# 1. 저장소 초기화
 cd C:\박관용\CLAUDE\ai-agent\coupang_pipeline
-git init
-git add .
-git commit -m "init: 꿀픽 파이프라인"
-
-# 2. GitHub에 새 저장소 만들고 (Public 권장 - Pages 무료)
-git remote add origin git@github.com:<계정>/<저장소명>.git
-git push -u origin main
-
-# 3. GitHub Pages 설정
-# Settings → Pages → Source: Deploy from a branch
-# Branch: main, Folder: /docs → Save
-
-# 4. Actions 권한 설정
-# Settings → Actions → General → Workflow permissions
-# → "Read and write permissions" 선택 → Save
+python main.py
 ```
 
-### GitHub Secrets 등록
-
-Settings → Secrets and variables → Actions → New repository secret
-
-| Secret 이름 | 값 |
-|------------|-----|
-| `ANTHROPIC_API_KEY` | .env의 값 |
-| `GROQ_API_KEY` | .env의 값 |
-| `NAVER_CLIENT_ID` | .env의 값 |
-| `NAVER_CLIENT_SECRET` | .env의 값 |
-| `YOUTUBE_API_KEY` | .env의 값 |
-| `THREADS_USERNAME` | Threads 아이디 |
-| `THREADS_PASSWORD` | Threads 비밀번호 |
-| `THREADS_COOKIES_B64` | 쿠키 base64 (선택, 아래 참조) |
-
-### Threads 쿠키 등록 (선택)
-
-로컬에서 먼저 로그인하면 Actions에서도 세션 유지 가능:
-
-```bash
-# 로컬에서 쿠키 저장
-python poster/threads_login.py
-
-# base64 인코딩 후 Secret에 등록
-python -c "import base64,open; print(base64.b64encode(open('data/threads_cookies.json','rb').read()).decode())"
-```
-
-위 출력값을 `THREADS_COOKIES_B64` Secret으로 등록.  
-쿠키가 만료되면 로컬에서 재실행 후 재등록 필요.
-
----
-
-## 수동 조작 방법
-
-### 상품 페이지만 바로 갱신
-
+### 페이지만 재생성 (포스팅 없이)
 ```bash
 python generate_page.py
 python generate_feed_page.py
 ```
 
-### 드라이런 미리보기 (실제 포스팅 없이 확인)
-
+### Threads API 연결 테스트
 ```bash
-python preview.py
-```
-→ 브라우저 자동 오픈, 상품 카드 + 쓰레드 피드 미리보기
-
-### 한 번만 실행 (포스팅 포함)
-
-```bash
-python main.py
-```
-
-### 스케줄 모드 (로컬에서 계속 실행)
-
-```bash
-python main.py --schedule
+python poster/threads.py
 ```
 
 ---
 
 ## 상품 관리
 
-### 상품 차단 (중국산 등 재진입 방지)
+### 상품 차단 (재진입 방지)
+`data/product_registry.json` → `blocked_item_ids` 배열에 itemId 추가
 
-`data/product_registry.json` 의 `blocked_item_ids` 배열에 itemId 추가:
-
-```json
-{
-  "blocked_item_ids": ["28158261236", "26870958522", "25050336169"],
-  ...
-}
-```
-
-쿠팡 상품 URL에서 itemId 확인: `...&itemId=28158261236&...`
-
-### 상품 수동 삭제
-
-`data/product_registry.json` 의 `products` 객체에서 해당 항목 삭제 후:
-```bash
-python generate_page.py
-```
-
-### 상품 검색 키워드 변경
-
-`scraper/naver_shopping.py` 의 `SEARCH_KEYWORDS` 리스트 수정
-
-### 품질 필터 설정 변경
-
+### 품질 필터 설정
 `config.py`:
 ```python
-CHECK_RATING      = True   # 별점/리뷰수 체크 (Playwright, 느림)
-MIN_REVIEW_COUNT  = 100    # 최소 리뷰수
-MIN_RATING        = 4.5    # 최소 별점
+MAX_PRODUCTS_PER_RUN = 1    # 하루 포스팅 개수
+MIN_REVIEW_COUNT = 100      # 최소 리뷰수
+MIN_RATING = 4.5            # 최소 별점
 ```
+
+### 쿠팡파트너스 수익화 전환
+`config.py` → `COUPANG_PARTNERS_ACTIVE = True`
 
 ---
 
-## 쿠팡파트너스 수익화 전환
-
-`config.py`:
-```python
-COUPANG_PARTNERS_ACTIVE = False  # → True 로 변경
-```
-
-True로 바꾸면:
-- 모든 포스팅 앞에 `[광고]` 자동 추가
-- 공정위 고지문 자동 포함
-
----
-
-## 자주 있는 상황별 대처
+## 트러블슈팅
 
 ### GitHub Actions 실패 시
-1. Actions 탭 → 실패한 워크플로 → 로그 확인
-2. API 키 만료/오류가 대부분 → Secrets 재확인
+1. Actions 탭 → 실패 워크플로 → 로그 확인
+2. API 키 만료가 대부분 → Secrets 재확인
 3. 수동 실행: Actions → Daily Pipeline → Run workflow
 
-### 상품이 계속 0개 수집될 때
+### 포스팅이 안 될 때
+1. Threads 토큰 만료 확인 (60일) → 위 갱신 방법 참고
+2. `python poster/threads.py` 로 연결 테스트
+3. Meta Developer에서 앱 상태 확인
+
+### 상품 0개 수집 시
 1. 네이버 API 쿼터 확인 (25,000건/일)
 2. YouTube API 쿼터 확인 (10,000 units/일)
-3. `preview.py` 로 로컬 테스트
-
-### Threads 포스팅이 안 될 때
-1. 쿠키 만료 → `python poster/threads_login.py` 재실행
-2. THREADS_COOKIES_B64 Secret 재등록
-3. 계정 정지 여부 확인
-
-### 페이지가 GitHub Pages에 안 보일 때
-1. Settings → Pages에서 배포 상태 확인
-2. `docs/index.html` 파일이 repo에 있는지 확인
-3. Actions 워크플로가 성공적으로 push했는지 확인
+3. Actions → Run workflow 로 수동 실행
 
 ---
 
 ## 다른 기기에서 작업 이어가기
 
+**직장 PC / 핸드폰 Claude에서:**
+1. 이 PIPELINE.md 내용을 Claude에게 붙여넣기
+2. "이어서 작업하자" 라고 말하면 맥락 공유 완료
+
+**직장 PC에서 로컬 실행하려면:**
 ```bash
-# 직장 PC / 핸드폰(Termux) 등 어디서든
-git clone git@github.com:<계정>/<저장소명>.git
-cd <저장소명>
-cp .env.example .env   # 환경변수 직접 입력 필요
+git clone https://github.com/parky091999-sudo/coupang-pipeline.git
+cd coupang-pipeline
 pip install -r requirements.txt
-playwright install chromium
+# .env 파일 새로 만들고 환경변수 입력
 ```
 
-Claude Code에서 이 PIPELINE.md를 먼저 읽히면 전체 맥락 공유 완료.
+---
+
+## 남은 작업 목록
+
+- [ ] Threads 프로필 사진 업로드 (data/profile_pic.png 파일)
+- [ ] Threads 소개글 설정: `매일 꿀템 하나씩 추천\n제품 정보는 아래 링크를 클릭하세요 👇`
+- [ ] Threads 링크 설정: `https://parky091999-sudo.github.io/coupang-pipeline/`
+- [ ] Meta Developer 앱 시크릿 재설정 (채팅에 노출됨)
+- [ ] 쿠팡파트너스 가입 후 `COUPANG_PARTNERS_ACTIVE = True` 전환
+- [ ] 60일 후 (2026-07-30) Threads 토큰 갱신
