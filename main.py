@@ -160,15 +160,15 @@ async def run_pipeline():
     logger.info("[3/5] 쓰레드 포스팅...")
     posting_ok = False
     try:
-        posted_urls, story_urls = await post_all_products(contents)
+        posted_urls, story_post_infos = await post_all_products(contents)
         # 성공한 상품만 posted_ids에 저장
         for url in posted_urls:
             posted_ids.add(url[:80] if url else "")
         posted_ids.discard("")
         save_posted_ids(posted_ids)
-        # story 게시글 URL 등록 (댓글 감지 대상)
-        for url in story_urls:
-            add_recent_post(url, "story")
+        # story 게시글 URL + post_id 등록 (댓글 감지 대상)
+        for info in story_post_infos:
+            add_recent_post(info.get("post_url", ""), info.get("post_id", ""), "story")
         logger.info(f"  → {len(posted_urls)}개 포스팅 완료")
         posting_ok = len(posted_urls) > 0
 

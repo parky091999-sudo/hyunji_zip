@@ -7,6 +7,11 @@ ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY")
 THREADS_USERNAME = os.getenv("THREADS_USERNAME")
 THREADS_PASSWORD = os.getenv("THREADS_PASSWORD")
 
+# Threads 공식 API (Meta Graph API)
+# Meta Developer → 앱 → Threads API → 사용자 액세스 토큰
+THREADS_ACCESS_TOKEN = os.getenv("THREADS_ACCESS_TOKEN", "")
+THREADS_USER_ID = os.getenv("THREADS_USER_ID", "")  # 숫자 ID (조회 방법: poster/threads.py 실행)
+
 # 네이버 개발자센터 - 검색 API (쇼핑)
 NAVER_CLIENT_ID = os.getenv("NAVER_CLIENT_ID", "")
 NAVER_CLIENT_SECRET = os.getenv("NAVER_CLIENT_SECRET", "")
