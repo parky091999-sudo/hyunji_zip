@@ -62,7 +62,6 @@ def build_html(products: list[dict]) -> str:
     else:
         footer_disclosure = "이 페이지에 포함된 링크는 향후 쿠팡파트너스 활동의 일환으로 수수료가 발생할 수 있습니다."
 
-    # 티커 텍스트를 여러 번 반복해서 끊기지 않게
     ticker_repeated = ("  ·  " + _TICKER_MSG) * 6
 
     return f"""<!DOCTYPE html>
@@ -70,7 +69,7 @@ def build_html(products: list[dict]) -> str:
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>꿀픽 | 보다가 이게 뭐야 싶은 것들</title>
+<title>꿀픽 | 진짜 쓸만한 것들만 모았어요</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <style>
   *, *::before, *::after {{ box-sizing: border-box; margin: 0; padding: 0; }}
@@ -173,6 +172,7 @@ def build_html(products: list[dict]) -> str:
     align-items: center;
     gap: 4px;
     white-space: nowrap;
+    text-decoration: none;
   }}
   .icon-btn:hover {{
     border-color: var(--accent);
@@ -208,31 +208,73 @@ def build_html(products: list[dict]) -> str:
   #search:focus {{ border-color: var(--accent); }}
   #search::placeholder {{ color: var(--text2); }}
 
-  /* ── 카운트 바 ── */
-  .count-bar {{
+  /* ── 컨트롤 바 (정렬 + 뷰모드) ── */
+  .control-bar {{
     max-width: 640px;
     margin: 13px auto 0;
     padding: 0 14px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 8px;
   }}
-  .count-label {{ font-size: 0.74rem; color: var(--text2); }}
-  .sort-label {{
-    font-size: 0.7rem;
-    color: var(--text2);
+  .count-label {{ font-size: 0.74rem; color: var(--text2); flex-shrink: 0; }}
+
+  /* 정렬 탭 */
+  .sort-tabs {{
     display: flex;
-    align-items: center;
     gap: 4px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 3px;
   }}
-  .sort-dot {{
-    width: 5px; height: 5px;
-    border-radius: 50%;
+  .sort-tab {{
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--text2);
+    padding: 4px 10px;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: all .15s;
+    border: none;
+    background: transparent;
+  }}
+  .sort-tab.active {{
     background: var(--accent);
-    display: inline-block;
+    color: #fff;
   }}
 
-  /* ── 그리드 ── */
+  /* 뷰 모드 토글 */
+  .view-toggle {{
+    display: flex;
+    gap: 4px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 3px;
+  }}
+  .view-btn {{
+    width: 28px;
+    height: 24px;
+    border: none;
+    background: transparent;
+    border-radius: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all .15s;
+    color: var(--text2);
+  }}
+  .view-btn.active {{
+    background: var(--surface);
+    color: var(--accent);
+    border: 1px solid var(--border);
+  }}
+  .view-btn svg {{ width: 14px; height: 14px; fill: currentColor; }}
+
+  /* ── 그리드 (카드형) ── */
   .grid {{
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(158px, 1fr));
@@ -240,9 +282,43 @@ def build_html(products: list[dict]) -> str:
     padding: 12px 14px 28px;
     max-width: 640px;
     margin: 0 auto;
+    transition: all .2s;
   }}
 
-  /* ── 카드 ── */
+  /* ── 리스트형 ── */
+  .grid.list-view {{
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }}
+  .grid.list-view .card {{
+    flex-direction: row;
+    height: 100px;
+  }}
+  .grid.list-view .card img {{
+    width: 100px;
+    height: 100px;
+    aspect-ratio: 1 / 1;
+    flex-shrink: 0;
+    border-radius: var(--radius) 0 0 var(--radius);
+  }}
+  .grid.list-view .card-body {{
+    padding: 10px 12px;
+    justify-content: center;
+    gap: 6px;
+  }}
+  .grid.list-view .badge-row {{ margin-bottom: 4px; }}
+  .grid.list-view .name {{
+    -webkit-line-clamp: 2;
+    margin-bottom: 6px;
+    font-size: 0.82rem;
+  }}
+  .grid.list-view .btn {{
+    padding: 6px 10px;
+    font-size: 0.72rem;
+    width: fit-content;
+  }}
+
+  /* ── 카드 공통 ── */
   .card {{
     background: var(--surface);
     border-radius: var(--radius);
@@ -253,9 +329,12 @@ def build_html(products: list[dict]) -> str:
     transition: transform .2s ease, border-color .2s, box-shadow .2s;
   }}
   .card:hover {{
-    transform: translateY(-4px);
+    transform: translateY(-3px);
     border-color: #3a3a3a;
-    box-shadow: 0 12px 32px rgba(0,0,0,0.5);
+    box-shadow: 0 10px 28px rgba(0,0,0,0.45);
+  }}
+  .grid.list-view .card:hover {{
+    transform: translateX(3px);
   }}
   .card img {{
     width: 100%;
@@ -276,6 +355,7 @@ def build_html(products: list[dict]) -> str:
     align-items: center;
     gap: 5px;
     margin-bottom: 7px;
+    flex-wrap: wrap;
   }}
   .badge {{
     display: inline-block;
@@ -482,13 +562,9 @@ def build_html(products: list[dict]) -> str:
 
 <header>
   <div class="header-top">
-    <!-- 왼쪽 여백 (레이아웃 균형) -->
-    <div style="width:70px"></div>
-
+    <div style="width:60px"></div>
     <div class="logo">🍯 <span class="accent">꿀픽</span></div>
-
     <div class="header-btns">
-      <a class="icon-btn" href="feed.html" title="피드">📋 피드</a>
       <button class="icon-btn" onclick="showQR()" title="QR코드">
         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path d="M3 3h7v7H3V3zm2 2v3h3V5H5zm9-2h7v7h-7V3zm2 2v3h3V5h-3zM3 14h7v7H3v-7zm2 2v3h3v-3H5zm11 0h2v2h-2v-2zm2 2h2v2h-2v-2zm-4 0h2v2h-2v-2zm4-4h2v2h-2v-2zm-4 4h2v2h-2v-2zm4 4h2v2h-2v-2zm-2-2h2v2h-2v-2z"/>
@@ -504,15 +580,33 @@ def build_html(products: list[dict]) -> str:
     </div>
   </div>
 
-  <div class="tagline">보다가 이게 뭐야 싶은 것들만</div>
+  <div class="tagline">매일 하나씩, 진짜 쓸만한 것들만</div>
   <div class="search-wrap">
     <input type="search" id="search" placeholder="코드(예: 027) 또는 상품명 검색" autocomplete="off" inputmode="search">
   </div>
 </header>
 
-<div class="count-bar">
+<!-- 컨트롤 바: 카운트 + 정렬 + 뷰모드 -->
+<div class="control-bar">
   <span class="count-label" id="count-label">상품 {count}개</span>
-  <span class="sort-label"><span class="sort-dot"></span> 최신순</span>
+
+  <!-- 정렬 탭 -->
+  <div class="sort-tabs">
+    <button class="sort-tab active" id="tab-newest" onclick="setSort('newest')">최신순</button>
+    <button class="sort-tab" id="tab-popular" onclick="setSort('popular')">인기순</button>
+  </div>
+
+  <!-- 뷰 모드 토글 -->
+  <div class="view-toggle">
+    <!-- 그리드 아이콘 -->
+    <button class="view-btn active" id="btn-grid" onclick="setView('grid')" title="카드형">
+      <svg viewBox="0 0 16 16"><rect x="1" y="1" width="6" height="6" rx="1"/><rect x="9" y="1" width="6" height="6" rx="1"/><rect x="1" y="9" width="6" height="6" rx="1"/><rect x="9" y="9" width="6" height="6" rx="1"/></svg>
+    </button>
+    <!-- 리스트 아이콘 -->
+    <button class="view-btn" id="btn-list" onclick="setView('list')" title="리스트형">
+      <svg viewBox="0 0 16 16"><rect x="1" y="2" width="14" height="3" rx="1"/><rect x="1" y="7" width="14" height="3" rx="1"/><rect x="1" y="12" width="14" height="3" rx="1"/></svg>
+    </button>
+  </div>
 </div>
 
 <div class="grid" id="grid">
@@ -528,7 +622,7 @@ def build_html(products: list[dict]) -> str:
       상품 가격 및 재고는 실시간으로 변동될 수 있으며, 쿠팡 페이지에서 최종 확인 후 구매해 주세요.
     </div>
   </div>
-  <div class="footer-copy">© 꿀픽 · kkul.pick.kr</div>
+  <div class="footer-copy">© 꿀픽</div>
 </footer>
 
 <!-- QR 모달 -->
@@ -545,7 +639,7 @@ def build_html(products: list[dict]) -> str:
 <div class="toast" id="toast">링크가 복사됐어요 ✓</div>
 
 <script>
-  /* ── 클릭 트래킹 (localStorage, 기기별) ── */
+  /* ── 클릭 트래킹 ── */
   const CLICK_KEY = 'kkul_clicks';
   const HOT_THRESHOLD  = 3;
   const BEST_THRESHOLD = 8;
@@ -558,15 +652,17 @@ def build_html(products: list[dict]) -> str:
     localStorage.setItem(CLICK_KEY, JSON.stringify(data));
   }}
 
+  function getClickCount(code) {{
+    return loadClicks()[code] || 0;
+  }}
+
   function applyClickBadges() {{
     const clicks = loadClicks();
     document.querySelectorAll('.card').forEach(card => {{
       const code  = card.dataset.code;
       const count = clicks[code] || 0;
       const row   = card.querySelector('.badge-row');
-
       row.querySelectorAll('.badge-hot, .badge-best').forEach(b => b.remove());
-
       if (count >= BEST_THRESHOLD) {{
         const b = document.createElement('span');
         b.className = 'badge-best';
@@ -595,29 +691,88 @@ def build_html(products: list[dict]) -> str:
   applyClickBadges();
 
   /* ── 검색 ── */
-  const input = document.getElementById('search');
-  const cards = Array.from(document.querySelectorAll('.card'));
+  const searchInput = document.getElementById('search');
+  const allCards = Array.from(document.querySelectorAll('.card'));
   const noResult = document.getElementById('no-result');
   const countLabel = document.getElementById('count-label');
 
-  input.addEventListener('input', () => {{
-    const q = input.value.trim().replace(/[\\[\\]]/g, '').toLowerCase();
+  function filterCards() {{
+    const q = searchInput.value.trim().replace(/[\\[\\]]/g, '').toLowerCase();
     let visible = 0;
-    cards.forEach(c => {{
+    allCards.forEach(c => {{
       const match = !q || c.dataset.code.startsWith(q) || c.dataset.name.includes(q);
       c.style.display = match ? '' : 'none';
       if (match) visible++;
     }});
     noResult.style.display = visible === 0 ? 'block' : 'none';
-    countLabel.textContent = q ? `${{visible}}개 검색됨` : `상품 ${{cards.length}}개`;
-  }});
+    countLabel.textContent = q ? `${{visible}}개 검색됨` : `상품 ${{allCards.length}}개`;
+  }}
+
+  searchInput.addEventListener('input', filterCards);
 
   const hash = location.hash.replace('#', '').replace(/[\\[\\]]/g, '');
   if (hash) {{
-    input.value = hash;
-    input.dispatchEvent(new Event('input'));
+    searchInput.value = hash;
+    filterCards();
     const target = document.querySelector(`.card[data-code="${{hash.padStart(3,'0')}}"]`);
     if (target) target.scrollIntoView({{ behavior: 'smooth', block: 'center' }});
+  }}
+
+  /* ── 정렬 ── */
+  let currentSort = 'newest';
+
+  function setSort(mode) {{
+    currentSort = mode;
+    document.getElementById('tab-newest').classList.toggle('active', mode === 'newest');
+    document.getElementById('tab-popular').classList.toggle('active', mode === 'popular');
+
+    const grid = document.getElementById('grid');
+    const noResultEl = document.getElementById('no-result');
+
+    // 카드만 추출 (no-result 제외)
+    const cards = allCards.slice();
+
+    if (mode === 'newest') {{
+      // 코드 숫자 내림차순 (높은 번호 = 최신)
+      cards.sort((a, b) => parseInt(b.dataset.code) - parseInt(a.dataset.code));
+    }} else {{
+      // 인기순: 클릭수 내림차순, 같으면 최신순
+      const clicks = loadClicks();
+      cards.sort((a, b) => {{
+        const ca = clicks[a.dataset.code] || 0;
+        const cb = clicks[b.dataset.code] || 0;
+        if (cb !== ca) return cb - ca;
+        return parseInt(b.dataset.code) - parseInt(a.dataset.code);
+      }});
+    }}
+
+    // DOM 재배치
+    cards.forEach(c => grid.insertBefore(c, noResultEl));
+    filterCards();
+  }}
+
+  /* ── 뷰 모드 ── */
+  let currentView = 'grid';
+
+  function setView(mode) {{
+    currentView = mode;
+    const grid = document.getElementById('grid');
+    document.getElementById('btn-grid').classList.toggle('active', mode === 'grid');
+    document.getElementById('btn-list').classList.toggle('active', mode === 'list');
+
+    if (mode === 'list') {{
+      grid.classList.add('list-view');
+    }} else {{
+      grid.classList.remove('list-view');
+    }}
+    // 로컬에 저장 (새로고침 후에도 유지)
+    localStorage.setItem('kkul_view', mode);
+  }}
+
+  // 저장된 뷰 모드 복원
+  const savedView = localStorage.getItem('kkul_view');
+  if (savedView && savedView !== 'grid') {{
+    setView(savedView);
   }}
 
   /* ── QR 코드 ── */
@@ -628,7 +783,6 @@ def build_html(products: list[dict]) -> str:
     const urlText = document.getElementById('qr-url-text');
     const url = window.location.href;
     urlText.textContent = url;
-
     if (!qrGenerated) {{
       new QRCode(document.getElementById('qr-canvas'), {{
         text: url,
@@ -651,15 +805,9 @@ def build_html(products: list[dict]) -> str:
   function sharePage() {{
     const url = window.location.href;
     if (navigator.share) {{
-      navigator.share({{
-        title: '꿀픽 - 보다가 이게 뭐야 싶은 것들',
-        text: '신기한 생활용품 모음',
-        url: url,
-      }}).catch(() => {{}});
+      navigator.share({{ title: '꿀픽', text: '매일 하나씩, 진짜 쓸만한 것들만', url }}).catch(() => {{}});
     }} else {{
-      navigator.clipboard.writeText(url).then(() => showToast()).catch(() => {{
-        prompt('링크를 복사하세요:', url);
-      }});
+      navigator.clipboard.writeText(url).then(() => showToast()).catch(() => {{ prompt('링크를 복사하세요:', url); }});
     }}
   }}
 
