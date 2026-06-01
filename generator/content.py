@@ -3,6 +3,7 @@
 - 글1: Groq AI로 상품별 맞춤 생성 (스토리텔링 + 해시태그)
 - 글2: 코드 기반 유도 — URL 직접 노출 없음 ("프로필 링크에서 [CODE] 검색")
 - COUPANG_PARTNERS_ACTIVE=True 시 [광고] + 공정위 고지문 자동 추가
+- ★ 수정: 쿠팡 상세페이지에서 이미지 3~4장 수집 → carousel 포스팅용
 """
 import random
 import os
@@ -96,7 +97,6 @@ def _generate_post1_ai(product: dict, product_code: str) -> str | None:
         body_and_tags = resp.choices[0].message.content.strip().strip('"\'""''')
         if not body_and_tags:
             return None
-        # AI 생성 본문+해시태그 + 빈 줄 + 코드 안내 (맨 아래로 이동)
         return f"{body_and_tags}\n\n{_CODE_LINE.format(code=product_code)}"
     except Exception as e:
         logger.warning(f"AI 글1 생성 실패: {e}")
@@ -116,6 +116,35 @@ def _post1_fallback(name: str, product_code: str) -> str:
     return f"{body_and_tags}\n\n{_CODE_LINE.format(code=product_code)}"
 
 
+# ── 쿠팡 상세 이미지 수집 ────────────────────────────────────────────────────
+
+def _collect_detail_images(product: dict) -> list[str]:
+    """
+    쿠팡 상세페이지에서 이미지 3~4장 수집
+    - 실패 시 대표 이미지 1장으로 폴백
+    """
+    product_url = product.get("product_url", "")
+    fallback_image = product.get("image_url", "")
+
+    if not product_url:
+        return [fallback_image] if fallback_image else []
+
+    try:
+        from scraper.coupang_images import fetch_product_images
+        images = fetch_product_images(product_url, max_images=4)
+        if images:
+            logger.info(f"  상세 이미지 {len(images)}장 수집 성공")
+            return images
+    except Exception as e:
+        logger.warning(f"  상세 이미지 수집 실패, 대표 이미지로 폴백: {e}")
+
+    # 폴백: 대표 이미지 1장
+    if fallback_image:
+        logger.info("  대표 이미지 1장으로 폴백")
+        return [fallback_image]
+    return []
+
+
 # ── 메인 생성 함수 ─────────────────────────────────────────────────────────────
 
 def generate_post(product: dict) -> dict:
@@ -125,13 +154,18 @@ def generate_post(product: dict) -> dict:
     product_url = product.get("product_url", "")
     image_url = product.get("image_url", "")
 
-    # 상품 코드 할당 ([001], [002]...) — 빈 문자열은 차단된 상품
+    # 상품 코드 할당
     product_code = assign_code(product_url, name, image_url)
     if not product_code:
         logger.info(f"  차단된 상품 스킵: {name[:40]}")
         return {}
 
-    # 글1 하나만 — 스토리 + 해시태그 + 코드 안내 통합
+    # ★ 쿠팡 상세 이미지 3~4장 수집 (carousel용)
+    logger.info(f"  상세 이미지 수집 중: {name[:30]}")
+    detail_images = _collect_detail_images(product)
+    logger.info(f"  → {len(detail_images)}장 준비됨")
+
+    # 글1 생성
     post_text_1 = _generate_post1_ai(product, product_code)
     if post_text_1:
         style = "ai"
@@ -145,8 +179,9 @@ def generate_post(product: dict) -> dict:
     logger.info(f"생성 완료 [{style}][{product_code}]: {name[:30]}")
     return {
         "post_text_1": post_text_1,
-        "post_text_2": "",          # 글2 없음
-        "image_url": image_url,
+        "post_text_2": "",
+        "image_url": image_url,           # 기존 호환용 (단일 이미지)
+        "detail_images": detail_images,   # ★ carousel용 3~4장
         "product": product,
         "style": style,
         "product_code": product_code,
