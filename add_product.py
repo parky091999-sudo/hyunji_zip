@@ -1,0 +1,191 @@
+"""
+직접 상품 등록 CLI — 우선순위 큐에 수동 추가 (priority=1)
+
+사용법:
+  python add_product.py "전동 두피 마사지기"
+  python add_product.py --url "https://www.coupang.com/vp/products/..."
+  python add_product.py --list
+  python add_product.py --remove 2        # 2번 항목 삭제
+  python add_product.py --clear
+"""
+import argparse
+import json
+import os
+import re
+import sys
+from datetime import datetime
+
+import requests
+
+sys.path.insert(0, os.path.dirname(__file__))
+from config import DATA_DIR, NAVER_CLIENT_ID, NAVER_CLIENT_SECRET
+
+QUEUE_PATH = os.path.join(DATA_DIR, "priority_queue.json")
+
+
+def load_queue() -> list:
+    if not os.path.exists(QUEUE_PATH):
+        return []
+    with open(QUEUE_PATH, encoding="utf-8") as f:
+        return json.load(f)
+
+
+def save_queue(queue: list):
+    os.makedirs(DATA_DIR, exist_ok=True)
+    with open(QUEUE_PATH, "w", encoding="utf-8") as f:
+        json.dump(queue, f, ensure_ascii=False, indent=2)
+
+
+def _search_naver(query: str) -> dict | None:
+    if not NAVER_CLIENT_ID:
+        return None
+    headers = {
+        "X-Naver-Client-Id":     NAVER_CLIENT_ID,
+        "X-Naver-Client-Secret": NAVER_CLIENT_SECRET,
+    }
+    params = {"query": query, "display": 5, "sort": "sim"}
+    try:
+        resp = requests.get(
+            "https://openapi.naver.com/v1/search/shop.json",
+            headers=headers, params=params, timeout=10,
+        )
+        resp.raise_for_status()
+        items = resp.json().get("items", [])
+        if not items:
+            return None
+        item = items[0]
+        name = re.sub(r"<[^>]+>", "", item.get("title", query)).strip()
+        lp = int(item.get("lprice", 0) or 0)
+        return {
+            "name":        name,
+            "price":       f"{lp:,}원" if lp else "",
+            "image_url":   item.get("image", ""),
+            "product_url": item.get("link", ""),
+            "brand":       (item.get("brand") or item.get("maker") or "").strip(),
+            "source":      "manual",
+        }
+    except Exception as e:
+        print(f"  네이버 검색 오류: {e}")
+        return None
+
+
+def _is_duplicate(queue: list, url: str) -> bool:
+    if not url:
+        return False
+    return any(item.get("product", {}).get("product_url", "") == url for item in queue)
+
+
+def add_by_name(name: str):
+    print(f"네이버 쇼핑 검색 중: '{name}'")
+    product = _search_naver(name)
+    if not product:
+        product = {"name": name, "product_url": "", "source": "manual"}
+        print("  → 검색 결과 없음 — 상품명만으로 등록")
+    else:
+        print(f"  → {product['name'][:55]}  |  {product.get('price', '')}")
+    _enqueue(product)
+
+
+def add_by_url(url: str):
+    # 쿠팡 URL에서 상품명 힌트 추출
+    name_hint = ""
+    m = re.search(r"/products/\d+--([^/?#]+)", url)
+    if m:
+        name_hint = m.group(1).replace("-", " ").strip()
+
+    if name_hint and NAVER_CLIENT_ID:
+        print(f"URL 힌트로 네이버 검색: '{name_hint}'")
+        product = _search_naver(name_hint)
+        if product:
+            product["product_url"] = url
+            print(f"  → 매칭: {product['name'][:55]}")
+        else:
+            product = {"name": name_hint, "product_url": url, "source": "manual"}
+    else:
+        # URL만 있을 때 — 상품명은 URL 끝 부분에서 추출
+        fallback_name = url.rstrip("/").split("/")[-1][:50] or "수동 등록 상품"
+        product = {"name": fallback_name, "product_url": url, "source": "manual"}
+
+    _enqueue(product)
+
+
+def _enqueue(product: dict):
+    queue = load_queue()
+    if _is_duplicate(queue, product.get("product_url", "")):
+        print(f"  ⚠️  이미 큐에 있는 상품입니다.")
+        return
+    entry = {
+        "priority":  1,
+        "source":    "manual",
+        "added_at":  datetime.now().isoformat(),
+        "product":   product,
+    }
+    queue.append(entry)
+    save_queue(queue)
+    print(f"  ✅ 큐에 추가 (priority=1 / 수동): {product.get('name', '')[:55]}")
+    p1 = sum(1 for x in queue if x.get("priority") == 1)
+    p2 = sum(1 for x in queue if x.get("priority") == 2)
+    print(f"     현재 큐: 수동={p1}개  벤치마크={p2}개  합계={len(queue)}개")
+
+
+def print_queue():
+    queue = load_queue()
+    if not queue:
+        print("우선순위 큐가 비어 있습니다.")
+        return
+    queue_sorted = sorted(queue, key=lambda x: (x.get("priority", 99), x.get("added_at", "")))
+    print(f"우선순위 큐 ({len(queue_sorted)}개):")
+    print(f"  {'#':<4} {'P':<3} {'출처':<12} {'상품명':<45} {'등록일'}")
+    print("  " + "-" * 80)
+    for i, entry in enumerate(queue_sorted, 1):
+        p     = entry.get("priority", "?")
+        src   = entry.get("source", "?")[:10]
+        name  = entry.get("product", {}).get("name", "?")[:43]
+        added = entry.get("added_at", "")[:10]
+        print(f"  {i:<4} {p:<3} {src:<12} {name:<45} {added}")
+
+
+def remove_item(index: int):
+    queue = load_queue()
+    queue_sorted = sorted(queue, key=lambda x: (x.get("priority", 99), x.get("added_at", "")))
+    if index < 1 or index > len(queue_sorted):
+        print(f"  ❌ 잘못된 번호: {index} (1~{len(queue_sorted)} 범위)")
+        return
+    removed = queue_sorted.pop(index - 1)
+    save_queue(queue_sorted)
+    print(f"  ✅ 삭제: [{index}] {removed.get('product', {}).get('name', '')[:50]}")
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(
+        description="우선순위 큐 상품 수동 등록",
+        formatter_class=argparse.RawTextHelpFormatter,
+        epilog=(
+            "예시:\n"
+            '  python add_product.py "전동 두피 마사지기"\n'
+            '  python add_product.py --url "https://www.coupang.com/vp/products/12345--product-name"\n'
+            "  python add_product.py --list\n"
+            "  python add_product.py --remove 2\n"
+            "  python add_product.py --clear"
+        ),
+    )
+    parser.add_argument("name",     nargs="?",            help="등록할 상품명")
+    parser.add_argument("--url",                          help="쿠팡 상품 URL")
+    parser.add_argument("--list",   action="store_true",  help="현재 큐 조회")
+    parser.add_argument("--remove", type=int, metavar="N",help="N번 항목 삭제")
+    parser.add_argument("--clear",  action="store_true",  help="큐 전체 삭제")
+    args = parser.parse_args()
+
+    if args.clear:
+        save_queue([])
+        print("큐를 초기화했습니다.")
+    elif args.list:
+        print_queue()
+    elif args.remove is not None:
+        remove_item(args.remove)
+    elif args.url:
+        add_by_url(args.url)
+    elif args.name:
+        add_by_name(args.name)
+    else:
+        parser.print_help()

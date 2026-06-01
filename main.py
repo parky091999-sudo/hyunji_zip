@@ -26,6 +26,36 @@ from poster.engager import run_engagement_session
 
 POSTED_IDS_PATH  = os.path.join(DATA_DIR, "posted_ids.json")
 FEED_POSTS_PATH  = os.path.join(DATA_DIR, "feed_posts.json")
+QUEUE_PATH       = os.path.join(DATA_DIR, "priority_queue.json")
+
+
+# ── 우선순위 큐 관리 ──────────────────────────────────────────────────────────
+
+def load_priority_queue() -> list:
+    if not os.path.exists(QUEUE_PATH):
+        return []
+    with open(QUEUE_PATH, encoding="utf-8") as f:
+        return json.load(f)
+
+
+def save_priority_queue(queue: list):
+    os.makedirs(DATA_DIR, exist_ok=True)
+    with open(QUEUE_PATH, "w", encoding="utf-8") as f:
+        json.dump(queue, f, ensure_ascii=False, indent=2)
+
+
+def pop_from_queue() -> dict | None:
+    """큐에서 최고 우선순위 항목 1개를 꺼내 반환 (pop)"""
+    queue = load_priority_queue()
+    if not queue:
+        return None
+    queue.sort(key=lambda x: (x.get("priority", 99), x.get("added_at", "")))
+    entry = queue.pop(0)
+    save_priority_queue(queue)
+    src = entry.get("source", "?")
+    acct = f" (@{entry['benchmark_account']})" if "benchmark_account" in entry else ""
+    logger.info(f"  큐 팝: priority={entry.get('priority')} / {src}{acct}")
+    return entry.get("product")
 
 
 # ── 피드 데이터 관리 ─────────────────────────────────────────────────────────
@@ -112,24 +142,62 @@ async def run_pipeline():
     logger.info(f"파이프라인 시작: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     logger.info("=" * 50)
 
-    # 1단계: 상품 수집 (YouTube 트렌딩 우선 → 네이버 보충 → 쿠팡 홈 폴백)
+    # 1단계: 상품 선정 (우선순위 큐 → 자동 수집)
     products = []
 
-    if YOUTUBE_API_KEY:
-        logger.info("[1/3] YouTube 트렌딩 상품 수집...")
-        from scraper.youtube_trending import scrape_trending_products
-        products = scrape_trending_products(max_items=MAX_PRODUCTS_PER_RUN)
-        logger.info(f"  → YouTube {len(products)}개 수집")
+    queue      = load_priority_queue()
+    has_p1     = any(x.get("priority", 99) == 1 for x in queue)
+    has_p2     = any(x.get("priority", 99) == 2 for x in queue)
+    queue_size = len(queue)
 
-    if len(products) < MAX_PRODUCTS_PER_RUN and NAVER_CLIENT_ID:
-        needed = MAX_PRODUCTS_PER_RUN - len(products)
-        logger.info(f"[1/3] 네이버 쇼핑으로 {needed}개 보충...")
-        extra = scrape_deals(max_items=needed)
-        products.extend(extra)
+    # 벤치마킹: 큐가 3개 미만이면 보충 시도
+    if queue_size < 3:
+        logger.info(f"[1/3] 큐 잔여 {queue_size}개 → 벤치마킹 계정 스캔...")
+        try:
+            from scraper.threads_benchmark import run_benchmark
+            added = run_benchmark()
+            if added:
+                # 큐 다시 로드
+                queue  = load_priority_queue()
+                has_p1 = any(x.get("priority", 99) == 1 for x in queue)
+                has_p2 = any(x.get("priority", 99) == 2 for x in queue)
+        except Exception as e:
+            logger.warning(f"  벤치마킹 오류 (계속 진행): {e}")
+
+    # 우선순위 큐에서 상품 선정
+    # P1(수동): 항상 우선 사용
+    # P2(벤치마크): 70% 확률로 사용 (30%는 자동 수집으로 신선도 유지)
+    import random as _random
+    use_queue = (
+        has_p1
+        or (has_p2 and _random.random() < 0.70)
+    )
+
+    if use_queue and queue:
+        logger.info("[1/3] 우선순위 큐에서 상품 선정...")
+        product = pop_from_queue()
+        if product:
+            products = [product]
+            src_tag = "(수동)" if has_p1 else "(벤치마크)"
+            logger.info(f"  → 큐 상품 선정 {src_tag}: {product.get('name', '')[:40]}")
 
     if not products:
-        logger.info("[1/3] YouTube/네이버 결과 없음 → 쿠팡 홈 폴백...")
-        products = await scrape_homepage_deals(max_items=MAX_PRODUCTS_PER_RUN)
+        logger.info("[1/3] 자동 수집 모드...")
+        if YOUTUBE_API_KEY:
+            logger.info("  YouTube 트렌딩 상품 수집...")
+            from scraper.youtube_trending import scrape_trending_products
+            products = scrape_trending_products(max_items=MAX_PRODUCTS_PER_RUN)
+            logger.info(f"  → YouTube {len(products)}개 수집")
+
+        if len(products) < MAX_PRODUCTS_PER_RUN and NAVER_CLIENT_ID:
+            needed = MAX_PRODUCTS_PER_RUN - len(products)
+            logger.info(f"  네이버 쇼핑으로 {needed}개 보충...")
+            extra = scrape_deals(max_items=needed)
+            products.extend(extra)
+
+        if not products:
+            logger.info("  YouTube/네이버 결과 없음 → 쿠팡 홈 폴백...")
+            products = await scrape_homepage_deals(max_items=MAX_PRODUCTS_PER_RUN)
 
     if not products:
         logger.warning("수집된 상품이 없습니다. 파이프라인 종료.")

@@ -91,12 +91,14 @@ Settings → Secrets and variables → Actions
 ```
 coupang_pipeline/
 ├── main.py                  ← 파이프라인 진입점 (python main.py)
+├── add_product.py           ← 상품 수동 등록 CLI (python add_product.py "상품명")
 ├── config.py                ← 설정 (품질 필터, 포스팅 수 등)
 ├── generate_page.py         ← 상품 페이지 생성 (docs/index.html)
 ├── generate_feed_page.py    ← 피드 페이지 생성 (docs/feed.html)
 ├── scraper/
 │   ├── naver_shopping.py    ← 네이버 쇼핑 API 스크래퍼
-│   └── youtube_trending.py  ← YouTube 트렌딩 → 상품 탐지
+│   ├── youtube_trending.py  ← YouTube 트렌딩 → 상품 탐지
+│   └── threads_benchmark.py ← 벤치마킹 계정 스캔 → 상품 추출
 ├── generator/
 │   ├── content.py           ← Groq AI 게시글 생성
 │   └── registry.py          ← 상품 코드 레지스트리 관리
@@ -104,10 +106,12 @@ coupang_pipeline/
 │   ├── threads.py           ← Threads 공식 API 포스터
 │   └── comment_replier.py   ← 댓글 자동 대댓글 (API 기반)
 ├── data/
-│   ├── product_registry.json ← 등록 상품 + 차단 목록
-│   ├── feed_posts.json       ← 포스팅 기록
-│   ├── posted_ids.json       ← 중복 포스팅 방지
-│   └── profile_pic.png       ← Threads 프로필 사진
+│   ├── product_registry.json  ← 등록 상품 + 차단 목록
+│   ├── feed_posts.json        ← 포스팅 기록
+│   ├── posted_ids.json        ← 중복 포스팅 방지
+│   ├── priority_queue.json    ← 우선순위 큐 (수동/벤치마크 상품 대기열)
+│   ├── benchmark_accounts.json← 벤치마킹 Threads 계정 목록 (29개)
+│   └── profile_pic.png        ← Threads 프로필 사진
 ├── docs/
 │   ├── index.html            ← 상품 페이지 (GitHub Pages)
 │   └── feed.html             ← 피드 페이지 (GitHub Pages)
@@ -143,6 +147,34 @@ python poster/threads.py
 ---
 
 ## 상품 관리
+
+### 우선순위 큐 (상품 수동 등록)
+
+**상품명으로 등록:**
+```bash
+python add_product.py "전동 두피 마사지기"
+```
+**쿠팡 URL로 등록:**
+```bash
+python add_product.py --url "https://www.coupang.com/vp/products/..."
+```
+**큐 조회/삭제:**
+```bash
+python add_product.py --list        # 현재 큐 목록
+python add_product.py --remove 2    # 2번 항목 삭제
+python add_product.py --clear       # 전체 삭제
+```
+
+**우선순위 정책:**
+- `priority=1` (수동): 항상 최우선 포스팅
+- `priority=2` (벤치마크): 70% 확률로 우선 사용
+- `priority=3` (자동): 큐 비어있거나 30% 확률 시
+
+**벤치마킹 수동 실행:**
+```bash
+python scraper/threads_benchmark.py
+```
+→ 29개 계정 중 4개 랜덤 선택 → 게시글 분석 → 상품 추출 → 큐에 priority=2로 추가
 
 ### 상품 차단 (재진입 방지)
 `data/product_registry.json` → `blocked_item_ids` 배열에 itemId 추가
@@ -203,6 +235,16 @@ pip install -r requirements.txt
 - [ ] Meta Developer 앱 시크릿 재설정 (채팅에 노출됨)
 - [ ] 쿠팡파트너스 가입 후 `COUPANG_PARTNERS_ACTIVE = True` 전환
 - [ ] 60일 후 (2026-07-30) Threads 토큰 갱신
+
+---
+
+## 2026-06-01 작업 이력 (2차)
+
+- `add_product.py` 추가: 상품명/URL → 우선순위 큐(priority=1) 수동 등록 CLI
+- `scraper/threads_benchmark.py` 추가: 벤치마킹 계정 29개 랜덤 스캔 → priority=2 큐 추가
+- `data/benchmark_accounts.json` 추가: 검증된 쿠팡파트너스 Threads 계정 29개 목록
+- `data/priority_queue.json` 추가: 우선순위 큐 저장소
+- `main.py` 수정: 우선순위 큐 로직 추가 (P1→P2→자동, 큐<3개 시 벤치마킹 자동 보충)
 
 ---
 
