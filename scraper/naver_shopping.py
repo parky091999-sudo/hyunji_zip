@@ -25,7 +25,6 @@ logger = logging.getLogger(__name__)
 API_URL = "https://openapi.naver.com/v1/search/shop.json"
 
 # 카테고리별 키워드 — (키워드, 카테고리힌트) 튜플
-# 전략: 보는 순간 "이게 뭐야?" "이게 된다고?" 반응 나오는 구체적 아이템
 SEARCH_KEYWORDS = [
     # 주방 — 특이한 자동화 가젯
     ("자동 계란 삶기 기계", "주방"),
@@ -57,8 +56,30 @@ SEARCH_KEYWORDS = [
 
 MIN_LPRICE = 15_000  # 15,000원 미만 단순 소품 제외
 
-# 같은 배치 내 중복 방지 — 같은 그룹 키워드가 상품명에 있으면 동일 유형으로 판단
-# 한 배치에서 같은 유형은 1개만 허용
+# ── 차단 키워드 (공업용/업소용/저품질 자동 필터) ────────────────────────────
+# 이런 상품은 올리기 전에 자체 차단
+BLOCKED_KEYWORDS = [
+    # 공업/산업/업소용 장비
+    "슬라이서", "절단기", "분쇄기", "탈피기", "박피기", "채칼기계",
+    "업소용", "상업용", "공업용", "산업용", "영업용", "식당용", "주방장비",
+    # 공업 스펙 수치 (일반 소비자 상품에 없는 표현)
+    "kg/h", "r/min", "1400r", "가공량",
+    # B2B / 도매
+    "도매", "대량구매", "벌크", "박스단위",
+    # 직구 / 중국 직배송 느낌
+    "직구", "해외직구",
+    # 부품류
+    "교체부품", "부품만", "스페어",
+    # 작업/안전 장비
+    "소방", "안전모", "작업복", "방진마스크", "방진장갑",
+]
+
+
+def is_blocked_product(name: str) -> bool:
+    """공업용/저품질/B2B 상품 차단"""
+    return any(kw in name for kw in BLOCKED_KEYWORDS)
+
+
 _TYPE_GROUPS: list[list[str]] = [
     ["led마스크", "led 마스크", "피부관리기", "피부 관리 led", "led피부관리"],
     ["마사지의자", "안마의자", "마사지 의자"],
@@ -87,7 +108,6 @@ _TYPE_GROUPS: list[list[str]] = [
 
 
 def _get_product_type(name: str) -> str | None:
-    """상품명에서 유형 ID 추출 — 같은 유형이면 같은 문자열 반환"""
     name_lower = name.lower().replace(" ", "")
     for group in _TYPE_GROUPS:
         for kw in group:
@@ -96,12 +116,11 @@ def _get_product_type(name: str) -> str | None:
     return None
 
 
-# 상품명에서 제거할 광고성/불필요 패턴
 _NAME_NOISE = re.compile(
-    r"(\[.*?\])"                   # [특가] [타임딜] 등 대괄호 문구
-    r"|(\(.*?직영.*?\))"           # (본사직영) 등
-    r"|(,\s*\d+개$)"               # 끝의 수량 표기 ",  1개"
-    r"|(\s{2,})",                  # 연속 공백
+    r"(\[.*?\])"
+    r"|(\(.*?직영.*?\))"
+    r"|(,\s*\d+개$)"
+    r"|(\s{2,})",
     re.IGNORECASE,
 )
 
@@ -111,15 +130,12 @@ def _strip_html(text: str) -> str:
 
 
 def _clean_name(name: str) -> str:
-    """상품명에서 광고성 문구 제거"""
     cleaned = _NAME_NOISE.sub(" ", name).strip()
-    # 앞뒤 특수문자 정리
     cleaned = re.sub(r"^[\s\-_,/|]+|[\s\-_,/|]+$", "", cleaned)
     return cleaned if cleaned else name
 
 
 def _fetch_items(keyword: str, display: int = 30) -> list[dict]:
-    """네이버 쇼핑 API 호출"""
     headers = {
         "X-Naver-Client-Id": NAVER_CLIENT_ID,
         "X-Naver-Client-Secret": NAVER_CLIENT_SECRET,
@@ -131,14 +147,12 @@ def _fetch_items(keyword: str, display: int = 30) -> list[dict]:
 
 
 def _calc_discount_rate(lprice: int, hprice: int) -> int:
-    """최고가 대비 최저가 할인율"""
     if hprice > 0 and lprice > 0 and hprice > lprice:
         return round((1 - lprice / hprice) * 100)
     return 0
 
 
 def _is_bad_name(name: str) -> bool:
-    """중국산 키워드 도배 상품명 감지 — 단어 수 많고 의미 없는 수식어 나열"""
     words = name.split()
     if len(words) >= 10:
         return True
@@ -149,18 +163,16 @@ def _is_bad_name(name: str) -> bool:
 
 
 def _has_chinese(text: str) -> bool:
-    """상품명에 중국어 한자가 포함되어 있는지 감지"""
     for ch in text:
         cp = ord(ch)
-        if (0x4E00 <= cp <= 0x9FFF   # CJK 통합 한자 (가장 많음)
-                or 0x3400 <= cp <= 0x4DBF   # CJK 확장 A
-                or 0xF900 <= cp <= 0xFAFF): # CJK 호환 한자
+        if (0x4E00 <= cp <= 0x9FFF
+                or 0x3400 <= cp <= 0x4DBF
+                or 0xF900 <= cp <= 0xFAFF):
             return True
     return False
 
 
 def _to_product(item: dict, category_hint: str = "") -> dict | None:
-    """네이버 API 응답 → 파이프라인 공통 포맷"""
     raw_name = _strip_html(item.get("title", ""))
     if not raw_name:
         return None
@@ -173,7 +185,11 @@ def _to_product(item: dict, category_hint: str = "") -> dict | None:
     if _has_chinese(name):
         return None
 
-    # 브랜드/제조사 둘 다 없으면 노브랜드 중국산 가능성 높음
+    # ── 차단 키워드 필터 (공업용/업소용 등) ──────────────────────────────────
+    if is_blocked_product(name):
+        logger.info(f"  차단 키워드 필터: {name[:40]}")
+        return None
+
     if REQUIRE_BRAND:
         brand = (item.get("brand") or "").strip()
         maker = (item.get("maker") or "").strip()
@@ -208,24 +224,25 @@ def _to_product(item: dict, category_hint: str = "") -> dict | None:
 def _check_coupang_rating(product: dict) -> bool:
     """
     Playwright로 쿠팡 상품 페이지 접속 → 별점/리뷰수 확인
-    CHECK_RATING=False이거나 별점 정보를 못 가져오면 True(통과) 반환
+    ★ 핵심 수정: 별점 정보를 못 가져오면 False(차단)로 처리
+      — 리뷰 0건 상품이 올라오는 버그 방지
     """
     if not CHECK_RATING:
         return True
 
     url = product.get("product_url", "")
     if not url:
-        return True
+        return False  # ★ 수정: URL 없으면 차단 (기존: True 통과)
 
     try:
-        # Naver 리다이렉트 → 실제 쿠팡 URL 추적
         resp = requests.head(url, allow_redirects=True, timeout=6,
                              headers={"User-Agent": "Mozilla/5.0"})
         final_url = resp.url
         if "coupang.com" not in final_url:
-            return True
+            logger.info(f"  쿠팡 상품 아님 — 차단: {url[:50]}")
+            return False  # ★ 수정: 쿠팡 상품이 아니면 차단 (기존: True 통과)
     except Exception:
-        return True  # 리다이렉트 실패 시 패스
+        return False  # ★ 수정: 리다이렉트 실패도 차단 (기존: True 통과)
 
     try:
         from playwright.sync_api import sync_playwright
@@ -251,6 +268,7 @@ def _check_coupang_rating(product: dict) -> bool:
                     ar = data.get("aggregateRating", {})
                     if ar:
                         rating_val = float(ar.get("ratingValue", 0) or 0)
+                        # ★ 수정: reviewCount / ratingCount 모두 명시적 int 변환
                         review_cnt = int(ar.get("reviewCount") or ar.get("ratingCount") or 0)
                         if rating_val > 0:
                             break
@@ -272,37 +290,40 @@ def _check_coupang_rating(product: dict) -> bool:
 
             browser.close()
 
-        if rating_val > 0:
-            product["rating"] = rating_val
-            product["review_count"] = review_cnt
-            logger.info(f"  → ★{rating_val} 리뷰 {review_cnt}개")
+        # ★ 핵심 수정: 별점 정보 자체가 없으면 차단
+        if rating_val == 0:
+            logger.info(f"  별점 정보 없음 (신규/미검증 상품) → 차단: {product.get('name','')[:30]}")
+            return False  # 기존: True(통과) → False(차단)으로 변경
 
-            if review_cnt < MIN_REVIEW_COUNT:
-                logger.info(f"  → 리뷰 부족 ({review_cnt} < {MIN_REVIEW_COUNT}) 제외")
-                return False
-            if rating_val < MIN_RATING:
-                logger.info(f"  → 별점 미달 (★{rating_val} < ★{MIN_RATING}) 제외")
-                return False
-        else:
-            logger.info("  → 별점 정보 없음, 패스")
+        product["rating"] = rating_val
+        product["review_count"] = review_cnt
+        logger.info(f"  → ★{rating_val} 리뷰 {review_cnt}개")
+
+        # ★ 수정: 리뷰수 None 방어 — 명시적 int 변환
+        if int(review_cnt or 0) < MIN_REVIEW_COUNT:
+            logger.info(f"  → 리뷰 부족 ({review_cnt} < {MIN_REVIEW_COUNT}) 제외")
+            return False
+        if float(rating_val or 0) < MIN_RATING:
+            logger.info(f"  → 별점 미달 (★{rating_val} < ★{MIN_RATING}) 제외")
+            return False
 
         return True
 
     except Exception as e:
-        logger.warning(f"  → 별점 체크 오류: {e} — 패스")
-        return True
+        logger.warning(f"  → 별점 체크 오류: {e} — 안전하게 차단")
+        return False  # ★ 수정: 오류 시 차단 (기존: True 통과)
 
 
 def scrape_deals(max_items: int = MAX_PRODUCTS_PER_RUN) -> list[dict]:
     """상품 수집 (네이버 쇼핑 API) — 다양한 카테고리, 쿠팡 판매 상품 우선"""
     if not NAVER_CLIENT_ID or not NAVER_CLIENT_SECRET:
-        logger.error("네이버 API 키 미설정 — .env에 NAVER_CLIENT_ID, NAVER_CLIENT_SECRET 추가 필요")
+        logger.error("네이버 API 키 미설정")
         return []
 
     coupang_products: list[dict] = []
     all_products: list[dict] = []
     seen_names: set[str] = set()
-    seen_types: set[str] = set()  # 유형 중복 방지
+    seen_types: set[str] = set()
 
     for keyword, cat_hint in SEARCH_KEYWORDS:
         if len(coupang_products) >= max_items:
@@ -316,7 +337,7 @@ def scrape_deals(max_items: int = MAX_PRODUCTS_PER_RUN) -> list[dict]:
                 product = _to_product(item, category_hint=cat_hint)
                 if not product:
                     continue
-                # 상품명 중복 제거
+
                 key = product["name"][:8]
                 if key in seen_names:
                     continue
@@ -324,7 +345,6 @@ def scrape_deals(max_items: int = MAX_PRODUCTS_PER_RUN) -> list[dict]:
 
                 is_coupang = "쿠팡" in product["mall_name"]
                 if is_coupang:
-                    # 유형 중복 제거 — 쿠팡 상품끼리만 비교 (비쿠팡이 슬롯 차지 방지)
                     ptype = _get_product_type(product["name"])
                     if ptype and ptype in seen_types:
                         logger.info(f"  유형 중복 제외 [{ptype}]: {product['name'][:30]}")
@@ -349,7 +369,6 @@ def scrape_deals(max_items: int = MAX_PRODUCTS_PER_RUN) -> list[dict]:
     return result
 
 
-# 하위 호환용 alias
 scrape_beauty_deals = scrape_deals
 
 
@@ -376,7 +395,7 @@ async def run():
     products = scrape_beauty_deals()
     if products:
         save_products(products)
-        print(f"\n수집된 뷰티 상품 {len(products)}개:")
+        print(f"\n수집된 상품 {len(products)}개:")
         for p in products:
             print(f"  [{p['discount_rate']}%] {p['name'][:45]} | {p['price']} | {p['mall_name']}")
     else:
