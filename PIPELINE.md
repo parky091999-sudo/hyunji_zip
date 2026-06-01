@@ -4,15 +4,15 @@
 
 ---
 
-## 현재 상태 (2026-05-31 기준)
+## 현재 상태 (2026-06-01 기준)
 
 | 항목 | 상태 |
 |------|------|
 | Threads 계정 | `@kkul_pick711` (신규, 공개) |
 | Threads 포스팅 방식 | **공식 API** (Playwright 제거, 봇탐지 없음) |
-| 포스팅 주기 | 매일 1개, 오전 9~11시 랜덤 |
-| 상품 코드 | 001번부터 새로 시작 |
-| GitHub Actions | 정상 작동 중 |
+| 포스팅 주기 | 매일 1개, 오전 9:05 KST 자동 실행 + 0~120분 랜덤 딜레이 |
+| 상품 코드 | 002번까지 진행 (2026-06-01 테스트런) |
+| GitHub Actions | **정상 작동 확인** (2026-06-01 테스트런 성공) |
 | GitHub Pages | https://parky091999-sudo.github.io/coupang-pipeline/ |
 | 프로필 사진 | data/profile_pic.png (Threads 앱에서 수동 업로드 필요) |
 
@@ -35,7 +35,7 @@ docs/index.html  (상품 페이지)  ← GitHub Pages 공개
 docs/feed.html   (피드 페이지)  ← GitHub Pages 공개
 ```
 
-**실행 주기:** 매일 09:00 KST (GitHub Actions) + 0~120분 랜덤 딜레이 → 실제 포스팅 9~11시 사이  
+**실행 주기:** 매일 09:05 KST (GitHub Actions) + 0~120분 랜덤 딜레이 → 실제 포스팅 9~11시 사이  
 **1회 수집:** 상품 1개 → Threads 게시글 1개 → 페이지 업데이트
 
 ---
@@ -122,9 +122,12 @@ coupang_pipeline/
 
 ### 파이프라인 1회 실행 (포스팅 포함)
 ```bash
-cd C:\박관용\CLAUDE\ai-agent\coupang_pipeline
-python main.py
+python main.py              # 랜덤 딜레이 포함 (운영용)
+python main.py --no-delay   # 즉시 실행 (테스트용)
 ```
+
+### GitHub Actions 수동 테스트 실행
+Actions → Daily Pipeline → Run workflow → **"랜덤 딜레이 건너뛰기" 체크** → Run workflow
 
 ### 페이지만 재생성 (포스팅 없이)
 ```bash
@@ -200,3 +203,15 @@ pip install -r requirements.txt
 - [ ] Meta Developer 앱 시크릿 재설정 (채팅에 노출됨)
 - [ ] 쿠팡파트너스 가입 후 `COUPANG_PARTNERS_ACTIVE = True` 전환
 - [ ] 60일 후 (2026-07-30) Threads 토큰 갱신
+
+---
+
+## 2026-06-01 작업 이력
+
+- `daily.yml` 시크릿 수정: `THREADS_USERNAME/PASSWORD` → `THREADS_ACCESS_TOKEN/USER_ID`
+- cron `0 0 * * *` → `5 0 * * *` (정각 부하 회피, 09:05 KST)
+- 테스트용 딜레이 스킵 옵션 추가: `--no-delay` 플래그, Actions `skip_delay` 체크박스
+- `poster/threads.py`: permalink 조회 전 5초 대기 (색인 미완료 대응)
+- `main.py`: 포스팅 후 `feed_posts.json`에 `threads_url` 업데이트 로직 추가
+- `generator/content.py`: 한국어 전용 생성 지시 추가 (다국어 혼입 방지)
+- 2026-06-01 테스트런 성공 확인 (상품코드 002, 포스팅 완료)
