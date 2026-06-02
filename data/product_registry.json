@@ -1,10 +1,6 @@
 {
   "next_code": 4,
-  "blocked_item_ids": [
-    "28158261236",
-    "26870958522",
-    "25050336169"
-  ],
+  "blocked_item_ids": [ ],
   "products": {
     "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8849967732&ctag=8849967732&lpt": {
       "code": "001",
