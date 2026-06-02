@@ -25,7 +25,7 @@ YOUTUBE_API_KEY = os.getenv("YOUTUBE_API_KEY", "")
 
 # 상품 품질 필터
 REQUIRE_BRAND = False     # 별점/리뷰수 필터가 더 강력 — 브랜드 필터는 오탈락 많아 비활성화
-CHECK_RATING = True       # True: Playwright로 쿠팡 별점/리뷰수 확인 (느리지만 정확)
+CHECK_RATING = False      # GitHub Actions IP를 쿠팡이 차단해 별점 확인 불가 → 비활성화
 MIN_REVIEW_COUNT = 100    # 최소 리뷰 수
 MIN_RATING = 4.5          # 최소 별점
 
