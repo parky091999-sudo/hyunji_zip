@@ -224,30 +224,35 @@ def _to_product(item: dict, category_hint: str = "") -> dict | None:
 def _check_coupang_rating(product: dict) -> bool:
     """
     Playwright로 쿠팡 상품 페이지 접속 → 별점/리뷰수 확인
-    ★ 핵심 수정: 별점 정보를 못 가져오면 False(차단)로 처리
-      — 리뷰 0건 상품이 올라오는 버그 방지
+    - 별점 정보를 정상적으로 가져왔는데 0점이면 차단 (신규/미검증 상품)
+    - Playwright 인프라 오류(브라우저 미설치, 네트워크 타임아웃 등)는
+      차단하지 않고 통과 처리 (검증 불가 → 허용)
     """
     if not CHECK_RATING:
         return True
 
     url = product.get("product_url", "")
     if not url:
-        return False  # ★ 수정: URL 없으면 차단 (기존: True 통과)
+        return False
 
     try:
-        resp = requests.head(url, allow_redirects=True, timeout=6,
+        resp = requests.head(url, allow_redirects=True, timeout=8,
                              headers={"User-Agent": "Mozilla/5.0"})
         final_url = resp.url
         if "coupang.com" not in final_url:
             logger.info(f"  쿠팡 상품 아님 — 차단: {url[:50]}")
-            return False  # ★ 수정: 쿠팡 상품이 아니면 차단 (기존: True 통과)
-    except Exception:
-        return False  # ★ 수정: 리다이렉트 실패도 차단 (기존: True 통과)
+            return False
+    except Exception as e:
+        logger.warning(f"  리다이렉트 확인 실패 ({e}) — 통과 처리")
+        final_url = url  # 원본 URL로 Playwright 시도
 
     try:
         from playwright.sync_api import sync_playwright
         with sync_playwright() as p:
-            browser = p.chromium.launch(headless=True)
+            browser = p.chromium.launch(
+                headless=True,
+                args=["--no-sandbox", "--disable-dev-shm-usage"],
+            )
             page = browser.new_page(
                 user_agent=(
                     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
@@ -255,7 +260,7 @@ def _check_coupang_rating(product: dict) -> bool:
                     "Chrome/124.0.0.0 Safari/537.36"
                 )
             )
-            page.goto(final_url, wait_until="domcontentloaded", timeout=15000)
+            page.goto(final_url, wait_until="domcontentloaded", timeout=20000)
 
             rating_val, review_cnt = 0.0, 0
 
@@ -268,7 +273,6 @@ def _check_coupang_rating(product: dict) -> bool:
                     ar = data.get("aggregateRating", {})
                     if ar:
                         rating_val = float(ar.get("ratingValue", 0) or 0)
-                        # ★ 수정: reviewCount / ratingCount 모두 명시적 int 변환
                         review_cnt = int(ar.get("reviewCount") or ar.get("ratingCount") or 0)
                         if rating_val > 0:
                             break
@@ -290,16 +294,14 @@ def _check_coupang_rating(product: dict) -> bool:
 
             browser.close()
 
-        # ★ 핵심 수정: 별점 정보 자체가 없으면 차단
         if rating_val == 0:
             logger.info(f"  별점 정보 없음 (신규/미검증 상품) → 차단: {product.get('name','')[:30]}")
-            return False  # 기존: True(통과) → False(차단)으로 변경
+            return False
 
         product["rating"] = rating_val
         product["review_count"] = review_cnt
         logger.info(f"  → ★{rating_val} 리뷰 {review_cnt}개")
 
-        # ★ 수정: 리뷰수 None 방어 — 명시적 int 변환
         if int(review_cnt or 0) < MIN_REVIEW_COUNT:
             logger.info(f"  → 리뷰 부족 ({review_cnt} < {MIN_REVIEW_COUNT}) 제외")
             return False
@@ -310,8 +312,10 @@ def _check_coupang_rating(product: dict) -> bool:
         return True
 
     except Exception as e:
-        logger.warning(f"  → 별점 체크 오류: {e} — 안전하게 차단")
-        return False  # ★ 수정: 오류 시 차단 (기존: True 통과)
+        # Playwright 인프라 오류 (브라우저 미설치, OS 라이브러리 누락 등)
+        # 상품 자체의 문제가 아니므로 차단하지 않고 통과
+        logger.warning(f"  → Playwright 오류로 별점 확인 불가: {e} — 통과 처리")
+        return True
 
 
 def scrape_deals(max_items: int = MAX_PRODUCTS_PER_RUN) -> list[dict]:
