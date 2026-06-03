@@ -1,5 +1,5 @@
 {
-  "next_code": 4,
+  "next_code": 5,
   "blocked_item_ids": [],
   "products": {
     "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8849967732&ctag=8849967732&lpt": {
@@ -19,6 +19,12 @@
       "name": "CLABO 딥클린 샴푸 트로피칼 시트러스 960ml 2개 약산성 두피케어",
       "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=5652252849&ctag=5652252849&lptag=I8574817075&itemId=8574817075&vendorItemId=92419089816&spec=10305197",
       "image_url": "https://shopping-phinf.pstatic.net/main_5720025/57200255943.jpg"
+    },
+    "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8645052268&ctag=8645052268&lpt": {
+      "code": "004",
+      "name": "산리오 헬로키티 미니 물 정수기 디스펜서 2L 핑크",
+      "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8645052268&ctag=8645052268&lptag=P8645052268&itemId=27727944467&vendorItemId=94689248135&spec=10305199",
+      "image_url": "https://shopping-phinf.pstatic.net/main_5880827/58808274258.jpg"
     }
   }
 }
