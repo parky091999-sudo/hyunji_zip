@@ -1,5 +1,5 @@
 {
-  "next_code": 5,
+  "next_code": 6,
   "blocked_item_ids": [],
   "products": {
     "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8849967732&ctag=8849967732&lpt": {
@@ -25,6 +25,12 @@
       "name": "360도회전 올인원 유리창닦이 자동물분사 구정물수집 실리콘 스퀴지 찌든때제거 물때자국없이",
       "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9057403458&ctag=9057403458&lptag=I28158261236&itemId=28158261236&vendorItemId=95113361305&spec=10305199",
       "image_url": "https://shopping-phinf.pstatic.net/main_5986397/59863973537.jpg"
+    },
+    "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=5652252849&ctag=5652252849&lpt": {
+      "code": "005",
+      "name": "CLABO 딥클린 샴푸 트로피칼 시트러스 960ml 2개 약산성 두피케어",
+      "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=5652252849&ctag=5652252849&lptag=I8574817075&itemId=8574817075&vendorItemId=92419089816&spec=10305197",
+      "image_url": "https://shopping-phinf.pstatic.net/main_5720025/57200255943.jpg"
     }
   }
 }
