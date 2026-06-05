@@ -68,7 +68,6 @@ def run():
                     existing_selected[url] = c
 
     seen_urls: set[str] = set(existing_selected.keys())
-    seen_names: set[str] = set()
     candidates: list[dict] = []
 
     for acc in accounts:
@@ -92,10 +91,6 @@ def run():
             for name in names:
                 if len(candidates) >= MAX_CANDIDATES:
                     break
-                key = name[:6]
-                if key in seen_names:
-                    continue
-                seen_names.add(key)
 
                 product = _search_naver(name)
                 if not product:
