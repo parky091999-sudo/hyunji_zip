@@ -67,8 +67,18 @@ def assign_code(product_url: str, name: str = "", image_url: str = "") -> str:
     return code
 
 
+def mark_posted(code: str):
+    """포스팅 성공 시 호출 — 해당 코드 상품을 posted=True 로 표시"""
+    reg = _load()
+    for v in reg["products"].values():
+        if v["code"] == code:
+            v["posted"] = True
+            break
+    _save(reg)
+
+
 def get_all() -> list[dict]:
-    """전체 등록 상품 목록 — 링크인바이오 페이지 생성용"""
+    """실제 포스팅된 상품 목록만 반환 — 링크인바이오 페이지 생성용"""
     reg = _load()
     return [
         {
@@ -78,4 +88,5 @@ def get_all() -> list[dict]:
             "image_url": v.get("image_url", ""),
         }
         for v in reg["products"].values()
+        if v.get("posted", False)
     ]

@@ -195,6 +195,10 @@ async def run():
         if key:
             posted_ids.add(key)
         _save_json(POSTED_IDS_PATH, sorted(posted_ids))
+        # 페이지 노출용 posted 플래그
+        if code:
+            from generator.registry import mark_posted
+            mark_posted(code)
 
     # 5. feed_posts 업데이트
     feed = _load_json(FEED_POSTS_PATH, [])
