@@ -58,15 +58,44 @@ def _resolve_url(url: str) -> str:
         headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
         resp = requests.get(url, headers=headers, timeout=12, verify=False, allow_redirects=True)
         final = resp.url
-        # 쿠팡 상품 URL이 포함되어 있으면 그걸 추출
+        html  = resp.text
+
+        # 1. 최종 URL 자체가 쿠팡이면 반환
         m = re.search(r"(https?://(?:www\.)?coupang\.com/vp/products/\d+[^\s\"'&]*)", final)
         if m:
             return m.group(1)
-        # HTML 내 쿠팡 URL 탐색 (일부 링크는 JS 리다이렉트)
-        m2 = re.search(r"(https?://(?:www\.)?coupang\.com/vp/products/\d+[^\s\"'&]*)", resp.text)
+
+        # 2. HTML 내 쿠팡 상품 URL 탐색
+        #    - link.coupang.com 파트너스 링크 우선
+        m2 = re.search(r"(https://link\.coupang\.com/[^\s\"'<>&]+)", html)
         if m2:
-            return m2.group(1)
-        return final   # 그래도 없으면 최종 URL 반환
+            # 파트너스 단축 링크를 다시 따라가기
+            try:
+                r2 = requests.get(m2.group(1), headers=headers, timeout=8, verify=False, allow_redirects=True)
+                m3 = re.search(r"(https?://(?:www\.)?coupang\.com/vp/products/\d+[^\s\"'&]*)", r2.url)
+                if m3:
+                    return m3.group(1)
+            except Exception:
+                pass
+
+        # 3. HTML 내 직접 coupang.com/vp/products URL
+        m4 = re.search(r"(https?://(?:www\.)?coupang\.com/vp/products/\d+[^\s\"'<>&]*)", html)
+        if m4:
+            return m4.group(1)
+
+        # 4. inpock 페이지: JSON-LD 또는 data 속성에서 상품 URL 추출
+        # {"url":"https://link.coupang.com/..."}  또는  data-link="..."
+        m5 = re.search(r'"(?:url|link|href)"\s*:\s*"(https://link\.coupang\.com/[^"]+)"', html)
+        if m5:
+            try:
+                r3 = requests.get(m5.group(1), headers=headers, timeout=8, verify=False, allow_redirects=True)
+                m6 = re.search(r"(https?://(?:www\.)?coupang\.com/vp/products/\d+[^\s\"'&]*)", r3.url)
+                if m6:
+                    return m6.group(1)
+            except Exception:
+                pass
+
+        return final   # 최종 URL 반환 (쿠팡 아닐 수 있음 — 이후 필터링)
     except Exception as e:
         logger.warning(f"  URL 추적 실패 ({url[:60]}): {e}")
         return url
