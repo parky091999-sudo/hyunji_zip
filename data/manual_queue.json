@@ -1,1 +1,34 @@
-[]
+[
+  {
+    "product": {
+      "name": "인스타 포토존 웨딩 판넬 제작 포맥스 등신대 폼보드5T/A3 인스타그램 컬러A UV출력",
+      "price": "19,800원",
+      "image_url": "https://shopping-phinf.pstatic.net/main_8101685/81016853230.3.jpg",
+      "product_url": "https://smartstore.naver.com/main/products/3472336093",
+      "brand": "",
+      "source": "benchmark"
+    },
+    "image_url": "https://shopping-phinf.pstatic.net/main_8101685/81016853230.3.jpg",
+    "detail_images": [],
+    "post_text": "",
+    "product_code": "preview",
+    "source_account": "space_____gitdeum",
+    "added_at": "2026-06-05T01:47:36.434Z"
+  },
+  {
+    "product": {
+      "name": "오닉스 북스 GO7 (페이지후속) 7인치 흑백 이북리더기",
+      "price": "409,000원",
+      "image_url": "https://shopping-phinf.pstatic.net/main_8941335/89413356453.1.jpg",
+      "product_url": "https://smartstore.naver.com/main/products/11868845859",
+      "brand": "북스",
+      "source": "benchmark"
+    },
+    "image_url": "https://shopping-phinf.pstatic.net/main_8941335/89413356453.1.jpg",
+    "detail_images": [],
+    "post_text": "",
+    "product_code": "preview",
+    "source_account": "kimsobak90",
+    "added_at": "2026-06-05T01:47:36.435Z"
+  }
+]
