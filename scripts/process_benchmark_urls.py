@@ -16,10 +16,11 @@ sys.path.insert(0, ROOT)
 
 from config import DATA_DIR, LOG_DIR, NAVER_CLIENT_ID
 
-PENDING_URLS_PATH = os.path.join(DATA_DIR, "pending_benchmark_urls.json")
-CANDIDATES_PATH   = os.path.join(DATA_DIR, "manual_candidates.json")
-MAX_PER_PAGE      = 30
-MAX_TOTAL         = 100
+PENDING_URLS_PATH  = os.path.join(DATA_DIR, "pending_benchmark_urls.json")
+CANDIDATES_PATH    = os.path.join(DATA_DIR, "manual_candidates.json")
+SOURCES_PATH       = os.path.join(DATA_DIR, "collection_sources.json")
+MAX_PER_PAGE       = 30
+MAX_TOTAL          = 100
 
 KST = timezone(timedelta(hours=9))
 
@@ -317,9 +318,17 @@ async def run():
 
     pending = _load_json(PENDING_URLS_PATH, {"urls": []})
     urls = [u.strip() for u in pending.get("urls", []) if u.strip()]
+
+    # pending이 비어있으면 저장된 소스 전체 재스캔
     if not urls:
-        logger.info("처리할 URL 없음")
-        return
+        sources_data = _load_json(SOURCES_PATH, {"sources": []})
+        saved = [s["url"] for s in sources_data.get("sources", [])]
+        if saved:
+            logger.info(f"pending 없음 → 저장된 소스 {len(saved)}개 재스캔")
+            urls = saved
+        else:
+            logger.info("처리할 URL 없음")
+            return
 
     logger.info(f"{len(urls)}개 URL 처리 시작")
 
@@ -362,6 +371,23 @@ async def run():
         "updated_at": datetime.now(KST).isoformat(),
         "candidates": candidates,
     })
+
+    # 컬렉션 URL 영구 저장 (재스캔용)
+    sources_data = _load_json(SOURCES_PATH, {"sources": [], "updated_at": ""})
+    existing_source_urls = {s["url"] for s in sources_data.get("sources", [])}
+    for url in urls:
+        if url not in existing_source_urls:
+            label = [s for s in url.rstrip("/").split("/") if s][-1]
+            sources_data["sources"].append({
+                "url":        url,
+                "label":      label,
+                "added_at":   datetime.now(KST).isoformat(),
+            })
+            existing_source_urls.add(url)
+    sources_data["updated_at"] = datetime.now(KST).isoformat()
+    _save_json(SOURCES_PATH, sources_data)
+    logger.info(f"컬렉션 소스 누적: 총 {len(sources_data['sources'])}개 저장됨")
+
     _save_json(PENDING_URLS_PATH, {
         "urls": [], "submitted_at": "",
         "processed_at": datetime.now(KST).isoformat(),
