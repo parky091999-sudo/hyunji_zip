@@ -1,20 +1,6 @@
 {
-  "scanned_at": "2026-06-05T11:13:49.179206+09:00",
-  "updated_at": "2026-06-05T13:10:45.334814+09:00",
+  "scanned_at": "2026-06-05T13:27:11.982471+09:00",
   "candidates": [
-    {
-      "product": {
-        "name": "lyun8350 | 인포크링크",
-        "product_url": "https://link.inpock.co.kr/lyun8350",
-        "image_url": "https://d13k46lqgoj3d6.cloudfront.net/2023/12/14/2023-12-14-1702519322055.webp?w=600&amp;f=png",
-        "price": "",
-        "brand": "",
-        "category_hint": "",
-        "source": "url_input"
-      },
-      "source_account": "url_input",
-      "added_at": "2026-06-05T12:30:23.871287+09:00"
-    },
     {
       "product": {
         "name": "액막이 도어벨 명태풍경 체리원목 자석 현관종 집들이 이사 선물 마켓유니버스",
@@ -78,7 +64,7 @@
     {
       "product": {
         "name": "삼성전자 삼성 2025 QLED 4K QF7D 214cm(85인치) (KQ85QF7DAFXKR), 스탠드",
-        "price": "1,897,410원",
+        "price": "1,897,300원",
         "image_url": "https://shopping-phinf.pstatic.net/main_5616521/56165212067.20250808111943.jpg",
         "product_url": "https://search.shopping.naver.com/catalog/56165212067",
         "brand": "삼성",
