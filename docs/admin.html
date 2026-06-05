@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>꿀픽 관리 페이지</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  background: #0a0a0a; color: #f0f0f0;
+  max-width: 680px; margin: 0 auto; min-height: 100vh;
+}
+/* ── 토큰 모달 ── */
+#token-modal {
+  display: none; position: fixed; inset: 0; background: rgba(0,0,0,.85);
+  z-index: 100; align-items: center; justify-content: center;
+}
+#token-modal.show { display: flex; }
+.modal-box {
+  background: #1a1a1a; border: 1px solid #333; border-radius: 16px;
+  padding: 28px 24px; width: 90%; max-width: 400px;
+}
+.modal-box h2 { font-size: 18px; margin-bottom: 8px; }
+.modal-box p { font-size: 13px; color: #888; margin-bottom: 16px; line-height: 1.5; }
+.modal-box input {
+  width: 100%; padding: 10px 12px; background: #111; border: 1px solid #333;
+  border-radius: 8px; color: #fff; font-size: 13px; margin-bottom: 12px;
+}
+/* ── 탑바 ── */
+.topbar {
+  position: sticky; top: 0; z-index: 10;
+  background: rgba(10,10,10,.95); backdrop-filter: blur(10px);
+  border-bottom: 1px solid #1e1e1e;
+}
+.topbar-row { padding: 14px 16px 0; display: flex; justify-content: space-between; align-items: center; }
+.logo { font-size: 20px; font-weight: 800; }
+.logo span { color: #f8c93a; }
+.topbar-right { font-size: 11px; color: #555; cursor: pointer; }
+.tab-nav { display: flex; border-top: 1px solid #1a1a1a; margin-top: 10px; }
+.tab-btn {
+  flex: 1; padding: 10px; background: none; border: none; color: #555;
+  font-size: 13px; font-weight: 600; cursor: pointer;
+  border-bottom: 2px solid transparent; transition: all .15s;
+}
+.tab-btn.active { color: #fff; border-bottom-color: #f8c93a; }
+/* ── 탭 패널 ── */
+.tab-panel { display: none; padding-bottom: 40px; }
+.tab-panel.active { display: block; }
+/* ── 섹션 ── */
+.section { padding: 20px 16px 0; }
+.section-title {
+  font-size: 11px; color: #555; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .08em; margin-bottom: 12px;
+}
+/* ── 버튼 ── */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 8px 16px; border-radius: 20px; border: none; font-size: 13px;
+  font-weight: 600; cursor: pointer; transition: all .15s;
+}
+.btn-gold { background: #f8c93a; color: #000; }
+.btn-gold:hover { background: #f5a623; }
+.btn-outline { background: none; border: 1px solid #444; color: #ccc; }
+.btn-outline:hover { border-color: #888; color: #fff; }
+.btn-danger { background: none; border: 1px solid #c0392b; color: #e74c3c; }
+.btn-danger:hover { background: #c0392b22; }
+.btn-sm { padding: 5px 12px; font-size: 12px; }
+.btn:disabled { opacity: .4; cursor: default; }
+/* ── 후보 카드 ── */
+.candidate-card {
+  background: #141414; border: 1.5px solid #222; border-radius: 14px;
+  overflow: hidden; margin-bottom: 12px; transition: border-color .15s;
+}
+.candidate-card.approved { border-color: #27ae60; }
+.candidate-card.rejected { border-color: #c0392b; opacity: .55; }
+.candidate-card.default-pick { border-color: #f8c93a33; }
+.card-header {
+  display: flex; gap: 12px; padding: 14px; align-items: flex-start;
+}
+.card-img {
+  width: 72px; height: 72px; object-fit: cover; border-radius: 8px;
+  flex-shrink: 0; background: #1e1e1e;
+}
+.card-info { flex: 1; min-width: 0; }
+.card-badge {
+  display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 8px;
+  border-radius: 10px; margin-bottom: 5px;
+}
+.badge-pending { background: #2a2a2a; color: #888; }
+.badge-approved { background: #1e3a2e; color: #27ae60; }
+.badge-rejected { background: #2a1a1a; color: #e74c3c; }
+.badge-default  { background: #2a2200; color: #f8c93a; }
+.card-name { font-size: 14px; font-weight: 700; line-height: 1.4; margin-bottom: 3px; }
+.card-meta { font-size: 11px; color: #666; }
+.card-body { padding: 0 14px 12px; }
+.card-text {
+  font-size: 13px; color: #bbb; line-height: 1.6; white-space: pre-wrap;
+  background: #0d0d0d; padding: 10px 12px; border-radius: 8px;
+  max-height: 120px; overflow-y: auto; margin-bottom: 10px;
+}
+.card-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+/* ── 수동 큐 ── */
+.queue-item {
+  background: #141414; border: 1px solid #222; border-radius: 10px;
+  padding: 12px 14px; margin-bottom: 8px;
+  display: flex; align-items: center; gap: 10px;
+}
+.queue-order {
+  font-size: 18px; font-weight: 800; color: #f8c93a;
+  width: 28px; text-align: center; flex-shrink: 0;
+}
+.queue-img {
+  width: 48px; height: 48px; object-fit: cover;
+  border-radius: 6px; flex-shrink: 0; background: #1e1e1e;
+}
+.queue-info { flex: 1; min-width: 0; }
+.queue-name { font-size: 13px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.queue-meta { font-size: 11px; color: #666; margin-top: 2px; }
+.queue-controls { display: flex; flex-direction: column; gap: 4px; flex-shrink: 0; }
+.move-btn {
+  background: #222; border: none; color: #888; width: 28px; height: 22px;
+  border-radius: 4px; cursor: pointer; font-size: 11px; display: flex;
+  align-items: center; justify-content: center;
+}
+.move-btn:hover { background: #333; color: #fff; }
+/* ── 벤치마크 후보 ── */
+.candidate-check-item {
+  background: #141414; border: 1px solid #222; border-radius: 10px;
+  padding: 12px 14px; margin-bottom: 8px;
+  display: flex; align-items: center; gap: 10px; cursor: pointer;
+}
+.candidate-check-item:hover { border-color: #444; }
+.candidate-check-item.checked { border-color: #f8c93a55; background: #1a1500; }
+.check-img { width: 52px; height: 52px; object-fit: cover; border-radius: 6px; flex-shrink: 0; background: #1e1e1e; }
+.check-info { flex: 1; min-width: 0; }
+.check-name { font-size: 13px; font-weight: 600; margin-bottom: 2px; }
+.check-meta { font-size: 11px; color: #666; }
+.check-box {
+  width: 22px; height: 22px; border: 2px solid #444; border-radius: 5px;
+  flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+  font-size: 13px; transition: all .15s;
+}
+.checked .check-box { border-color: #f8c93a; background: #f8c93a; color: #000; }
+/* ── 이력 ── */
+.history-item {
+  border-bottom: 1px solid #1a1a1a; padding: 12px 16px;
+  display: flex; gap: 10px; align-items: flex-start;
+}
+.hist-type {
+  font-size: 9px; font-weight: 700; padding: 2px 6px; border-radius: 6px;
+  flex-shrink: 0; margin-top: 2px;
+}
+.type-auto   { background: #1a2a3a; color: #5dade2; }
+.type-manual { background: #1a2a1a; color: #58d68d; }
+.hist-info { flex: 1; min-width: 0; }
+.hist-name { font-size: 13px; font-weight: 600; margin-bottom: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.hist-meta { font-size: 11px; color: #666; }
+.hist-status { font-size: 11px; flex-shrink: 0; }
+.status-ok  { color: #27ae60; }
+.status-fail{ color: #e74c3c; }
+/* ── 공통 ── */
+.empty-msg { color: #555; font-size: 13px; padding: 24px 0; text-align: center; }
+.loading { color: #555; font-size: 13px; padding: 20px 0; text-align: center; }
+.toast {
+  position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+  background: #222; border: 1px solid #444; color: #fff;
+  padding: 10px 20px; border-radius: 20px; font-size: 13px;
+  z-index: 200; opacity: 0; transition: opacity .3s; pointer-events: none;
+}
+.toast.show { opacity: 1; }
+.scan-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.scan-meta { font-size: 11px; color: #555; }
+</style>
+</head>
+<body>
+
+<!-- 토큰 모달 -->
+<div id="token-modal" class="show">
+  <div class="modal-box">
+    <h2>꿀픽 관리 페이지</h2>
+    <p>GitHub Personal Access Token을 입력하세요.<br>한 번 입력하면 이 기기에서는 자동 저장됩니다.<br><small style="color:#555">Settings → Developer settings → PAT (Classic) → repo 권한</small></p>
+    <input type="password" id="token-input" placeholder="ghp_xxxxxxxxxxxxxxxx" autocomplete="off">
+    <div style="display:flex;gap:8px">
+      <button class="btn btn-gold" style="flex:1" onclick="saveToken()">저장 후 시작</button>
+    </div>
+  </div>
+</div>
+
+<div class="topbar">
+  <div class="topbar-row">
+    <div class="logo">꿀픽 <span>관리</span></div>
+    <div class="topbar-right" onclick="clearToken()">토큰 재설정</div>
+  </div>
+  <div class="tab-nav">
+    <button class="tab-btn active" onclick="switchTab('auto',this)">자동포스팅</button>
+    <button class="tab-btn"        onclick="switchTab('manual',this)">수동관리</button>
+    <button class="tab-btn"        onclick="switchTab('history',this)">이력</button>
+  </div>
+</div>
+
+<!-- ── 탭1: 자동포스팅 ── -->
+<div id="tab-auto" class="tab-panel active">
+  <div class="section">
+    <div class="section-title" id="auto-section-title">내일 포스팅 후보</div>
+    <div id="auto-candidates"><div class="loading">불러오는 중...</div></div>
+  </div>
+</div>
+
+<!-- ── 탭2: 수동관리 ── -->
+<div id="tab-manual" class="tab-panel">
+  <div class="section">
+    <div class="section-title">포스팅 큐 (낮 12시 순서대로)</div>
+    <div id="manual-queue-list"><div class="loading">불러오는 중...</div></div>
+  </div>
+  <div class="section" style="margin-top:24px">
+    <div class="scan-bar">
+      <div class="section-title" style="margin-bottom:0">벤치마크 후보</div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <span class="scan-meta" id="scan-date"></span>
+        <button class="btn btn-outline btn-sm" onclick="triggerScan()">새로고침</button>
+      </div>
+    </div>
+    <div id="check-selected-bar" style="display:none;margin-bottom:12px">
+      <button class="btn btn-gold btn-sm" onclick="addCheckedToQueue()">선택한 상품 큐에 추가</button>
+      <span id="check-count" style="font-size:12px;color:#888;margin-left:8px"></span>
+    </div>
+    <div id="benchmark-candidates"><div class="loading">불러오는 중...</div></div>
+  </div>
+</div>
+
+<!-- ── 탭3: 이력 ── -->
+<div id="tab-history" class="tab-panel">
+  <div class="section" style="padding-bottom:20px">
+    <div style="display:flex;gap:8px;margin-bottom:16px">
+      <button class="btn btn-outline btn-sm active-filter" id="filter-all"    onclick="filterHistory('all',this)">전체</button>
+      <button class="btn btn-outline btn-sm"               id="filter-auto"   onclick="filterHistory('auto',this)">자동</button>
+      <button class="btn btn-outline btn-sm"               id="filter-manual" onclick="filterHistory('manual',this)">수동</button>
+    </div>
+    <div id="history-list"><div class="loading">불러오는 중...</div></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const REPO   = "parky091999-sudo/coupang-pipeline";
+const BASE   = `https://api.github.com/repos/${REPO}`;
+let TOKEN    = localStorage.getItem("kkul_pat") || "";
+let _shas    = {};          // 파일별 sha 캐시
+let _data    = {};          // 파일별 데이터 캐시
+let _checkedCandidates = new Set();  // 체크된 후보 인덱스
+let _historyFilter = "all";
+
+// ── 토큰 ──────────────────────────────────────────────────────────────────────
+function saveToken() {
+  const v = document.getElementById("token-input").value.trim();
+  if (!v) { showToast("토큰을 입력하세요"); return; }
+  TOKEN = v;
+  localStorage.setItem("kkul_pat", TOKEN);
+  document.getElementById("token-modal").classList.remove("show");
+  loadAll();
+}
+function clearToken() {
+  if (!confirm("토큰을 삭제하고 재입력 화면으로 이동할까요?")) return;
+  localStorage.removeItem("kkul_pat");
+  TOKEN = "";
+  document.getElementById("token-modal").classList.add("show");
+}
+if (TOKEN) {
+  document.getElementById("token-modal").classList.remove("show");
+}
+
+// ── GitHub API ────────────────────────────────────────────────────────────────
+async function ghGet(path) {
+  const r = await fetch(`${BASE}/contents/${path}`, {
+    headers: { Authorization: `Bearer ${TOKEN}`, Accept: "application/vnd.github+json" }
+  });
+  if (!r.ok) throw new Error(`GET ${path}: ${r.status}`);
+  const j = await r.json();
+  _shas[path] = j.sha;
+  const content = JSON.parse(decodeURIComponent(escape(atob(j.content.replace(/\n/g,"")))));
+  _data[path] = content;
+  return content;
+}
+async function ghPut(path, content, message) {
+  const sha = _shas[path];
+  const body = JSON.stringify({
+    message,
+    content: btoa(unescape(encodeURIComponent(JSON.stringify(content, null, 2)))),
+    sha,
+  });
+  const r = await fetch(`${BASE}/contents/${path}`, {
+    method: "PUT",
+    headers: {
+      Authorization:  `Bearer ${TOKEN}`,
+      Accept:         "application/vnd.github+json",
+      "Content-Type": "application/json",
+    },
+    body,
+  });
+  if (!r.ok) { const t = await r.text(); throw new Error(`PUT ${path}: ${r.status} ${t}`); }
+  const j = await r.json();
+  _shas[path] = j.content.sha;
+  _data[path] = content;
+}
+async function ghDispatch(workflow) {
+  const r = await fetch(`${BASE}/actions/workflows/${workflow}/dispatches`, {
+    method: "POST",
+    headers: {
+      Authorization:  `Bearer ${TOKEN}`,
+      Accept:         "application/vnd.github+json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ ref: "main" }),
+  });
+  if (!r.ok) throw new Error(`dispatch ${workflow}: ${r.status}`);
+}
+
+// ── 전체 로드 ─────────────────────────────────────────────────────────────────
+async function loadAll() {
+  if (!TOKEN) return;
+  await Promise.allSettled([
+    loadAutoCandidates(),
+    loadManualQueue(),
+    loadBenchmarkCandidates(),
+    loadHistory(),
+  ]);
+}
+
+// ── 탭1: 자동포스팅 후보 ──────────────────────────────────────────────────────
+async function loadAutoCandidates() {
+  const el = document.getElementById("auto-candidates");
+  try {
+    const pending = await ghGet("data/pending_post.json");
+    const { for_date, generated_at, candidates = [] } = pending;
+
+    const titleEl = document.getElementById("auto-section-title");
+    if (for_date) {
+      titleEl.textContent = `내일(${for_date}) 포스팅 후보`;
+    } else {
+      titleEl.textContent = "내일 포스팅 후보 (미선정)";
+    }
+
+    if (!candidates.length) {
+      el.innerHTML = `<div class="empty-msg">선정된 후보 없음<br><small style="color:#444">매일 오전 9시에 자동 선정됩니다</small></div>`;
+      return;
+    }
+
+    let defaultIdx = -1;
+    const approvedIdx = candidates.findIndex(c => c.status === "approved");
+    if (approvedIdx >= 0) defaultIdx = approvedIdx;
+    else defaultIdx = candidates.findIndex(c => c.status === "pending");
+
+    el.innerHTML = candidates.map((c, i) => renderCandidateCard(c, i, i === defaultIdx && approvedIdx < 0)).join("");
+  } catch (e) {
+    el.innerHTML = `<div class="empty-msg">불러오기 실패: ${e.message}</div>`;
+  }
+}
+
+function renderCandidateCard(c, idx, isDefault) {
+  const { product = {}, post_text = "", image_url = "", product_code = "", status } = c;
+  const name     = product.name || "(이름 없음)";
+  const img      = image_url || product.image_url || "";
+  const price    = product.price || "";
+  const srcAcc   = product.youtube_source ? `유튜브 연동` : (product.source === "preset" ? "프리셋" : "자동수집");
+
+  let badgeClass = "badge-pending", badgeText = "대기";
+  let cardClass  = "";
+  if (status === "approved") { badgeClass = "badge-approved"; badgeText = "✓ 승인"; cardClass = "approved"; }
+  else if (status === "rejected") { badgeClass = "badge-rejected"; badgeText = "✕ 반려"; cardClass = "rejected"; }
+  else if (isDefault) { badgeClass = "badge-default"; badgeText = "→ 포스팅 예정"; cardClass = "default-pick"; }
+
+  const approveDisabled = status === "approved" ? "disabled" : "";
+  const rejectDisabled  = status === "rejected"  ? "disabled" : "";
+
+  return `
+  <div class="candidate-card ${cardClass}" id="cand-${idx}">
+    <div class="card-header">
+      ${img ? `<img class="card-img" src="${img}" onerror="this.style.display='none'">` : '<div class="card-img"></div>'}
+      <div class="card-info">
+        <span class="card-badge ${badgeClass}">${badgeText}</span>
+        <div class="card-name">${esc(name)}</div>
+        <div class="card-meta">${price ? price + " · " : ""}${srcAcc}${product_code ? " · [" + product_code + "]" : ""}</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-text">${esc(post_text)}</div>
+      <div class="card-actions">
+        <button class="btn btn-gold btn-sm" onclick="approveCandidate(${idx})" ${approveDisabled}>✓ 승인</button>
+        <button class="btn btn-danger btn-sm" onclick="rejectCandidate(${idx})" ${rejectDisabled}>✕ 반려</button>
+        <button class="btn btn-outline btn-sm" onclick="resetCandidate(${idx})">↺ 초기화</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+async function _updatePendingStatus(idx, newStatus) {
+  try {
+    const pending = _data["data/pending_post.json"];
+    if (!pending?.candidates?.[idx]) return;
+    pending.candidates[idx].status = newStatus;
+    await ghPut("data/pending_post.json", pending, `admin: 후보 ${idx} → ${newStatus}`);
+    await loadAutoCandidates();
+    showToast(newStatus === "approved" ? "✓ 승인했습니다" : newStatus === "rejected" ? "✕ 반려했습니다" : "↺ 초기화했습니다");
+  } catch (e) { showToast("오류: " + e.message); }
+}
+const approveCandidate = i => _updatePendingStatus(i, "approved");
+const rejectCandidate  = i => _updatePendingStatus(i, "rejected");
+const resetCandidate   = i => _updatePendingStatus(i, "pending");
+
+// ── 탭2: 수동 큐 ─────────────────────────────────────────────────────────────
+async function loadManualQueue() {
+  const el = document.getElementById("manual-queue-list");
+  try {
+    const queue = await ghGet("data/manual_queue.json");
+    if (!queue.length) {
+      el.innerHTML = `<div class="empty-msg">수동 큐가 비어 있습니다<br><small style="color:#444">아래 벤치마크 후보에서 상품을 선택해 추가하세요</small></div>`;
+      return;
+    }
+    el.innerHTML = queue.map((item, i) => renderQueueItem(item, i, queue.length)).join("");
+  } catch (e) {
+    el.innerHTML = `<div class="empty-msg">불러오기 실패: ${e.message}</div>`;
+  }
+}
+
+function renderQueueItem(item, i, total) {
+  const p = item.product || {};
+  const img = item.image_url || p.image_url || "";
+  return `
+  <div class="queue-item" id="qi-${i}">
+    <div class="queue-order">${i+1}</div>
+    ${img ? `<img class="queue-img" src="${img}" onerror="this.style.display='none'">` : '<div class="queue-img"></div>'}
+    <div class="queue-info">
+      <div class="queue-name">${esc(p.name || "(이름 없음)")}</div>
+      <div class="queue-meta">${p.price || ""} ${p.price && item.source_account ? "·" : ""} ${item.source_account ? "@"+item.source_account : ""}</div>
+    </div>
+    <div class="queue-controls">
+      <button class="move-btn" onclick="moveQueue(${i},-1)" ${i===0?"disabled":""}>▲</button>
+      <button class="move-btn" onclick="moveQueue(${i},1)"  ${i===total-1?"disabled":""}>▼</button>
+    </div>
+    <button class="btn btn-danger btn-sm" onclick="removeFromQueue(${i})">✕</button>
+  </div>`;
+}
+
+async function moveQueue(idx, dir) {
+  const q = [..._data["data/manual_queue.json"]];
+  const to = idx + dir;
+  if (to < 0 || to >= q.length) return;
+  [q[idx], q[to]] = [q[to], q[idx]];
+  try {
+    await ghPut("data/manual_queue.json", q, `admin: 큐 순서 변경`);
+    await loadManualQueue();
+  } catch(e) { showToast("오류: "+e.message); }
+}
+
+async function removeFromQueue(idx) {
+  const q = [..._data["data/manual_queue.json"]];
+  const name = q[idx]?.product?.name || "";
+  if (!confirm(`"${name}" 를 큐에서 삭제할까요?`)) return;
+  q.splice(idx, 1);
+  try {
+    await ghPut("data/manual_queue.json", q, `admin: 큐에서 삭제`);
+    await loadManualQueue();
+    showToast("삭제했습니다");
+  } catch(e) { showToast("오류: "+e.message); }
+}
+
+// ── 탭2: 벤치마크 후보 ───────────────────────────────────────────────────────
+async function loadBenchmarkCandidates() {
+  const el = document.getElementById("benchmark-candidates");
+  _checkedCandidates.clear();
+  updateCheckBar();
+  try {
+    const data = await ghGet("data/manual_candidates.json");
+    const { scanned_at, candidates = [] } = data;
+    document.getElementById("scan-date").textContent = scanned_at ? `마지막 스캔: ${scanned_at.slice(0,10)}` : "스캔 전";
+
+    if (!candidates.length) {
+      el.innerHTML = `<div class="empty-msg">벤치마크 후보 없음<br><small style="color:#444">'새로고침' 버튼으로 스캔하세요 (일요일 밤 자동 실행)</small></div>`;
+      return;
+    }
+    el.innerHTML = candidates.map((c, i) => renderCheckItem(c, i)).join("");
+  } catch(e) {
+    el.innerHTML = `<div class="empty-msg">불러오기 실패: ${e.message}</div>`;
+  }
+}
+
+function renderCheckItem(c, i) {
+  const p = c.product || {};
+  const img = p.image_url || "";
+  const checked = _checkedCandidates.has(i) ? "checked" : "";
+  return `
+  <div class="candidate-check-item ${checked}" id="ci-${i}" onclick="toggleCheck(${i})">
+    ${img ? `<img class="check-img" src="${img}" onerror="this.style.display='none'">` : '<div class="check-img"></div>'}
+    <div class="check-info">
+      <div class="check-name">${esc(p.name || "(이름 없음)")}</div>
+      <div class="check-meta">${p.price || ""} ${c.source_account ? "· @"+c.source_account : ""}</div>
+    </div>
+    <div class="check-box">${_checkedCandidates.has(i) ? "✓" : ""}</div>
+  </div>`;
+}
+
+function toggleCheck(i) {
+  if (_checkedCandidates.has(i)) _checkedCandidates.delete(i);
+  else _checkedCandidates.add(i);
+  const el = document.getElementById(`ci-${i}`);
+  const box = el.querySelector(".check-box");
+  if (_checkedCandidates.has(i)) { el.classList.add("checked"); box.textContent = "✓"; }
+  else { el.classList.remove("checked"); box.textContent = ""; }
+  updateCheckBar();
+}
+
+function updateCheckBar() {
+  const bar = document.getElementById("check-selected-bar");
+  const cnt = document.getElementById("check-count");
+  if (_checkedCandidates.size > 0) {
+    bar.style.display = "block";
+    cnt.textContent = `${_checkedCandidates.size}개 선택됨`;
+  } else {
+    bar.style.display = "none";
+  }
+}
+
+async function addCheckedToQueue() {
+  if (!_checkedCandidates.size) return;
+  const candidates = _data["data/manual_candidates.json"]?.candidates || [];
+  const queue = [...(_data["data/manual_queue.json"] || [])];
+
+  const existingUrls = new Set(queue.map(q => q.product?.product_url || ""));
+
+  const toAdd = [..._checkedCandidates].sort((a,b)=>a-b).map(i => candidates[i]).filter(Boolean);
+  let added = 0;
+  for (const c of toAdd) {
+    const url = c.product?.product_url || "";
+    if (url && existingUrls.has(url)) continue;
+    existingUrls.add(url);
+    queue.push({
+      product:         c.product,
+      image_url:       c.product?.image_url || "",
+      detail_images:   [],
+      post_text:       "",          // 포스팅 시 자동 생성
+      product_code:    "preview",
+      source_account:  c.source_account || "",
+      added_at:        new Date().toISOString(),
+    });
+    added++;
+  }
+
+  try {
+    await ghPut("data/manual_queue.json", queue, `admin: 벤치마크 ${added}개 큐 추가`);
+    _checkedCandidates.clear();
+    updateCheckBar();
+    await loadManualQueue();
+    showToast(`${added}개를 큐에 추가했습니다`);
+    switchTab("manual", document.querySelector('.tab-btn'));
+  } catch(e) { showToast("오류: "+e.message); }
+}
+
+async function triggerScan() {
+  if (!confirm("전체 벤치마크 스캔을 시작할까요?\n(GitHub Actions가 실행되며 3~5분 소요됩니다)")) return;
+  try {
+    await ghDispatch("weekly_benchmark_scan.yml");
+    showToast("스캔 시작됨 — 잠시 후 새로고침하세요");
+  } catch(e) { showToast("오류: "+e.message); }
+}
+
+// ── 탭3: 이력 ────────────────────────────────────────────────────────────────
+async function loadHistory() {
+  const el = document.getElementById("history-list");
+  try {
+    const feed = await ghGet("data/feed_posts.json");
+    renderHistory(feed);
+  } catch(e) {
+    el.innerHTML = `<div class="empty-msg">불러오기 실패: ${e.message}</div>`;
+  }
+}
+
+function renderHistory(feed) {
+  const el = document.getElementById("history-list");
+  let items = feed;
+  if (_historyFilter === "auto")   items = feed.filter(f => f.post_type === "auto"   || !f.post_type);
+  if (_historyFilter === "manual") items = feed.filter(f => f.post_type === "manual");
+
+  if (!items.length) {
+    el.innerHTML = `<div class="empty-msg">이력 없음</div>`;
+    return;
+  }
+  el.innerHTML = items.map(f => {
+    const dt  = f.timestamp ? f.timestamp.slice(0,16).replace("T"," ") : "";
+    const ptype = f.post_type === "manual" ? "수동" : "자동";
+    const ptypeClass = f.post_type === "manual" ? "type-manual" : "type-auto";
+    const statusClass = f.status === "posted" ? "status-ok" : "status-fail";
+    const statusText  = f.status === "posted" ? "✓ 성공" : "✕ 실패";
+    const link = f.threads_url
+      ? `<a href="${f.threads_url}" target="_blank" style="color:#f8c93a;font-size:11px;margin-top:2px;display:block">Threads 바로가기 →</a>`
+      : "";
+    return `
+    <div class="history-item">
+      <span class="hist-type ${ptypeClass}">${ptype}</span>
+      <div class="hist-info">
+        <div class="hist-name">${esc(f.product_name || "(이름 없음)")}</div>
+        <div class="hist-meta">${dt}${f.product_code ? " · ["+f.product_code+"]" : ""}</div>
+        ${link}
+      </div>
+      <div class="hist-status ${statusClass}">${statusText}</div>
+    </div>`;
+  }).join("");
+}
+
+function filterHistory(type, btn) {
+  _historyFilter = type;
+  document.querySelectorAll(".active-filter").forEach(b => b.classList.remove("active-filter"));
+  btn.classList.add("active-filter");
+  const feed = _data["data/feed_posts.json"];
+  if (feed) renderHistory(feed);
+}
+
+// ── 유틸 ─────────────────────────────────────────────────────────────────────
+function switchTab(id, btn) {
+  document.querySelectorAll(".tab-panel").forEach(p => p.classList.remove("active"));
+  document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+  document.getElementById("tab-"+id).classList.add("active");
+  // tab-btn 버튼 찾기
+  document.querySelectorAll(".tab-btn").forEach(b => {
+    if (b.getAttribute("onclick")?.includes(`'${id}'`)) b.classList.add("active");
+  });
+}
+
+let _toastTimer;
+function showToast(msg) {
+  const t = document.getElementById("toast");
+  t.textContent = msg; t.classList.add("show");
+  clearTimeout(_toastTimer);
+  _toastTimer = setTimeout(() => t.classList.remove("show"), 2400);
+}
+
+function esc(s) {
+  return String(s || "")
+    .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;");
+}
+
+// ── 초기 로드 ──────────────────────────────────────────────────────────────────
+if (TOKEN) loadAll();
+</script>
+</body>
+</html>

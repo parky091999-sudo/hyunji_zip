@@ -4,39 +4,43 @@
 
 ---
 
-## 현재 상태 (2026-06-01 기준)
+## 현재 상태 (2026-06-05 기준)
 
 | 항목 | 상태 |
 |------|------|
-| Threads 계정 | `@kkul_pick711` (신규, 공개) |
-| Threads 포스팅 방식 | **공식 API** (Playwright 제거, 봇탐지 없음) |
-| 포스팅 주기 | 매일 1개, 오전 9:05 KST 자동 실행 + 0~120분 랜덤 딜레이 |
-| 상품 코드 | 002번까지 진행 (2026-06-01 테스트런) |
-| GitHub Actions | **정상 작동 확인** (2026-06-01 테스트런 성공) |
-| GitHub Pages | https://parky091999-sudo.github.io/coupang-pipeline/ |
-| 프로필 사진 | data/profile_pic.png (Threads 앱에서 수동 업로드 필요) |
+| Threads 계정 | `@kkul_pick711` (공개) |
+| Threads 포스팅 방식 | **공식 API** (봇탐지 없음) |
+| 자동 포스팅 | 매일 오전 8:05 KST (0~55분 랜덤 딜레이) |
+| 수동 포스팅 | 매일 낮 12:05 KST (수동 큐에 상품 있을 때만) |
+| 사전 선정 | 매일 오전 9:00 KST (다음날 후보 3개 미리 선정) |
+| 벤치마크 스캔 | 매주 일요일 23:00 KST (29개 계정 전체 스캔) |
+| 관리 페이지 | https://parky091999-sudo.github.io/coupang-pipeline/admin.html |
+| 상품 페이지 | https://parky091999-sudo.github.io/coupang-pipeline/ |
 
 ---
 
 ## 시스템 개요
 
 ```
-YouTube 트렌딩 영상
-    ↓  Groq AI → 상품명 추출
-네이버 쇼핑 API → 쿠팡 상품 매칭
-    ↓
-별점 4.5+ / 리뷰 100+ 필터
-    ↓
-Groq AI → 쓰레드 포스팅 텍스트 생성
-    ↓
-Threads 공식 API 포스팅 (Graph API)
-    ↓
-docs/index.html  (상품 페이지)  ← GitHub Pages 공개
-docs/feed.html   (피드 페이지)  ← GitHub Pages 공개
-```
+[전날 09:00 KST] 사전선정 (preselect.py)
+  YouTube / 네이버 / 프리셋 → 후보 3개 생성 → pending_post.json 저장
 
-**실행 주기:** 매일 09:05 KST (GitHub Actions) + 0~120분 랜덤 딜레이 → 실제 포스팅 9~11시 사이  
-**1회 수집:** 상품 1개 → Threads 게시글 1개 → 페이지 업데이트
+[당일 08:05 KST] 자동 포스팅 (auto_post.py)
+  pending_post.json → 승인/기본 후보 선택 → Threads 포스팅
+  → docs/index.html, docs/feed.html 업데이트
+
+[당일 12:05 KST] 수동 포스팅 (manual_post.py)
+  manual_queue.json 첫 번째 → Threads 포스팅 (큐 없으면 스킵)
+
+[일요일 23:00 KST] 주간 벤치마크 스캔 (full_benchmark_scan.py)
+  29개 계정 전체 스캔 → 최대 50개 후보 → manual_candidates.json
+
+[관리 페이지] admin.html
+  - 내일 포스팅 후보 승인/반려
+  - 수동 큐 순서 관리
+  - 벤치마크 후보 선택 → 큐 추가
+  - 포스팅 이력 확인
+```
 
 ---
 

@@ -1,18 +1,12 @@
-name: Auto Post (08:05 KST)
+name: Pre-Select Products (09:00 KST)
 
 on:
   schedule:
-    - cron: '5 23 * * *'   # 23:05 UTC = 08:05 KST
+    - cron: '0 0 * * *'   # 00:00 UTC = 09:00 KST
   workflow_dispatch:
-    inputs:
-      skip_delay:
-        description: '랜덤 딜레이 건너뛰기 (테스트용)'
-        required: false
-        default: 'false'
-        type: boolean
 
 jobs:
-  auto-post:
+  preselect:
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -30,7 +24,7 @@ jobs:
       - name: Install Playwright
         run: playwright install chromium --with-deps
 
-      - name: Run auto post
+      - name: Run pre-selection
         env:
           THREADS_ACCESS_TOKEN: ${{ secrets.THREADS_ACCESS_TOKEN }}
           THREADS_USER_ID:      ${{ secrets.THREADS_USER_ID }}
@@ -38,14 +32,12 @@ jobs:
           NAVER_CLIENT_SECRET:  ${{ secrets.NAVER_CLIENT_SECRET }}
           YOUTUBE_API_KEY:      ${{ secrets.YOUTUBE_API_KEY }}
           GROQ_API_KEY:         ${{ secrets.GROQ_API_KEY }}
-          SKIP_DELAY:           ${{ github.event.inputs.skip_delay || 'false' }}
-        run: python scripts/auto_post.py
+        run: python scripts/preselect.py
 
-      - name: Commit changes
+      - name: Commit pending_post.json
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add docs/index.html docs/feed.html || true
-          git add data/product_registry.json data/feed_posts.json data/posted_ids.json || true
-          git diff --staged --quiet || git commit -m "auto: daily pipeline $(date -u +%Y-%m-%d)"
+          git add data/pending_post.json data/product_registry.json || true
+          git diff --staged --quiet || git commit -m "preselect: 내일 후보 선정 $(date -u +%Y-%m-%d)"
           git push

@@ -1,8 +1,8 @@
-name: Auto Post (08:05 KST)
+name: Manual Post (12:05 KST)
 
 on:
   schedule:
-    - cron: '5 23 * * *'   # 23:05 UTC = 08:05 KST
+    - cron: '5 3 * * *'   # 03:05 UTC = 12:05 KST
   workflow_dispatch:
     inputs:
       skip_delay:
@@ -12,7 +12,7 @@ on:
         type: boolean
 
 jobs:
-  auto-post:
+  manual-post:
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -27,19 +27,15 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Install Playwright
-        run: playwright install chromium --with-deps
-
-      - name: Run auto post
+      - name: Run manual post
         env:
           THREADS_ACCESS_TOKEN: ${{ secrets.THREADS_ACCESS_TOKEN }}
           THREADS_USER_ID:      ${{ secrets.THREADS_USER_ID }}
           NAVER_CLIENT_ID:      ${{ secrets.NAVER_CLIENT_ID }}
           NAVER_CLIENT_SECRET:  ${{ secrets.NAVER_CLIENT_SECRET }}
-          YOUTUBE_API_KEY:      ${{ secrets.YOUTUBE_API_KEY }}
           GROQ_API_KEY:         ${{ secrets.GROQ_API_KEY }}
           SKIP_DELAY:           ${{ github.event.inputs.skip_delay || 'false' }}
-        run: python scripts/auto_post.py
+        run: python scripts/manual_post.py
 
       - name: Commit changes
         run: |
@@ -47,5 +43,6 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add docs/index.html docs/feed.html || true
           git add data/product_registry.json data/feed_posts.json data/posted_ids.json || true
-          git diff --staged --quiet || git commit -m "auto: daily pipeline $(date -u +%Y-%m-%d)"
+          git add data/manual_queue.json || true
+          git diff --staged --quiet || git commit -m "manual: 수동 포스팅 $(date -u +%Y-%m-%d)"
           git push

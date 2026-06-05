@@ -1,0 +1,229 @@
+"""
+자동 포스팅 — 매일 오전 8:05 KST 실행
+1순위: pending_post.json 의 승인(또는 미반려) 후보 사용
+2순위: 실시간 수집 폴백 (main.py 방식)
+"""
+import asyncio
+import json
+import logging
+import os
+import sys
+from datetime import datetime, timezone, timedelta
+
+ROOT = os.path.dirname(os.path.dirname(__file__))
+sys.path.insert(0, ROOT)
+
+from config import DATA_DIR, LOG_DIR, MAX_PRODUCTS_PER_RUN, YOUTUBE_API_KEY, NAVER_CLIENT_ID
+
+PENDING_PATH    = os.path.join(DATA_DIR, "pending_post.json")
+POSTED_IDS_PATH = os.path.join(DATA_DIR, "posted_ids.json")
+FEED_POSTS_PATH = os.path.join(DATA_DIR, "feed_posts.json")
+
+KST = timezone(timedelta(hours=9))
+
+os.makedirs(LOG_DIR, exist_ok=True)
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(name)s - %(message)s",
+    handlers=[
+        logging.FileHandler(os.path.join(LOG_DIR, "auto_post.log"), encoding="utf-8"),
+        logging.StreamHandler(sys.stdout),
+    ],
+)
+logger = logging.getLogger("auto_post")
+
+
+def _load_json(path, default):
+    if not os.path.exists(path):
+        return default
+    with open(path, encoding="utf-8") as f:
+        return json.load(f)
+
+
+def _save_json(path, data):
+    os.makedirs(DATA_DIR, exist_ok=True)
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+
+
+def _product_key(product: dict) -> str:
+    url = product.get("product_url", "")
+    return url[:80] if url else product.get("name", "")[:20]
+
+
+def _pick_from_pending() -> dict | None:
+    """pending_post.json 에서 오늘 날짜 후보 중 포스팅할 것 선택"""
+    pending = _load_json(PENDING_PATH, {})
+    today = datetime.now(KST).strftime("%Y-%m-%d")
+
+    if pending.get("for_date") != today:
+        logger.info(f"  pending_post 날짜 불일치 (기대: {today}, 파일: {pending.get('for_date', '없음')})")
+        return None
+
+    candidates = pending.get("candidates", [])
+    if not candidates:
+        logger.info("  pending_post 후보 없음")
+        return None
+
+    # 명시 승인된 것 우선
+    for c in candidates:
+        if c.get("status") == "approved":
+            logger.info(f"  [승인된 후보] {c['product'].get('name', '')[:40]}")
+            return c
+
+    # 반려되지 않은 첫 번째
+    for c in candidates:
+        if c.get("status") == "pending":
+            logger.info(f"  [기본 후보] {c['product'].get('name', '')[:40]}")
+            return c
+
+    logger.info("  모든 후보가 반려됨 → 실시간 수집으로 폴백")
+    return None
+
+
+async def _collect_fallback() -> dict | None:
+    """pending_post 없을 때 실시간 수집"""
+    posted_ids = set(_load_json(POSTED_IDS_PATH, []))
+    products = []
+
+    if YOUTUBE_API_KEY:
+        from scraper.youtube_trending import scrape_trending_products
+        products = scrape_trending_products(max_items=MAX_PRODUCTS_PER_RUN)
+
+    if not products and NAVER_CLIENT_ID:
+        from scraper.naver_shopping import scrape_deals
+        products = scrape_deals(max_items=MAX_PRODUCTS_PER_RUN)
+
+    if not products:
+        from scraper.coupang import scrape_homepage_deals
+        products = await scrape_homepage_deals(max_items=MAX_PRODUCTS_PER_RUN)
+
+    if not products:
+        from scraper.preset import get_next_preset_product
+        p = get_next_preset_product(posted_ids)
+        if p:
+            products = [p]
+
+    new = [p for p in products if _product_key(p) not in posted_ids]
+    if not new:
+        return None
+
+    from generator.content import generate_post
+    content = generate_post(new[0])
+    if not content:
+        return None
+
+    return {
+        "product":       content["product"],
+        "post_text":     content["post_text_1"],
+        "image_url":     content.get("image_url", ""),
+        "detail_images": content.get("detail_images", []),
+        "product_code":  content.get("product_code", ""),
+        "status":        "pending",
+    }
+
+
+async def run():
+    import random
+    skip_delay = os.getenv("SKIP_DELAY", "false").lower() == "true"
+    if not skip_delay:
+        delay = random.randint(0, 55)
+        if delay:
+            logger.info(f"랜덤 딜레이: {delay}분 대기...")
+            await asyncio.sleep(delay * 60)
+
+    logger.info("=" * 50)
+    logger.info(f"자동 포스팅 시작: {datetime.now(KST).strftime('%Y-%m-%d %H:%M KST')}")
+    logger.info("=" * 50)
+
+    # 1. pending_post.json 에서 후보 선택
+    candidate = _pick_from_pending()
+
+    # 2. 없으면 실시간 수집
+    if not candidate:
+        logger.info("[폴백] 실시간 수집 모드...")
+        candidate = await _collect_fallback()
+
+    if not candidate:
+        logger.warning("포스팅할 상품 없음 — 종료")
+        return
+
+    # 3. 포스팅
+    from poster.threads import post_thread_api
+    from poster.comment_replier import add_recent_post, check_and_reply_comments
+    from poster.engager import run_engagement_session
+
+    product     = candidate["product"]
+    post_text   = candidate["post_text"]
+    image_url   = candidate.get("image_url") or product.get("image_url", "")
+    detail_imgs = candidate.get("detail_images", [])
+    code        = candidate.get("product_code", "")
+
+    logger.info(f"포스팅: {product.get('name', '')[:40]} [{code}]")
+    try:
+        result = post_thread_api(
+            post_text=post_text,
+            image_url=image_url,
+            detail_images=detail_imgs,
+        )
+    except Exception as e:
+        logger.error(f"포스팅 실패: {e}")
+        result = None
+
+    post_url = result.get("post_url") if result else None
+    post_id  = result.get("post_id")  if result else None
+    status   = "posted" if result else "failed"
+
+    # 4. posted_ids 업데이트
+    if result:
+        posted_ids = set(_load_json(POSTED_IDS_PATH, []))
+        key = _product_key(product)
+        if key:
+            posted_ids.add(key)
+        _save_json(POSTED_IDS_PATH, sorted(posted_ids))
+
+    # 5. feed_posts 업데이트
+    feed = _load_json(FEED_POSTS_PATH, [])
+    feed.insert(0, {
+        "timestamp":     datetime.now(KST).isoformat(),
+        "product_code":  code,
+        "product_name":  product.get("name", ""),
+        "product_image": product.get("image_url", ""),
+        "product_url":   product.get("product_url", ""),
+        "post_text":     post_text,
+        "threads_url":   post_url,
+        "status":        status,
+        "post_type":     "auto",
+    })
+    _save_json(FEED_POSTS_PATH, feed[:200])
+
+    if post_url and post_id:
+        add_recent_post(post_url, post_id, "story")
+
+    logger.info(f"포스팅 완료: {status} | {post_url or '(URL 없음)'}")
+
+    # 6. 댓글 대댓글
+    try:
+        await check_and_reply_comments()
+    except Exception as e:
+        logger.error(f"대댓글 오류: {e}")
+
+    # 7. 타 계정 활동
+    try:
+        await run_engagement_session(max_comments=10)
+    except Exception as e:
+        logger.error(f"댓글 활동 오류: {e}")
+
+    # 8. 페이지 업데이트
+    try:
+        import generate_page, generate_feed_page
+        generate_page.main()
+        generate_feed_page.main()
+    except Exception as e:
+        logger.error(f"페이지 생성 오류: {e}")
+
+    logger.info("자동 포스팅 완료!")
+
+
+if __name__ == "__main__":
+    asyncio.run(run())
