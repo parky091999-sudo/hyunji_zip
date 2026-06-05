@@ -1,12 +1,19 @@
 """
-직접 상품 등록 CLI — 우선순위 큐에 수동 추가 (priority=1)
+직접 상품 등록 CLI
 
-사용법:
+[우선순위 큐] — 즉시 포스팅 대기열 (사용 후 삭제)
   python add_product.py "전동 두피 마사지기"
   python add_product.py --url "https://www.coupang.com/vp/products/..."
   python add_product.py --list
-  python add_product.py --remove 2        # 2번 항목 삭제
+  python add_product.py --remove 2
   python add_product.py --clear
+
+[프리셋 리스트] — 자동 수집 실패 시 순환 폴백 (삭제 안 됨)
+  python add_product.py --preset "전동 두피 마사지기"
+  python add_product.py --preset --url "https://www.coupang.com/vp/products/..."
+  python add_product.py --preset --list
+  python add_product.py --preset --remove 2
+  python add_product.py --preset --clear
 """
 import argparse
 import json
@@ -156,27 +163,90 @@ def remove_item(index: int):
     print(f"  ✅ 삭제: [{index}] {removed.get('product', {}).get('name', '')[:50]}")
 
 
+def _preset_build_product(name: str | None, url: str | None) -> dict | None:
+    if url:
+        name_hint = ""
+        m = re.search(r"/products/\d+--([^/?#]+)", url)
+        if m:
+            name_hint = m.group(1).replace("-", " ").strip()
+        if name_hint and NAVER_CLIENT_ID:
+            product = _search_naver(name_hint)
+            if product:
+                product["product_url"] = url
+            else:
+                product = {"name": name_hint, "product_url": url, "source": "manual"}
+        else:
+            product = {"name": name or url.rstrip("/").split("/")[-1][:50], "product_url": url, "source": "manual"}
+    elif name:
+        product = _search_naver(name)
+        if not product:
+            product = {"name": name, "product_url": "", "source": "manual"}
+    else:
+        return None
+    return product
+
+
+def handle_preset(args):
+    from scraper.preset import add_product, remove_product, list_products
+
+    if args.clear:
+        from scraper.preset import _save
+        _save([])
+        print("프리셋 리스트를 초기화했습니다.")
+        return
+
+    if args.list:
+        items = list_products()
+        if not items:
+            print("프리셋 리스트가 비어 있습니다.")
+            return
+        print(f"프리셋 리스트 ({len(items)}개) — 자동 수집 실패 시 순환 폴백:")
+        print(f"  {'#':<4} {'상품명':<50} {'마지막사용':<12} {'등록일'}")
+        print("  " + "-" * 85)
+        for i, p in enumerate(items, 1):
+            name     = p.get("name", "?")[:48]
+            last     = p.get("last_used", "")[:10] or "미사용"
+            added    = p.get("added_at", "")[:10]
+            print(f"  {i:<4} {name:<50} {last:<12} {added}")
+        return
+
+    if args.remove is not None:
+        items = list_products()
+        if remove_product(args.remove):
+            print(f"  삭제 완료: [{args.remove}]번 항목")
+        else:
+            print(f"  잘못된 번호: {args.remove} (1~{len(items)} 범위)")
+        return
+
+    product = _preset_build_product(args.name, args.url)
+    if not product:
+        print("상품명 또는 --url 을 입력하세요.")
+        return
+
+    print(f"  → {product.get('name', '')[:55]}  |  {product.get('price', '')}")
+    if add_product(product):
+        items = list_products()
+        print(f"  프리셋에 추가 완료 (현재 {len(items)}개)")
+    else:
+        print("  이미 프리셋에 등록된 상품입니다.")
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
-        description="우선순위 큐 상품 수동 등록",
+        description="상품 등록 CLI (우선순위 큐 / 프리셋 리스트)",
         formatter_class=argparse.RawTextHelpFormatter,
-        epilog=(
-            "예시:\n"
-            '  python add_product.py "전동 두피 마사지기"\n'
-            '  python add_product.py --url "https://www.coupang.com/vp/products/12345--product-name"\n'
-            "  python add_product.py --list\n"
-            "  python add_product.py --remove 2\n"
-            "  python add_product.py --clear"
-        ),
     )
     parser.add_argument("name",     nargs="?",            help="등록할 상품명")
     parser.add_argument("--url",                          help="쿠팡 상품 URL")
-    parser.add_argument("--list",   action="store_true",  help="현재 큐 조회")
+    parser.add_argument("--list",   action="store_true",  help="목록 조회")
     parser.add_argument("--remove", type=int, metavar="N",help="N번 항목 삭제")
-    parser.add_argument("--clear",  action="store_true",  help="큐 전체 삭제")
+    parser.add_argument("--clear",  action="store_true",  help="전체 삭제")
+    parser.add_argument("--preset", action="store_true",  help="프리셋 리스트 대상 (없으면 우선순위 큐)")
     args = parser.parse_args()
 
-    if args.clear:
+    if args.preset:
+        handle_preset(args)
+    elif args.clear:
         save_queue([])
         print("큐를 초기화했습니다.")
     elif args.list:

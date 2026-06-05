@@ -199,8 +199,20 @@ async def run_pipeline():
             logger.info("  YouTube/네이버 결과 없음 → 쿠팡 홈 폴백...")
             products = await scrape_homepage_deals(max_items=MAX_PRODUCTS_PER_RUN)
 
+        if not products:
+            logger.info("  쿠팡 홈 폴백도 없음 → 프리셋 리스트 확인...")
+            try:
+                from scraper.preset import get_next_preset_product
+                posted_ids_now = load_posted_ids()
+                preset_product = get_next_preset_product(posted_ids_now)
+                if preset_product:
+                    products = [preset_product]
+                    logger.info(f"  → 프리셋 상품 사용: {preset_product.get('name', '')[:40]}")
+            except Exception as e:
+                logger.warning(f"  프리셋 폴백 오류: {e}")
+
     if not products:
-        logger.warning("수집된 상품이 없습니다. 파이프라인 종료.")
+        logger.warning("수집된 상품이 없습니다 (프리셋 포함). 파이프라인 종료.")
         return
 
     save_products(products)
