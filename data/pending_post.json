@@ -18,13 +18,14 @@
         "source": "naver_shopping",
         "scraped_at": "2026-06-05T03:04:43.869704"
       },
-      "post_text": "이거 본 사람들 다 장바구니로 직행한 거\n괜히 후기 많은 게 아니더라\n데코아르 스마트 자동센서 스테인레스 휴지통 (20L...\n\n✔ 막상 써보면 없을 때가 더 불편함\n✔ 자취·신혼 살림에 딱\n\n#생활꿀템 #자취템 #살림템 #주방꿀템 #필수템\n\n제품 정보는 프로필 링크에서 [005] 검색 👆",
+      "post_text": "이거 본 사람들 다 장바구니로 직행한 거\n괜히 후기 많은 게 아니더라\n데코아르 스마트 자동센서 스테인레스 휴지통 (20L 전용)\n\n✔ 막상 써보면 없을 때가 더 불편함\n✔ 자취·신혼 살림에 딱\n✔ 쓰레기 냄새 원천 차단\n\n#생활꿀템 #자취템 #살림템 #주방꿀템 #필수템\n\n제품 정보는 프로필 링크에서 [005] 검색 👆",
       "image_url": "https://shopping-phinf.pstatic.net/main_5771787/57717876802.jpg",
       "detail_images": [
         "https://shopping-phinf.pstatic.net/main_5771787/57717876802.jpg"
       ],
       "product_code": "005",
-      "status": "pending"
+      "status": "approved",
+      "edited": true
     },
     {
       "product": {
