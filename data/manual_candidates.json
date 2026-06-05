@@ -1,5 +1,5 @@
 {
-  "scanned_at": "2026-06-05T10:46:14.208098+09:00",
+  "scanned_at": "2026-06-05T10:56:41.341103+09:00",
   "candidates": [
     {
       "product": {
@@ -83,6 +83,18 @@
         "source": "benchmark"
       },
       "source_account": "kimsobak90",
+      "selected": false
+    },
+    {
+      "product": {
+        "name": "[콩콩푸드]국산콩100% 유바스틱(푸주) 식물성 고단백 무첨가물 식재료 80g, 2개",
+        "price": "14,600원",
+        "image_url": "https://shopping-phinf.pstatic.net/main_8372889/83728899499.2.jpg",
+        "product_url": "https://smartstore.naver.com/main/products/6184399922",
+        "brand": "",
+        "source": "benchmark"
+      },
+      "source_account": "remeet_jeong",
       "selected": false
     }
   ]
