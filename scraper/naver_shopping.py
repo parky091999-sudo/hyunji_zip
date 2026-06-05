@@ -347,7 +347,10 @@ def scrape_deals(max_items: int = MAX_PRODUCTS_PER_RUN) -> list[dict]:
                     continue
                 seen_names.add(key)
 
-                is_coupang = "쿠팡" in product["mall_name"]
+                is_coupang = (
+                    "쿠팡" in product["mall_name"]
+                    or "coupang" in product.get("product_url", "").lower()
+                )
                 if is_coupang:
                     ptype = _get_product_type(product["name"])
                     if ptype and ptype in seen_types:
@@ -369,6 +372,41 @@ def scrape_deals(max_items: int = MAX_PRODUCTS_PER_RUN) -> list[dict]:
             logger.warning(f"키워드 오류 ({keyword}): {e}")
 
     result = coupang_products[:max_items]
+
+    # 쿠팡 상품 0개 → 더 넓은 키워드로 폴백 재시도
+    if not result:
+        logger.warning("쿠팡 상품 0개 → 폴백 키워드로 재시도...")
+        fallback_keywords = [
+            ("생활용품 인기 추천", "생활"),
+            ("주방용품 베스트 추천", "주방"),
+            ("뷰티 인기 추천", "뷰티"),
+            ("생활 가전 인기", "생활"),
+        ]
+        for kw, cat_hint in fallback_keywords:
+            if len(result) >= max_items:
+                break
+            try:
+                items = _fetch_items(kw)
+                for item in items:
+                    product = _to_product(item, category_hint=cat_hint)
+                    if not product:
+                        continue
+                    if not (
+                        "쿠팡" in product["mall_name"]
+                        or "coupang" in product.get("product_url", "").lower()
+                    ):
+                        continue
+                    key = product["name"][:8]
+                    if key in seen_names:
+                        continue
+                    seen_names.add(key)
+                    result.append(product)
+                    logger.info(f"  [폴백/{cat_hint}] {product['name'][:40]}")
+                    if len(result) >= max_items:
+                        break
+            except Exception as e:
+                logger.warning(f"폴백 키워드 오류 ({kw}): {e}")
+
     logger.info(f"최종 수집: {len(result)}개 (쿠팡만)")
     return result
 

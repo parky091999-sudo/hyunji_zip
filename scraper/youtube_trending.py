@@ -144,7 +144,11 @@ def _find_naver_product(product_name: str) -> dict | None:
                 continue
             if any_hit is None:
                 any_hit = p
-            if "쿠팡" in p.get("mall_name", "") and coupang_hit is None:
+            is_cp = (
+                "쿠팡" in p.get("mall_name", "")
+                or "coupang" in p.get("product_url", "").lower()
+            )
+            if is_cp and coupang_hit is None:
                 coupang_hit = p
             if coupang_hit:
                 break
