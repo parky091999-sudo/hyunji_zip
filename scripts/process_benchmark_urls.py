@@ -165,6 +165,91 @@ def _follow_to_coupang(url: str) -> str | None:
     return None
 
 
+# ── inpock __NEXT_DATA__ 파싱 ────────────────────────────────────────────────
+
+def _search_naver_coupang(query: str) -> dict | None:
+    """Naver Shopping API로 쿠팡 상품 검색 (coupang.com 링크만 반환)"""
+    if not NAVER_CLIENT_ID:
+        return None
+    try:
+        from config import NAVER_CLIENT_SECRET
+        resp = requests.get(
+            "https://openapi.naver.com/v1/search/shop.json",
+            headers={
+                "X-Naver-Client-Id":     NAVER_CLIENT_ID,
+                "X-Naver-Client-Secret": NAVER_CLIENT_SECRET,
+            },
+            params={"query": query[:40], "display": 10, "sort": "sim"},
+            timeout=8, verify=False,
+        )
+        if resp.status_code != 200:
+            return None
+        items = resp.json().get("items", [])
+        for it in items:
+            link = it.get("link", "")
+            mall = it.get("mallName", "")
+            if "coupang.com" not in link and "쿠팡" not in mall:
+                continue
+            name = re.sub(r"<[^>]+>", "", it.get("title", "")).strip()
+            lp = int(it.get("lprice", 0) or 0)
+            return {
+                "name":        name,
+                "price":       f"{lp:,}원" if lp else "",
+                "image_url":   it.get("image", ""),
+                "product_url": link,
+                "brand":       re.sub(r"<[^>]+>", "", it.get("brand", "") or "").strip(),
+                "source":      "inpock_nextdata",
+            }
+    except Exception as e:
+        logger.warning(f"  Naver 쿠팡 검색 실패 ({query[:20]}): {e}")
+    return None
+
+
+def _parse_inpock_blocks(page_url: str, max_items: int = 30) -> list[dict]:
+    """inpock __NEXT_DATA__ 파싱 → 쿠팡 상품 검색으로 후보 생성"""
+    resp = _get(page_url, timeout=12)
+    if not resp:
+        return []
+
+    m = re.search(r'<script[^>]*id=["\']__NEXT_DATA__["\'][^>]*>(\{.+?\})</script>', resp.text, re.DOTALL)
+    if not m:
+        logger.info(f"  __NEXT_DATA__ 없음 — Playwright로 폴백")
+        return []
+
+    try:
+        data = json.loads(m.group(1))
+    except Exception:
+        return []
+
+    blocks = data.get("props", {}).get("pageProps", {}).get("blocks", [])
+    link_blocks = [b for b in blocks if b.get("block_type") == "link" and b.get("is_open")]
+    logger.info(f"  __NEXT_DATA__ 파싱: {len(link_blocks)}개 링크 블록")
+
+    candidates = []
+    for b in link_blocks:
+        if len(candidates) >= max_items:
+            break
+        title = (b.get("title") or "").strip()
+        if not title or len(title) < 5:
+            continue
+        product = _search_naver_coupang(title)
+        if not product:
+            continue
+        url = product.get("product_url", "")
+        if not url or "coupang.com" not in url:
+            continue
+        # 이미지가 없으면 inpock 이미지 사용 시도
+        if not product.get("image_url"):
+            img = b.get("image", "")
+            if img and img.startswith("http"):
+                product["image_url"] = img
+        candidates.append(product)
+        logger.info(f"  [{len(candidates)}] {product['name'][:40]}")
+
+    logger.info(f"  inpock → 쿠팡 매칭: {len(candidates)}개")
+    return candidates
+
+
 # ── 네이버 정보 보충 ──────────────────────────────────────────────────────────
 
 def _naver_enrich(name: str) -> dict:
@@ -376,6 +461,22 @@ async def _scrape_collection(page_url: str, source_label: str) -> list[dict]:
     """컬렉션/프로필 페이지에서 상품 목록 수집"""
     logger.info(f"[컬렉션] {page_url} → @{source_label}")
 
+    # inpock: __NEXT_DATA__ 파싱 + Naver Shopping API 검색
+    if "inpock.co.kr" in page_url:
+        inpock_products = _parse_inpock_blocks(page_url, max_items=MAX_PER_PAGE)
+        if inpock_products:
+            result = []
+            for product in inpock_products:
+                result.append({
+                    "product":        product,
+                    "source_account": source_label,
+                    "added_at":       datetime.now(KST).isoformat(),
+                })
+            logger.info(f"  → {len(result)}개 수집 완료")
+            return result
+        logger.warning(f"  inpock 파싱 결과 없음 — 건너뜀")
+        return []
+
     # 1단계: requests로 빠르게 시도
     raw_urls: list[str] = []
     resp = _get(page_url)
@@ -389,10 +490,6 @@ async def _scrape_collection(page_url: str, source_label: str) -> list[dict]:
         raw_urls = await _scrape_with_playwright(page_url)
 
     if not raw_urls:
-        # 디버깅: 수집된 응답 텍스트 샘플 출력 (inpock URL 포맷 파악용)
-        if "inpock" in page_url and resp:
-            sample = resp.text[:300].replace("\n", " ")
-            logger.info(f"  [debug] inpock HTML 샘플: {sample}")
         logger.warning(f"  링크 없음 — 건너뜀")
         return []
 
