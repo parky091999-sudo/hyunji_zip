@@ -114,12 +114,13 @@ def _follow_to_coupang(url: str) -> str | None:
         try:
             r = requests.head(url, headers=_HEADERS, timeout=8, verify=False, allow_redirects=False)
             location = r.headers.get("Location", "")
+            logger.info(f"  단축URL HEAD {r.status_code} → {location[:100]}")
             if "link.coupang.com" in location:
                 return location  # pageKey 포함 URL 획득
             if re.search(r"coupang\.com/vp/products/\d+", location):
                 return re.search(r"(https?://(?:www\.)?coupang\.com/vp/products/\d+)", location).group(1)
-        except Exception:
-            pass
+        except Exception as e:
+            logger.info(f"  단축URL HEAD 실패: {e}")
         return url  # 폴백: 원래 단축 URL
 
     # inpock 및 기타 리다이렉트: HEAD 요청으로 중간 Location 헤더 추출
