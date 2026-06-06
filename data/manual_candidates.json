@@ -1,7 +1,20 @@
 {
   "scanned_at": "2026-06-06T14:28:04.320141+09:00",
-  "updated_at": "2026-06-06T14:38:24.318134+09:00",
+  "updated_at": "2026-06-06T14:42:59.605886+09:00",
   "candidates": [
+    {
+      "product": {
+        "name": "[만족도최상]초고당도 농장직송 고령 하미과 메론, 3kg, 1박스 - 메론",
+        "product_url": "https://www.coupang.com/vp/products/9539230511",
+        "image_url": "",
+        "price": "",
+        "brand": "",
+        "category_hint": "",
+        "source": "direct_url"
+      },
+      "source_account": "직접입력",
+      "added_at": "2026-06-06T14:42:59.605705+09:00"
+    },
     {
       "product": {
         "name": "삼은파트너스 겸용제본기 WB-250DUO (삼은파트너스)",
