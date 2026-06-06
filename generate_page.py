@@ -3,6 +3,7 @@
 실행: python generate_page.py
 출력: docs/index.html  → GitHub Pages 호스팅용
 """
+import json
 import os
 import sys
 
@@ -56,6 +57,11 @@ def build_cards(products: list[dict]) -> str:
 def build_html(products: list[dict]) -> str:
     cards = build_cards(products)
     count = len(products)
+    products_json = json.dumps(
+        [{"code": p["code"], "name": p.get("name", ""), "url": p.get("url", ""), "image_url": p.get("image_url", "")}
+         for p in products],
+        ensure_ascii=False
+    )
 
     if COUPANG_PARTNERS_ACTIVE:
         footer_disclosure = "이 포스팅은 쿠팡파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다."
@@ -404,6 +410,78 @@ def build_html(products: list[dict]) -> str:
     letter-spacing: 0.04em;
     flex-shrink: 0;
   }}
+
+  /* ── BEST/HOT 캐러셀 ── */
+  .featured-section {{
+    padding: 14px 14px 0;
+    max-width: 640px;
+    margin: 0 auto;
+  }}
+  .featured-title {{
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: var(--text2);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }}
+  .carousel-wrap {{
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }}
+  .carousel-wrap::-webkit-scrollbar {{ display: none; }}
+  .carousel-row {{
+    display: flex;
+    gap: 10px;
+    padding-bottom: 4px;
+  }}
+  .c-card {{
+    flex: 0 0 130px;
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    text-decoration: none;
+    display: block;
+    transition: border-color .15s, transform .15s;
+  }}
+  .c-card:hover {{ border-color: var(--accent); transform: translateY(-2px); }}
+  .c-card.rank-best {{ border-color: #50DC78; }}
+  .c-card.rank-hot  {{ border-color: var(--accent); }}
+  .c-card img {{
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    display: block;
+    background: var(--surface2);
+  }}
+  .c-card-body {{ padding: 7px 8px 9px; }}
+  .c-badge {{
+    font-size: 0.58rem;
+    font-weight: 800;
+    padding: 2px 6px;
+    border-radius: 6px;
+    display: inline-block;
+    margin-bottom: 4px;
+    letter-spacing: 0.03em;
+  }}
+  .c-badge.best {{ background: rgba(80,220,120,0.2); color: #50DC78; border: 1px solid rgba(80,220,120,0.3); }}
+  .c-badge.hot  {{ background: rgba(255,107,53,0.2); color: var(--accent); border: 1px solid rgba(255,107,53,0.3); }}
+  .c-badge.new  {{ background: rgba(255,209,102,0.2); color: var(--accent2); border: 1px solid rgba(255,209,102,0.3); }}
+  .c-name {{
+    font-size: 0.7rem;
+    font-weight: 600;
+    line-height: 1.35;
+    color: var(--text);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }}
   .name {{
     font-size: 0.79rem;
     line-height: 1.5;
@@ -586,6 +664,14 @@ def build_html(products: list[dict]) -> str:
   </div>
 </header>
 
+<!-- BEST/HOT 캐러셀 -->
+<div class="featured-section" id="featured-section">
+  <div class="featured-title">✨ 추천 상품</div>
+  <div class="carousel-wrap">
+    <div class="carousel-row" id="carousel-row"></div>
+  </div>
+</div>
+
 <!-- 컨트롤 바: 카운트 + 정렬 + 뷰모드 -->
 <div class="control-bar">
   <span class="count-label" id="count-label">상품 {count}개</span>
@@ -639,6 +725,9 @@ def build_html(products: list[dict]) -> str:
 <div class="toast" id="toast">링크가 복사됐어요 ✓</div>
 
 <script>
+  /* ── 상품 데이터 (Python 주입) ── */
+  const PRODUCTS_DATA = {products_json};
+
   /* ── 클릭 트래킹 ── */
   const CLICK_KEY = 'kkul_clicks';
   const HOT_THRESHOLD  = 3;
@@ -689,6 +778,58 @@ def build_html(products: list[dict]) -> str:
   }});
 
   applyClickBadges();
+
+  /* ── BEST/HOT 캐러셀 ── */
+  function buildCarousel() {{
+    const row = document.getElementById('carousel-row');
+    if (!row || !PRODUCTS_DATA.length) return;
+    const clicks = loadClicks();
+    const hasClicks = Object.values(clicks).some(v => v > 0);
+
+    let items;
+    if (hasClicks) {{
+      items = [...PRODUCTS_DATA].sort((a, b) => {{
+        const ca = clicks[a.code] || 0;
+        const cb = clicks[b.code] || 0;
+        return cb !== ca ? cb - ca : parseInt(b.code) - parseInt(a.code);
+      }}).slice(0, 5);
+    }} else {{
+      items = [...PRODUCTS_DATA].sort((a, b) => parseInt(b.code) - parseInt(a.code)).slice(0, 5);
+    }}
+
+    row.innerHTML = items.map(p => {{
+      const cnt = clicks[p.code] || 0;
+      const isBest = cnt >= BEST_THRESHOLD;
+      const isHot  = cnt >= HOT_THRESHOLD;
+      const badgeClass = isBest ? 'best' : isHot ? 'hot' : 'new';
+      const badgeText  = isBest ? 'BEST' : isHot ? 'HOT 🔥' : 'NEW';
+      const rankClass  = isBest ? 'rank-best' : isHot ? 'rank-hot' : '';
+      const imgTag = p.image_url
+        ? `<img src="${{p.image_url}}" alt="${{p.name}}" loading="lazy">`
+        : '';
+      const href = p.url || '#';
+      const target = p.url ? 'target="_blank" rel="noopener noreferrer"' : '';
+      return `
+        <a class="c-card ${{rankClass}}" href="${{href}}" ${{target}}
+           onclick="trackCarouselClick('${{p.code}}')">
+          ${{imgTag}}
+          <div class="c-card-body">
+            <span class="c-badge ${{badgeClass}}">${{badgeText}}</span>
+            <div class="c-name">${{p.name}}</div>
+          </div>
+        </a>`;
+    }}).join('');
+  }}
+
+  function trackCarouselClick(code) {{
+    const clicks = loadClicks();
+    clicks[code] = (clicks[code] || 0) + 1;
+    saveClicks(clicks);
+    applyClickBadges();
+    buildCarousel();
+  }}
+
+  buildCarousel();
 
   /* ── 검색 ── */
   const searchInput = document.getElementById('search');

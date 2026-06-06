@@ -324,10 +324,10 @@ body {
       <button class="btn btn-outline btn-sm" onclick="toggleUrlSection()" style="font-size:11px;padding:3px 9px">접기/펼치기</button>
     </div>
     <div id="url-input-section">
-      <textarea id="url-paste-input" placeholder="inpock 컬렉션/프로필 링크를 한 줄에 하나씩&#10;예) https://link.inpock.co.kr/계정명&#10;개별 쿠팡 상품 URL도 가능"></textarea>
+      <textarea id="url-paste-input" placeholder="• inpock 컬렉션/프로필 → 후보 목록으로 수집 (3~5분)&#10;• 쿠팡 상품 URL (coupang.com) → 포스팅 큐에 바로 추가&#10;한 줄에 하나씩 입력"></textarea>
       <div style="display:flex;gap:8px;align-items:center;margin-bottom:4px">
-        <button class="btn btn-gold btn-sm" onclick="submitUrls()">상품 수집 시작</button>
-        <span style="font-size:11px;color:#555">컬렉션 1개당 최대 30개 자동 수집 (3~5분)</span>
+        <button class="btn btn-gold btn-sm" onclick="submitUrls()">등록</button>
+        <span style="font-size:11px;color:#555">쿠팡 URL은 큐에 즉시 추가 · inpock은 3~5분 소요</span>
       </div>
     </div>
   </div>
@@ -956,15 +956,54 @@ async function submitUrls() {
   if (!raw) { showToast("URL을 입력하세요"); return; }
   const urls = raw.split("\n").map(u => u.trim()).filter(u => u.startsWith("http"));
   if (!urls.length) { showToast("유효한 URL이 없습니다"); return; }
-  const payload = { urls, submitted_at: new Date().toISOString() };
-  try {
-    // 먼저 현재 sha 획득 시도 (파일이 없으면 PUT이 sha 없이 실행)
-    try { await ghGet("data/pending_benchmark_urls.json"); } catch(_) {}
-    await ghPut("data/pending_benchmark_urls.json", payload, `admin: URL ${urls.length}개 등록`);
-    await ghDispatch("process_benchmark_urls.yml");
-    document.getElementById("url-paste-input").value = "";
-    showToast(`${urls.length}개 URL 처리 시작 — 3~5분 후 후보 목록에 반영됩니다`);
-  } catch(e) { showToast("오류: " + e.message); }
+
+  const isCoupang = u => u.includes("coupang.com");
+  const coupangUrls = urls.filter(isCoupang);
+  const collectionUrls = urls.filter(u => !isCoupang(u));
+  const messages = [];
+
+  // 쿠팡 직접 URL → 포스팅 큐에 바로 추가
+  if (coupangUrls.length) {
+    try {
+      let queue;
+      try { queue = await ghGet("data/manual_queue.json"); }
+      catch(_) { queue = []; }
+      const existingUrls = new Set(queue.map(q => q.product?.product_url || ""));
+      let added = 0;
+      for (const url of coupangUrls) {
+        if (existingUrls.has(url)) continue;
+        existingUrls.add(url);
+        queue.push({
+          product: { product_url: url, name: "쿠팡 상품 (URL 직접 등록)", image_url: "", price: "" },
+          image_url: "", detail_images: [], post_text: "",
+          product_code: "preview", source_account: "direct_url",
+          added_at: new Date().toISOString(),
+        });
+        added++;
+      }
+      if (added) {
+        await ghPut("data/manual_queue.json", queue, `admin: 쿠팡 URL ${added}개 큐 직접 추가`);
+        await loadManualQueue();
+        messages.push(`쿠팡 URL ${added}개 → 큐 추가 완료`);
+      } else {
+        messages.push("쿠팡 URL: 이미 큐에 있는 상품");
+      }
+    } catch(e) { showToast("오류: " + e.message); return; }
+  }
+
+  // inpock 등 컬렉션 URL → 후보 수집 파이프라인
+  if (collectionUrls.length) {
+    const payload = { urls: collectionUrls, submitted_at: new Date().toISOString() };
+    try {
+      try { await ghGet("data/pending_benchmark_urls.json"); } catch(_) {}
+      await ghPut("data/pending_benchmark_urls.json", payload, `admin: URL ${collectionUrls.length}개 등록`);
+      await ghDispatch("process_benchmark_urls.yml");
+      messages.push(`컬렉션 ${collectionUrls.length}개 수집 중 (3~5분)`);
+    } catch(e) { showToast("오류: " + e.message); return; }
+  }
+
+  document.getElementById("url-paste-input").value = "";
+  showToast(messages.join(" · ") || "처리 완료");
 }
 
 // ── 수동관리: 프리뷰 패널 ─────────────────────────────────────────────────────
