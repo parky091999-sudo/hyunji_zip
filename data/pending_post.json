@@ -30,7 +30,8 @@
         "https://shopping-phinf.pstatic.net/main_5932285/59322851701.1.jpg"
       ],
       "product_code": "",
-      "status": "pending"
+      "status": "rejected",
+      "rejection_reason": "가독성 좋게 줄바꿈 수정했고, 해시테그에 독일어같은게 있음"
     },
     {
       "product": {
