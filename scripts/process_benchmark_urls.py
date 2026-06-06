@@ -87,10 +87,12 @@ def _product_id(url: str) -> str | None:
 
 
 def _extract_coupang_urls(text: str) -> list[str]:
-    """텍스트에서 쿠팡 관련 URL 모두 추출"""
+    """텍스트에서 쿠팡/inpock 관련 URL 추출"""
     urls = []
     urls += re.findall(r'https://link\.coupang\.com/[A-Za-z0-9/_\-?=&%.]+', text)
     urls += re.findall(r'https?://(?:www\.)?coupang\.com/vp/products/\d+[^\s"\'<>&]*', text)
+    # inpock 상품 리다이렉트 링크 — _follow_to_coupang()에서 link.coupang.com으로 변환
+    urls += re.findall(r'https?://(?:www\.)?inpock\.co\.kr/c/[A-Za-z0-9_\-]+', text)
     return urls
 
 
@@ -105,10 +107,38 @@ def _follow_to_coupang(url: str) -> str | None:
     if re.search(r"coupang\.com/vp/products/\d+", url):
         return re.search(r"(https?://(?:www\.)?coupang\.com/vp/products/\d+)", url).group(1)
     # 쿠팡 파트너스 링크 — GitHub Actions에서 coupang.com 직접 접근 차단됨
-    # link.coupang.com URL을 그대로 반환 (pageKey/itemId로 추후 정보 조회)
     if "link.coupang.com" in url:
         return url
-    # 기타 URL은 리다이렉트 추적 시도
+
+    # inpock 및 기타 리다이렉트: HEAD 요청으로 중간 Location 헤더 추출
+    # (coupang.com 직접 접근 없이 link.coupang.com까지만 추적)
+    from urllib.parse import urlparse
+    current = url
+    for _ in range(6):
+        try:
+            r = requests.head(
+                current, headers=_HEADERS, timeout=8,
+                verify=False, allow_redirects=False,
+            )
+        except Exception:
+            break
+        location = r.headers.get("Location", "")
+        if not location:
+            break
+        if location.startswith("/"):
+            parsed = urlparse(current)
+            location = f"{parsed.scheme}://{parsed.netloc}{location}"
+        if "link.coupang.com" in location:
+            return location
+        m = re.search(r"(https?://(?:www\.)?coupang\.com/vp/products/\d+)", location)
+        if m:
+            return m.group(1)
+        if r.status_code in (301, 302, 303, 307, 308):
+            current = location
+        else:
+            break
+
+    # 폴백: GET으로 응답 본문/최종 URL에서 coupang URL 탐색
     resp = _get(url, timeout=10)
     if not resp:
         return None
@@ -116,8 +146,7 @@ def _follow_to_coupang(url: str) -> str | None:
         m = re.search(r"(https?://(?:www\.)?coupang\.com/vp/products/\d+)", src)
         if m:
             return m.group(1)
-    # 리다이렉트 결과가 link.coupang.com인 경우도 수락
-    m = re.search(r"(https?://link\.coupang\.com/[^\s\"'<>&]+)", resp.url)
+    m = re.search(r'(https?://link\.coupang\.com/[A-Za-z0-9/_\-?=&%.]+)', resp.url + " " + resp.text)
     if m:
         return m.group(1)
     return None
