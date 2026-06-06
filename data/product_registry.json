@@ -1,5 +1,5 @@
 {
-  "next_code": 5,
+  "next_code": 6,
   "blocked_item_ids": [],
   "products": {
     "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8849967732&ctag=8849967732&lpt": {
@@ -28,6 +28,13 @@
       "name": "산리오 헬로키티 미니 물 정수기 디스펜서 2L 핑크",
       "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8645052268&ctag=8645052268&lptag=P8645052268&itemId=27727944467&vendorItemId=94689248135&spec=10305199",
       "image_url": "https://shopping-phinf.pstatic.net/main_5880827/58808274258.jpg",
+      "posted": true
+    },
+    "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=6582577923&ctag=6582577923&lpt": {
+      "code": "005",
+      "name": "데코아르 스마트 자동센서 스테인레스 휴지통 (20L 전용)",
+      "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=6582577923&ctag=6582577923&lptag=l050201694728&itemId=40208950176&vendorItemId=92082014509&spec=10305198",
+      "image_url": "https://shopping-phinf.pstatic.net/main_5771787/57717876802.jpg",
       "posted": true
     }
   }
