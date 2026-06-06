@@ -1,81 +1,66 @@
 {
-  "for_date": "2026-06-06",
-  "generated_at": "2026-06-05T12:05:02.043193+09:00",
+  "for_date": "2026-06-07",
+  "generated_at": "2026-06-06T14:16:23.799946+09:00",
   "candidates": [
     {
       "product": {
-        "name": "데코아르 스마트 자동센서 스테인레스 휴지통 (20L 전용)",
-        "price": "54,900원",
+        "name": "쿠쿠 식기세척기 6인용 CDW-A0611TW 방문설치",
+        "price": "400,000원",
         "original_price": "",
         "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_5771787/57717876802.jpg",
-        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=6582577923&ctag=6582577923&lptag=l050201694728&itemId=40208950176&vendorItemId=92082014509&spec=10305198",
+        "image_url": "https://shopping-phinf.pstatic.net/main_5932285/59322851701.1.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=5655029966&ctag=5655029966&lptag=I9265334954&itemId=9265334954&vendorItemId=71163768673&spec=10305199",
         "badge": "쿠팡",
-        "brand": "",
-        "category": "휴지통",
+        "brand": "CUCKOO",
+        "category": "식기세척/건조기",
         "category_hint": "생활",
         "mall_name": "쿠팡",
         "source": "naver_shopping",
-        "scraped_at": "2026-06-05T03:04:43.869704"
+        "scraped_at": "2026-06-06T05:15:35.829173",
+        "youtube_source": {
+          "title": "식세기 있어도 허리 아픈 이유! #생활꿀템 #생활가전추천 #생활가전 #식기세척기 #식기세척기추천 #인테리어꿀템 #인테리어디자인 #주방꿀템 #주방인테리어 #주방디자인 #신박템",
+          "video_id": "VoVN_2_aKXI",
+          "views": 1587774,
+          "keyword": "생활꿀템 추천"
+        }
       },
-      "post_text": "이거 본 사람들 다 장바구니로 직행한 거\n괜히 후기 많은 게 아니더라\n데코아르 스마트 자동센서 스테인레스 휴지통 (20L 전용)\n\n✔ 막상 써보면 없을 때가 더 불편함\n✔ 자취·신혼 살림에 딱\n✔ 쓰레기 냄새 원천 차단\n\n#생활꿀템 #자취템 #살림템 #주방꿀템 #필수템\n\n제품 정보는 프로필 링크에서 [005] 검색 👆",
-      "image_url": "https://shopping-phinf.pstatic.net/main_5771787/57717876802.jpg",
+      "post_text": "식기세척기 있어도 허리 아프다고? 그 이유가 바로 이것이었어!\n쿠쿠 식기세척기 6인용은 방문설치로 편하게 설치할 수 있고, 세척 후 물기 제거 기능이 있어 건조도 잘 돼. 리뷰 보니까 음식물도 잘 씻어내고, 소음도 적다고 하더라.\n✔ 아침저녁으로 사용하기 좋은 크기라서 좁은 공간에서도 활용하기 좋고, ✔ 세척 후 자동 건조 기능으로 보관도 편리해.\n#생활꿀템 #식기세척기 #생활가전추천 #인테리어꿀 #küchen제품",
+      "image_url": "https://shopping-phinf.pstatic.net/main_5932285/59322851701.1.jpg",
       "detail_images": [
-        "https://shopping-phinf.pstatic.net/main_5771787/57717876802.jpg"
+        "https://shopping-phinf.pstatic.net/main_5932285/59322851701.1.jpg"
       ],
-      "product_code": "005",
-      "status": "approved",
-      "edited": true
+      "product_code": "",
+      "status": "pending"
     },
     {
       "product": {
-        "name": "멍멍이 자동 발사기 간식 디스펜서 훈련기구",
-        "price": "31,000원",
+        "name": "오아 UV 듀얼 초음파 살균 렌즈세척기",
+        "price": "39,800원",
         "original_price": "",
         "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_6017188/60171886211.jpg",
-        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9504628880&ctag=9504628880&lptag=I28319222530&itemId=28319222530&vendorItemId=95271807404&spec=10305199",
+        "image_url": "https://shopping-phinf.pstatic.net/main_5896351/58963512720.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=7280230895&ctag=7280230895&lptag=l133226856585&itemId=53283651865&vendorItemId=92330625206&spec=10305197",
         "badge": "쿠팡",
         "brand": "",
-        "category": "강아지 장난감/훈련",
-        "category_hint": "반려동물",
+        "category": "렌즈세척기",
+        "category_hint": "생활",
         "mall_name": "쿠팡",
         "source": "naver_shopping",
-        "scraped_at": "2026-06-05T03:04:47.628878"
+        "scraped_at": "2026-06-06T05:15:37.909290",
+        "youtube_source": {
+          "title": "여자들 잘 준비 2시간 과하다? or 아니다? 올영 샤워템 추천템 가득‼️",
+          "video_id": "fZk_ItM1I7w",
+          "views": 298169,
+          "keyword": "생활꿀템 추천"
+        }
       },
-      "post_text": "이거 왜 이제 알았지 싶은 물건 발견함\n후기 보니까 한 번 쓰면 못 돌아간다더라\n멍멍이 자동 발사기 간식 디스펜서 훈련기구\n\n✔ 생각날 때마다 바로바로 쓰기 좋고\n✔ 하나 사두면 두고두고 쓰는 템\n\n#생활꿀템 #살림템 #아이디어상품 #꿀템추천\n\n제품 정보는 프로필 링크에서 [006] 검색 👆",
-      "image_url": "https://shopping-phinf.pstatic.net/main_6017188/60171886211.jpg",
+      "post_text": "진작 알았으면 좋았을 텐데 싶은 거\n리뷰 평점 보고 바로 믿고 사는 물건\n오아 UV 듀얼 초음파 살균 렌즈세척기\n\n✔ 사용법 간단해서 누구나 OK\n✔ 선물용으로도 반응 좋음\n\n#생활꿀템 #아이디어상품 #꿀템 #추천템 #살림꿀템",
+      "image_url": "https://shopping-phinf.pstatic.net/main_5896351/58963512720.jpg",
       "detail_images": [
-        "https://shopping-phinf.pstatic.net/main_6017188/60171886211.jpg"
+        "https://shopping-phinf.pstatic.net/main_5896351/58963512720.jpg"
       ],
-      "product_code": "006",
-      "status": "rejected",
-      "rejection_reason": "흥미 없는 아이템"
-    },
-    {
-      "product": {
-        "name": "자동 아로마 디퓨저 무드등 겸용 크리스탈 아로마 - 없음",
-        "price": "32,400원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_5980043/59800439325.jpg",
-        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9131851256&ctag=9131851256&lptag=I26870958519&itemId=26870958519&vendorItemId=93840547646&spec=10305199",
-        "badge": "쿠팡",
-        "brand": "",
-        "category": "가습기",
-        "category_hint": "인테리어",
-        "mall_name": "쿠팡",
-        "source": "naver_shopping",
-        "scraped_at": "2026-06-05T03:04:50.600561"
-      },
-      "post_text": "이거 왜 이제 알았지 싶은 물건!\n\n리뷰 보니까 자동 아로마 디퓨저와 무드등의 두 가지 기능을 모두 겸비해서 방을 환하게 밝히고 향기로 가득 채워줘. 작동 중이면 조명이 색상이 변해서 vraiment 감성돋는 분위기를 연출해 준다고 함. 쓰면 집 분위기가 완전 달라져.\n\n✔ 자동으로 아로마를 발향해서 매번 향수 넣을 필요 없 거야.\n✔ 밤에 불 끄고 자도 자동으로 꺼지니까 안전해서 좋더라.\n\n#생활꿀템 #인테리어템 #홈디퓨저 #무드등 #아로마테라피\n\n제품 정보는 프로필 링크에서 [007] 검색 👆",
-      "image_url": "https://shopping-phinf.pstatic.net/main_5980043/59800439325.jpg",
-      "detail_images": [
-        "https://shopping-phinf.pstatic.net/main_5980043/59800439325.jpg"
-      ],
-      "product_code": "007",
-      "status": "rejected",
-      "rejection_reason": "중국 상품, 본문에 외국어"
+      "product_code": "",
+      "status": "pending"
     }
   ]
 }
