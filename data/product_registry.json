@@ -1,5 +1,5 @@
 {
-  "next_code": 7,
+  "next_code": 8,
   "blocked_item_ids": [],
   "products": {
     "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8849967732&ctag=8849967732&lpt": {
@@ -42,6 +42,13 @@
       "name": "쿠쿠 식기세척기 6인용 CDW-A0611TW 방문설치",
       "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=5655029966&ctag=5655029966&lptag=I9265334954&itemId=9265334954&vendorItemId=71163768673&spec=10305199",
       "image_url": "https://shopping-phinf.pstatic.net/main_5932285/59322851701.1.jpg",
+      "posted": true
+    },
+    "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=5954126991&ctag=5954126991&lpt": {
+      "code": "007",
+      "name": "비즈 목덜이 넥밴드 선풍기 2개   화이트1+1 BZ-FL20",
+      "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=5954126991&ctag=5954126991&lptag=I19303587546&itemId=19303587546&vendorItemId=92075466958&spec=10305198",
+      "image_url": "https://shopping-phinf.pstatic.net/main_5924557/59245572574.1.jpg",
       "posted": true
     }
   }
