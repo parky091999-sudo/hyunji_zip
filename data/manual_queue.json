@@ -73,6 +73,20 @@
   },
   {
     "product": {
+      "product_url": "https://www.coupang.com/vp/products/9539230511?itemId=28453721203&vendorItemId=95404318279&q=%EB%A9%9C%EB%A1%A0&searchId=6eb834482584996&sourceType=search&itemsCount=60&searchRank=1&rank=1&traceId=mq3sk58w",
+      "name": "쿠팡 상품 (URL 직접 등록)",
+      "image_url": "",
+      "price": ""
+    },
+    "image_url": "",
+    "detail_images": [],
+    "post_text": "",
+    "product_code": "preview",
+    "source_account": "direct_url",
+    "added_at": "2026-06-07T13:02:06.537Z"
+  },
+  {
+    "product": {
       "name": "리드볼트 오딧 캐리어 24인치  04_(6/15 출고)펄스레드",
       "price": "484,900원",
       "image_url": "https://shopping-phinf.pstatic.net/main_6029017/60290171407.jpg",
@@ -88,19 +102,5 @@
     "added_at": "2026-06-07T02:57:07.715Z",
     "edited": true,
     "content_gen_at": "2026-06-07T13:45:45.094278+09:00"
-  },
-  {
-    "product": {
-      "product_url": "https://www.coupang.com/vp/products/9539230511?itemId=28453721203&vendorItemId=95404318279&q=%EB%A9%9C%EB%A1%A0&searchId=6eb834482584996&sourceType=search&itemsCount=60&searchRank=1&rank=1&traceId=mq3sk58w",
-      "name": "쿠팡 상품 (URL 직접 등록)",
-      "image_url": "",
-      "price": ""
-    },
-    "image_url": "",
-    "detail_images": [],
-    "post_text": "",
-    "product_code": "preview",
-    "source_account": "direct_url",
-    "added_at": "2026-06-07T13:02:06.537Z"
   }
 ]
