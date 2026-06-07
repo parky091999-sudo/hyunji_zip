@@ -68,21 +68,38 @@ def _make_prompts(product: dict, post_text: str) -> list[str]:
     ]
 
 
-def _pollinations_url(prompt: str) -> str:
+def _pollinations_url(prompt: str, idx: int = 0) -> str:
     encoded = quote(prompt)
-    seed    = abs(hash(prompt)) % 99999
+    seed    = (abs(hash(prompt)) + idx * 7919) % 99999
     return (
         f"https://image.pollinations.ai/prompt/{encoded}"
-        f"?width=1080&height=1080&nologo=true&seed={seed}&model=flux"
+        f"?width=1080&height=1080&nologo=true&seed={seed}&model=flux-realism"
     )
 
 
+def _fetch_with_retry(url: str, retries: int = 2, timeout: int = 45) -> bytes | None:
+    for attempt in range(retries + 1):
+        try:
+            r = requests.get(url, timeout=timeout)
+            if r.status_code == 200 and r.headers.get("content-type", "").startswith("image"):
+                return r.content
+        except Exception as e:
+            if attempt == retries:
+                logger.warning(f"  다운로드 실패: {e}")
+    return None
+
+
 def generate_product_image_urls(product: dict, post_text: str = "") -> list[str]:
-    """API 키 없이 pollinations.ai URL 3개 즉시 반환 (Threads 서버가 직접 다운로드)"""
+    """pollinations.ai URL 4개 즉시 반환 (Threads 서버가 직접 다운로드)"""
     prompts = _make_prompts(product, post_text)
-    urls = [_pollinations_url(p) for p in prompts]
+    # 3개 프롬프트 × 변형 시드로 4개 URL 생성
+    urls = []
+    for i, p in enumerate(prompts):
+        urls.append(_pollinations_url(p, idx=i))
+    if len(urls) < 4 and prompts:
+        urls.append(_pollinations_url(prompts[0], idx=99))
     logger.info(f"pollinations.ai 이미지 URL {len(urls)}개 생성")
-    return urls
+    return urls[:4]
 
 
 def generate_and_upload_images(product: dict, post_text: str = "") -> list[str]:
@@ -93,18 +110,19 @@ def generate_and_upload_images(product: dict, post_text: str = "") -> list[str]:
     prompts = _make_prompts(product, post_text)
 
     if not IMGBB_API_KEY:
-        urls = [_pollinations_url(p) for p in prompts]
-        logger.info(f"IMGBB_API_KEY 없음 → pollinations.ai URL {len(urls)}개 반환")
-        return urls
+        return generate_product_image_urls(product, post_text)
 
     result = []
-    for prompt in prompts:
+    indices = list(range(len(prompts))) + [99]  # 4번째는 첫 프롬프트 변형
+    for i, (prompt, idx) in enumerate(zip(prompts + [prompts[0]], indices)):
+        if len(result) >= 4:
+            break
+        poll_url = _pollinations_url(prompt, idx=idx)
+        img_bytes = _fetch_with_retry(poll_url)
+        if not img_bytes:
+            continue
         try:
-            poll_url = _pollinations_url(prompt)
-            r = requests.get(poll_url, timeout=45)
-            if r.status_code != 200:
-                continue
-            b64 = base64.b64encode(r.content).decode()
+            b64 = base64.b64encode(img_bytes).decode()
             up = requests.post(
                 "https://api.imgbb.com/1/upload",
                 data={"key": IMGBB_API_KEY, "image": b64},
@@ -113,10 +131,11 @@ def generate_and_upload_images(product: dict, post_text: str = "") -> list[str]:
             if up.status_code == 200:
                 img_url = up.json()["data"]["url"]
                 result.append(img_url)
-                logger.info(f"  imgBB 업로드 완료: {img_url[:60]}...")
+                logger.info(f"  imgBB 업로드 완료 ({i+1}): {img_url[:55]}...")
         except Exception as e:
-            logger.warning(f"  이미지 처리 실패: {e}")
+            logger.warning(f"  imgBB 업로드 실패: {e}")
 
     if not result:
-        result = [_pollinations_url(p) for p in prompts]
+        logger.warning("imgBB 전체 실패 → pollinations.ai URL 사용")
+        result = generate_product_image_urls(product, post_text)
     return result
