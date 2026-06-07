@@ -19,6 +19,20 @@
   },
   {
     "product": {
+      "product_url": "https://www.coupang.com/vp/products/9539230511?itemId=28453721203&vendorItemId=95404318279&q=%EB%A9%9C%EB%A1%A0&searchId=6eb834482584996&sourceType=search&itemsCount=60&searchRank=1&rank=1&traceId=mq3sk58w",
+      "name": "쿠팡 상품 (URL 직접 등록)",
+      "image_url": "",
+      "price": ""
+    },
+    "image_url": "",
+    "detail_images": [],
+    "post_text": "",
+    "product_code": "preview",
+    "source_account": "direct_url",
+    "added_at": "2026-06-07T13:02:06.537Z"
+  },
+  {
+    "product": {
       "name": "휴대용 의류건조기 접이식 소형 여행용 자취 원룸 1인용 미니건조기  기본 색상  아이보리 건조 스마트 타이머 휴대용 200w",
       "price": "42,400원",
       "image_url": "https://shopping-phinf.pstatic.net/main_5998634/59986344743.2.jpg",
@@ -34,20 +48,6 @@
     "added_at": "2026-06-07T02:55:04.036Z",
     "edited": true,
     "content_gen_at": "2026-06-07T13:45:40.426630+09:00"
-  },
-  {
-    "product": {
-      "product_url": "https://www.coupang.com/vp/products/9539230511?itemId=28453721203&vendorItemId=95404318279&q=%EB%A9%9C%EB%A1%A0&searchId=6eb834482584996&sourceType=search&itemsCount=60&searchRank=1&rank=1&traceId=mq3sk58w",
-      "name": "쿠팡 상품 (URL 직접 등록)",
-      "image_url": "",
-      "price": ""
-    },
-    "image_url": "",
-    "detail_images": [],
-    "post_text": "",
-    "product_code": "preview",
-    "source_account": "direct_url",
-    "added_at": "2026-06-07T13:02:06.537Z"
   },
   {
     "product": {
