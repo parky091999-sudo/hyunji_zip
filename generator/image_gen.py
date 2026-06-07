@@ -1,13 +1,14 @@
 """
 AI 이미지 생성
-- Gemini로 상품별 이미지 프롬프트 생성
-- pollinations.ai로 실제 이미지 URL 반환 (무료, API 키 불필요)
-- IMGBB_API_KEY 있으면 영구 CDN URL로 업로드 (선택적 품질 향상)
+- Gemini로 프롬프트 생성 → pollinations.ai 다운로드 → imgBB 영구 업로드
+- imgBB 업로드 성공한 URL만 반환 (pollinations URL을 Threads에 직접 넘기지 않음)
+- 실패 시 [] 반환 → 호출부에서 원본 이미지 유지
 """
 import base64
 import logging
 import os
 import sys
+import time
 from urllib.parse import quote
 
 import requests
@@ -20,20 +21,49 @@ IMGBB_API_KEY = os.getenv("IMGBB_API_KEY", "")
 
 logger = logging.getLogger("image_gen")
 
-CATEGORY_STYLE = {
-    "뷰티":       "Korean beauty aesthetic, soft pastel lighting, cosmetic product photography",
-    "주방":       "modern bright kitchen, lifestyle cooking scene, clean background",
-    "생활":       "cozy home interior, lifestyle product, warm natural lighting",
-    "디지털/가전": "tech product, minimalist studio, white background, sharp focus",
-    "인테리어":   "cozy Scandinavian interior, warm mood lighting, home styling",
-    "기타":       "lifestyle product photography, clean background, warm tones",
+# 카테고리별 영문 폴백 프롬프트 (Gemini 실패 시 사용, 영문만 사용해야 pollinations 정확도 높음)
+CATEGORY_PROMPTS = {
+    "뷰티": [
+        "Korean LED facial mask skincare device, soft pink pastel studio lighting, cosmetic product photography, clean white background, 4k",
+        "woman using face beauty device at home, Korean beauty aesthetic, warm natural light, lifestyle photography",
+        "skincare beauty gadget flat lay, rose gold tones, minimal elegant composition, editorial style",
+        "anti-aging LED mask beauty product, modern bathroom setting, glowing skin concept, professional photo",
+    ],
+    "주방": [
+        "modern kitchen appliance product photography, bright clean white background, professional studio lighting, 4k",
+        "cooking lifestyle scene, Korean home kitchen aesthetic, warm natural light, food styling",
+        "kitchen gadget flat lay, marble surface, minimalist composition, editorial food photography",
+        "home cooking product in use, cozy kitchen setting, soft warm tones, lifestyle photo",
+    ],
+    "생활": [
+        "home lifestyle product photography, cozy interior, warm natural lighting, clean background, 4k",
+        "smart home device in modern living room, Scandinavian interior aesthetic, soft focus",
+        "household product flat lay, white linen background, minimal editorial composition",
+        "home product lifestyle shot, cozy domestic scene, warm golden hour light",
+    ],
+    "디지털/가전": [
+        "tech gadget product photography, minimalist white studio background, sharp focus, 4k",
+        "electronic device lifestyle shot, modern desk setup, clean aesthetic, professional lighting",
+        "smart device flat lay, dark matte surface, dramatic studio lighting, editorial",
+        "technology product in use, modern home office, natural daylight, lifestyle photography",
+    ],
+    "인테리어": [
+        "cozy interior decor product, Scandinavian home aesthetic, warm mood lighting, lifestyle photography",
+        "home decoration flat lay, minimal white background, editorial composition, 4k",
+        "interior design product in room setting, warm ambient light, lifestyle shot",
+        "decorative home item, elegant modern interior, soft natural daylight",
+    ],
+    "기타": [
+        "lifestyle product photography, clean white background, professional studio lighting, 4k",
+        "product flat lay composition, minimal editorial style, warm neutral tones",
+        "product in use lifestyle photo, natural light, Korean aesthetic, modern setting",
+        "commercial product photography, sharp focus, elegant background, professional",
+    ],
 }
 
 
 def _make_prompts(product: dict, post_text: str) -> list[str]:
-    name     = product.get("name", "")
     category = product.get("category_hint", product.get("category", "기타"))
-    style    = CATEGORY_STYLE.get(category, CATEGORY_STYLE["기타"])
 
     if GOOGLE_API_KEY:
         try:
@@ -41,101 +71,100 @@ def _make_prompts(product: dict, post_text: str) -> list[str]:
             genai.configure(api_key=GOOGLE_API_KEY)
             model = genai.GenerativeModel("gemini-2.0-flash")
             res = model.generate_content(
-                f"""다음 한국 쇼핑 상품의 인스타그램 광고용 AI 이미지 프롬프트 3개를 영어로 작성해줘.
-상품명: {name}
-카테고리: {category}
-본문 참고: {post_text[:200]}
+                f"""Write 4 English image prompts for AI image generation for this Korean shopping product.
+Product: {product.get('name', '')}
+Category: {category}
 
-규칙:
-- 각 프롬프트 한 줄 (콤마로 태그 구분)
-- 실제 상품이 사진에 등장하는 상황 묘사
-- professional commercial product photography 스타일
-- Korean lifestyle aesthetic 포함
-- 번호 없이 줄바꿈으로만 구분, 프롬프트 3개만 출력""",
+Rules:
+- English ONLY (no Korean characters)
+- Each prompt on one line, no numbering
+- Professional commercial product photography style
+- Include the product context (in use, flat lay, lifestyle, etc.)
+- Include: Korean lifestyle aesthetic, studio quality, 4k
+- Output exactly 4 prompts separated by newlines""",
                 generation_config=genai.types.GenerationConfig(temperature=0.7),
             )
-            lines = [l.strip() for l in res.text.strip().split("\n") if l.strip()][:3]
-            if lines:
+            lines = [l.strip() for l in res.text.strip().split("\n") if l.strip()][:4]
+            if len(lines) >= 3:
                 return lines
         except Exception as e:
             logger.warning(f"Gemini 프롬프트 생성 실패: {e}")
 
-    # Fallback
-    return [
-        f"{name}, {style}, professional commercial photography, 4k",
-        f"{name} lifestyle in use, {style}, Korean aesthetic, natural light",
-        f"{name} product flat lay, {style}, editorial composition",
-    ]
+    return CATEGORY_PROMPTS.get(category, CATEGORY_PROMPTS["기타"])
 
 
-def _pollinations_url(prompt: str, idx: int = 0) -> str:
-    encoded = quote(prompt)
-    seed    = (abs(hash(prompt)) + idx * 7919) % 99999
-    return (
-        f"https://image.pollinations.ai/prompt/{encoded}"
-        f"?width=1080&height=1080&nologo=true&seed={seed}&model=flux-realism"
-    )
-
-
-def _fetch_with_retry(url: str, retries: int = 2, timeout: int = 45) -> bytes | None:
-    for attempt in range(retries + 1):
+def _fetch_image(url: str, timeout: int = 60) -> bytes | None:
+    """pollinations.ai에서 이미지 바이트 다운로드 (1회 재시도)"""
+    for attempt in range(2):
         try:
             r = requests.get(url, timeout=timeout)
-            if r.status_code == 200 and r.headers.get("content-type", "").startswith("image"):
-                return r.content
+            if r.status_code == 200 and len(r.content) > 5000:
+                ct = r.headers.get("content-type", "")
+                # content-type이 image거나, 바이트 시그니처로 이미지 확인
+                if ct.startswith("image") or r.content[:3] in (b'\xff\xd8\xff', b'\x89PN', b'GIF', b'RIFF'):
+                    return r.content
+                logger.warning(f"  비이미지 응답 (attempt {attempt+1}): ct={ct}, size={len(r.content)}")
+            elif r.status_code != 200:
+                logger.warning(f"  HTTP {r.status_code} (attempt {attempt+1})")
+        except requests.Timeout:
+            logger.warning(f"  타임아웃 {timeout}s (attempt {attempt+1})")
         except Exception as e:
-            if attempt == retries:
-                logger.warning(f"  다운로드 실패: {e}")
+            logger.warning(f"  다운로드 오류 (attempt {attempt+1}): {e}")
+
+        if attempt == 0:
+            time.sleep(10)
     return None
 
 
-def generate_product_image_urls(product: dict, post_text: str = "") -> list[str]:
-    """pollinations.ai URL 4개 즉시 반환 (Threads 서버가 직접 다운로드)"""
-    prompts = _make_prompts(product, post_text)
-    # 3개 프롬프트 × 변형 시드로 4개 URL 생성
-    urls = []
-    for i, p in enumerate(prompts):
-        urls.append(_pollinations_url(p, idx=i))
-    if len(urls) < 4 and prompts:
-        urls.append(_pollinations_url(prompts[0], idx=99))
-    logger.info(f"pollinations.ai 이미지 URL {len(urls)}개 생성")
-    return urls[:4]
+def _upload_imgbb(img_bytes: bytes) -> str | None:
+    """imgBB에 이미지 업로드 → URL 반환"""
+    try:
+        b64 = base64.b64encode(img_bytes).decode()
+        r = requests.post(
+            "https://api.imgbb.com/1/upload",
+            data={"key": IMGBB_API_KEY, "image": b64},
+            timeout=30,
+        )
+        if r.status_code == 200:
+            return r.json()["data"]["url"]
+        logger.warning(f"  imgBB 오류: {r.status_code}")
+    except Exception as e:
+        logger.warning(f"  imgBB 업로드 실패: {e}")
+    return None
 
 
 def generate_and_upload_images(product: dict, post_text: str = "") -> list[str]:
     """
-    이미지 생성 후 imgBB 업로드 → 영구 CDN URL 반환.
-    IMGBB_API_KEY 없으면 pollinations.ai URL 그대로 반환.
+    AI 이미지 생성 → imgBB 업로드 → 영구 URL 목록 반환.
+    IMGBB_API_KEY 없거나 전체 실패 시 [] 반환 (호출부가 원본 이미지 사용).
     """
-    prompts = _make_prompts(product, post_text)
-
     if not IMGBB_API_KEY:
-        return generate_product_image_urls(product, post_text)
+        logger.info("IMGBB_API_KEY 없음 → AI 이미지 건너뜀")
+        return []
 
-    result = []
-    indices = list(range(len(prompts))) + [99]  # 4번째는 첫 프롬프트 변형
-    for i, (prompt, idx) in enumerate(zip(prompts + [prompts[0]], indices)):
-        if len(result) >= 4:
-            break
-        poll_url = _pollinations_url(prompt, idx=idx)
-        img_bytes = _fetch_with_retry(poll_url)
+    prompts = _make_prompts(product, post_text)
+    result  = []
+
+    for i, prompt in enumerate(prompts[:4]):
+        encoded  = quote(prompt)
+        seed     = (abs(hash(prompt)) + i * 7919) % 99999
+        poll_url = (
+            f"https://image.pollinations.ai/prompt/{encoded}"
+            f"?width=1080&height=1080&nologo=true&seed={seed}&model=flux-realism"
+        )
+        logger.info(f"  이미지 {i+1}/4 생성 중...")
+
+        img_bytes = _fetch_image(poll_url)
         if not img_bytes:
+            logger.warning(f"  이미지 {i+1} 다운로드 실패 — 건너뜀")
             continue
-        try:
-            b64 = base64.b64encode(img_bytes).decode()
-            up = requests.post(
-                "https://api.imgbb.com/1/upload",
-                data={"key": IMGBB_API_KEY, "image": b64},
-                timeout=20,
-            )
-            if up.status_code == 200:
-                img_url = up.json()["data"]["url"]
-                result.append(img_url)
-                logger.info(f"  imgBB 업로드 완료 ({i+1}): {img_url[:55]}...")
-        except Exception as e:
-            logger.warning(f"  imgBB 업로드 실패: {e}")
 
-    if not result:
-        logger.warning("imgBB 전체 실패 → pollinations.ai URL 사용")
-        result = generate_product_image_urls(product, post_text)
+        url = _upload_imgbb(img_bytes)
+        if url:
+            result.append(url)
+            logger.info(f"  imgBB 업로드 완료 ({i+1}): {url[:55]}...")
+        else:
+            logger.warning(f"  이미지 {i+1} imgBB 업로드 실패 — 건너뜀")
+
+    logger.info(f"AI 이미지 생성 결과: {len(result)}장 성공 / {len(prompts[:4])}장 시도")
     return result
