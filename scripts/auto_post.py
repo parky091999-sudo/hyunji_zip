@@ -191,6 +191,7 @@ async def run():
         ai_imgs = generate_and_upload_images(product, post_text)
         if ai_imgs:
             detail_imgs = ai_imgs
+            image_url = ""
             logger.info(f"AI 이미지 {len(ai_imgs)}장으로 교체")
         else:
             logger.info("AI 이미지 생성 실패 → 원본 이미지 유지")
