@@ -1,5 +1,5 @@
 {
-  "next_code": 6,
+  "next_code": 7,
   "blocked_item_ids": [],
   "products": {
     "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8849967732&ctag=8849967732&lpt": {
@@ -35,6 +35,13 @@
       "name": "데코아르 스마트 자동센서 스테인레스 휴지통 (20L 전용)",
       "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=6582577923&ctag=6582577923&lptag=l050201694728&itemId=40208950176&vendorItemId=92082014509&spec=10305198",
       "image_url": "https://shopping-phinf.pstatic.net/main_5771787/57717876802.jpg",
+      "posted": true
+    },
+    "https://www.coupang.com/vp/products/9539230511": {
+      "code": "006",
+      "name": "[만족도최상]초고당도 농장직송 고령 하미과 메론, 3kg, 1박스",
+      "url": "https://www.coupang.com/vp/products/9539230511",
+      "image_url": "",
       "posted": true
     }
   }

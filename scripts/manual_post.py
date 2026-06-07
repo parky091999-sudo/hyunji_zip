@@ -106,6 +106,11 @@ async def run():
     if code and "프로필 링크에서" not in post_text:
         post_text = post_text + f"\n\n제품 정보는 프로필 링크에서 [{code}] 검색 👆"
 
+    # 파트너스 링크 추가 (link.coupang.com 형태만)
+    product_url = product.get("product_url", "")
+    if product_url and "link.coupang.com" in product_url and product_url not in post_text:
+        post_text += f"\n👉 {product_url}"
+
     if not post_text.strip():
         logger.error("포스팅 텍스트 생성 실패 — 종료")
         return
