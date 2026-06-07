@@ -93,7 +93,13 @@ async def _collect_products(need: int, posted_ids: set[str], rejected_urls: set[
     if len(products) < need and NAVER_CLIENT_ID:
         logger.info(f"네이버 쇼핑으로 {need - len(products)}개 보충...")
         from scraper.naver_shopping import scrape_deals
-        extra = scrape_deals(max_items=need - len(products))
+        try:
+            from scraper.naver_datalab import get_trending_categories
+            trending_cats = get_trending_categories(top_n=3)
+        except Exception as e:
+            logger.warning(f"데이터랩 스킵: {e}")
+            trending_cats = None
+        extra = scrape_deals(max_items=need - len(products), trending_cats=trending_cats)
         for p in extra:
             if _product_key(p) not in posted_ids and p not in products and not _is_rejected(p):
                 products.append(p)

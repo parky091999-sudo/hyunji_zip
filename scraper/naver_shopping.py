@@ -24,35 +24,92 @@ logger = logging.getLogger(__name__)
 
 API_URL = "https://openapi.naver.com/v1/search/shop.json"
 
-# 카테고리별 키워드 — (키워드, 카테고리힌트) 튜플
-SEARCH_KEYWORDS = [
-    # 주방 — 특이한 자동화 가젯
-    ("자동 계란 삶기 기계", "주방"),
-    ("전동 채칼 회오리 채썰기", "주방"),
-    ("자동 비누 거품기 센서", "주방"),
-    ("전동 와인오프너 자동", "주방"),
-    ("분리형 계란 분리기", "주방"),
-    # 청소/정리 — 비포&애프터 반응
-    ("욕실 전동 청소 솔 회전", "생활"),
-    ("이불 압축팩 전동펌프", "생활"),
-    ("신발 건조기 냄새 제거", "생활"),
-    ("자동 센서 쓰레기통", "생활"),
-    # 뷰티/홈케어 — 셀프케어 트렌드
-    ("전동 두피 마사지기 샤워", "뷰티"),
-    ("눈 온열 마사지기 찜질", "뷰티"),
-    ("전동 발뒤꿈치 각질 제거기", "뷰티"),
-    ("목 견인 스트레칭 기기", "뷰티"),
-    # 반려동물 — 동물 반응 영상 바이럴
-    ("고양이 자동 레이저 장난감", "반려동물"),
-    ("강아지 간식 발사기 자동", "반려동물"),
-    ("고양이 자동 급수기 분수", "반려동물"),
-    # 수면/건강 — 공감 폭발 키워드
-    ("코골이 방지 자동 기기", "건강"),
-    ("수면 무호흡 방지 기기", "건강"),
-    # 인테리어/감성 소품
-    ("LED 무드등 별빛 프로젝터", "인테리어"),
-    ("자동 아로마 디퓨저 초음파", "인테리어"),
+# 카테고리별 키워드 풀 — (키워드, 카테고리힌트) 튜플
+# 데이터랩 트렌딩 카테고리명과 동일한 키로 구성
+SEARCH_KEYWORDS_BY_CATEGORY: dict[str, list[tuple[str, str]]] = {
+    "생활/건강": [
+        ("자동 계란 삶기 기계", "주방"),
+        ("전동 채칼 회오리 채썰기", "주방"),
+        ("자동 비누 거품기 센서", "주방"),
+        ("전동 와인오프너 자동", "주방"),
+        ("분리형 계란 분리기", "주방"),
+        ("욕실 전동 청소 솔 회전", "생활"),
+        ("이불 압축팩 전동펌프", "생활"),
+        ("신발 건조기 냄새 제거", "생활"),
+        ("자동 센서 쓰레기통", "생활"),
+        ("UV 살균 칫솔 케이스", "생활"),
+        ("전동 칫솔 소닉 방수", "생활"),
+        ("자동 핸드 워시 거품 센서", "생활"),
+        ("코골이 방지 자동 기기", "건강"),
+        ("수면 무호흡 방지 기기", "건강"),
+        ("고양이 자동 레이저 장난감", "반려동물"),
+        ("강아지 간식 발사기 자동", "반려동물"),
+        ("고양이 자동 급수기 분수", "반려동물"),
+        ("강아지 자동 공 발사기", "반려동물"),
+    ],
+    "화장품/미용": [
+        ("전동 두피 마사지기 샤워", "뷰티"),
+        ("눈 온열 마사지기 찜질", "뷰티"),
+        ("전동 발뒤꿈치 각질 제거기", "뷰티"),
+        ("목 견인 스트레칭 기기", "뷰티"),
+        ("LED 마스크 피부 관리기", "뷰티"),
+        ("초음파 세안기 피부 관리", "뷰티"),
+        ("미세전류 리프팅 기기", "뷰티"),
+        ("전동 마사지건 근육 이완", "뷰티"),
+        ("눈 마사지기 온열 진동", "뷰티"),
+        ("두피 스케일러 전동", "뷰티"),
+    ],
+    "가구/인테리어": [
+        ("LED 무드등 별빛 프로젝터", "인테리어"),
+        ("자동 아로마 디퓨저 초음파", "인테리어"),
+        ("스마트 플러그 타이머 앱", "인테리어"),
+        ("소형 공기청정기 미니", "인테리어"),
+        ("자동 가습기 초음파 미니", "인테리어"),
+        ("감성 수면등 수유등", "인테리어"),
+    ],
+    "디지털/가전": [
+        ("목걸이 선풍기 휴대용", "디지털"),
+        ("미니 빔프로젝터 가정용", "디지털"),
+        ("무선 충전 고속 멀티", "디지털"),
+        ("전동 킥보드 접이식", "디지털"),
+        ("휴대용 블루투스 스피커 방수", "디지털"),
+        ("스마트워치 혈압 혈당 측정", "디지털"),
+    ],
+    "스포츠/레저": [
+        ("폼롤러 근막 마사지 전동", "스포츠"),
+        ("스마트 줄넘기 카운트", "스포츠"),
+        ("미니 홈트 기구 접이식", "스포츠"),
+        ("요가 매트 미끄럼 방지", "스포츠"),
+        ("자동 공기주입 볼 펌프", "스포츠"),
+    ],
+    "출산/육아": [
+        ("아기 모니터 카메라 무선", "육아"),
+        ("전동 착유기 유축기 휴대용", "육아"),
+        ("자동 젖병 소독 건조기", "육아"),
+        ("아기 전동 코 흡입기", "육아"),
+        ("유아 전동 그네 자동", "육아"),
+    ],
+}
+
+# 전체 키워드 플랫 리스트 (트렌드 데이터 없을 때 폴백용)
+SEARCH_KEYWORDS: list[tuple[str, str]] = [
+    kw for kws in SEARCH_KEYWORDS_BY_CATEGORY.values() for kw in kws
 ]
+
+
+def _build_keyword_order(trending_cats: list[str] | None) -> list[tuple[str, str]]:
+    """트렌딩 카테고리 키워드를 앞에, 나머지를 뒤에 배치"""
+    if not trending_cats:
+        return SEARCH_KEYWORDS
+
+    priority: list[tuple[str, str]] = []
+    others:   list[tuple[str, str]] = []
+    for cat_name, kw_list in SEARCH_KEYWORDS_BY_CATEGORY.items():
+        if cat_name in trending_cats:
+            priority.extend(kw_list)
+        else:
+            others.extend(kw_list)
+    return priority + others
 
 MIN_LPRICE = 15_000  # 15,000원 미만 단순 소품 제외
 
@@ -322,18 +379,22 @@ def _check_coupang_rating(product: dict) -> bool:
         return True
 
 
-def scrape_deals(max_items: int = MAX_PRODUCTS_PER_RUN) -> list[dict]:
-    """상품 수집 (네이버 쇼핑 API) — 다양한 카테고리, 쿠팡 판매 상품 우선"""
+def scrape_deals(max_items: int = MAX_PRODUCTS_PER_RUN, trending_cats: list[str] | None = None) -> list[dict]:
+    """상품 수집 (네이버 쇼핑 API) — 트렌딩 카테고리 우선, 쿠팡 판매 상품 필터"""
     if not NAVER_CLIENT_ID or not NAVER_CLIENT_SECRET:
         logger.error("네이버 API 키 미설정")
         return []
+
+    keywords = _build_keyword_order(trending_cats)
+    if trending_cats:
+        logger.info(f"트렌딩 카테고리 우선 검색: {trending_cats}")
 
     coupang_products: list[dict] = []
     all_products: list[dict] = []
     seen_names: set[str] = set()
     seen_types: set[str] = set()
 
-    for keyword, cat_hint in SEARCH_KEYWORDS:
+    for keyword, cat_hint in keywords:
         if len(coupang_products) >= max_items:
             break
         try:
