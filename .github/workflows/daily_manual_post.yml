@@ -47,6 +47,6 @@ jobs:
           git add docs/index.html docs/feed.html || true
           git add data/product_registry.json data/feed_posts.json data/posted_ids.json || true
           git add data/manual_queue.json || true
-          git diff --staged --quiet || git commit -m "manual: 수동 포스팅 $(date -u +%Y-%m-%d)"
           git add -u || true
+          git diff --staged --quiet || git commit -m "manual: 수동 포스팅 $(date -u +%Y-%m-%d)"
           git pull --rebase origin main && git push
