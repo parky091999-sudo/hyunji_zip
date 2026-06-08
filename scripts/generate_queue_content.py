@@ -108,6 +108,13 @@ def _parse_coupang_html(html: str) -> dict:
     return {"name": name, "image_url": image_url, "price": price}
 
 
+_INVALID_NAMES = {"access denied", "forbidden", "error", "robot check", "robot or human?", "blocked", "429"}
+
+
+def _is_valid_name(name: str) -> bool:
+    return bool(name) and name.lower().strip() not in _INVALID_NAMES and len(name) > 3
+
+
 def _fetch_coupang_info_playwright(url: str) -> dict:
     """Playwright로 JS 렌더링 후 상품 정보 추출 (단축 URL 등 fallback)"""
     try:
@@ -121,7 +128,11 @@ def _fetch_coupang_info_playwright(url: str) -> dict:
             final_url = page.url
             browser.close()
         logger.info(f"  Playwright 최종 URL: {final_url[:80]}")
-        return _parse_coupang_html(html)
+        info = _parse_coupang_html(html)
+        if not _is_valid_name(info.get("name", "")):
+            logger.warning(f"  Playwright 응답이 오류 페이지: '{info.get('name','')}' — 무효 처리")
+            return {}
+        return info
     except Exception as e:
         logger.warning(f"  Playwright 스크래핑 실패: {e}")
         return {}
@@ -137,7 +148,7 @@ def _fetch_coupang_info(url: str) -> dict:
         resp = requests.get(url, headers=_SCRAPE_HEADERS, timeout=15,
                             verify=False, allow_redirects=True)
         info = _parse_coupang_html(resp.text)
-        if info.get("name"):
+        if _is_valid_name(info.get("name", "")):
             logger.info(f"  스크래핑 완료: {info['name'][:40]} / {info.get('price','')}")
             return info
         logger.info(f"  requests로 상품명 미수집 (최종URL: {resp.url[:70]}) → Playwright 시도")
@@ -169,7 +180,7 @@ def _generate(product: dict) -> str | None:
             import google.generativeai as genai
             genai.configure(api_key=GOOGLE_API_KEY)
             model = genai.GenerativeModel(
-                "gemini-2.0-flash",
+                "gemini-2.5-flash",
                 system_instruction=_POST_SYSTEM,
                 generation_config=genai.types.GenerationConfig(max_output_tokens=500, temperature=0.85),
             )

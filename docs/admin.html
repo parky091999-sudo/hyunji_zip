@@ -325,6 +325,11 @@ body {
     </div>
     <div id="url-input-section">
       <textarea id="url-paste-input" placeholder="• inpock 컬렉션/프로필 → 후보 목록으로 수집 (3~5분)&#10;• 쿠팡 상품 URL (coupang.com) → 포스팅 큐에 바로 추가&#10;한 줄에 하나씩 입력"></textarea>
+      <div style="margin-bottom:6px">
+        <input id="url-product-name-input" type="text"
+          placeholder="상품명 직접 입력 (쿠팡 URL 등록 시 권장 — 없으면 자동 추출 시도)"
+          style="width:100%;box-sizing:border-box;padding:6px 9px;border:1px solid #333;border-radius:6px;background:#1a1a1a;color:#e0e0e0;font-size:12px">
+      </div>
       <div style="display:flex;gap:8px;align-items:center;margin-bottom:4px">
         <button class="btn btn-gold btn-sm" onclick="submitUrls()">등록</button>
         <span style="font-size:11px;color:#555">쿠팡 URL은 큐에 즉시 추가 · inpock은 3~5분 소요</span>
@@ -966,6 +971,7 @@ async function submitUrls() {
   if (!raw) { showToast("URL을 입력하세요"); return; }
   const urls = raw.split("\n").map(u => u.trim()).filter(u => u.startsWith("http"));
   if (!urls.length) { showToast("유효한 URL이 없습니다"); return; }
+  const manualProductName = (document.getElementById("url-product-name-input")?.value || "").trim();
 
   const isCoupang = u => u.includes("coupang.com");
   const coupangUrls = urls.filter(isCoupang);
@@ -986,8 +992,10 @@ async function submitUrls() {
         if (existingUrls.has(url)) continue;
         existingUrls.add(url);
         if (!firstNewUrl) firstNewUrl = url;
+        // 상품명 직접 입력 시 즉시 사용, 없으면 플레이스홀더(AI 자동 추출 대기)
+        const productName = manualProductName || "쿠팡 상품 (URL 직접 등록)";
         newItems.push({
-          product: { product_url: url, name: "쿠팡 상품 (URL 직접 등록)", image_url: "", price: "" },
+          product: { product_url: url, name: productName, image_url: "", price: "" },
           image_url: "", detail_images: [], post_text: "",
           product_code: "preview", source_account: "direct_url",
           added_at: new Date().toISOString(),
@@ -998,9 +1006,12 @@ async function submitUrls() {
       queue.unshift(...newItems);
       if (added) {
         await ghPut("data/manual_queue.json", queue, `admin: 쿠팡 URL ${added}개 큐 직접 추가`);
+        // 입력 필드 초기화
+        document.getElementById("url-paste-input").value = "";
+        if (document.getElementById("url-product-name-input")) document.getElementById("url-product-name-input").value = "";
         await loadManualQueue();
 
-        // AI 본문 즉시 생성 트리거
+        // 상품명 직접 입력했으면 AI 본문만 생성, 아니면 URL 스크래핑+본문 생성
         try { await ghDispatch("generate_queue_content.yml"); } catch(_) {}
 
         // 첫 번째 추가 항목 프리뷰 로딩 상태로 바로 열기
@@ -1011,7 +1022,9 @@ async function submitUrls() {
           startPollingQueue(firstNewUrl);
         }
 
-        messages.push(`쿠팡 URL ${added}개 → AI 본문 생성 중 (1~2분)`);
+        messages.push(manualProductName
+          ? `쿠팡 URL ${added}개 → 상품명 저장 완료, AI 본문 생성 중 (1~2분)`
+          : `쿠팡 URL ${added}개 → 상품명 자동 추출 + AI 본문 생성 중 (1~2분)`);
       } else {
         messages.push("쿠팡 URL: 이미 큐에 있는 상품");
       }

@@ -144,7 +144,7 @@ def _generate_with_gemini(product: dict, product_code: str) -> str | None:
         import google.generativeai as genai
         genai.configure(api_key=GOOGLE_API_KEY)
         model = genai.GenerativeModel(
-            "gemini-2.0-flash",
+            "gemini-2.5-flash",
             system_instruction=_POST1_SYSTEM,
             generation_config=genai.types.GenerationConfig(
                 max_output_tokens=450,
@@ -435,7 +435,7 @@ def generate_general_post(post_type: str | None = None) -> str | None:
             import google.generativeai as genai
             genai.configure(api_key=GOOGLE_API_KEY)
             model = genai.GenerativeModel(
-                "gemini-2.0-flash",
+                "gemini-2.5-flash",
                 system_instruction=_CASUAL_SYSTEM,
                 generation_config=genai.types.GenerationConfig(
                     max_output_tokens=300,
