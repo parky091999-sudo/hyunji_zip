@@ -96,6 +96,7 @@ async def _collect_products(need: int, posted_ids: set[str], rejected_urls: set[
         try:
             from scraper.naver_datalab import get_trending_categories
             trending_cats = get_trending_categories(top_n=3)
+            logger.info(f"  데이터랩 트렌딩: {trending_cats or '없음(전체 키워드 사용)'}")
         except Exception as e:
             logger.warning(f"데이터랩 스킵: {e}")
             trending_cats = None

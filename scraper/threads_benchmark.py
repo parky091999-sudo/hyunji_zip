@@ -136,6 +136,16 @@ def _walk_for_texts(obj, depth: int = 0) -> list[str]:
 
 # ── AI 상품명 추출 ────────────────────────────────────────────────────────────
 
+# SNS 플랫폼 / 앱 / 서비스 이름 — 상품명으로 오인 추출 방지
+_NON_PRODUCT_WORDS = {
+    "threads", "instagram", "인스타그램", "youtube", "유튜브",
+    "facebook", "페이스북", "tiktok", "틱톡", "twitter", "트위터",
+    "카카오", "kakao", "naver", "네이버", "sns", "링크",
+    "팔로우", "follow", "구독", "subscribe", "댓글", "좋아요",
+    "쿠팡", "coupang",
+}
+
+
 def _extract_product_names(texts: list[str], account: str) -> list[str]:
     """Groq LLM으로 게시글 텍스트에서 상품명 추출"""
     if not GROQ_API_KEY or not texts:
@@ -144,8 +154,11 @@ def _extract_product_names(texts: list[str], account: str) -> list[str]:
     prompt = (
         f"다음은 한국 쿠팡 추천 SNS 계정(@{account})의 게시글 텍스트입니다.\n\n"
         f"{combined}\n\n"
-        "위 텍스트에서 언급된 실제 상품명을 최대 3개 추출하세요.\n"
+        "위 텍스트에서 언급된 실제 판매 상품명을 최대 3개 추출하세요.\n"
         "규칙:\n"
+        "- 실제 구매 가능한 물건/제품명만 출력 (예: '에어프라이어', '두피 마사지기', '스퀴지 걸레')\n"
+        "- SNS·앱·플랫폼 이름 절대 출력 금지: Threads, Instagram, YouTube, TikTok, 쿠팡, 네이버 등\n"
+        "- 서비스명, 앱 이름, 브랜드 계정명, 웹사이트 이름 출력 금지\n"
         "- 상품명만 한 줄에 하나씩 출력\n"
         "- 설명, 번호, 기호 없이 상품명만\n"
         "- 상품이 없거나 모르면 아무것도 출력하지 마세요"
@@ -160,10 +173,16 @@ def _extract_product_names(texts: list[str], account: str) -> list[str]:
             temperature=0.1,
         )
         content = resp.choices[0].message.content.strip()
-        names = [
-            line.strip() for line in content.splitlines()
-            if line.strip() and len(line.strip()) > 2
-        ]
+        names = []
+        for line in content.splitlines():
+            name = line.strip()
+            if not name or len(name) < 3:
+                continue
+            lower = name.lower()
+            if any(kw in lower for kw in _NON_PRODUCT_WORDS):
+                logger.info(f"  비상품 필터: '{name}'")
+                continue
+            names.append(name)
         return names[:3]
     except Exception as e:
         logger.warning(f"  Groq 상품명 추출 오류: {e}")
