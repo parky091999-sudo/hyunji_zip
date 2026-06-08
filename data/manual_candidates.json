@@ -1,16 +1,28 @@
 {
-  "scanned_at": "2026-06-08T09:46:39.048958+09:00",
+  "scanned_at": "2026-06-08T10:53:14.986823+09:00",
   "candidates": [
     {
       "product": {
-        "name": "옵트샵 제본기 RS-200 삼은파트너스 RS200",
-        "price": "375,400원",
-        "image_url": "https://shopping-phinf.pstatic.net/main_6028402/60284028648.jpg",
-        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9331332958&ctag=9331332958&lptag=V94629099121&itemId=27666399736&vendorItemId=94629099121&spec=10305199",
+        "name": "힐링타임 고양이 반하리 캣닢쿠션 NH-0304  혼합색상  2개",
+        "price": "19,200원",
+        "image_url": "https://shopping-phinf.pstatic.net/main_5862383/58623837205.8.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=2309428393&ctag=2309428393&lptag=I3982735509&itemId=3982735509&vendorItemId=82582759633&spec=10305199",
+        "brand": "힐링타임",
+        "source": "benchmark"
+      },
+      "source_account": "living_flex",
+      "selected": false
+    },
+    {
+      "product": {
+        "name": "중국식품 중국수입 마라탕 샤브 훠궈 식재료 문어볼 피쉬볼 냉동 400g 1개",
+        "price": "3,310원",
+        "image_url": "https://shopping-phinf.pstatic.net/main_4301371/43013712313.94.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=7530263200&ctag=7530263200&lptag=I19175475758&itemId=19175475758&vendorItemId=85936728894&spec=10305199",
         "brand": "",
         "source": "benchmark"
       },
-      "source_account": "lou20221001",
+      "source_account": "remeet_jeong",
       "selected": false
     }
   ]
