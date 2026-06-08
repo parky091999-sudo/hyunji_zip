@@ -579,10 +579,27 @@ function renderCandidateCard(c, idx, isDefault) {
       <div class="card-actions">
         <button class="btn btn-gold btn-sm" onclick="approveCandidate(${idx})" ${approveDisabled}>✓ 승인</button>
         <button class="btn btn-danger btn-sm" onclick="openRejectModal(${idx})" ${rejectDisabled}>✕ 반려</button>
+        <button class="btn btn-outline btn-sm" onclick="regenCandidateText(${idx})" ${isRejected ? "disabled" : ""}>↻ 본문재생성</button>
         <button class="btn btn-outline btn-sm" onclick="resetCandidate(${idx})">↺ 초기화</button>
       </div>
     </div>
   </div>`;
+}
+
+async function regenCandidateText(idx) {
+  if (!confirm(`후보 ${idx + 1}번의 본문을 AI로 재생성할까요?`)) return;
+  try {
+    const pending = _data["data/pending_post.json"];
+    if (!pending?.candidates?.[idx]) return;
+    pending.candidates[idx].post_text = "";
+    pending.candidates[idx].status = "pending";
+    delete pending.candidates[idx].edited;
+    await ghPut("data/pending_post.json", pending, `admin: 후보 ${idx} 본문 재생성 요청`);
+    // preselect 재실행으로 본문 재생성
+    await ghDispatch("daily_preselect.yml");
+    await loadAutoCandidates();
+    showToast("본문 재생성 중 — 3~5분 후 새로고침하세요");
+  } catch (e) { showToast("오류: " + e.message); }
 }
 
 async function approveCandidate(idx) {

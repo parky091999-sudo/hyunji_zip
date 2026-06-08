@@ -154,9 +154,31 @@ async def run():
                     existing_good.append(c)
             logger.info(f"기존 유효 후보 {len(existing_good)}개 유지")
 
+    # 기존 후보 중 post_text 없는 것 본문 재생성
+    regen_count = 0
+    for c in existing_good:
+        if not c.get("post_text", "").strip():
+            product = c.get("product", {})
+            logger.info(f"  기존 후보 본문 재생성: {product.get('name','')[:40]}")
+            content = generate_post(product, assign_code_now=False)
+            if content:
+                c["post_text"] = content.get("post_text_1", "")
+                regen_count += 1
+
     need = CANDIDATES_COUNT - len(existing_good)
     if need <= 0:
-        logger.info(f"후보가 이미 {CANDIDATES_COUNT}개 — 종료")
+        if regen_count > 0:
+            pending = {
+                "for_date":     tomorrow,
+                "generated_at": datetime.now(KST).isoformat(),
+                "candidates":   existing_good[:CANDIDATES_COUNT],
+            }
+            os.makedirs(DATA_DIR, exist_ok=True)
+            with open(PENDING_PATH, "w", encoding="utf-8") as f:
+                json.dump(pending, f, ensure_ascii=False, indent=2)
+            logger.info(f"본문 재생성 저장 완료: {regen_count}개")
+        else:
+            logger.info(f"후보가 이미 {CANDIDATES_COUNT}개 — 종료")
         return
 
     # 기존 후보 URL도 중복 방지용으로 posted_ids에 포함
