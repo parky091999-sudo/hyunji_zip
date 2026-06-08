@@ -1,6 +1,20 @@
 [
   {
     "product": {
+      "product_url": "https://link.coupang.com/a/epfxsGELMO?abTestInfo=100412_group_A",
+      "name": "쿠팡 상품 (URL 직접 등록)",
+      "image_url": "",
+      "price": ""
+    },
+    "image_url": "",
+    "detail_images": [],
+    "post_text": "",
+    "product_code": "preview",
+    "source_account": "direct_url",
+    "added_at": "2026-06-08T03:15:35.478Z"
+  },
+  {
+    "product": {
       "name": "QUZO 아이스 터보 휴대용 선풍기 급속냉각 손풍기  회색  H-202",
       "price": "29,900원",
       "image_url": "https://shopping-phinf.pstatic.net/main_6024768/60247686492.jpg",
