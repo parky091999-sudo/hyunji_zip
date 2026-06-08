@@ -79,17 +79,25 @@ def _pick_from_pending() -> dict | None:
         logger.info("  pending_post 후보 없음")
         return None
 
+    posted_ids = set(_load_json(POSTED_IDS_PATH, []))
+
+    def _not_posted(c: dict) -> bool:
+        url = c.get("product", {}).get("product_url", "")
+        return not (url and url[:80] in posted_ids)
+
     # 명시 승인된 것 우선
     for c in candidates:
-        if c.get("status") == "approved":
+        if c.get("status") == "approved" and _not_posted(c):
             logger.info(f"  [승인된 후보] {c['product'].get('name', '')[:40]}")
             return c
 
     # 반려되지 않은 첫 번째
     for c in candidates:
-        if c.get("status") == "pending":
+        if c.get("status") == "pending" and _not_posted(c):
             logger.info(f"  [기본 후보] {c['product'].get('name', '')[:40]}")
             return c
+
+    logger.info("  pending 후보 전부 이미 포스팅됨 → 실시간 수집으로 폴백")
 
     logger.info("  모든 후보가 반려됨 → 실시간 수집으로 폴백")
     return None
