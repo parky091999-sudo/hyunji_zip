@@ -970,11 +970,12 @@ async function submitUrls() {
       const existingUrls = new Set(queue.map(q => q.product?.product_url || ""));
       let added = 0;
       let firstNewUrl = "";
+      const newItems = [];
       for (const url of coupangUrls) {
         if (existingUrls.has(url)) continue;
         existingUrls.add(url);
         if (!firstNewUrl) firstNewUrl = url;
-        queue.push({
+        newItems.push({
           product: { product_url: url, name: "쿠팡 상품 (URL 직접 등록)", image_url: "", price: "" },
           image_url: "", detail_images: [], post_text: "",
           product_code: "preview", source_account: "direct_url",
@@ -982,6 +983,8 @@ async function submitUrls() {
         });
         added++;
       }
+      // 직접 등록 항목은 큐 맨 앞에 삽입 (1순위)
+      queue.unshift(...newItems);
       if (added) {
         await ghPut("data/manual_queue.json", queue, `admin: 쿠팡 URL ${added}개 큐 직접 추가`);
         await loadManualQueue();

@@ -1,12 +1,17 @@
 """
 수동 포스팅 큐 AI 본문 즉시 생성
 post_text가 비어있는 manual_queue 항목에 Gemini(기본)/Groq(폴백)로 본문 생성
+직접 URL 등록 항목(name="쿠팡 상품 (URL 직접 등록)")은 Coupang 페이지에서
+실제 상품명·이미지·가격을 먼저 스크래핑한 후 본문 생성
 """
 import json
 import logging
 import os
+import re
 import sys
 from datetime import datetime, timezone, timedelta
+
+import requests
 
 ROOT = os.path.dirname(os.path.dirname(__file__))
 sys.path.insert(0, ROOT)
@@ -49,6 +54,64 @@ _POST_SYSTEM = """
 해시태그: 첫 태그 #생활꿀템 고정, 나머지 카테고리·키워드 태그.
 반드시 한국어로만. 텍스트만 출력.
 """.strip()
+
+
+_PLACEHOLDER_NAME = "쿠팡 상품 (URL 직접 등록)"
+
+_SCRAPE_HEADERS = {
+    "User-Agent": (
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+        "AppleWebKit/537.36 (KHTML, like Gecko) "
+        "Chrome/124.0.0.0 Safari/537.36"
+    ),
+    "Accept-Language": "ko-KR,ko;q=0.9",
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+}
+
+
+def _fetch_coupang_info(url: str) -> dict:
+    """Coupang 상품 URL에서 이름·이미지·가격 추출 (requests + meta 파싱)"""
+    import urllib3
+    urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+    try:
+        resp = requests.get(url, headers=_SCRAPE_HEADERS, timeout=15,
+                            verify=False, allow_redirects=True)
+        html = resp.text
+
+        # 상품명: og:title 또는 <title>
+        name = ""
+        m = re.search(r'<meta[^>]+property="og:title"[^>]+content="([^"]+)"', html)
+        if not m:
+            m = re.search(r'<meta[^>]+content="([^"]+)"[^>]+property="og:title"', html)
+        if m:
+            name = m.group(1).strip()
+        if not name:
+            m = re.search(r"<title>([^<]+)</title>", html)
+            if m:
+                name = m.group(1).split("|")[0].split("-")[0].strip()
+
+        # 이미지: og:image
+        image_url = ""
+        m = re.search(r'<meta[^>]+property="og:image"[^>]+content="([^"]+)"', html)
+        if not m:
+            m = re.search(r'<meta[^>]+content="([^"]+)"[^>]+property="og:image"', html)
+        if m:
+            image_url = m.group(1).strip()
+
+        # 가격: JSON-LD Product schema 우선, 없으면 패턴 매칭
+        price = ""
+        m = re.search(r'"price"\s*:\s*"?([\d]+)"?', html)
+        if m:
+            p = int(m.group(1))
+            if p > 100:
+                price = f"{p:,}원"
+
+        info = {"name": name, "image_url": image_url, "price": price}
+        logger.info(f"  스크래핑 완료: {name[:40]} / {price}")
+        return info
+    except Exception as e:
+        logger.warning(f"  Coupang 정보 조회 실패: {e}")
+        return {}
 
 
 def _build_prompt(product: dict) -> str:
@@ -121,10 +184,31 @@ def run():
         item = queue[i]
         product = item.get("product") or {}
         name = product.get("name", "")
+
+        # URL 직접 등록 항목 — 실제 상품 정보 먼저 스크래핑
+        if name == _PLACEHOLDER_NAME:
+            url = product.get("product_url", "")
+            if url:
+                logger.info(f"  URL 직접 등록 감지 → Coupang 스크래핑: {url[:60]}")
+                info = _fetch_coupang_info(url)
+                if info.get("name"):
+                    product.update(info)
+                    queue[i]["product"] = product
+                    # 최상위 image_url도 동기화
+                    if info.get("image_url") and not queue[i].get("image_url"):
+                        queue[i]["image_url"] = info["image_url"]
+                    name = product["name"]
+                else:
+                    logger.warning(f"  상품명 조회 실패 — 본문 생성 건너뜀")
+                    continue
+            else:
+                logger.warning(f"  product_url 없음 — 건너뜀")
+                continue
+
         logger.info(f"  생성 중: {name[:40]}")
         text = _generate(product)
         if text:
-            queue[i]["post_text"]    = text
+            queue[i]["post_text"]      = text
             queue[i]["content_gen_at"] = datetime.now(KST).isoformat()
             changed += 1
             logger.info(f"  ✅ 완료")
