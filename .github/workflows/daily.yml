@@ -47,6 +47,17 @@ jobs:
           SKIP_DELAY:           ${{ github.event.inputs.skip_delay || 'false' }}
         run: python scripts/auto_post.py
 
+      - name: Refresh tomorrow candidates (preselect)
+        env:
+          NAVER_CLIENT_ID:      ${{ secrets.NAVER_CLIENT_ID }}
+          NAVER_CLIENT_SECRET:  ${{ secrets.NAVER_CLIENT_SECRET }}
+          YOUTUBE_API_KEY:      ${{ secrets.YOUTUBE_API_KEY }}
+          GROQ_API_KEY:         ${{ secrets.GROQ_API_KEY }}
+          GOOGLE_API_KEY:       ${{ secrets.GOOGLE_API_KEY }}
+          GEMINI_API_KEY:       ${{ secrets.GOOGLE_API_KEY }}
+          SKIP_DELAY:           'true'
+        run: python scripts/preselect.py
+
       - name: Commit changes
         run: |
           git config user.name  "github-actions[bot]"

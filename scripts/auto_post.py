@@ -51,6 +51,16 @@ def _product_key(product: dict) -> str:
     return url[:80] if url else product.get("name", "")[:20]
 
 
+def _mark_pending_used(product_url: str) -> None:
+    """포스팅 완료된 후보의 status를 'used'로 업데이트"""
+    pending = _load_json(PENDING_PATH, {})
+    for c in pending.get("candidates", []):
+        if c.get("product", {}).get("product_url", "") == product_url:
+            c["status"] = "used"
+            break
+    _save_json(PENDING_PATH, pending)
+
+
 def _pick_from_pending() -> dict | None:
     """pending_post.json 에서 오늘/어제 날짜 후보 중 포스팅할 것 선택"""
     pending = _load_json(PENDING_PATH, {})
@@ -141,12 +151,15 @@ async def run():
     logger.info("=" * 50)
 
     # 1. pending_post.json 에서 후보 선택
+    from_pending = False
     candidate = _pick_from_pending()
 
     # 2. 없으면 실시간 수집
     if not candidate:
         logger.info("[폴백] 실시간 수집 모드...")
         candidate = await _collect_fallback()
+    else:
+        from_pending = True
 
     if not candidate:
         logger.warning("포스팅할 상품 없음 — 종료")
@@ -228,6 +241,9 @@ async def run():
         if code:
             from generator.registry import mark_posted
             mark_posted(code, category=product.get("category_hint", ""))
+        # pending 후보를 사용했으면 used 처리 → preselect가 새 후보로 교체
+        if from_pending:
+            _mark_pending_used(product.get("product_url", ""))
 
     # 5. feed_posts 업데이트
     feed = _load_json(FEED_POSTS_PATH, [])

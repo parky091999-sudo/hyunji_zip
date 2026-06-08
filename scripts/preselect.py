@@ -147,8 +147,9 @@ async def run():
                 url    = c.get("product", {}).get("product_url", "")
                 status = c.get("status", "pending")
                 pk     = _extract_page_key(url)
-                is_blocked = (pk and pk in rejected_urls) or url in rejected_urls
-                if status not in ("rejected", "excluded") and not is_blocked:
+                is_blocked   = (pk and pk in rejected_urls) or url in rejected_urls
+                is_posted    = bool(url and url[:80] in posted_ids)
+                if status not in ("rejected", "excluded", "used") and not is_blocked and not is_posted:
                     existing_good.append(c)
             logger.info(f"기존 유효 후보 {len(existing_good)}개 유지")
 
