@@ -45,4 +45,5 @@ jobs:
           git add data/pending_post.json data/product_registry.json data/rejected_products.json || true
           git add -u || true
           git diff --staged --quiet || git commit -m "preselect: 내일 후보 선정 $(date -u +%Y-%m-%d)"
-          git pull --rebase -X ours origin main && git push
+          git pull --rebase -X theirs origin main
+          git push || (git pull --rebase -X theirs origin main && git push)

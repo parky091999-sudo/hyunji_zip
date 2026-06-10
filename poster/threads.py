@@ -132,10 +132,34 @@ def get_post_url(post_id: str) -> str | None:
         return None
 
 
+def find_recent_post_by_marker(marker: str, limit: int = 25) -> dict | None:
+    """최근 내 게시글에서 marker(예: '[013] 검색') 포함 글 탐색 — 중복 게시 차단용.
+    발견 시 {post_id, post_url} 반환, 없거나 조회 실패 시 None (게시 진행)."""
+    if not marker or not THREADS_ACCESS_TOKEN:
+        return None
+    try:
+        data = _api(
+            "GET",
+            f"/{THREADS_USER_ID}/threads",
+            params={
+                "fields": "id,text,permalink",
+                "limit": limit,
+                "access_token": THREADS_ACCESS_TOKEN,
+            },
+        )
+        for p in data.get("data", []):
+            if marker in (p.get("text") or ""):
+                return {"post_id": p.get("id", ""), "post_url": p.get("permalink")}
+    except Exception as e:
+        logger.warning(f"최근 게시글 조회 실패(가드 생략): {e}")
+    return None
+
+
 def post_thread_api(
     post_text: str,
     image_url: str | None = None,
     detail_images: list[str] | None = None,
+    fallback_image_url: str | None = None,
 ) -> dict | None:
     """
     Threads API로 게시글 작성
@@ -164,12 +188,22 @@ def post_thread_api(
     # ── 케이스 1: 이미지 2장 이상 → carousel ─────────────────────────────────
     if len(images_to_use) >= 2:
         logger.info(f"  carousel 포스팅: {len(images_to_use)}장")
-        container_id = _create_carousel_post(post_text, images_to_use[:4])
+        container_id = _create_carousel_post(
+            post_text, images_to_use[:4], fallback_image_url or image_url
+        )
 
     # ── 케이스 2: 이미지 1장 → 단일 이미지 ──────────────────────────────────
     elif len(images_to_use) == 1:
         logger.info(f"  단일 이미지 포스팅: {images_to_use[0][:50]}")
-        container_id = create_image_container(post_text, images_to_use[0])
+        try:
+            container_id = create_image_container(post_text, images_to_use[0])
+        except Exception as e:
+            fb = fallback_image_url or image_url
+            if fb and fb != images_to_use[0]:
+                logger.warning(f"  이미지 컨테이너 실패 → 원본 이미지로 재시도: {e}")
+                container_id = create_image_container(post_text, fb)
+            else:
+                raise
 
     # ── 케이스 3: 이미지 없음 → 텍스트만 ────────────────────────────────────
     else:
@@ -195,7 +229,9 @@ def post_thread_api(
     return {"post_id": post_id, "post_url": post_url}
 
 
-def _create_carousel_post(text: str, image_urls: list[str]) -> str:
+def _create_carousel_post(
+    text: str, image_urls: list[str], fallback_image_url: str | None = None
+) -> str:
     """
     carousel 컨테이너 생성 전체 플로우
     1. 각 이미지 아이템 컨테이너 생성
@@ -213,11 +249,19 @@ def _create_carousel_post(text: str, image_urls: list[str]) -> str:
     # carousel은 최소 2장 필요
     if len(child_ids) < 2:
         logger.warning(f"  carousel 아이템 {len(child_ids)}개만 성공 → 단일 이미지로 폴백")
+        # 폴백 우선순위: 성공한 AI 이미지 → 원본 상품 이미지 → 텍스트
+        candidates = []
         if child_ids:
-            # 단일 이미지 컨테이너로 폴백 (아이템 ID 재사용 불가, 원본 URL로 재생성)
-            return create_image_container(text, image_urls[0])
-        else:
-            return create_text_container(text)
+            candidates.append(image_urls[0])
+        if fallback_image_url and fallback_image_url.startswith("http"):
+            candidates.append(fallback_image_url)
+        for cand in candidates:
+            try:
+                return create_image_container(text, cand)
+            except Exception as e:
+                logger.warning(f"  단일 이미지 폴백 실패({cand[:40]}): {e}")
+        logger.warning("  모든 이미지 실패 → 텍스트 전용 게시")
+        return create_text_container(text)
 
     # carousel 컨테이너 생성
     carousel_id = create_carousel_container(text, child_ids)

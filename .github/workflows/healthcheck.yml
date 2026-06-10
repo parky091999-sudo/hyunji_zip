@@ -5,6 +5,11 @@ on:
     - cron: '0 8 * * *'   # 08:00 UTC = 17:00 KST
   workflow_dispatch:
 
+# 포스팅 워크플로 동시 실행 금지 — 크론 지연으로 겹칠 때 중복 게시 방지
+concurrency:
+  group: threads-posting
+  cancel-in-progress: false
+
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
@@ -18,7 +23,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Pull latest
-        run: git pull --rebase -X ours origin main
+        run: git pull --rebase origin main
 
       - uses: actions/setup-python@v5
         with:
@@ -39,6 +44,8 @@ jobs:
           YOUTUBE_API_KEY:      ${{ secrets.YOUTUBE_API_KEY }}
           GROQ_API_KEY:         ${{ secrets.GROQ_API_KEY }}
           GOOGLE_API_KEY:       ${{ secrets.GOOGLE_API_KEY }}
+          GEMINI_API_KEY:       ${{ secrets.GOOGLE_API_KEY }}
+          IMGBB_API_KEY:        ${{ secrets.IMGBB_API_KEY }}
           SKIP_DELAY:           'true'
         run: python scripts/healthcheck.py
 
@@ -48,5 +55,7 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add docs/index.html docs/feed.html || true
           git add data/product_registry.json data/feed_posts.json data/posted_ids.json || true
+          git add -u || true
           git diff --staged --quiet || git commit -m "healthcheck: 누락 포스팅 복구 $(date -u +%Y-%m-%d)"
-          git pull --rebase origin main && git push || true
+          git pull --rebase -X theirs origin main
+          git push || (git pull --rebase -X theirs origin main && git push)

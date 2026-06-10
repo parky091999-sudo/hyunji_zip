@@ -14,6 +14,11 @@ on:
         default: 'false'
         type: boolean
 
+# 포스팅 워크플로 동시 실행 금지 — 크론 지연으로 겹칠 때 중복 게시 방지
+concurrency:
+  group: threads-posting
+  cancel-in-progress: false
+
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
@@ -69,4 +74,6 @@ jobs:
           git add data/product_registry.json data/feed_posts.json data/posted_ids.json || true
           git add -u || true
           git diff --staged --quiet || git commit -m "auto: daily pipeline $(date -u +%Y-%m-%d)"
-          git pull --rebase -X ours origin main && git push
+          # rebase에서 theirs = 로컬 커밋(방금 기록한 포스팅 데이터) — 충돌 시 데이터 유실/중복포스팅 방지
+          git pull --rebase -X theirs origin main
+          git push || (git pull --rebase -X theirs origin main && git push)

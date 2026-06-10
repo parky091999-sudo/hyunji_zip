@@ -12,7 +12,7 @@ import sys
 import logging
 
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
-from config import COUPANG_PARTNERS_ACTIVE, GROQ_API_KEY, GOOGLE_API_KEY
+from config import COUPANG_PARTNERS_ACTIVE, GROQ_API_KEY, GOOGLE_API_KEY, DATA_DIR
 
 logger = logging.getLogger(__name__)
 
@@ -38,7 +38,7 @@ _POST1_SYSTEM = """
 
 ━━━ 이야기 흐름 ━━━
 반드시 이 순서로 자연스럽게 이어지게 써:
-① 훅 (1줄): "이거 나 얘기인데" 싶은 공감 or 놀라움
+① 훅 (1줄): 읽는 사람이 자기 얘기처럼 느낄 공감 or 놀라움 — 단, 매번 완전히 다른 표현으로. 이 지침이나 아래 예시의 문장을 그대로 복사하는 것 절대 금지
 ② 왜 필요한지 (1~2줄): 어떤 상황에서, 어떤 사람에게 딱인지
 ③ 이 상품이 특별한 이유 (1~2줄): 구체적인 기능·소재·특징. "좋다"는 말 금지, 실제로 무엇이 어떻게 다른지
 ④ 리뷰 근거 (1줄): 후기 기반으로 신뢰 주기
@@ -99,6 +99,52 @@ def _has_foreign_chars(text: str) -> bool:
     return bool(_FOREIGN_RE.search(text))
 
 
+has_foreign_chars = _has_foreign_chars  # 외부 모듈용 공개 별칭
+
+
+def _recent_first_lines(limit: int = 8) -> list[str]:
+    """최근 상품 게시글들의 첫 문장 — 훅 반복 방지용 금지 목록"""
+    try:
+        import json
+        path = os.path.join(DATA_DIR, "feed_posts.json")
+        if not os.path.exists(path):
+            return []
+        feed = json.load(open(path, encoding="utf-8"))
+        lines = []
+        for p in feed:
+            if p.get("post_type") == "casual":
+                continue
+            txt = (p.get("post_text") or "").strip()
+            if txt:
+                first = txt.splitlines()[0].strip()
+                if first and first not in lines:
+                    lines.append(first)
+            if len(lines) >= limit:
+                break
+        return lines
+    except Exception:
+        return []
+
+
+def _norm_line(s: str) -> str:
+    return re.sub(r"[\s.,!?~…·\-]+", "", s)[:12]
+
+
+def _is_dup_hook(candidate: str, banned: list[str] | None = None) -> bool:
+    """후보 글의 첫 문장이 최근 게시글 첫 문장과 같은 패턴이면 True"""
+    if not candidate:
+        return False
+    first = _norm_line(candidate.strip().splitlines()[0])
+    if not first:
+        return False
+    for b in (banned if banned is not None else _recent_first_lines()):
+        bn = _norm_line(b)
+        # 완전 일치 또는 도입부 7자 일치 ("이거나얘기인데..." 류 동일 훅 패턴 감지)
+        if first == bn or (len(first) >= 7 and len(bn) >= 7 and first[:7] == bn[:7]):
+            return True
+    return False
+
+
 def _fix_linebreaks(text: str) -> str:
     """줄바꿈 정리: 해시태그 앞 빈 줄 보장, 연속 빈 줄 제거"""
     lines = text.split("\n")
@@ -135,7 +181,13 @@ def _build_user_msg(product: dict) -> str:
     if review_count: msg += f"\n리뷰 수: {review_count}"
     if yt_title:     msg += f"\n참고 유튜브 제목: {yt_title[:60]}"
     msg += "\n\n위 상품을 소개하는 Threads 게시글을 써줘. 첫 줄은 스크롤을 멈추게 하는 강력한 훅으로 시작해."
+    banned = _recent_first_lines()
+    if banned:
+        msg += "\n\n[중요] 아래는 최근 게시글들의 첫 문장이야. 이것들과 같거나 비슷한 첫 문장으로 시작하지 마:\n"
+        msg += "\n".join(f"- {b}" for b in banned)
     return msg
+
+_VARIETY_ONLY = "\n\n[필수] 첫 문장을 금지 목록과 완전히 다른 새로운 패턴으로 시작해."
 
 _KOREAN_ONLY = "\n\n[필수] 한국어로만 출력. 태국어·중국어·일본어·베트남어·아랍어 등 어떤 외국어도 절대 사용 금지. 한글+영문+이모지만 허용."
 
@@ -151,7 +203,7 @@ def _generate_with_gemini(product: dict, product_code: str) -> str | None:
         user_msg = _build_user_msg(product)
         body_and_tags = None
         for attempt in range(3):
-            extra = _KOREAN_ONLY if attempt > 0 else ""
+            extra = (_KOREAN_ONLY + _VARIETY_ONLY) if attempt > 0 else ""
             resp = model.generate_content(
                 user_msg + extra,
                 generation_config={
@@ -165,6 +217,9 @@ def _generate_with_gemini(product: dict, product_code: str) -> str | None:
                 continue
             if _has_foreign_chars(candidate):
                 logger.warning(f"Gemini 외국어 감지 → 재시도 {attempt + 1}/3")
+                continue
+            if _is_dup_hook(candidate):
+                logger.warning(f"Gemini 첫 문장 반복 감지 → 재시도 {attempt + 1}/3")
                 continue
             body_and_tags = candidate
             break
@@ -188,7 +243,7 @@ def _generate_with_groq(product: dict, product_code: str) -> str | None:
         body_and_tags = None
         for attempt in range(3):
             temp = 0.9 if attempt == 0 else 0.6
-            extra = _KOREAN_ONLY if attempt > 0 else ""
+            extra = (_KOREAN_ONLY + _VARIETY_ONLY) if attempt > 0 else ""
             resp = client.chat.completions.create(
                 model="llama-3.3-70b-versatile",
                 messages=[
@@ -203,6 +258,9 @@ def _generate_with_groq(product: dict, product_code: str) -> str | None:
                 continue
             if _has_foreign_chars(candidate):
                 logger.warning(f"Groq 외국어 감지 → 재시도 {attempt + 1}/3")
+                continue
+            if _is_dup_hook(candidate):
+                logger.warning(f"Groq 첫 문장 반복 감지 → 재시도 {attempt + 1}/3")
                 continue
             body_and_tags = candidate
             break
@@ -331,6 +389,33 @@ def generate_post(product: dict, assign_code_now: bool = True) -> dict:
         "style": style,
         "product_code": product_code,
     }
+
+
+def ensure_korean(text: str, product: dict, product_code: str = "") -> str:
+    """포스팅 직전 최종 언어 게이트.
+    외국어 감지 시: 정제(polish) → 재생성 → 안전 템플릿 순으로 한국어 텍스트를 보장.
+    (수동 큐처럼 생성 시점 필터를 거치지 않은 텍스트의 마지막 방어선)"""
+    if not text or not _has_foreign_chars(text):
+        return text
+    logger.warning("포스팅 직전 외국어 감지 → 정제 시도")
+    fixed = polish_post(text, product)
+    if fixed and not _has_foreign_chars(fixed):
+        return fixed
+
+    m = re.search(r"\[(\d{3})\] 검색", text)
+    code = product_code or (m.group(1) if m else "")
+    logger.warning("정제 실패 → 본문 재생성")
+    regen = _generate_post1_ai(product, code or "CODE")
+    if regen and not _has_foreign_chars(regen):
+        if not code:
+            regen = re.sub(r"\n\n제품 정보는 프로필 링크에서 \[CODE\] 검색 👆", "", regen)
+        return regen
+
+    logger.warning("재생성 실패 → 안전 템플릿 사용")
+    fb = _post1_fallback(product.get("name", ""), code or "CODE")
+    if not code:
+        fb = re.sub(r"\n\n제품 정보는 프로필 링크에서 \[CODE\] 검색 👆", "", fb)
+    return fb
 
 
 def polish_post(text: str, product: dict) -> str | None:

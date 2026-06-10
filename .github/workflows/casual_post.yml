@@ -5,6 +5,11 @@ on:
     - cron: '30 1 * * *'   # 01:30 UTC = 10:30 KST
   workflow_dispatch:
 
+# 포스팅 워크플로 동시 실행 금지 — 크론 지연으로 겹칠 때 중복 게시 방지
+concurrency:
+  group: threads-posting
+  cancel-in-progress: false
+
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
@@ -39,4 +44,5 @@ jobs:
           git add data/last_casual_post.json data/feed_posts.json || true
           git add data/recent_posts.json || true
           git diff --staged --quiet || git commit -m "casual: 일상글 포스팅 $(date -u +%Y-%m-%d)"
-          git pull --rebase origin main && git push || true
+          git pull --rebase -X theirs origin main
+          git push || (git pull --rebase -X theirs origin main && git push)

@@ -46,7 +46,9 @@ def _upload_imgbb(img_bytes: bytes) -> str | None:
             timeout=30,
         )
         if r.status_code == 200:
-            return r.json()["data"]["url"]
+            d = r.json()["data"]
+            # display_url = 직접 렌더링 가능한 이미지 URL (Threads가 fetch 가능해야 함)
+            return d.get("display_url") or d.get("url")
         logger.warning(f"imgBB 오류: {r.status_code}")
     except Exception as e:
         logger.warning(f"imgBB 업로드 실패: {e}")

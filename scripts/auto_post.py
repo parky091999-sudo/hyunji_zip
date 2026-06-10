@@ -158,11 +158,16 @@ async def run():
     logger.info(f"자동 포스팅 시작: {datetime.now(KST).strftime('%Y-%m-%d %H:%M KST')}")
     logger.info("=" * 50)
 
-    # 오늘 이미 자동 포스팅했으면 건너뜀 (cron 4회 실행 중 중복 방지)
+    # 오늘 이미 자동 포스팅 '성공'했으면 건너뜀 (실패 건은 보정 크론이 재시도)
     today_str = datetime.now(KST).strftime("%Y-%m-%d")
     if os.path.exists(FEED_POSTS_PATH):
         feed = json.load(open(FEED_POSTS_PATH, encoding="utf-8"))
-        if any(p.get("timestamp", "")[:10] == today_str and p.get("post_type") == "auto" for p in feed):
+        if any(
+            p.get("timestamp", "")[:10] == today_str
+            and p.get("post_type") == "auto"
+            and p.get("status") == "posted"
+            for p in feed
+        ):
             logger.info(f"오늘({today_str}) 자동 포스팅 이미 완료 — 건너뜀")
             return
 
@@ -218,13 +223,27 @@ async def run():
         if code and "프로필 링크에서" not in post_text:
             post_text += f"\n\n제품 정보는 프로필 링크에서 [{code}] 검색 👆"
 
+    # ── 이미지 보충: 원본 이미지 없으면 네이버 검색으로 확보 (010 메론 무사진 재발 방지)
+    if not image_url:
+        try:
+            from scraper.naver_shopping import fetch_image_by_name
+            image_url = fetch_image_by_name(product.get("name", ""))
+            if image_url:
+                product["image_url"] = image_url
+        except Exception as e:
+            logger.warning(f"이미지 보충 실패: {e}")
+
+    # ── 언어 게이트: 포스팅 직전 외국어 최종 차단 (012 한자 유출 재발 방지)
+    from generator.content import ensure_korean
+    post_text = ensure_korean(post_text, product, code)
+
     # AI 이미지 생성 — 성공 시 교체, 실패 시 원본 유지
     try:
         from generator.image_gen import generate_and_upload_images
         ai_imgs = generate_and_upload_images(product, post_text)
         if ai_imgs:
             detail_imgs = ai_imgs
-            image_url = ""
+            # 원본 image_url 은 비우지 않고 carousel 전멸 시 폴백으로 사용 (013 무사진 재발 방지)
             logger.info(f"AI 이미지 {len(ai_imgs)}장으로 교체")
         else:
             logger.info("AI 이미지 생성 실패 → 원본 이미지 유지")
@@ -232,15 +251,28 @@ async def run():
         logger.warning(f"AI 이미지 생성 오류: {e}")
 
     logger.info(f"포스팅: {product.get('name', '')[:40]} [{code}]")
-    try:
-        result = post_thread_api(
-            post_text=post_text,
-            image_url=image_url,
-            detail_images=detail_imgs,
-        )
-    except Exception as e:
-        logger.error(f"포스팅 실패: {e}")
-        result = None
+
+    # ── 멱등 가드: 동일 코드 게시글이 이미 Threads에 있으면 게시 생략, 기록만 복구
+    #    (크론 지연·동시 실행으로 인한 011/013 중복 게시 재발 방지의 2차 방어선)
+    result = None
+    if code:
+        from poster.threads import find_recent_post_by_marker
+        already = find_recent_post_by_marker(f"[{code}] 검색")
+        if already:
+            logger.warning(f"Threads에 [{code}] 게시글 이미 존재 → 중복 게시 차단, 기록만 복구")
+            result = already
+
+    if result is None:
+        try:
+            result = post_thread_api(
+                post_text=post_text,
+                image_url="" if (detail_imgs and detail_imgs != [image_url]) else image_url,
+                detail_images=detail_imgs,
+                fallback_image_url=image_url,
+            )
+        except Exception as e:
+            logger.error(f"포스팅 실패: {e}")
+            result = None
 
     post_url = result.get("post_url") if result else None
     post_id  = result.get("post_id")  if result else None

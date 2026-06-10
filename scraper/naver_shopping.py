@@ -260,6 +260,23 @@ def _fetch_items(keyword: str, display: int = 30) -> list[dict]:
     return resp.json().get("items", [])
 
 
+def fetch_image_by_name(name: str) -> str:
+    """상품명으로 네이버 쇼핑 검색 → 대표 이미지 URL 1개 반환.
+    어드민 URL 직접 등록 등으로 이미지가 없는 상품 보충용 (공식 API, 무료)."""
+    if not name or not (NAVER_CLIENT_ID and NAVER_CLIENT_SECRET):
+        return ""
+    try:
+        keyword = _clean_name(_strip_html(name)).strip()[:40] or name[:40]
+        for item in _fetch_items(keyword, display=5):
+            img = (item.get("image") or "").strip()
+            if img.startswith("http"):
+                logger.info(f"  네이버 이미지 보충 성공: {keyword[:25]}")
+                return img
+    except Exception as e:
+        logger.warning(f"네이버 이미지 보충 실패: {e}")
+    return ""
+
+
 def _calc_discount_rate(lprice: int, hprice: int) -> int:
     if hprice > 0 and lprice > 0 and hprice > lprice:
         return round((1 - lprice / hprice) * 100)

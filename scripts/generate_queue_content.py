@@ -175,6 +175,9 @@ def _build_prompt(product: dict) -> str:
 def _generate(product: dict) -> str | None:
     prompt = _build_prompt(product)
 
+    from generator.content import has_foreign_chars
+    _KO = "\n\n[필수] 한국어로만 출력. 한자·일본어·태국어 등 어떤 외국어도 절대 사용 금지."
+
     if GOOGLE_API_KEY:
         try:
             import google.generativeai as genai
@@ -183,18 +186,24 @@ def _generate(product: dict) -> str | None:
                 "gemini-2.5-flash",
                 system_instruction=_POST_SYSTEM,
             )
-            resp = model.generate_content(
-                prompt,
-                generation_config={
-                    "max_output_tokens": 2000,
-                    "temperature": 0.85,
-                    "thinking_config": {"thinking_budget": 0},
-                },
-            )
-            text = resp.text.strip() if resp.text else ""
-            if text:
+            for attempt in range(3):
+                resp = model.generate_content(
+                    prompt + (_KO if attempt > 0 else ""),
+                    generation_config={
+                        "max_output_tokens": 2000,
+                        "temperature": 0.85,
+                        "thinking_config": {"thinking_budget": 0},
+                    },
+                )
+                text = resp.text.strip() if resp.text else ""
+                if not text:
+                    continue
+                if has_foreign_chars(text):
+                    logger.warning(f"  Gemini 외국어 감지 → 재시도 {attempt + 1}/3")
+                    continue
                 logger.info("  [Gemini] 생성 완료")
                 return text
+            logger.warning("  Gemini 3회 모두 외국어 포함 → Groq 폴백")
         except Exception as e:
             logger.warning(f"  Gemini 오류 → Groq 폴백: {e}")
 
@@ -202,13 +211,24 @@ def _generate(product: dict) -> str | None:
         try:
             from groq import Groq
             client = Groq(api_key=GROQ_API_KEY)
-            resp = client.chat.completions.create(
-                model="llama-3.3-70b-versatile",
-                messages=[{"role": "system", "content": _POST_SYSTEM}, {"role": "user", "content": prompt}],
-                max_tokens=500,
-                temperature=0.85,
-            )
-            return resp.choices[0].message.content.strip()
+            for attempt in range(2):
+                resp = client.chat.completions.create(
+                    model="llama-3.3-70b-versatile",
+                    messages=[
+                        {"role": "system", "content": _POST_SYSTEM},
+                        {"role": "user", "content": prompt + (_KO if attempt > 0 else "")},
+                    ],
+                    max_tokens=500,
+                    temperature=0.85,
+                )
+                text = resp.choices[0].message.content.strip()
+                if not text:
+                    continue
+                if has_foreign_chars(text):
+                    logger.warning(f"  Groq 외국어 감지 → 재시도 {attempt + 1}/2")
+                    continue
+                return text
+            logger.warning("  Groq 외국어 포함 → 생성 보류 (빈 상태 유지)")
         except Exception as e:
             logger.warning(f"  Groq 생성 오류: {e}")
 

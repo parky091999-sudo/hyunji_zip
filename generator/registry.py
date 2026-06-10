@@ -67,16 +67,19 @@ def assign_code(product_url: str, name: str = "", image_url: str = "", category:
             if _extract_item_id(existing.get("url", "")) == item_id:
                 return existing["code"]
 
+    # URL 없는 상품은 등록 불가 — 코드 번호 낭비 방지
+    if not key:
+        return ""
+
     code = str(reg["next_code"]).zfill(3)
-    if key:
-        reg["products"][key] = {
-            "code": code,
-            "name": name,
-            "url": product_url,
-            "image_url": image_url,
-            "category": category,
-            "registered_at": datetime.now(KST).isoformat(),
-        }
+    reg["products"][key] = {
+        "code": code,
+        "name": name,
+        "url": product_url,
+        "image_url": image_url,
+        "category": category,
+        "registered_at": datetime.now(KST).isoformat(),
+    }
     reg["next_code"] += 1
     _save(reg)
     return code
