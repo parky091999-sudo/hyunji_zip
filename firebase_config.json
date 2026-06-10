@@ -1,8 +1,9 @@
 {
-  "apiKey": "여기에_apiKey_붙여넣기",
-  "authDomain": "여기에_authDomain_붙여넣기",
-  "projectId": "여기에_projectId_붙여넣기",
-  "storageBucket": "여기에_storageBucket_붙여넣기",
-  "messagingSenderId": "여기에_messagingSenderId_붙여넣기",
-  "appId": "여기에_appId_붙여넣기"
+  "apiKey": "AIzaSyCdQQmDW8w6ymkrU9otb4VKFzbaCnn1gRo",
+  "authDomain": "kkul-pick.firebaseapp.com",
+  "projectId": "kkul-pick",
+  "storageBucket": "kkul-pick.firebasestorage.app",
+  "messagingSenderId": "1095253541227",
+  "appId": "1:1095253541227:web:8f4a974b3a7fd6aa9e8c2e",
+  "measurementId": "G-3JKLLG0EDZ"
 }
