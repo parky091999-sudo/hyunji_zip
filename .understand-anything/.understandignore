@@ -1,0 +1,25 @@
+# .understandignore
+# From .gitignore
+# .env
+# ssh-key/
+# *.pyc
+# *.pyo
+# .Python
+# data/threads_cookies.json
+# data/*.png
+# data/after_*.html
+# data/beauty_*.html
+# data/coupang_*.html
+# data/products.json
+# logs/
+# preview_*.html
+# dryrun_*.html
+# .DS_Store
+# Thumbs.db
+
+# Detected directories
+# docs/
+
+# Test patterns
+# *.test.*
+# *.spec.*

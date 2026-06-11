@@ -1,0 +1,2473 @@
+{
+  "version": "1.0.0",
+  "project": {
+    "name": "꿀픽 파이프라인",
+    "languages": [
+      "Python",
+      "YAML",
+      "Markdown",
+      "HTML"
+    ],
+    "frameworks": [
+      "anthropic",
+      "groq",
+      "playwright",
+      "schedule",
+      "requests",
+      "beautifulsoup4",
+      "python-dotenv",
+      "aiofiles"
+    ],
+    "description": "쿠팡/네이버/YouTube 상품 수집 → Groq AI 게시글 생성 → Threads 자동 포스팅 파이프라인",
+    "analyzedAt": "2026-06-03T10:04:29.242330Z",
+    "gitCommitHash": ""
+  },
+  "nodes": [
+    {
+      "id": "file:main.py",
+      "type": "file",
+      "name": "메인 파이프라인 진입점",
+      "filePath": "main.py",
+      "summary": "전체 파이프라인의 오케스트레이터. 상품 수집(우선순위 큐 → YouTube → 네이버 → 쿠팡 폴백) → AI 게시글 생성 → Threads 포스팅 → 댓글 대댓글 → 타계정 댓글 활동 → 페이지 빌드 순서로 5단계 파이프라인을 실행한다. 즉시 1회 실행과 schedule 모드(하루 2~3회 자동) 두 가지 진입점을 지원한다.",
+      "tags": [
+        "파이프라인",
+        "비동기",
+        "스케줄러",
+        "오케스트레이터"
+      ],
+      "complexity": "complex",
+      "layer": "layer:orchestrator"
+    },
+    {
+      "id": "function:main.py:run_pipeline",
+      "type": "function",
+      "name": "run_pipeline",
+      "filePath": "main.py",
+      "summary": "전체 파이프라인 1회 실행 async 함수. 랜덤 딜레이(0~120분) 후 우선순위 큐 확인 → 벤치마킹 보충 → 상품 선정 → AI 콘텐츠 생성 → Threads 포스팅 → 댓글 대댓글 → 타계정 댓글 활동 → 페이지 빌드 순으로 진행. P1(수동) 상품은 항상 우선, P2(벤치마크) 상품은 70% 확률로 사용.",
+      "tags": [
+        "비동기",
+        "파이프라인",
+        "상품선정",
+        "포스팅"
+      ],
+      "complexity": "complex",
+      "layer": "layer:orchestrator"
+    },
+    {
+      "id": "function:main.py:load_priority_queue",
+      "type": "function",
+      "name": "load_priority_queue",
+      "filePath": "main.py",
+      "summary": "priority_queue.json에서 우선순위 큐를 로드. 파일이 없으면 빈 리스트 반환.",
+      "tags": [
+        "파일IO",
+        "우선순위큐"
+      ],
+      "complexity": "simple",
+      "layer": "layer:orchestrator"
+    },
+    {
+      "id": "function:main.py:pop_from_queue",
+      "type": "function",
+      "name": "pop_from_queue",
+      "filePath": "main.py",
+      "summary": "우선순위(priority 오름차순) + added_at 순으로 정렬 후 최상위 항목 1개를 팝하여 상품 dict 반환. P1(수동) > P2(벤치마크) 순서 보장.",
+      "tags": [
+        "우선순위큐",
+        "상품선정"
+      ],
+      "complexity": "simple",
+      "layer": "layer:orchestrator"
+    },
+    {
+      "id": "function:main.py:append_feed_entries",
+      "type": "function",
+      "name": "append_feed_entries",
+      "filePath": "main.py",
+      "summary": "생성된 콘텐츠 목록을 feed_posts.json 맨 앞에 추가. 최근 200개만 보관. 초기 status는 'generated', 포스팅 성공 시 'posted'로 업데이트됨.",
+      "tags": [
+        "피드관리",
+        "파일IO"
+      ],
+      "complexity": "moderate",
+      "layer": "layer:orchestrator"
+    },
+    {
+      "id": "function:main.py:load_posted_ids",
+      "type": "function",
+      "name": "load_posted_ids",
+      "filePath": "main.py",
+      "summary": "posted_ids.json에서 이미 포스팅된 상품 URL 집합을 로드. 중복 포스팅 방지용.",
+      "tags": [
+        "중복필터",
+        "파일IO"
+      ],
+      "complexity": "simple",
+      "layer": "layer:orchestrator"
+    },
+    {
+      "id": "function:main.py:run_scheduled",
+      "type": "function",
+      "name": "run_scheduled",
+      "filePath": "main.py",
+      "summary": "schedule 라이브러리를 사용해 config의 SCHEDULE_TIMES에 지정된 시각마다 run_once를 자동 실행하는 스케줄 모드 함수.",
+      "tags": [
+        "스케줄러",
+        "자동화"
+      ],
+      "complexity": "simple",
+      "layer": "layer:orchestrator"
+    },
+    {
+      "id": "file:poster/engager.py",
+      "type": "file",
+      "name": "타계정 댓글 활동 모듈",
+      "filePath": "poster/engager.py",
+      "summary": "Playwright 브라우저로 Threads를 로그인한 뒤, 키워드 검색으로 타계정 게시글을 발견하고, Groq LLM(llama-3.3-70b)으로 게시글 본문에 맞는 자연스러운 한국어 댓글을 생성해 게시한다. 하루 최대 10개, 댓글 간 3~5분 자연스러운 딜레이 유지.",
+      "tags": [
+        "Playwright",
+        "Groq",
+        "댓글자동화",
+        "노출확대"
+      ],
+      "complexity": "complex",
+      "layer": "layer:poster"
+    },
+    {
+      "id": "function:poster/engager.py:run_engagement_session",
+      "type": "function",
+      "name": "run_engagement_session",
+      "filePath": "poster/engager.py",
+      "summary": "독립 Playwright 브라우저 세션을 열고 쿠키로 로그인 후 run_engagement를 호출. main.py에서 직접 await 가능한 공개 진입점.",
+      "tags": [
+        "Playwright",
+        "세션관리",
+        "비동기"
+      ],
+      "complexity": "moderate",
+      "layer": "layer:poster"
+    },
+    {
+      "id": "function:poster/engager.py:run_engagement",
+      "type": "function",
+      "name": "run_engagement",
+      "filePath": "poster/engager.py",
+      "summary": "키워드 랜덤 4개 선택 → 검색 → 타계정 게시글 URL 수집 → 미댓글 게시글에만 방문·댓글 게시. 댓글 간 MIN_DELAY_SEC~MAX_DELAY_SEC(3~5분) 대기.",
+      "tags": [
+        "키워드검색",
+        "댓글루프",
+        "비동기"
+      ],
+      "complexity": "moderate",
+      "layer": "layer:poster"
+    },
+    {
+      "id": "function:poster/engager.py:_generate_comment",
+      "type": "function",
+      "name": "_generate_comment",
+      "filePath": "poster/engager.py",
+      "summary": "게시글 본문을 Groq LLM에 전달해 12~40자, 자연스러운 반말 한국어 댓글 1개 생성. 품질 미달 시 retry=True로 재시도(temperature 0.9).",
+      "tags": [
+        "Groq",
+        "LLM",
+        "댓글생성"
+      ],
+      "complexity": "moderate",
+      "layer": "layer:poster"
+    },
+    {
+      "id": "function:poster/engager.py:_visit_and_comment",
+      "type": "function",
+      "name": "_visit_and_comment",
+      "filePath": "poster/engager.py",
+      "summary": "게시글 URL 직접 방문 → 본문 추출 → 댓글 생성 → textbox에 타이핑 후 Enter로 게시. 성공 여부와 댓글 텍스트 튜플 반환.",
+      "tags": [
+        "Playwright",
+        "댓글게시",
+        "비동기"
+      ],
+      "complexity": "moderate",
+      "layer": "layer:poster"
+    },
+    {
+      "id": "function:poster/engager.py:_search_posts",
+      "type": "function",
+      "name": "_search_posts",
+      "filePath": "poster/engager.py",
+      "summary": "Threads 검색 페이지(/search?q=키워드)에서 타계정 게시글 URL 최대 max_posts개 수집. 자기 계정(@THREADS_USERNAME) 게시글은 제외.",
+      "tags": [
+        "Playwright",
+        "검색",
+        "URL수집"
+      ],
+      "complexity": "simple",
+      "layer": "layer:poster"
+    },
+    {
+      "id": "file:poster/threads.py",
+      "type": "file",
+      "name": "Threads API 포스터",
+      "filePath": "poster/threads.py",
+      "summary": "Meta Graph API(graph.threads.net)를 사용해 텍스트/단일이미지/캐러셀 게시글을 게시하는 공식 API 클라이언트. Playwright 불필요, IP 제한 없음, 하루 250개 포스팅 한도. 이미지 수에 따라 TEXT → IMAGE → CAROUSEL 중 자동 선택.",
+      "tags": [
+        "Threads API",
+        "Meta Graph API",
+        "포스팅",
+        "캐러셀"
+      ],
+      "complexity": "moderate",
+      "layer": "layer:poster"
+    },
+    {
+      "id": "function:poster/threads.py:post_thread_api",
+      "type": "function",
+      "name": "post_thread_api",
+      "filePath": "poster/threads.py",
+      "summary": "이미지 수에 따라 포스팅 방식을 결정하는 메인 함수. detail_images 2장 이상 → carousel, 1장 → 단일이미지, 없음 → 텍스트. 컨테이너 생성 후 30초 대기 → publish → URL 조회 흐름.",
+      "tags": [
+        "포스팅",
+        "캐러셀",
+        "이미지"
+      ],
+      "complexity": "moderate",
+      "layer": "layer:poster"
+    },
+    {
+      "id": "function:poster/threads.py:post_all_products",
+      "type": "function",
+      "name": "post_all_products",
+      "filePath": "poster/threads.py",
+      "summary": "여러 상품 콘텐츠를 순차적으로 Threads에 포스팅. 각 상품 간 90초 대기. 포스팅된 product_url 목록과 게시글 정보 목록({post_id, post_url})을 반환.",
+      "tags": [
+        "배치포스팅",
+        "비동기"
+      ],
+      "complexity": "moderate",
+      "layer": "layer:poster"
+    },
+    {
+      "id": "function:poster/threads.py:_create_carousel_post",
+      "type": "function",
+      "name": "_create_carousel_post",
+      "filePath": "poster/threads.py",
+      "summary": "캐러셀 게시글 생성 전체 플로우: 각 이미지 아이템 컨테이너 생성(간 2초 대기) → carousel 컨테이너 생성. 성공 이미지 2장 미만이면 단일이미지 또는 텍스트로 자동 폴백.",
+      "tags": [
+        "캐러셀",
+        "폴백로직"
+      ],
+      "complexity": "moderate",
+      "layer": "layer:poster"
+    },
+    {
+      "id": "function:poster/threads.py:_api",
+      "type": "function",
+      "name": "_api",
+      "filePath": "poster/threads.py",
+      "summary": "Threads Graph API 공통 HTTP 요청 헬퍼. 오류 응답 시 RuntimeError 발생.",
+      "tags": [
+        "HTTP",
+        "API클라이언트"
+      ],
+      "complexity": "simple",
+      "layer": "layer:poster"
+    },
+    {
+      "id": "function:poster/threads.py:publish_container",
+      "type": "function",
+      "name": "publish_container",
+      "filePath": "poster/threads.py",
+      "summary": "미디어 컨테이너 ID를 threads_publish 엔드포인트에 전달해 실제 게시. Threads 포스트 ID 반환.",
+      "tags": [
+        "게시",
+        "API"
+      ],
+      "complexity": "simple",
+      "layer": "layer:poster"
+    },
+    {
+      "id": "file:scraper/coupang.py",
+      "type": "file",
+      "name": "쿠팡 스크래퍼",
+      "filePath": "scraper/coupang.py",
+      "summary": "Playwright 비동기 브라우저로 쿠팡 홈페이지 프로모션 섹션을 스크래핑. 봇 탐지 우회를 위해 headless=False, webdriver 프로퍼티 제거. 프로모션 캐러셀 → 오늘의 발견(개인화) 순으로 수집하며 부족하면 두 번째 섹션으로 보충.",
+      "tags": [
+        "Playwright",
+        "스크래핑",
+        "쿠팡",
+        "봇우회"
+      ],
+      "complexity": "moderate",
+      "layer": "layer:scraper"
+    },
+    {
+      "id": "function:scraper/coupang.py:scrape_homepage_deals",
+      "type": "function",
+      "name": "scrape_homepage_deals",
+      "filePath": "scraper/coupang.py",
+      "summary": "쿠팡 홈 접속 → 스크롤 5회(JS 렌더링 트리거) → 프로모션 캐러셀 수집 → 부족 시 개인화 섹션으로 보충. 최종 상품 list[dict] 반환. main.py에서 폴백으로 호출.",
+      "tags": [
+        "비동기",
+        "스크래핑",
+        "폴백"
+      ],
+      "complexity": "moderate",
+      "layer": "layer:scraper"
+    },
+    {
+      "id": "function:scraper/coupang.py:_scrape_promotion_items",
+      "type": "function",
+      "name": "_scrape_promotion_items",
+      "filePath": "scraper/coupang.py",
+      "summary": "li.promotion-carousel-item 셀렉터로 프로모션 카드 목록 수집 후 _parse_promotion_card로 파싱. 할인율·가격 정보가 있는 상품 우선.",
+      "tags": [
+        "DOM파싱",
+        "프로모션"
+      ],
+      "complexity": "simple",
+      "layer": "layer:scraper"
+    },
+    {
+      "id": "function:scraper/coupang.py:_parse_promotion_card",
+      "type": "function",
+      "name": "_parse_promotion_card",
+      "filePath": "scraper/coupang.py",
+      "summary": "프로모션 카드 DOM 요소에서 상품명·할인율·가격·원가·이미지·링크·배지를 추출해 상품 dict 반환.",
+      "tags": [
+        "DOM파싱",
+        "상품추출"
+      ],
+      "complexity": "simple",
+      "layer": "layer:scraper"
+    },
+    {
+      "id": "function:scraper/coupang.py:_scrape_personalized_items",
+      "type": "function",
+      "name": "_scrape_personalized_items",
+      "filePath": "scraper/coupang.py",
+      "summary": "오늘의 발견 개인화 섹션(a.impression-logged)에서 상품카드 파싱. item-image가 있는 카드만 처리. 프로모션 섹션 수집 부족 시 보충용.",
+      "tags": [
+        "DOM파싱",
+        "개인화추천"
+      ],
+      "complexity": "simple",
+      "layer": "layer:scraper"
+    },
+    {
+      "id": "file:scraper/naver_shopping.py",
+      "type": "file",
+      "name": "네이버 쇼핑 스크래퍼",
+      "filePath": "scraper/naver_shopping.py",
+      "summary": "네이버 쇼핑 검색 API(무료 25,000건/일)로 21개 카테고리 키워드를 순환 검색해 쿠팡 판매 상품만 수집. 공업용/B2B 차단 키워드 필터, 유형 중복 제거, 브랜드 필터, 별점/리뷰수 검증(Playwright)을 거쳐 최고 품질 상품만 반환.",
+      "tags": [
+        "네이버API",
+        "쿠팡우선",
+        "상품필터링",
+        "품질검증"
+      ],
+      "complexity": "complex",
+      "layer": "layer:scraper"
+    },
+    {
+      "id": "function:scraper/naver_shopping.py:scrape_deals",
+      "type": "function",
+      "name": "scrape_deals",
+      "filePath": "scraper/naver_shopping.py",
+      "summary": "SEARCH_KEYWORDS를 순환하며 네이버 쇼핑 API 검색 → 쿠팡 상품 우선 필터 → 유형 중복 제거 → 별점 검증 후 max_items개 반환. 쿠팡이 아닌 상품은 제외.",
+      "tags": [
+        "네이버API",
+        "쿠팡필터",
+        "배치수집"
+      ],
+      "complexity": "complex",
+      "layer": "layer:scraper"
+    },
+    {
+      "id": "function:scraper/naver_shopping.py:_to_product",
+      "type": "function",
+      "name": "_to_product",
+      "filePath": "scraper/naver_shopping.py",
+      "summary": "네이버 API 응답 item dict를 표준 상품 dict로 변환. 이름 정제, 한자 포함 제거, 노이즈 이름 제거, 차단 키워드 필터, 브랜드/가격 필터를 모두 적용.",
+      "tags": [
+        "데이터변환",
+        "상품필터"
+      ],
+      "complexity": "moderate",
+      "layer": "layer:scraper"
+    },
+    {
+      "id": "function:scraper/naver_shopping.py:_check_coupang_rating",
+      "type": "function",
+      "name": "_check_coupang_rating",
+      "filePath": "scraper/naver_shopping.py",
+      "summary": "Playwright로 쿠팡 상품 페이지 접속 후 JSON-LD aggregateRating에서 별점/리뷰수를 파싱. 별점 0이거나 리뷰 부족이면 False 반환. Playwright 인프라 오류 시 통과 처리(허용).",
+      "tags": [
+        "Playwright",
+        "별점검증",
+        "품질필터"
+      ],
+      "complexity": "complex",
+      "layer": "layer:scraper"
+    },
+    {
+      "id": "function:scraper/naver_shopping.py:is_blocked_product",
+      "type": "function",
+      "name": "is_blocked_product",
+      "filePath": "scraper/naver_shopping.py",
+      "summary": "공업용·업소용·B2B·직구 등 BLOCKED_KEYWORDS에 해당하는 상품을 필터링.",
+      "tags": [
+        "상품필터",
+        "품질관리"
+      ],
+      "complexity": "simple",
+      "layer": "layer:scraper"
+    },
+    {
+      "id": "function:scraper/naver_shopping.py:_fetch_items",
+      "type": "function",
+      "name": "_fetch_items",
+      "filePath": "scraper/naver_shopping.py",
+      "summary": "네이버 쇼핑 검색 API에 키워드로 GET 요청해 items 배열 반환.",
+      "tags": [
+        "HTTP",
+        "네이버API"
+      ],
+      "complexity": "simple",
+      "layer": "layer:scraper"
+    },
+    {
+      "id": "file:scraper/threads_benchmark.py",
+      "type": "file",
+      "name": "Threads 벤치마킹 계정 스캐너",
+      "filePath": "scraper/threads_benchmark.py",
+      "summary": "benchmark_accounts.json에서 활성 계정 랜덤 4개 선택 → Playwright로 Threads 프로필 페이지 렌더링 후 게시글 텍스트 파싱 → Groq로 상품명 추출 → 네이버 쇼핑 매칭 → priority_queue.json에 priority=2로 추가. 큐 부족(3개 미만) 시 자동 보충 역할.",
+      "tags": [
+        "벤치마킹",
+        "Playwright",
+        "Groq",
+        "우선순위큐"
+      ],
+      "complexity": "complex",
+      "layer": "layer:scraper"
+    },
+    {
+      "id": "function:scraper/threads_benchmark.py:run_benchmark",
+      "type": "function",
+      "name": "run_benchmark",
+      "filePath": "scraper/threads_benchmark.py",
+      "summary": "벤치마킹 계정 스캔 메인 진입점. 계정 랜덤 선택 → 게시글 파싱 → 상품명 추출 → 네이버 검색 → 큐 중복 확인 후 추가. 추가된 상품 수 반환.",
+      "tags": [
+        "벤치마킹",
+        "큐관리"
+      ],
+      "complexity": "moderate",
+      "layer": "layer:scraper"
+    },
+    {
+      "id": "function:scraper/threads_benchmark.py:_fetch_posts",
+      "type": "function",
+      "name": "_fetch_posts",
+      "filePath": "scraper/threads_benchmark.py",
+      "summary": "Playwright로 Threads 프로필 페이지 렌더링 후 __NEXT_DATA__ JSON → span[dir=auto] → og:description 순서로 폴백하며 게시글 텍스트 추출.",
+      "tags": [
+        "Playwright",
+        "HTML파싱",
+        "폴백로직"
+      ],
+      "complexity": "moderate",
+      "layer": "layer:scraper"
+    },
+    {
+      "id": "function:scraper/threads_benchmark.py:_extract_product_names",
+      "type": "function",
+      "name": "_extract_product_names",
+      "filePath": "scraper/threads_benchmark.py",
+      "summary": "Groq LLM(llama-3.3-70b)에 게시글 텍스트를 전달해 상품명 최대 3개를 추출. temperature=0.1로 정확도 우선.",
+      "tags": [
+        "Groq",
+        "LLM",
+        "상품명추출"
+      ],
+      "complexity": "simple",
+      "layer": "layer:scraper"
+    },
+    {
+      "id": "function:scraper/threads_benchmark.py:_walk_for_texts",
+      "type": "function",
+      "name": "_walk_for_texts",
+      "filePath": "scraper/threads_benchmark.py",
+      "summary": "__NEXT_DATA__ JSON 트리를 재귀 탐색해 text_post_app_text, caption, text 등 텍스트 필드 수집. 최대 depth=15로 무한 재귀 방지.",
+      "tags": [
+        "재귀파싱",
+        "JSON탐색"
+      ],
+      "complexity": "moderate",
+      "layer": "layer:scraper"
+    },
+    {
+      "id": "function:scraper/threads_benchmark.py:_search_naver",
+      "type": "function",
+      "name": "_search_naver",
+      "filePath": "scraper/threads_benchmark.py",
+      "summary": "추출된 상품명으로 네이버 쇼핑 API 검색 후 첫 번째 결과를 표준 상품 dict로 반환.",
+      "tags": [
+        "네이버API",
+        "상품검색"
+      ],
+      "complexity": "simple",
+      "layer": "layer:scraper"
+    },
+    {
+      "id": "file:scraper/youtube_trending.py",
+      "type": "file",
+      "name": "YouTube 트렌딩 상품 탐지기",
+      "filePath": "scraper/youtube_trending.py",
+      "summary": "YouTube Data API v3로 한국 바이럴 생활용품 영상을 검색(10,000 units/일 무료 쿼터) → Groq AI로 영상 제목/설명에서 상품명 1개 추출 → 네이버 쇼핑 API로 쿠팡 상품 매칭. 조회수 기준 재정렬로 바이럴 상품 우선 발굴.",
+      "tags": [
+        "YouTube API",
+        "Groq",
+        "트렌딩",
+        "바이럴상품"
+      ],
+      "complexity": "moderate",
+      "layer": "layer:scraper"
+    },
+    {
+      "id": "function:scraper/youtube_trending.py:scrape_trending_products",
+      "type": "function",
+      "name": "scrape_trending_products",
+      "filePath": "scraper/youtube_trending.py",
+      "summary": "YouTube 키워드 랜덤 6개 선택 → 영상 검색 → 조회수 기준 재정렬 → Groq 상품명 추출 → 네이버 쇼핑 쿠팡 매칭. max_items개 달성 시 조기 종료. naver_shopping.scrape_deals와 동일한 상품 포맷 반환.",
+      "tags": [
+        "트렌딩수집",
+        "배치처리"
+      ],
+      "complexity": "moderate",
+      "layer": "layer:scraper"
+    },
+    {
+      "id": "function:scraper/youtube_trending.py:_search_videos",
+      "type": "function",
+      "name": "_search_videos",
+      "filePath": "scraper/youtube_trending.py",
+      "summary": "YouTube Data API v3 search 엔드포인트로 최근 PUBLISHED_DAYS(30일) 이내 한국어 영상을 조회수 순으로 검색.",
+      "tags": [
+        "YouTube API",
+        "검색"
+      ],
+      "complexity": "simple",
+      "layer": "layer:scraper"
+    },
+    {
+      "id": "function:scraper/youtube_trending.py:_extract_product_name",
+      "type": "function",
+      "name": "_extract_product_name",
+      "filePath": "scraper/youtube_trending.py",
+      "summary": "Groq LLM에 영상 제목과 설명을 입력해 소개 상품명 1개만 추출. 상품 없으면 None 반환.",
+      "tags": [
+        "Groq",
+        "LLM",
+        "상품명추출"
+      ],
+      "complexity": "simple",
+      "layer": "layer:scraper"
+    },
+    {
+      "id": "function:scraper/youtube_trending.py:_find_naver_product",
+      "type": "function",
+      "name": "_find_naver_product",
+      "filePath": "scraper/youtube_trending.py",
+      "summary": "추출된 상품명으로 naver_shopping._fetch_items 호출 후 쿠팡 판매 상품만 반환. 비쿠팡 상품은 네이버 보안확인 팝업 때문에 제외.",
+      "tags": [
+        "네이버API",
+        "쿠팡필터"
+      ],
+      "complexity": "simple",
+      "layer": "layer:scraper"
+    },
+    {
+      "id": "function:scraper/youtube_trending.py:_get_view_counts",
+      "type": "function",
+      "name": "_get_view_counts",
+      "filePath": "scraper/youtube_trending.py",
+      "summary": "video_ids 배열을 YouTube videos.statistics API에 일괄 전달해 {video_id: 조회수} dict 반환.",
+      "tags": [
+        "YouTube API",
+        "조회수"
+      ],
+      "complexity": "simple",
+      "layer": "layer:scraper"
+    },
+    {
+      "id": "file:generator/content.py",
+      "type": "file",
+      "name": "AI 게시글 생성기",
+      "filePath": "generator/content.py",
+      "summary": "Groq AI(LLaMA 3.3)를 사용해 상품별 맞춤 Threads 게시글을 생성하는 콘텐츠 생성기. AI 생성 실패 시 폴백 템플릿 사용, 쿠팡파트너스 활성 시 광고 고지문 자동 추가, carousel 포스팅용 상세 이미지 3~4장 수집 기능 포함.",
+      "tags": [
+        "콘텐츠생성",
+        "Groq AI",
+        "LLaMA",
+        "Threads포스팅",
+        "carousel",
+        "광고고지문",
+        "폴백처리"
+      ],
+      "complexity": "complex",
+      "layer": "layer:generator"
+    },
+    {
+      "id": "file:generator/registry.py",
+      "type": "file",
+      "name": "상품 코드 레지스트리",
+      "filePath": "generator/registry.py",
+      "summary": "포스팅 상품에 [001], [002]... 순번 코드를 부여하고 JSON 파일(product_registry.json)로 영속 관리하는 레지스트리. ctag가 달라도 itemId 기준으로 동일 상품 중복 감지 및 차단 목록 지원.",
+      "tags": [
+        "상품코드레지스트리",
+        "중복방지",
+        "itemId추출",
+        "JSON영속화"
+      ],
+      "complexity": "moderate",
+      "layer": "layer:generator"
+    },
+    {
+      "id": "file:scraper/coupang_images.py",
+      "type": "file",
+      "name": "쿠팡 이미지 스크래퍼",
+      "filePath": "scraper/coupang_images.py",
+      "summary": "쿠팡 상품 상세페이지에서 갤러리 이미지 최대 4장을 스크래핑하는 모듈. CSS 셀렉터 → JSON 파싱 → og:image 순서의 3단계 폴백 전략, 저해상도 URL 업그레이드, 중국 CDN 이미지 필터링 기능 포함.",
+      "tags": [
+        "이미지스크래핑",
+        "BeautifulSoup",
+        "쿠팡갤러리",
+        "carousel이미지",
+        "중국CDN필터"
+      ],
+      "complexity": "moderate",
+      "layer": "layer:scraper"
+    },
+    {
+      "id": "function:generator/content.py:generate_post",
+      "type": "function",
+      "name": "generate_post",
+      "filePath": "generator/content.py",
+      "summary": "상품 딕셔너리 하나를 받아 게시글 텍스트, carousel 이미지 목록, 상품 코드를 담은 결과 딕셔너리를 반환하는 메인 생성 함수. assign_code() → _collect_detail_images() → AI/폴백 글 생성 순으로 실행.",
+      "tags": [
+        "메인진입점",
+        "게시글생성",
+        "carousel",
+        "상품코드할당"
+      ],
+      "complexity": "complex",
+      "layer": "layer:generator"
+    },
+    {
+      "id": "function:generator/content.py:generate_posts_batch",
+      "type": "function",
+      "name": "generate_posts_batch",
+      "filePath": "generator/content.py",
+      "summary": "상품 리스트를 순회하며 generate_post()를 일괄 호출하고, 성공한 결과만 모아 반환하는 배치 처리 함수.",
+      "tags": [
+        "배치처리",
+        "일괄생성",
+        "에러격리"
+      ],
+      "complexity": "simple",
+      "layer": "layer:generator"
+    },
+    {
+      "id": "function:generator/content.py:_generate_post1_ai",
+      "type": "function",
+      "name": "_generate_post1_ai",
+      "filePath": "generator/content.py",
+      "summary": "Groq API(llama-3.3-70b-versatile)를 호출해 상품 정보 기반 Threads 게시글을 생성. 외국어 문자 감지 시 temperature 낮춰 1회 재생성, 재시도 후에도 실패 시 None 반환.",
+      "tags": [
+        "Groq API",
+        "LLaMA3.3",
+        "AI글생성",
+        "외국어필터",
+        "재생성로직"
+      ],
+      "complexity": "moderate",
+      "layer": "layer:generator"
+    },
+    {
+      "id": "function:generator/content.py:_post1_fallback",
+      "type": "function",
+      "name": "_post1_fallback",
+      "filePath": "generator/content.py",
+      "summary": "AI 생성 실패 시 사용하는 3종 폴백 템플릿 중 하나를 랜덤 선택해 게시글을 반환하는 함수. 상품명 28자로 잘라 삽입.",
+      "tags": [
+        "폴백템플릿",
+        "랜덤선택",
+        "AI대체"
+      ],
+      "complexity": "simple",
+      "layer": "layer:generator"
+    },
+    {
+      "id": "function:generator/content.py:_collect_detail_images",
+      "type": "function",
+      "name": "_collect_detail_images",
+      "filePath": "generator/content.py",
+      "summary": "scraper.coupang_images.fetch_product_images()를 호출해 carousel용 상세 이미지를 수집. 실패 시 product['image_url'] 단일 이미지로 폴백.",
+      "tags": [
+        "이미지수집",
+        "carousel폴백",
+        "coupang_images연동"
+      ],
+      "complexity": "simple",
+      "layer": "layer:generator"
+    },
+    {
+      "id": "function:generator/content.py:_has_foreign_chars",
+      "type": "function",
+      "name": "_has_foreign_chars",
+      "filePath": "generator/content.py",
+      "summary": "정규식으로 중국어·일본어·태국어·아랍어·키릴·라틴 확장 문자를 탐지해 외국어 포함 여부를 반환하는 유틸리티.",
+      "tags": [
+        "외국어감지",
+        "정규식",
+        "텍스트검증"
+      ],
+      "complexity": "simple",
+      "layer": "layer:generator"
+    },
+    {
+      "id": "function:generator/registry.py:assign_code",
+      "type": "function",
+      "name": "assign_code",
+      "filePath": "generator/registry.py",
+      "summary": "상품 URL에 순번 코드([001]~)를 할당하는 핵심 함수. URL key 일치 → itemId 일치 → 신규 채번 순으로 중복을 3단계로 검사. 차단 상품이면 빈 문자열 반환.",
+      "tags": [
+        "코드할당",
+        "중복감지",
+        "itemId매칭",
+        "차단목록"
+      ],
+      "complexity": "moderate",
+      "layer": "layer:generator"
+    },
+    {
+      "id": "function:generator/registry.py:get_all",
+      "type": "function",
+      "name": "get_all",
+      "filePath": "generator/registry.py",
+      "summary": "레지스트리에 등록된 전체 상품 목록을 code/name/url/image_url 필드로 반환. 링크인바이오 페이지 생성에 사용.",
+      "tags": [
+        "전체상품조회",
+        "링크인바이오"
+      ],
+      "complexity": "simple",
+      "layer": "layer:generator"
+    },
+    {
+      "id": "function:generator/registry.py:_extract_item_id",
+      "type": "function",
+      "name": "_extract_item_id",
+      "filePath": "generator/registry.py",
+      "summary": "쿠팡 URL에서 itemId 파라미터 값을 정규식으로 추출하는 내부 유틸리티. ctag가 달라도 동일 상품 감지에 사용.",
+      "tags": [
+        "itemId추출",
+        "URL파싱",
+        "중복감지"
+      ],
+      "complexity": "simple",
+      "layer": "layer:generator"
+    },
+    {
+      "id": "function:generator/registry.py:_load",
+      "type": "function",
+      "name": "_load",
+      "filePath": "generator/registry.py",
+      "summary": "product_registry.json 파일을 읽어 레지스트리 딕셔너리를 반환. 파일이 없으면 초기 구조 반환.",
+      "tags": [
+        "JSON로드",
+        "파일IO",
+        "초기화"
+      ],
+      "complexity": "simple",
+      "layer": "layer:generator"
+    },
+    {
+      "id": "function:generator/registry.py:_save",
+      "type": "function",
+      "name": "_save",
+      "filePath": "generator/registry.py",
+      "summary": "레지스트리 딕셔너리를 product_registry.json에 저장하는 내부 함수. DATA_DIR 자동 생성.",
+      "tags": [
+        "JSON저장",
+        "파일IO",
+        "영속화"
+      ],
+      "complexity": "simple",
+      "layer": "layer:generator"
+    },
+    {
+      "id": "function:scraper/coupang_images.py:fetch_product_images",
+      "type": "function",
+      "name": "fetch_product_images",
+      "filePath": "scraper/coupang_images.py",
+      "summary": "쿠팡 상품 URL에서 갤러리 이미지 최대 max_images장을 수집해 URL 리스트로 반환하는 메인 함수. CSS 셀렉터 → JSON 파싱 → og:image 순서의 3단계 폴백 적용.",
+      "tags": [
+        "이미지수집메인",
+        "3단계폴백",
+        "BeautifulSoup",
+        "갤러리스크래핑"
+      ],
+      "complexity": "complex",
+      "layer": "layer:scraper"
+    },
+    {
+      "id": "function:scraper/coupang_images.py:_resolve_redirect",
+      "type": "function",
+      "name": "_resolve_redirect",
+      "filePath": "scraper/coupang_images.py",
+      "summary": "네이버 쇼핑 등 단축/리다이렉트 URL을 실제 쿠팡 URL로 추적. HEAD 요청 실패 시 GET으로 재시도하는 2단계 전략.",
+      "tags": [
+        "리다이렉트추적",
+        "네이버쇼핑URL",
+        "HEAD/GET폴백"
+      ],
+      "complexity": "simple",
+      "layer": "layer:scraper"
+    },
+    {
+      "id": "function:scraper/coupang_images.py:_extract_from_json",
+      "type": "function",
+      "name": "_extract_from_json",
+      "filePath": "scraper/coupang_images.py",
+      "summary": "HTML 소스 내 window.__PRELOADED_STATE__ 등 JSON 데이터에서 imageList, vendorItemImages, imageUrl 패턴으로 이미지 URL을 추출하는 파서.",
+      "tags": [
+        "JSON파싱",
+        "정규식추출",
+        "PRELOADED_STATE",
+        "imageList"
+      ],
+      "complexity": "moderate",
+      "layer": "layer:scraper"
+    },
+    {
+      "id": "function:scraper/coupang_images.py:_upgrade_image_url",
+      "type": "function",
+      "name": "_upgrade_image_url",
+      "filePath": "scraper/coupang_images.py",
+      "summary": "쿠팡 이미지 URL을 고해상도로 정규화. http→https 변환, 쿼리스트링 제거, 저해상도 사이즈 파라미터(/q70/80x80/ → /q85/) 교체.",
+      "tags": [
+        "URL정규화",
+        "고해상도업그레이드",
+        "쿼리스트링제거"
+      ],
+      "complexity": "simple",
+      "layer": "layer:scraper"
+    },
+    {
+      "id": "function:scraper/coupang_images.py:_is_valid_image",
+      "type": "function",
+      "name": "_is_valid_image",
+      "filePath": "scraper/coupang_images.py",
+      "summary": "이미지 URL의 유효성을 검사하는 필터 함수. 20자 미만, 아이콘/배너/로고 키워드 포함, 중국 CDN 도메인, 이미지 확장자 미포함 URL을 모두 제외.",
+      "tags": [
+        "이미지필터",
+        "중국CDN제외",
+        "URL유효성검사"
+      ],
+      "complexity": "simple",
+      "layer": "layer:scraper"
+    },
+    {
+      "id": "pipeline:.github/workflows/daily.yml",
+      "type": "pipeline",
+      "name": "GitHub Actions 일일 파이프라인 워크플로우",
+      "filePath": ".github/workflows/daily.yml",
+      "summary": "매일 오전 9:05 KST(UTC 00:05)에 자동으로 파이프라인을 실행하는 GitHub Actions 워크플로우. Python 3.11 환경에서 의존성 설치, Playwright Chromium 설치, main.py 실행 후 생성된 HTML 및 데이터 파일을 자동 커밋·푸시한다. 수동 실행 시 랜덤 딜레이 건너뛰기 옵션을 지원한다.",
+      "tags": [
+        "GitHub Actions",
+        "자동화",
+        "스케줄러",
+        "CI/CD",
+        "Playwright",
+        "자동커밋"
+      ],
+      "complexity": "moderate",
+      "layer": "layer:ci-cd"
+    },
+    {
+      "id": "document:PIPELINE.md",
+      "type": "document",
+      "name": "파이프라인 운영 문서",
+      "filePath": "PIPELINE.md",
+      "summary": "꿀픽 파이프라인 전체 운영 가이드. 시스템 구조, Threads API 정보, GitHub Secrets 목록, 파일 구조, 수동 조작 방법, 상품 관리 정책, 트러블슈팅, 다기기 작업 이어가기 방법, 작업 이력이 모두 포함된 단일 참조 문서.",
+      "tags": [
+        "운영문서",
+        "아키텍처",
+        "트러블슈팅",
+        "Threads API",
+        "상품관리"
+      ],
+      "complexity": "moderate",
+      "layer": "layer:config"
+    },
+    {
+      "id": "file:add_product.py",
+      "type": "file",
+      "name": "상품 수동 등록 CLI",
+      "filePath": "add_product.py",
+      "summary": "우선순위 큐에 상품을 수동으로 추가하는 CLI 도구. 상품명 또는 쿠팡 URL을 입력받아 네이버 쇼핑 API로 상품 정보를 조회한 후 priority=1(수동)으로 priority_queue.json에 등록한다.",
+      "tags": [
+        "CLI",
+        "우선순위큐",
+        "상품등록",
+        "네이버 쇼핑 API",
+        "수동관리"
+      ],
+      "complexity": "moderate",
+      "layer": "layer:dev-tools"
+    },
+    {
+      "id": "file:check_products.py",
+      "type": "file",
+      "name": "상품 데이터 확인 스크립트",
+      "filePath": "check_products.py",
+      "summary": "data/products.json 파일을 읽어 저장된 상품 목록을 콘솔에 출력하는 유틸리티 스크립트.",
+      "tags": [
+        "디버그",
+        "상품확인",
+        "유틸리티"
+      ],
+      "complexity": "simple",
+      "layer": "layer:dev-tools"
+    },
+    {
+      "id": "config:config.py",
+      "type": "config",
+      "name": "파이프라인 전역 설정",
+      "filePath": "config.py",
+      "summary": "dotenv 기반으로 환경변수를 로드하여 Threads API 토큰, 네이버/Groq/YouTube API 키, 상품 품질 필터, 쿠팡파트너스 활성화 플래그, 하루 최대 포스팅 수, 데이터·로그 디렉터리 경로 등 파이프라인 전반의 설정값을 제공한다.",
+      "tags": [
+        "설정",
+        "환경변수",
+        "API키",
+        "품질필터",
+        "dotenv"
+      ],
+      "complexity": "simple",
+      "layer": "layer:config"
+    },
+    {
+      "id": "file:debug_beauty.py",
+      "type": "file",
+      "name": "쿠팡 뷰티 카테고리 DOM 디버그",
+      "filePath": "debug_beauty.py",
+      "summary": "Playwright로 쿠팡 뷰티 카테고리를 열어 상품 카드 CSS 셀렉터를 자동 탐색하고 결과를 저장하는 개발용 디버그 스크립트.",
+      "tags": [
+        "디버그",
+        "Playwright",
+        "DOM분석",
+        "쿠팡스크래핑"
+      ],
+      "complexity": "moderate",
+      "layer": "layer:dev-tools"
+    },
+    {
+      "id": "file:debug_comment.py",
+      "type": "file",
+      "name": "Threads 댓글 입력 디버그",
+      "filePath": "debug_comment.py",
+      "summary": "저장된 쿠키로 Threads에 로그인 후 댓글 입력창을 탐색하고 테스트 댓글을 입력·게시하는 과정을 단계별 스크린샷으로 저장하는 디버그 스크립트.",
+      "tags": [
+        "디버그",
+        "Playwright",
+        "Threads댓글",
+        "UI자동화"
+      ],
+      "complexity": "moderate",
+      "layer": "layer:dev-tools"
+    },
+    {
+      "id": "file:debug_coupang.py",
+      "type": "file",
+      "name": "쿠팡 홈 DOM 구조 디버그",
+      "filePath": "debug_coupang.py",
+      "summary": "Playwright로 쿠팡 메인 페이지를 열어 상품 카드 셀렉터를 확인하는 개발용 디버그 스크립트.",
+      "tags": [
+        "디버그",
+        "Playwright",
+        "DOM분석",
+        "쿠팡스크래핑"
+      ],
+      "complexity": "simple",
+      "layer": "layer:dev-tools"
+    },
+    {
+      "id": "file:debug_naver.py",
+      "type": "file",
+      "name": "네이버 쇼핑 API 디버그",
+      "filePath": "debug_naver.py",
+      "summary": "네이버 쇼핑 검색 API를 직접 호출하여 검색 결과를 콘솔에 출력하는 API 연결 테스트 스크립트.",
+      "tags": [
+        "디버그",
+        "네이버 쇼핑 API",
+        "API테스트"
+      ],
+      "complexity": "simple",
+      "layer": "layer:dev-tools"
+    },
+    {
+      "id": "file:debug_threads.py",
+      "type": "file",
+      "name": "Threads UI 셀렉터 디버그",
+      "filePath": "debug_threads.py",
+      "summary": "저장된 쿠키로 Threads에 로그인 후 글쓰기 화면까지 이동하며 UI 셀렉터를 탐색하는 디버그 스크립트.",
+      "tags": [
+        "디버그",
+        "Playwright",
+        "Threads UI",
+        "셀렉터탐색"
+      ],
+      "complexity": "moderate",
+      "layer": "layer:dev-tools"
+    },
+    {
+      "id": "file:debug_youtube.py",
+      "type": "file",
+      "name": "YouTube 트렌딩 상품 탐지 테스트",
+      "filePath": "debug_youtube.py",
+      "summary": "YOUTUBE_API_KEY를 검증한 뒤 scraper.youtube_trending 모듈을 호출하여 트렌딩 상품을 수집·출력하는 API 연결 테스트 스크립트.",
+      "tags": [
+        "디버그",
+        "YouTube API",
+        "트렌딩상품",
+        "API테스트"
+      ],
+      "complexity": "simple",
+      "layer": "layer:dev-tools"
+    },
+    {
+      "id": "file:fix_posts.py",
+      "type": "file",
+      "name": "포스팅 정리 및 재게시 스크립트",
+      "filePath": "fix_posts.py",
+      "summary": "Threads Graph API로 특정 포스트를 삭제하고 상품 코드를 재번호로 정리하여 재게시하는 1회성 데이터 수정 스크립트.",
+      "tags": [
+        "데이터수정",
+        "Threads API",
+        "포스팅관리",
+        "1회성스크립트"
+      ],
+      "complexity": "moderate",
+      "layer": "layer:dev-tools"
+    },
+    {
+      "id": "file:generate_feed_page.py",
+      "type": "file",
+      "name": "피드 페이지 생성기",
+      "filePath": "generate_feed_page.py",
+      "summary": "data/feed_posts.json을 읽어 Threads 피드 스타일의 포스팅 기록 페이지(docs/feed.html)를 생성한다.",
+      "tags": [
+        "HTML생성",
+        "피드페이지",
+        "GitHub Pages",
+        "다크테마"
+      ],
+      "complexity": "moderate",
+      "layer": "layer:page"
+    },
+    {
+      "id": "file:generate_page.py",
+      "type": "file",
+      "name": "상품 목록 페이지 생성기",
+      "filePath": "generate_page.py",
+      "summary": "generator.registry에서 상품 목록을 불러와 검색·정렬·QR코드 기능이 포함된 인터랙티브 docs/index.html을 생성한다.",
+      "tags": [
+        "HTML생성",
+        "상품페이지",
+        "GitHub Pages",
+        "다크테마",
+        "인터랙티브"
+      ],
+      "complexity": "complex",
+      "layer": "layer:page"
+    },
+    {
+      "id": "file:list_posts.py",
+      "type": "file",
+      "name": "Threads 포스트 목록 조회",
+      "filePath": "list_posts.py",
+      "summary": "Threads Graph API로 최근 20개 포스트를 조회하여 콘솔에 출력하는 관리 유틸리티.",
+      "tags": [
+        "유틸리티",
+        "Threads API",
+        "포스트조회"
+      ],
+      "complexity": "simple",
+      "layer": "layer:dev-tools"
+    },
+    {
+      "id": "file:preview.py",
+      "type": "file",
+      "name": "콘텐츠 미리보기 (Dry-run)",
+      "filePath": "preview.py",
+      "summary": "실제 포스팅 없이 상품 수집→AI 콘텐츠 생성 결과를 Threads 피드 스타일 HTML로 렌더링하여 브라우저에서 미리 확인하는 dry-run 도구.",
+      "tags": [
+        "미리보기",
+        "드라이런",
+        "HTML렌더링",
+        "콘텐츠생성"
+      ],
+      "complexity": "complex",
+      "layer": "layer:dev-tools"
+    },
+    {
+      "id": "config:requirements.txt",
+      "type": "config",
+      "name": "Python 패키지 의존성 목록",
+      "filePath": "requirements.txt",
+      "summary": "프로젝트 실행에 필요한 Python 패키지 목록. playwright, anthropic, groq, schedule, python-dotenv, requests, aiofiles, beautifulsoup4를 포함한다.",
+      "tags": [
+        "의존성",
+        "패키지",
+        "Playwright",
+        "Groq",
+        "Anthropic"
+      ],
+      "complexity": "simple",
+      "layer": "layer:config"
+    },
+    {
+      "id": "file:setup.py",
+      "type": "file",
+      "name": "신규 PC 자동 설치 스크립트",
+      "filePath": "setup.py",
+      "summary": "새 PC에서 GitHub 저장소 클론, venv 생성, 패키지 설치, Playwright 설치, .env 파일 생성을 자동화하는 1회성 설치 스크립트.",
+      "tags": [
+        "설치자동화",
+        "환경설정",
+        "venv",
+        "Playwright"
+      ],
+      "complexity": "moderate",
+      "layer": "layer:config"
+    },
+    {
+      "id": "file:docs/feed.html",
+      "type": "file",
+      "name": "Threads 포스팅 기록 피드 페이지",
+      "filePath": "docs/feed.html",
+      "summary": "generate_feed_page.py가 자동 생성하는 GitHub Pages 정적 HTML 파일. Threads 포스팅 이력을 피드 카드 형태로 표시한다.",
+      "tags": [
+        "GitHub Pages",
+        "정적HTML",
+        "피드페이지",
+        "자동생성"
+      ],
+      "complexity": "moderate",
+      "layer": "layer:page"
+    },
+    {
+      "id": "file:docs/index.html",
+      "type": "file",
+      "name": "상품 목록 메인 페이지",
+      "filePath": "docs/index.html",
+      "summary": "generate_page.py가 자동 생성하는 GitHub Pages 메인 HTML 파일. 검색·정렬·QR코드 기능이 포함된 인터랙티브 상품 목록 페이지.",
+      "tags": [
+        "GitHub Pages",
+        "정적HTML",
+        "상품목록",
+        "인터랙티브",
+        "자동생성"
+      ],
+      "complexity": "complex",
+      "layer": "layer:page"
+    },
+    {
+      "id": "file:generator/__init__.py",
+      "type": "file",
+      "name": "generator 패키지 초기화",
+      "filePath": "generator/__init__.py",
+      "summary": "generator 패키지의 빈 초기화 파일.",
+      "tags": [
+        "패키지초기화",
+        "Python"
+      ],
+      "complexity": "simple",
+      "layer": "layer:generator"
+    },
+    {
+      "id": "file:generator/reply.py",
+      "type": "file",
+      "name": "Groq AI 대댓글 생성기",
+      "filePath": "generator/reply.py",
+      "summary": "Groq API(llama-3.3-70b-versatile)를 사용해 Threads 팔로워 댓글에 대한 자연스러운 한국어 대댓글을 생성하는 모듈.",
+      "tags": [
+        "Groq AI",
+        "대댓글생성",
+        "LLM",
+        "자연어처리"
+      ],
+      "complexity": "moderate",
+      "layer": "layer:generator"
+    },
+    {
+      "id": "file:poster/__init__.py",
+      "type": "file",
+      "name": "poster 패키지 초기화",
+      "filePath": "poster/__init__.py",
+      "summary": "poster 패키지의 빈 초기화 파일.",
+      "tags": [
+        "패키지초기화",
+        "Python"
+      ],
+      "complexity": "simple",
+      "layer": "layer:poster"
+    },
+    {
+      "id": "file:poster/comment_replier.py",
+      "type": "file",
+      "name": "Threads 댓글 자동 대댓글 모듈",
+      "filePath": "poster/comment_replier.py",
+      "summary": "Threads Graph API로 최근 7일 내 story 포스트의 새 댓글을 감지하고 Groq AI가 생성한 대댓글을 자동으로 게시하는 모듈.",
+      "tags": [
+        "Threads API",
+        "댓글자동화",
+        "대댓글",
+        "Groq AI",
+        "중복방지"
+      ],
+      "complexity": "complex",
+      "layer": "layer:poster"
+    },
+    {
+      "id": "file:poster/threads_login.py",
+      "type": "file",
+      "name": "Threads Playwright 수동 로그인",
+      "filePath": "poster/threads_login.py",
+      "summary": "Playwright로 Threads 로그인 후 세션 쿠키를 저장하는 1회성 초기 설정 스크립트 (레거시).",
+      "tags": [
+        "Playwright",
+        "로그인",
+        "쿠키저장",
+        "레거시"
+      ],
+      "complexity": "simple",
+      "layer": "layer:poster"
+    },
+    {
+      "id": "file:scraper/__init__.py",
+      "type": "file",
+      "name": "scraper 패키지 초기화",
+      "filePath": "scraper/__init__.py",
+      "summary": "scraper 패키지의 빈 초기화 파일.",
+      "tags": [
+        "패키지초기화",
+        "Python"
+      ],
+      "complexity": "simple",
+      "layer": "layer:scraper"
+    },
+    {
+      "id": "function:main.py:save_priority_queue",
+      "type": "function",
+      "name": "save_priority_queue",
+      "filePath": "main.py",
+      "summary": "우선순위 큐 리스트를 priority_queue.json에 저장. DATA_DIR 자동 생성.",
+      "tags": [
+        "우선순위큐",
+        "파일IO"
+      ],
+      "complexity": "simple",
+      "layer": "layer:orchestrator"
+    },
+    {
+      "id": "function:main.py:load_feed_posts",
+      "type": "function",
+      "name": "load_feed_posts",
+      "filePath": "main.py",
+      "summary": "feed_posts.json에서 피드 게시물 목록을 로드. 파일이 없으면 빈 리스트 반환.",
+      "tags": [
+        "피드관리",
+        "파일IO"
+      ],
+      "complexity": "simple",
+      "layer": "layer:orchestrator"
+    },
+    {
+      "id": "function:main.py:save_feed_posts",
+      "type": "function",
+      "name": "save_feed_posts",
+      "filePath": "main.py",
+      "summary": "피드 게시물 목록을 feed_posts.json에 저장. DATA_DIR 자동 생성.",
+      "tags": [
+        "피드관리",
+        "파일IO"
+      ],
+      "complexity": "simple",
+      "layer": "layer:orchestrator"
+    },
+    {
+      "id": "function:main.py:save_posted_ids",
+      "type": "function",
+      "name": "save_posted_ids",
+      "filePath": "main.py",
+      "summary": "포스팅 완료된 상품 URL 집합을 posted_ids.json에 저장. 중복 포스팅 방지용.",
+      "tags": [
+        "중복필터",
+        "파일IO"
+      ],
+      "complexity": "simple",
+      "layer": "layer:orchestrator"
+    },
+    {
+      "id": "function:main.py:_product_key",
+      "type": "function",
+      "name": "_product_key",
+      "filePath": "main.py",
+      "summary": "상품 고유 키를 생성하는 내부 함수. 상품 URL 앞 80자 또는 상품명 앞 20자를 반환.",
+      "tags": [
+        "중복필터",
+        "키생성"
+      ],
+      "complexity": "simple",
+      "layer": "layer:orchestrator"
+    },
+    {
+      "id": "function:main.py:run_once",
+      "type": "function",
+      "name": "run_once",
+      "filePath": "main.py",
+      "summary": "asyncio.run()으로 run_pipeline()을 1회 동기 실행하는 래퍼 함수.",
+      "tags": [
+        "동기래퍼",
+        "진입점"
+      ],
+      "complexity": "simple",
+      "layer": "layer:orchestrator"
+    },
+    {
+      "id": "function:poster/comment_replier.py:add_recent_post",
+      "type": "function",
+      "name": "add_recent_post",
+      "filePath": "poster/comment_replier.py",
+      "summary": "story 게시글의 URL과 post_id를 recent_posts.json에 등록. 7일 이상 지난 항목은 자동 제거.",
+      "tags": [
+        "댓글추적",
+        "파일IO",
+        "7일윈도우"
+      ],
+      "complexity": "simple",
+      "layer": "layer:poster"
+    },
+    {
+      "id": "function:poster/comment_replier.py:check_and_reply_comments",
+      "type": "function",
+      "name": "check_and_reply_comments",
+      "filePath": "poster/comment_replier.py",
+      "summary": "최근 story 게시글의 댓글을 Threads API로 조회하고 Groq AI 대댓글을 자동 게시하는 메인 async 함수.",
+      "tags": [
+        "댓글감지",
+        "대댓글",
+        "비동기",
+        "Groq AI"
+      ],
+      "complexity": "complex",
+      "layer": "layer:poster"
+    },
+    {
+      "id": "function:poster/comment_replier.py:get_replies",
+      "type": "function",
+      "name": "get_replies",
+      "filePath": "poster/comment_replier.py",
+      "summary": "Threads Graph API로 특정 게시글의 직접 댓글 목록을 조회해 반환.",
+      "tags": [
+        "Threads API",
+        "댓글조회"
+      ],
+      "complexity": "simple",
+      "layer": "layer:poster"
+    },
+    {
+      "id": "function:poster/comment_replier.py:post_reply_to_thread",
+      "type": "function",
+      "name": "post_reply_to_thread",
+      "filePath": "poster/comment_replier.py",
+      "summary": "Threads API로 특정 게시글에 대댓글 컨테이너를 생성한 뒤 15초 후 게시. 성공 여부 반환.",
+      "tags": [
+        "Threads API",
+        "대댓글게시"
+      ],
+      "complexity": "moderate",
+      "layer": "layer:poster"
+    },
+    {
+      "id": "function:scraper/naver_shopping.py:save_products",
+      "type": "function",
+      "name": "save_products",
+      "filePath": "scraper/naver_shopping.py",
+      "summary": "수집된 상품 목록을 data/products.json 파일로 저장하는 유틸리티 함수.",
+      "tags": [
+        "파일IO",
+        "상품저장"
+      ],
+      "complexity": "simple",
+      "layer": "layer:scraper"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:main.py",
+      "target": "file:scraper/coupang.py",
+      "type": "imports",
+      "weight": 0.6,
+      "direction": "forward"
+    },
+    {
+      "source": "file:main.py",
+      "target": "file:scraper/naver_shopping.py",
+      "type": "imports",
+      "weight": 0.7,
+      "direction": "forward"
+    },
+    {
+      "source": "file:main.py",
+      "target": "file:scraper/threads_benchmark.py",
+      "type": "imports",
+      "weight": 0.6,
+      "direction": "forward"
+    },
+    {
+      "source": "file:main.py",
+      "target": "file:scraper/youtube_trending.py",
+      "type": "imports",
+      "weight": 0.7,
+      "direction": "forward"
+    },
+    {
+      "source": "file:main.py",
+      "target": "file:poster/threads.py",
+      "type": "imports",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "file:main.py",
+      "target": "file:poster/engager.py",
+      "type": "imports",
+      "weight": 0.7,
+      "direction": "forward"
+    },
+    {
+      "source": "function:main.py:run_pipeline",
+      "target": "function:scraper/youtube_trending.py:scrape_trending_products",
+      "type": "calls",
+      "weight": 0.7,
+      "direction": "forward"
+    },
+    {
+      "source": "function:main.py:run_pipeline",
+      "target": "function:scraper/naver_shopping.py:scrape_deals",
+      "type": "calls",
+      "weight": 0.7,
+      "direction": "forward"
+    },
+    {
+      "source": "function:main.py:run_pipeline",
+      "target": "function:scraper/coupang.py:scrape_homepage_deals",
+      "type": "calls",
+      "weight": 0.5,
+      "direction": "forward"
+    },
+    {
+      "source": "function:main.py:run_pipeline",
+      "target": "function:scraper/threads_benchmark.py:run_benchmark",
+      "type": "calls",
+      "weight": 0.6,
+      "direction": "forward"
+    },
+    {
+      "source": "function:main.py:run_pipeline",
+      "target": "function:poster/threads.py:post_all_products",
+      "type": "calls",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "function:main.py:run_pipeline",
+      "target": "function:poster/engager.py:run_engagement_session",
+      "type": "calls",
+      "weight": 0.7,
+      "direction": "forward"
+    },
+    {
+      "source": "function:main.py:run_pipeline",
+      "target": "function:main.py:pop_from_queue",
+      "type": "calls",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "function:main.py:run_pipeline",
+      "target": "function:main.py:append_feed_entries",
+      "type": "calls",
+      "weight": 0.7,
+      "direction": "forward"
+    },
+    {
+      "source": "function:main.py:run_pipeline",
+      "target": "function:main.py:load_posted_ids",
+      "type": "calls",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "function:main.py:run_scheduled",
+      "target": "function:main.py:run_pipeline",
+      "type": "calls",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "function:poster/threads.py:post_all_products",
+      "target": "function:poster/threads.py:post_thread_api",
+      "type": "calls",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "function:poster/threads.py:post_thread_api",
+      "target": "function:poster/threads.py:_create_carousel_post",
+      "type": "calls",
+      "weight": 0.7,
+      "direction": "forward"
+    },
+    {
+      "source": "function:poster/threads.py:post_thread_api",
+      "target": "function:poster/threads.py:publish_container",
+      "type": "calls",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "function:poster/threads.py:_create_carousel_post",
+      "target": "function:poster/threads.py:_api",
+      "type": "calls",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "function:poster/threads.py:publish_container",
+      "target": "function:poster/threads.py:_api",
+      "type": "calls",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "function:poster/engager.py:run_engagement_session",
+      "target": "function:poster/engager.py:run_engagement",
+      "type": "calls",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "function:poster/engager.py:run_engagement",
+      "target": "function:poster/engager.py:_search_posts",
+      "type": "calls",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "function:poster/engager.py:run_engagement",
+      "target": "function:poster/engager.py:_visit_and_comment",
+      "type": "calls",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "function:poster/engager.py:_visit_and_comment",
+      "target": "function:poster/engager.py:_generate_comment",
+      "type": "calls",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "function:scraper/coupang.py:scrape_homepage_deals",
+      "target": "function:scraper/coupang.py:_scrape_promotion_items",
+      "type": "calls",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "function:scraper/coupang.py:scrape_homepage_deals",
+      "target": "function:scraper/coupang.py:_scrape_personalized_items",
+      "type": "calls",
+      "weight": 0.6,
+      "direction": "forward"
+    },
+    {
+      "source": "function:scraper/coupang.py:_scrape_promotion_items",
+      "target": "function:scraper/coupang.py:_parse_promotion_card",
+      "type": "calls",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "function:scraper/naver_shopping.py:scrape_deals",
+      "target": "function:scraper/naver_shopping.py:_fetch_items",
+      "type": "calls",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "function:scraper/naver_shopping.py:scrape_deals",
+      "target": "function:scraper/naver_shopping.py:_to_product",
+      "type": "calls",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "function:scraper/naver_shopping.py:scrape_deals",
+      "target": "function:scraper/naver_shopping.py:_check_coupang_rating",
+      "type": "calls",
+      "weight": 0.7,
+      "direction": "forward"
+    },
+    {
+      "source": "function:scraper/naver_shopping.py:_to_product",
+      "target": "function:scraper/naver_shopping.py:is_blocked_product",
+      "type": "calls",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "function:scraper/threads_benchmark.py:run_benchmark",
+      "target": "function:scraper/threads_benchmark.py:_fetch_posts",
+      "type": "calls",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "function:scraper/threads_benchmark.py:run_benchmark",
+      "target": "function:scraper/threads_benchmark.py:_extract_product_names",
+      "type": "calls",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "function:scraper/threads_benchmark.py:run_benchmark",
+      "target": "function:scraper/threads_benchmark.py:_search_naver",
+      "type": "calls",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "function:scraper/threads_benchmark.py:_fetch_posts",
+      "target": "function:scraper/threads_benchmark.py:_walk_for_texts",
+      "type": "calls",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "function:scraper/youtube_trending.py:scrape_trending_products",
+      "target": "function:scraper/youtube_trending.py:_search_videos",
+      "type": "calls",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "function:scraper/youtube_trending.py:scrape_trending_products",
+      "target": "function:scraper/youtube_trending.py:_get_view_counts",
+      "type": "calls",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "function:scraper/youtube_trending.py:scrape_trending_products",
+      "target": "function:scraper/youtube_trending.py:_extract_product_name",
+      "type": "calls",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "function:scraper/youtube_trending.py:scrape_trending_products",
+      "target": "function:scraper/youtube_trending.py:_find_naver_product",
+      "type": "calls",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "function:scraper/youtube_trending.py:_find_naver_product",
+      "target": "function:scraper/naver_shopping.py:_fetch_items",
+      "type": "calls",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "function:scraper/youtube_trending.py:_find_naver_product",
+      "target": "function:scraper/naver_shopping.py:_to_product",
+      "type": "calls",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scraper/threads_benchmark.py",
+      "target": "file:scraper/naver_shopping.py",
+      "type": "imports",
+      "weight": 0.5,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scraper/youtube_trending.py",
+      "target": "file:scraper/naver_shopping.py",
+      "type": "imports",
+      "weight": 0.7,
+      "direction": "forward"
+    },
+    {
+      "source": "function:generator/content.py:generate_post",
+      "target": "function:generator/registry.py:assign_code",
+      "type": "calls",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "function:generator/content.py:generate_post",
+      "target": "function:generator/content.py:_collect_detail_images",
+      "type": "calls",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "function:generator/content.py:generate_post",
+      "target": "function:generator/content.py:_generate_post1_ai",
+      "type": "calls",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "function:generator/content.py:generate_post",
+      "target": "function:generator/content.py:_post1_fallback",
+      "type": "calls",
+      "weight": 0.6,
+      "direction": "forward"
+    },
+    {
+      "source": "function:generator/content.py:generate_posts_batch",
+      "target": "function:generator/content.py:generate_post",
+      "type": "calls",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "function:generator/content.py:_collect_detail_images",
+      "target": "function:scraper/coupang_images.py:fetch_product_images",
+      "type": "calls",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "function:generator/content.py:_generate_post1_ai",
+      "target": "function:generator/content.py:_has_foreign_chars",
+      "type": "calls",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "function:scraper/coupang_images.py:fetch_product_images",
+      "target": "function:scraper/coupang_images.py:_resolve_redirect",
+      "type": "calls",
+      "weight": 0.7,
+      "direction": "forward"
+    },
+    {
+      "source": "function:scraper/coupang_images.py:fetch_product_images",
+      "target": "function:scraper/coupang_images.py:_extract_from_json",
+      "type": "calls",
+      "weight": 0.7,
+      "direction": "forward"
+    },
+    {
+      "source": "function:scraper/coupang_images.py:fetch_product_images",
+      "target": "function:scraper/coupang_images.py:_upgrade_image_url",
+      "type": "calls",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "function:scraper/coupang_images.py:fetch_product_images",
+      "target": "function:scraper/coupang_images.py:_is_valid_image",
+      "type": "calls",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "function:scraper/coupang_images.py:_extract_from_json",
+      "target": "function:scraper/coupang_images.py:_upgrade_image_url",
+      "type": "calls",
+      "weight": 0.7,
+      "direction": "forward"
+    },
+    {
+      "source": "function:scraper/coupang_images.py:_extract_from_json",
+      "target": "function:scraper/coupang_images.py:_is_valid_image",
+      "type": "calls",
+      "weight": 0.7,
+      "direction": "forward"
+    },
+    {
+      "source": "function:generator/registry.py:assign_code",
+      "target": "function:generator/registry.py:_extract_item_id",
+      "type": "calls",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "function:generator/registry.py:assign_code",
+      "target": "function:generator/registry.py:_load",
+      "type": "calls",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "function:generator/registry.py:assign_code",
+      "target": "function:generator/registry.py:_save",
+      "type": "calls",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "function:generator/registry.py:get_all",
+      "target": "function:generator/registry.py:_load",
+      "type": "calls",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "file:generator/content.py",
+      "target": "file:generator/registry.py",
+      "type": "imports",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "file:generator/content.py",
+      "target": "file:scraper/coupang_images.py",
+      "type": "imports",
+      "weight": 0.7,
+      "direction": "forward"
+    },
+    {
+      "source": "file:add_product.py",
+      "target": "config:config.py",
+      "type": "imports",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "file:check_products.py",
+      "target": "config:config.py",
+      "type": "imports",
+      "weight": 0.5,
+      "direction": "forward"
+    },
+    {
+      "source": "file:debug_youtube.py",
+      "target": "config:config.py",
+      "type": "imports",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "file:debug_naver.py",
+      "target": "config:config.py",
+      "type": "imports",
+      "weight": 0.7,
+      "direction": "forward"
+    },
+    {
+      "source": "file:fix_posts.py",
+      "target": "config:config.py",
+      "type": "imports",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "file:generate_feed_page.py",
+      "target": "config:config.py",
+      "type": "imports",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "file:generate_page.py",
+      "target": "config:config.py",
+      "type": "imports",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "file:list_posts.py",
+      "target": "config:config.py",
+      "type": "imports",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "file:preview.py",
+      "target": "config:config.py",
+      "type": "imports",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "file:preview.py",
+      "target": "file:generate_page.py",
+      "type": "imports",
+      "weight": 0.7,
+      "direction": "forward"
+    },
+    {
+      "source": "document:PIPELINE.md",
+      "target": "config:config.py",
+      "type": "documents",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "document:PIPELINE.md",
+      "target": "file:add_product.py",
+      "type": "documents",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "document:PIPELINE.md",
+      "target": "file:generate_page.py",
+      "type": "documents",
+      "weight": 0.7,
+      "direction": "forward"
+    },
+    {
+      "source": "config:requirements.txt",
+      "target": "config:config.py",
+      "type": "configures",
+      "weight": 0.6,
+      "direction": "forward"
+    },
+    {
+      "source": "file:setup.py",
+      "target": "config:requirements.txt",
+      "type": "imports",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "file:poster/comment_replier.py",
+      "target": "file:generator/reply.py",
+      "type": "imports",
+      "weight": 1,
+      "direction": "forward"
+    },
+    {
+      "source": "file:poster/comment_replier.py",
+      "target": "config:config.py",
+      "type": "imports",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "file:generator/reply.py",
+      "target": "config:config.py",
+      "type": "imports",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "file:generate_feed_page.py",
+      "target": "file:docs/feed.html",
+      "type": "configures",
+      "weight": 1,
+      "direction": "forward"
+    },
+    {
+      "source": "file:generate_page.py",
+      "target": "file:docs/index.html",
+      "type": "configures",
+      "weight": 1,
+      "direction": "forward"
+    },
+    {
+      "source": "file:docs/feed.html",
+      "target": "file:docs/index.html",
+      "type": "related",
+      "weight": 0.6,
+      "direction": "forward"
+    },
+    {
+      "source": "file:main.py",
+      "target": "file:generator/content.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:main.py",
+      "target": "file:poster/comment_replier.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:main.py",
+      "target": "file:generate_page.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:main.py",
+      "target": "file:generate_feed_page.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:generate_page.py",
+      "target": "file:generator/registry.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:preview.py",
+      "target": "file:generator/content.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:preview.py",
+      "target": "file:scraper/naver_shopping.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:preview.py",
+      "target": "file:scraper/youtube_trending.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:debug_beauty.py",
+      "target": "file:scraper/naver_shopping.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:debug_comment.py",
+      "target": "file:poster/comment_replier.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:debug_coupang.py",
+      "target": "file:scraper/coupang.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:debug_naver.py",
+      "target": "file:scraper/naver_shopping.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:debug_threads.py",
+      "target": "file:poster/threads.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:debug_youtube.py",
+      "target": "file:scraper/youtube_trending.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:main.py",
+      "target": "config:config.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "file:scraper/coupang.py",
+      "target": "config:config.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "file:scraper/naver_shopping.py",
+      "target": "config:config.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "file:scraper/youtube_trending.py",
+      "target": "config:config.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "file:scraper/threads_benchmark.py",
+      "target": "config:config.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "file:poster/threads.py",
+      "target": "config:config.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "file:poster/engager.py",
+      "target": "config:config.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "file:generator/registry.py",
+      "target": "config:config.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "function:main.py:run_pipeline",
+      "target": "function:generator/content.py:generate_posts_batch",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "function:main.py:run_pipeline",
+      "target": "function:poster/comment_replier.py:add_recent_post",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:main.py:run_pipeline",
+      "target": "function:poster/comment_replier.py:check_and_reply_comments",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:main.py:run_pipeline",
+      "target": "function:scraper/naver_shopping.py:save_products",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "function:main.py:run_once",
+      "target": "function:main.py:run_pipeline",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "function:main.py:run_scheduled",
+      "target": "function:main.py:run_once",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "function:main.py:append_feed_entries",
+      "target": "function:main.py:load_feed_posts",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "function:main.py:append_feed_entries",
+      "target": "function:main.py:save_feed_posts",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "function:main.py:pop_from_queue",
+      "target": "function:main.py:load_priority_queue",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "function:main.py:pop_from_queue",
+      "target": "function:main.py:save_priority_queue",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "function:poster/comment_replier.py:check_and_reply_comments",
+      "target": "function:poster/comment_replier.py:get_replies",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "function:poster/comment_replier.py:check_and_reply_comments",
+      "target": "function:poster/comment_replier.py:post_reply_to_thread",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "function:poster/threads.py:post_thread_api",
+      "target": "function:poster/threads.py:_api",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "pipeline:.github/workflows/daily.yml",
+      "target": "file:main.py",
+      "type": "triggers",
+      "direction": "forward",
+      "weight": 1
+    }
+  ],
+  "layers": [
+    {
+      "id": "layer:orchestrator",
+      "name": "오케스트레이터 레이어",
+      "description": "전체 파이프라인의 실행 순서(상품 수집 → AI 생성 → 포스팅 → 댓글 → 페이지 빌드)를 조율하는 진입점 모듈",
+      "nodeIds": [
+        "file:main.py"
+      ]
+    },
+    {
+      "id": "layer:scraper",
+      "name": "데이터 수집 레이어",
+      "description": "쿠팡·네이버 쇼핑·YouTube API·Threads 벤치마킹 계정을 통해 상품 데이터와 이미지를 수집하는 스크래퍼 모듈 집합",
+      "nodeIds": [
+        "file:scraper/coupang.py",
+        "file:scraper/naver_shopping.py",
+        "file:scraper/threads_benchmark.py",
+        "file:scraper/youtube_trending.py",
+        "file:scraper/coupang_images.py",
+        "file:scraper/__init__.py"
+      ]
+    },
+    {
+      "id": "layer:generator",
+      "name": "콘텐츠 생성 레이어",
+      "description": "Groq LLM(LLaMA 3.3)으로 상품별 Threads 게시글·대댓글을 생성하고, 상품 순번 코드를 부여·관리하는 AI 생성 모듈",
+      "nodeIds": [
+        "file:generator/content.py",
+        "file:generator/registry.py",
+        "file:generator/reply.py",
+        "file:generator/__init__.py"
+      ]
+    },
+    {
+      "id": "layer:poster",
+      "name": "포스팅 레이어",
+      "description": "Meta Graph API로 Threads에 게시글을 발행하고, Playwright로 타계정 댓글 활동·대댓글 자동화를 수행하는 SNS 발행 모듈",
+      "nodeIds": [
+        "file:poster/threads.py",
+        "file:poster/engager.py",
+        "file:poster/comment_replier.py",
+        "file:poster/threads_login.py",
+        "file:poster/__init__.py"
+      ]
+    },
+    {
+      "id": "layer:page",
+      "name": "GitHub Pages 레이어",
+      "description": "포스팅 이력과 상품 목록을 검색·QR코드 기능이 포함된 정적 HTML 페이지로 생성하여 GitHub Pages에 배포하는 웹 출력 모듈",
+      "nodeIds": [
+        "file:generate_feed_page.py",
+        "file:generate_page.py",
+        "file:docs/feed.html",
+        "file:docs/index.html"
+      ]
+    },
+    {
+      "id": "layer:config",
+      "name": "설정 및 인프라 레이어",
+      "description": "환경변수·API 키·품질 필터 등 파이프라인 전반의 설정값을 제공하고, 패키지 의존성 및 환경 초기화를 관리하는 설정 레이어",
+      "nodeIds": [
+        "config:config.py",
+        "config:requirements.txt",
+        "file:setup.py",
+        "document:PIPELINE.md"
+      ]
+    },
+    {
+      "id": "layer:ci-cd",
+      "name": "CI/CD 자동화 레이어",
+      "description": "매일 KST 오전 9시에 파이프라인을 자동 실행하고 생성된 HTML·데이터 파일을 자동 커밋·푸시하는 GitHub Actions 워크플로우",
+      "nodeIds": [
+        "pipeline:.github/workflows/daily.yml"
+      ]
+    },
+    {
+      "id": "layer:dev-tools",
+      "name": "개발 및 관리 도구 레이어",
+      "description": "Playwright DOM 셀렉터 검증·API 연결 테스트·데이터 수동 조작·콘텐츠 미리보기 등 개발·운영 지원용 스크립트 모음",
+      "nodeIds": [
+        "file:debug_beauty.py",
+        "file:debug_comment.py",
+        "file:debug_coupang.py",
+        "file:debug_naver.py",
+        "file:debug_threads.py",
+        "file:debug_youtube.py",
+        "file:fix_posts.py",
+        "file:add_product.py",
+        "file:check_products.py",
+        "file:list_posts.py",
+        "file:preview.py"
+      ]
+    }
+  ],
+  "tour": [
+    {
+      "order": 1,
+      "title": "파이프라인 전체 구조 이해",
+      "description": "PIPELINE.md는 이 프로젝트의 설계 의도와 전체 흐름을 한눈에 파악할 수 있는 단일 참조 문서다. GitHub Actions 트리거부터 상품 수집, AI 콘텐츠 생성, Threads 포스팅, GitHub Pages 빌드까지 5단계 파이프라인의 '왜'를 먼저 이해해야 이후 코드가 보인다. GitHub Secrets 목록, 수동 조작 방법, 트러블슈팅 정보도 이 문서에 집약되어 있다.",
+      "nodeIds": [
+        "document:PIPELINE.md"
+      ],
+      "languageLesson": "이 프로젝트는 서버 없이 GitHub Actions만으로 운영되는 'serverless 자동화 파이프라인'이다. 인프라 비용이 0원이며, 코드와 데이터(JSON)가 모두 같은 저장소에 저장되어 Git이 데이터베이스 역할을 한다."
+    },
+    {
+      "order": 2,
+      "title": "자동 실행 트리거: daily.yml",
+      "description": "daily.yml은 이 파이프라인이 '언제, 어떻게' 실행되는지를 정의한다. 매일 KST 오전 9:05(UTC 00:05) cron 스케줄로 main.py를 실행하고, 파이프라인이 생성한 HTML과 JSON 파일을 자동으로 git commit하여 GitHub Pages를 갱신한다. 수동 실행 시 랜덤 딜레이를 건너뛰는 옵션도 포함되어 있어 개발 시 빠른 테스트가 가능하다.",
+      "nodeIds": [
+        "pipeline:.github/workflows/daily.yml"
+      ],
+      "languageLesson": "GitHub Actions의 `on: schedule: cron` 표기는 UTC 기준이다. 한국 시간(KST, UTC+9)으로 9:05를 맞추려면 UTC 00:05로 설정해야 한다. `workflow_dispatch`를 함께 선언하면 GitHub UI에서 수동 트리거 버튼이 활성화된다."
+    },
+    {
+      "order": 3,
+      "title": "파이프라인 설정의 중심: config.py",
+      "description": "config.py는 fan-in 16으로 전체 코드베이스에서 가장 많이 참조되는 모듈이다. 모든 API 키(Threads, 네이버, Groq, YouTube)와 품질 필터 임계값, 쿠팡파트너스 활성화 플래그가 이 파일에 집중되어 있다. GitHub Actions의 Secrets와 로컬 .env 파일을 동일한 인터페이스로 읽도록 python-dotenv를 사용하여, 개발 환경과 프로덕션 환경을 코드 변경 없이 전환할 수 있다.",
+      "nodeIds": [
+        "config:config.py"
+      ],
+      "languageLesson": "python-dotenv의 `load_dotenv()`는 .env 파일이 없어도 오류 없이 동작한다. GitHub Actions에서는 환경변수가 Secrets로 주입되므로 .env 파일 없이도 동일한 `os.environ.get()` 호출로 값을 읽을 수 있다."
+    },
+    {
+      "order": 4,
+      "title": "오케스트레이터: main.py의 실행 흐름",
+      "description": "main.py는 파이프라인 전체의 지휘자(orchestrator)다. 실행마다 우선순위 큐(priority=1 수동 상품) → YouTube 트렌딩 → 네이버 쇼핑 → 쿠팡 폴백 순서로 상품을 선정하고, AI 콘텐츠 생성 → Threads 포스팅 → 댓글 대댓글 → 타계정 댓글 활동 → 페이지 빌드를 순차 실행한다. 0~120분 랜덤 딜레이는 봇 탐지를 피하기 위한 의도적 설계다.",
+      "nodeIds": [
+        "file:main.py"
+      ],
+      "languageLesson": "Python의 `asyncio`와 `async/await`는 I/O 대기 시간을 활용해 여러 작업을 효율적으로 처리한다. main.py는 단일 async 함수(`run_pipeline`)를 `asyncio.run()`으로 실행하는 단순한 구조를 선택했는데, 이는 병렬 처리보다 순서 보장이 더 중요한 SNS 포스팅 파이프라인의 특성을 반영한다."
+    },
+    {
+      "order": 5,
+      "title": "상품 발굴 전략: 3개 소스 + 벤치마킹 큐",
+      "description": "네이버 쇼핑 API(naver_shopping.py)가 주력 소스다. 무료 25,000건/일 API로 21개 카테고리를 순환 검색하고, B2B·공업용 차단 키워드 필터와 Playwright 기반 별점/리뷰수 검증을 거쳐 '실구매자에게 신뢰받는 쿠팡 상품'만 추린다. YouTube 트렌딩(youtube_trending.py)은 바이럴 영상에서 Groq AI로 상품명을 추출해 네이버 API로 검증한다. 쿠팡 홈 스크래퍼(coupang.py)는 API 수집이 부족할 때의 최후 폴백이다.",
+      "nodeIds": [
+        "file:scraper/naver_shopping.py",
+        "file:scraper/youtube_trending.py",
+        "file:scraper/coupang.py"
+      ],
+      "languageLesson": "네이버 쇼핑 API는 `쿠팡` 판매자 필터를 제공하지 않는다. 대신 응답 JSON의 `mallName` 또는 `link` 필드에 'coupang'이 포함된 항목만 선별하는 방식으로 쿠팡 상품을 필터링한다. 이런 클라이언트 사이드 필터링은 API 쿼터를 절약하면서 원하는 데이터만 취득하는 일반적인 패턴이다."
+    },
+    {
+      "order": 6,
+      "title": "경쟁사 벤치마킹: threads_benchmark.py",
+      "description": "threads_benchmark.py는 경쟁 계정들이 이미 검증한 '잘 팔리는 상품'을 자동으로 수집하는 차별화된 전략이다. 벤치마킹 계정의 Threads 게시글에서 Groq AI로 상품명을 추출하고 네이버 쇼핑 API로 쿠팡 상품을 매핑하여 priority_queue.json에 P2(priority=2)로 추가한다. 이 큐가 3개 미만이 되면 자동으로 보충하는 방식으로, 가장 신뢰도 높은 상품 소스 역할을 한다.",
+      "nodeIds": [
+        "file:scraper/threads_benchmark.py"
+      ],
+      "languageLesson": "Threads는 공식 Data API가 없어서 Playwright로 프로필 페이지를 렌더링한 뒤 `__NEXT_DATA__` JSON을 파싱하는 방식을 사용한다. 이는 SPA(Single Page Application)에서 서버사이드 렌더링(SSR) 데이터를 추출하는 일반적인 스크래핑 기법이다."
+    },
+    {
+      "order": 7,
+      "title": "AI 게시글 생성: content.py + registry.py",
+      "description": "content.py는 수집된 상품 데이터를 Groq AI(LLaMA 3.3-70b)에 전달해 Threads 특유의 짧고 감각적인 한국어 게시글을 생성한다. 생성 실패나 외국어 혼입 시 3종 폴백 템플릿으로 자동 대체하여 파이프라인이 절대 멈추지 않도록 설계되었다. registry.py는 상품마다 [001], [002]... 순번 코드를 부여하고 중복 포스팅을 itemId 기준으로 차단해 동일 상품이 재게시되지 않게 영속 관리한다.",
+      "nodeIds": [
+        "file:generator/content.py",
+        "file:generator/registry.py"
+      ],
+      "languageLesson": "LLM 호출의 핵심 파라미터 중 `temperature`는 출력의 창의성(랜덤성) 조절값이다. content.py는 일반 게시글 생성 시 temperature 0.7을 사용하고, 외국어가 감지되면 0.3으로 낮춰 더 안정적인 재생성을 시도한다. 낮은 temperature는 더 예측 가능하고 안전한 출력을 보장한다."
+    },
+    {
+      "order": 8,
+      "title": "캐러셀 이미지 수집: coupang_images.py",
+      "description": "Threads 캐러셀 포스팅은 텍스트 단독 포스팅보다 노출과 참여율이 높다. coupang_images.py는 쿠팡 상품 상세페이지에서 갤러리 이미지 최대 4장을 수집하는데, CSS 셀렉터 실패 시 window.__PRELOADED_STATE__ JSON 파싱, og:image 메타태그 순으로 3단계 폴백을 적용한다. 중국 CDN 이미지 필터링과 저해상도 URL 업그레이드로 Threads에 올라가는 이미지 품질을 보장한다.",
+      "nodeIds": [
+        "file:scraper/coupang_images.py"
+      ],
+      "languageLesson": "쿠팡은 SPA 구조라 HTML 소스에 상품 데이터가 인라인 JSON으로 포함되어 있다(`window.__PRELOADED_STATE__`). CSS 셀렉터가 동적 렌더링으로 변경되더라도 이 JSON은 상대적으로 안정적이기 때문에 1차 시도 실패 시의 신뢰할 수 있는 폴백이 된다."
+    },
+    {
+      "order": 9,
+      "title": "공식 API 포스팅: poster/threads.py",
+      "description": "threads.py는 Meta Graph API(graph.threads.net)를 사용해 실제 게시글을 발행한다. Playwright 기반 UI 자동화와 달리 IP 제한이 없고 하루 250개 포스팅 한도가 명확하며 안정적이다. 이미지 수에 따라 자동으로 TEXT/IMAGE/CAROUSEL 방식을 선택하고, 컨테이너 생성 후 30초 대기 후 publish하는 Threads API의 2단계 발행 흐름을 정확히 구현한다.",
+      "nodeIds": [
+        "file:poster/threads.py"
+      ],
+      "languageLesson": "Threads API는 Facebook Graph API 패턴을 따른다. 게시글을 즉시 발행하는 것이 아니라, 먼저 미디어 컨테이너를 `threads_publish` 엔드포인트에 생성(container ID 획득)하고, 일정 시간 후 publish API를 호출하는 2단계 구조다. 이 딜레이는 서버 측 미디어 처리 시간을 보장하기 위한 것이다."
+    },
+    {
+      "order": 10,
+      "title": "AI 댓글 자동화: engager.py + comment_replier.py",
+      "description": "단순 포스팅을 넘어 계정 성장을 위한 두 가지 댓글 자동화가 있다. engager.py는 Playwright로 타계정 게시글을 탐색해 Groq AI가 생성한 자연스러운 한국어 댓글(12~40자)을 3~5분 간격으로 게시한다. comment_replier.py는 반대로 자신의 게시글에 달린 팔로워 댓글을 Graph API로 감지하고 reply.py의 AI 생성 대댓글로 즉시 응답한다. 두 모듈 모두 Groq AI를 사용하여 사람이 쓴 것처럼 자연스러운 댓글을 목표로 한다.",
+      "nodeIds": [
+        "file:poster/engager.py",
+        "file:poster/comment_replier.py",
+        "file:generator/reply.py"
+      ]
+    },
+    {
+      "order": 11,
+      "title": "결과물 공개: GitHub Pages 빌드",
+      "description": "파이프라인의 최종 단계는 포스팅 이력을 누구나 볼 수 있는 정적 웹페이지로 공개하는 것이다. generate_page.py는 registry.py의 상품 목록으로 QR코드·검색·정렬 기능이 있는 docs/index.html을 생성하고, generate_feed_page.py는 feed_posts.json으로 Threads 피드 스타일의 docs/feed.html을 생성한다. daily.yml이 이 파일들을 자동 커밋하면 GitHub Pages가 즉시 반영한다.",
+      "nodeIds": [
+        "file:generate_page.py",
+        "file:generate_feed_page.py",
+        "file:docs/index.html",
+        "file:docs/feed.html"
+      ],
+      "languageLesson": "GitHub Pages는 저장소의 `docs/` 폴더(또는 `gh-pages` 브랜치)에 있는 정적 파일을 자동으로 호스팅한다. 별도의 웹 서버 없이 CI/CD 워크플로우에서 HTML을 생성해 커밋하는 것만으로 웹사이트가 갱신되는 '정적 사이트 자동화'의 전형적인 패턴이다."
+    }
+  ]
+}

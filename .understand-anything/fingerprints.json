@@ -1,0 +1,2756 @@
+{
+  "version": "1.0.0",
+  "gitCommitHash": "",
+  "generatedAt": "2026-06-03T13:45:15.453Z",
+  "files": {
+    "main.py": {
+      "filePath": "main.py",
+      "contentHash": "117c3eaf25162ed3dff4215cfcee81bef5cdd3a7e7cc9273025c793592c834e4",
+      "functions": [
+        {
+          "name": "load_priority_queue",
+          "params": [],
+          "returnType": "list",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "save_priority_queue",
+          "params": [
+            "queue"
+          ],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "pop_from_queue",
+          "params": [],
+          "returnType": "dict | None",
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "load_feed_posts",
+          "params": [],
+          "returnType": "list[dict]",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "save_feed_posts",
+          "params": [
+            "posts"
+          ],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "append_feed_entries",
+          "params": [
+            "contents",
+            "status"
+          ],
+          "returnType": "list[dict]",
+          "exported": true,
+          "lineCount": 20
+        },
+        {
+          "name": "load_posted_ids",
+          "params": [],
+          "returnType": "set[str]",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "save_posted_ids",
+          "params": [
+            "ids"
+          ],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "_product_key",
+          "params": [
+            "product"
+          ],
+          "returnType": "str",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "run_pipeline",
+          "params": [],
+          "exported": true,
+          "lineCount": 158
+        },
+        {
+          "name": "run_once",
+          "params": [],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "run_scheduled",
+          "params": [],
+          "exported": true,
+          "lineCount": 11
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "asyncio",
+          "specifiers": [
+            "asyncio"
+          ]
+        },
+        {
+          "source": "logging",
+          "specifiers": [
+            "logging"
+          ]
+        },
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        },
+        {
+          "source": "sys",
+          "specifiers": [
+            "sys"
+          ]
+        },
+        {
+          "source": "argparse",
+          "specifiers": [
+            "argparse"
+          ]
+        },
+        {
+          "source": "datetime",
+          "specifiers": [
+            "datetime"
+          ]
+        },
+        {
+          "source": "schedule",
+          "specifiers": [
+            "schedule"
+          ]
+        },
+        {
+          "source": "time",
+          "specifiers": [
+            "time"
+          ]
+        },
+        {
+          "source": "json",
+          "specifiers": [
+            "json"
+          ]
+        },
+        {
+          "source": "config",
+          "specifiers": [
+            "SCHEDULE_TIMES",
+            "MAX_PRODUCTS_PER_RUN",
+            "LOG_DIR",
+            "NAVER_CLIENT_ID",
+            "DATA_DIR",
+            "YOUTUBE_API_KEY"
+          ]
+        },
+        {
+          "source": "scraper.coupang",
+          "specifiers": [
+            "scrape_homepage_deals"
+          ]
+        },
+        {
+          "source": "scraper.naver_shopping",
+          "specifiers": [
+            "scrape_deals",
+            "save_products"
+          ]
+        },
+        {
+          "source": "generator.content",
+          "specifiers": [
+            "generate_posts_batch"
+          ]
+        },
+        {
+          "source": "poster.threads",
+          "specifiers": [
+            "post_all_products"
+          ]
+        },
+        {
+          "source": "poster.comment_replier",
+          "specifiers": [
+            "add_recent_post",
+            "check_and_reply_comments"
+          ]
+        },
+        {
+          "source": "poster.engager",
+          "specifiers": [
+            "run_engagement_session"
+          ]
+        }
+      ],
+      "exports": [
+        "load_priority_queue",
+        "save_priority_queue",
+        "pop_from_queue",
+        "load_feed_posts",
+        "save_feed_posts",
+        "append_feed_entries",
+        "load_posted_ids",
+        "save_posted_ids",
+        "_product_key",
+        "run_pipeline",
+        "run_once",
+        "run_scheduled"
+      ],
+      "totalLines": 322,
+      "hasStructuralAnalysis": true
+    },
+    "config.py": {
+      "filePath": "config.py",
+      "contentHash": "54557f52059bcba2400bdd5b07685b898b70bd5f4eb04269d56833e053881d3e",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "dotenv",
+          "specifiers": [
+            "load_dotenv"
+          ]
+        },
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 52,
+      "hasStructuralAnalysis": true
+    },
+    "requirements.txt": {
+      "filePath": "requirements.txt",
+      "contentHash": "e79a4368e9c52c16161486f4375f108c6b0b3f001bbda415c250aa0694ea9e1b",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 9,
+      "hasStructuralAnalysis": false
+    },
+    "PIPELINE.md": {
+      "filePath": "PIPELINE.md",
+      "contentHash": "bd5f084b34034cb048e94e9d1f3e6a832fd0d45d1d5c74486974df1cef8a46a0",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 260,
+      "hasStructuralAnalysis": true
+    },
+    "generate_page.py": {
+      "filePath": "generate_page.py",
+      "contentHash": "c5f203d8e08ae93f449bf0bdafcb27ee4765f3336a811d7ffea61e842a614108",
+      "functions": [
+        {
+          "name": "build_cards",
+          "params": [
+            "products"
+          ],
+          "returnType": "str",
+          "exported": true,
+          "lineCount": 36
+        },
+        {
+          "name": "build_html",
+          "params": [
+            "products"
+          ],
+          "returnType": "str",
+          "exported": true,
+          "lineCount": 767
+        },
+        {
+          "name": "main",
+          "params": [],
+          "exported": true,
+          "lineCount": 13
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        },
+        {
+          "source": "sys",
+          "specifiers": [
+            "sys"
+          ]
+        },
+        {
+          "source": "generator.registry",
+          "specifiers": [
+            "get_all"
+          ]
+        },
+        {
+          "source": "config",
+          "specifiers": [
+            "COUPANG_PARTNERS_ACTIVE"
+          ]
+        }
+      ],
+      "exports": [
+        "build_cards",
+        "build_html",
+        "main"
+      ],
+      "totalLines": 842,
+      "hasStructuralAnalysis": true
+    },
+    "generate_feed_page.py": {
+      "filePath": "generate_feed_page.py",
+      "contentHash": "718f918dc3c649721c47f9b5a662c5bce93626675be34c630a15f25d315b3bce",
+      "functions": [
+        {
+          "name": "load_posts",
+          "params": [],
+          "returnType": "list[dict]",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "_fmt_date",
+          "params": [
+            "ts"
+          ],
+          "returnType": "str",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "_status_badge",
+          "params": [
+            "status"
+          ],
+          "returnType": "str",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "build_cards",
+          "params": [
+            "posts"
+          ],
+          "returnType": "str",
+          "exported": true,
+          "lineCount": 54
+        },
+        {
+          "name": "build_html",
+          "params": [
+            "posts"
+          ],
+          "returnType": "str",
+          "exported": true,
+          "lineCount": 273
+        },
+        {
+          "name": "main",
+          "params": [],
+          "exported": true,
+          "lineCount": 10
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "json",
+          "specifiers": [
+            "json"
+          ]
+        },
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        },
+        {
+          "source": "sys",
+          "specifiers": [
+            "sys"
+          ]
+        },
+        {
+          "source": "datetime",
+          "specifiers": [
+            "datetime"
+          ]
+        },
+        {
+          "source": "config",
+          "specifiers": [
+            "COUPANG_PARTNERS_ACTIVE"
+          ]
+        }
+      ],
+      "exports": [
+        "load_posts",
+        "_fmt_date",
+        "_status_badge",
+        "build_cards",
+        "build_html",
+        "main"
+      ],
+      "totalLines": 385,
+      "hasStructuralAnalysis": true
+    },
+    "preview.py": {
+      "filePath": "preview.py",
+      "contentHash": "568ff063bc606fe305c865b581859c9de0529b41f72a1ad6e7b92e0db50f1912",
+      "functions": [
+        {
+          "name": "_sample_engager_comments",
+          "params": [],
+          "returnType": "list[dict]",
+          "exported": true,
+          "lineCount": 42
+        },
+        {
+          "name": "_post_card",
+          "params": [
+            "image_url",
+            "text",
+            "label"
+          ],
+          "returnType": "str",
+          "exported": true,
+          "lineCount": 33
+        },
+        {
+          "name": "_inpock_guide",
+          "params": [
+            "contents"
+          ],
+          "returnType": "str",
+          "exported": true,
+          "lineCount": 31
+        },
+        {
+          "name": "generate_html",
+          "params": [
+            "contents",
+            "engager_samples"
+          ],
+          "returnType": "str",
+          "exported": true,
+          "lineCount": 261
+        },
+        {
+          "name": "run_preview",
+          "params": [],
+          "exported": true,
+          "lineCount": 53
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        },
+        {
+          "source": "sys",
+          "specifiers": [
+            "sys"
+          ]
+        },
+        {
+          "source": "webbrowser",
+          "specifiers": [
+            "webbrowser"
+          ]
+        },
+        {
+          "source": "tempfile",
+          "specifiers": [
+            "tempfile"
+          ]
+        },
+        {
+          "source": "datetime",
+          "specifiers": [
+            "datetime"
+          ]
+        }
+      ],
+      "exports": [
+        "_sample_engager_comments",
+        "_post_card",
+        "_inpock_guide",
+        "generate_html",
+        "run_preview"
+      ],
+      "totalLines": 451,
+      "hasStructuralAnalysis": true
+    },
+    "add_product.py": {
+      "filePath": "add_product.py",
+      "contentHash": "e73f0a56d69da8b349f14b2df233baaecbe926ae05ef4633a8b00d2f4951bf78",
+      "functions": [
+        {
+          "name": "load_queue",
+          "params": [],
+          "returnType": "list",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "save_queue",
+          "params": [
+            "queue"
+          ],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "_search_naver",
+          "params": [
+            "query"
+          ],
+          "returnType": "dict | None",
+          "exported": true,
+          "lineCount": 31
+        },
+        {
+          "name": "_is_duplicate",
+          "params": [
+            "queue",
+            "url"
+          ],
+          "returnType": "bool",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "add_by_name",
+          "params": [
+            "name"
+          ],
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "add_by_url",
+          "params": [
+            "url"
+          ],
+          "exported": true,
+          "lineCount": 21
+        },
+        {
+          "name": "_enqueue",
+          "params": [
+            "product"
+          ],
+          "exported": true,
+          "lineCount": 17
+        },
+        {
+          "name": "print_queue",
+          "params": [],
+          "exported": true,
+          "lineCount": 15
+        },
+        {
+          "name": "remove_item",
+          "params": [
+            "index"
+          ],
+          "exported": true,
+          "lineCount": 9
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "argparse",
+          "specifiers": [
+            "argparse"
+          ]
+        },
+        {
+          "source": "json",
+          "specifiers": [
+            "json"
+          ]
+        },
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        },
+        {
+          "source": "re",
+          "specifiers": [
+            "re"
+          ]
+        },
+        {
+          "source": "sys",
+          "specifiers": [
+            "sys"
+          ]
+        },
+        {
+          "source": "datetime",
+          "specifiers": [
+            "datetime"
+          ]
+        },
+        {
+          "source": "requests",
+          "specifiers": [
+            "requests"
+          ]
+        },
+        {
+          "source": "config",
+          "specifiers": [
+            "DATA_DIR",
+            "NAVER_CLIENT_ID",
+            "NAVER_CLIENT_SECRET"
+          ]
+        }
+      ],
+      "exports": [
+        "load_queue",
+        "save_queue",
+        "_search_naver",
+        "_is_duplicate",
+        "add_by_name",
+        "add_by_url",
+        "_enqueue",
+        "print_queue",
+        "remove_item"
+      ],
+      "totalLines": 192,
+      "hasStructuralAnalysis": true
+    },
+    "check_products.py": {
+      "filePath": "check_products.py",
+      "contentHash": "b1b64d71f960938a851a6c2fe4ad174719daa7f4f0e891978041520b014b8814",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "json",
+          "specifiers": [
+            "json"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 11,
+      "hasStructuralAnalysis": true
+    },
+    "setup.py": {
+      "filePath": "setup.py",
+      "contentHash": "2823f3d89fb2235de6019cadc5659f57d5bfe03e1f99f7c613c40768ba5003e8",
+      "functions": [
+        {
+          "name": "run",
+          "params": [
+            "cmd",
+            "cwd",
+            "check"
+          ],
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "check_prerequisites",
+          "params": [],
+          "exported": true,
+          "lineCount": 15
+        },
+        {
+          "name": "clone_repo",
+          "params": [],
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "create_venv",
+          "params": [],
+          "exported": true,
+          "lineCount": 21
+        },
+        {
+          "name": "install_playwright",
+          "params": [
+            "python_path"
+          ],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "create_env",
+          "params": [],
+          "exported": true,
+          "lineCount": 32
+        },
+        {
+          "name": "print_done",
+          "params": [],
+          "exported": true,
+          "lineCount": 18
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "subprocess",
+          "specifiers": [
+            "subprocess"
+          ]
+        },
+        {
+          "source": "sys",
+          "specifiers": [
+            "sys"
+          ]
+        },
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        },
+        {
+          "source": "shutil",
+          "specifiers": [
+            "shutil"
+          ]
+        }
+      ],
+      "exports": [
+        "run",
+        "check_prerequisites",
+        "clone_repo",
+        "create_venv",
+        "install_playwright",
+        "create_env",
+        "print_done"
+      ],
+      "totalLines": 161,
+      "hasStructuralAnalysis": true
+    },
+    "fix_posts.py": {
+      "filePath": "fix_posts.py",
+      "contentHash": "a1bca485cb3f909b387b948ec1de54d67f9c47f6246cdb966666ed480b6ff9c8",
+      "functions": [
+        {
+          "name": "api",
+          "params": [
+            "method",
+            "path",
+            "**kwargs"
+          ],
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "delete_post",
+          "params": [
+            "post_id",
+            "label"
+          ],
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "post_with_image",
+          "params": [
+            "text",
+            "image_url"
+          ],
+          "returnType": "dict | None",
+          "exported": true,
+          "lineCount": 31
+        },
+        {
+          "name": "update_code_in_text",
+          "params": [
+            "text",
+            "old_code",
+            "new_code"
+          ],
+          "returnType": "str",
+          "exported": true,
+          "lineCount": 2
+        },
+        {
+          "name": "main",
+          "params": [],
+          "exported": true,
+          "lineCount": 99
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "sys",
+          "specifiers": [
+            "sys"
+          ]
+        },
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        },
+        {
+          "source": "json",
+          "specifiers": [
+            "json"
+          ]
+        },
+        {
+          "source": "time",
+          "specifiers": [
+            "time"
+          ]
+        },
+        {
+          "source": "re",
+          "specifiers": [
+            "re"
+          ]
+        },
+        {
+          "source": "dotenv",
+          "specifiers": [
+            "load_dotenv"
+          ]
+        },
+        {
+          "source": "config",
+          "specifiers": [
+            "THREADS_ACCESS_TOKEN",
+            "THREADS_USER_ID"
+          ]
+        },
+        {
+          "source": "requests",
+          "specifiers": [
+            "requests"
+          ]
+        }
+      ],
+      "exports": [
+        "api",
+        "delete_post",
+        "post_with_image",
+        "update_code_in_text",
+        "main"
+      ],
+      "totalLines": 182,
+      "hasStructuralAnalysis": true
+    },
+    "list_posts.py": {
+      "filePath": "list_posts.py",
+      "contentHash": "09b59fe529440c57aa38e268cf291b397dc2d363a398c437f9ce2a0debf381af",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "sys",
+          "specifiers": [
+            "sys"
+          ]
+        },
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        },
+        {
+          "source": "dotenv",
+          "specifiers": [
+            "load_dotenv"
+          ]
+        },
+        {
+          "source": "config",
+          "specifiers": [
+            "THREADS_ACCESS_TOKEN",
+            "THREADS_USER_ID"
+          ]
+        },
+        {
+          "source": "requests",
+          "specifiers": [
+            "requests"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 19,
+      "hasStructuralAnalysis": true
+    },
+    "debug_beauty.py": {
+      "filePath": "debug_beauty.py",
+      "contentHash": "c5e30434336127c043ae7d392ba23ed67c37b67e3f77f8f1631b7f7a498c2a61",
+      "functions": [
+        {
+          "name": "debug",
+          "params": [],
+          "exported": true,
+          "lineCount": 162
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "asyncio",
+          "specifiers": [
+            "asyncio"
+          ]
+        },
+        {
+          "source": "json",
+          "specifiers": [
+            "json"
+          ]
+        },
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        },
+        {
+          "source": "playwright.async_api",
+          "specifiers": [
+            "async_playwright"
+          ]
+        },
+        {
+          "source": "playwright_stealth",
+          "specifiers": [
+            "Stealth"
+          ]
+        }
+      ],
+      "exports": [
+        "debug"
+      ],
+      "totalLines": 189,
+      "hasStructuralAnalysis": true
+    },
+    "debug_comment.py": {
+      "filePath": "debug_comment.py",
+      "contentHash": "95d17e4681fd08f136ef445ab321ad7c66c021c57a9c9bf38bbc98c8a7359fed",
+      "functions": [
+        {
+          "name": "debug",
+          "params": [],
+          "exported": true,
+          "lineCount": 108
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "asyncio",
+          "specifiers": [
+            "asyncio"
+          ]
+        },
+        {
+          "source": "json",
+          "specifiers": [
+            "json"
+          ]
+        },
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        },
+        {
+          "source": "playwright.async_api",
+          "specifiers": [
+            "async_playwright"
+          ]
+        }
+      ],
+      "exports": [
+        "debug"
+      ],
+      "totalLines": 138,
+      "hasStructuralAnalysis": true
+    },
+    "debug_coupang.py": {
+      "filePath": "debug_coupang.py",
+      "contentHash": "7a8c6a7c2d64e3ad413388bc1493317238c36778633f609fb67b5f6cd26d8add",
+      "functions": [
+        {
+          "name": "debug",
+          "params": [],
+          "exported": true,
+          "lineCount": 71
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "asyncio",
+          "specifiers": [
+            "asyncio"
+          ]
+        },
+        {
+          "source": "playwright.async_api",
+          "specifiers": [
+            "async_playwright"
+          ]
+        },
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        }
+      ],
+      "exports": [
+        "debug"
+      ],
+      "totalLines": 82,
+      "hasStructuralAnalysis": true
+    },
+    "debug_naver.py": {
+      "filePath": "debug_naver.py",
+      "contentHash": "0d18a0dbfe3a76a1811b678cc6a2082baac71c8d87ce8879b3670677bcb9eb85",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "requests",
+          "specifiers": [
+            "requests"
+          ]
+        },
+        {
+          "source": "dotenv",
+          "specifiers": [
+            "load_dotenv"
+          ]
+        },
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 22,
+      "hasStructuralAnalysis": true
+    },
+    "debug_threads.py": {
+      "filePath": "debug_threads.py",
+      "contentHash": "39595c67afc2c27e3c111425b4fcff696868513475b23f4b966f8c417290b050",
+      "functions": [
+        {
+          "name": "debug",
+          "params": [],
+          "exported": true,
+          "lineCount": 129
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "asyncio",
+          "specifiers": [
+            "asyncio"
+          ]
+        },
+        {
+          "source": "json",
+          "specifiers": [
+            "json"
+          ]
+        },
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        },
+        {
+          "source": "playwright.async_api",
+          "specifiers": [
+            "async_playwright"
+          ]
+        }
+      ],
+      "exports": [
+        "debug"
+      ],
+      "totalLines": 151,
+      "hasStructuralAnalysis": true
+    },
+    "debug_youtube.py": {
+      "filePath": "debug_youtube.py",
+      "contentHash": "3253a2315f5297f3134fa3f7a6806e94407ea69bc387f2c15012d27ebc8e6181",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "logging",
+          "specifiers": [
+            "logging"
+          ]
+        },
+        {
+          "source": "sys",
+          "specifiers": [
+            "sys"
+          ]
+        },
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        },
+        {
+          "source": "config",
+          "specifiers": [
+            "YOUTUBE_API_KEY"
+          ]
+        },
+        {
+          "source": "scraper.youtube_trending",
+          "specifiers": [
+            "scrape_trending_products"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 33,
+      "hasStructuralAnalysis": true
+    },
+    "scraper/coupang.py": {
+      "filePath": "scraper/coupang.py",
+      "contentHash": "596a29e8721bbe365d7a8ccf7d92e6824b230fcfa825ab89bc91cc47e11bbe45",
+      "functions": [
+        {
+          "name": "scrape_homepage_deals",
+          "params": [
+            "max_items"
+          ],
+          "returnType": "list[dict]",
+          "exported": true,
+          "lineCount": 47
+        },
+        {
+          "name": "_scrape_promotion_items",
+          "params": [
+            "page",
+            "max_items"
+          ],
+          "returnType": "list[dict]",
+          "exported": true,
+          "lineCount": 19
+        },
+        {
+          "name": "_parse_promotion_card",
+          "params": [
+            "card"
+          ],
+          "returnType": "dict | None",
+          "exported": true,
+          "lineCount": 50
+        },
+        {
+          "name": "_scrape_personalized_items",
+          "params": [
+            "page",
+            "max_items"
+          ],
+          "returnType": "list[dict]",
+          "exported": true,
+          "lineCount": 51
+        },
+        {
+          "name": "save_products",
+          "params": [
+            "products",
+            "filename"
+          ],
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "load_products",
+          "params": [
+            "filename"
+          ],
+          "returnType": "list[dict]",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "run",
+          "params": [],
+          "exported": true,
+          "lineCount": 10
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "asyncio",
+          "specifiers": [
+            "asyncio"
+          ]
+        },
+        {
+          "source": "json",
+          "specifiers": [
+            "json"
+          ]
+        },
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        },
+        {
+          "source": "re",
+          "specifiers": [
+            "re"
+          ]
+        },
+        {
+          "source": "sys",
+          "specifiers": [
+            "sys"
+          ]
+        },
+        {
+          "source": "logging",
+          "specifiers": [
+            "logging"
+          ]
+        },
+        {
+          "source": "datetime",
+          "specifiers": [
+            "datetime"
+          ]
+        },
+        {
+          "source": "playwright.async_api",
+          "specifiers": [
+            "async_playwright",
+            "Page"
+          ]
+        },
+        {
+          "source": "config",
+          "specifiers": [
+            "DATA_DIR",
+            "MAX_PRODUCTS_PER_RUN"
+          ]
+        }
+      ],
+      "exports": [
+        "scrape_homepage_deals",
+        "_scrape_promotion_items",
+        "_parse_promotion_card",
+        "_scrape_personalized_items",
+        "save_products",
+        "load_products",
+        "run"
+      ],
+      "totalLines": 233,
+      "hasStructuralAnalysis": true
+    },
+    "scraper/naver_shopping.py": {
+      "filePath": "scraper/naver_shopping.py",
+      "contentHash": "7b25a5ca457ae32183f3fc4852102033d80718fd1696522d1f1bb17810e850ff",
+      "functions": [
+        {
+          "name": "is_blocked_product",
+          "params": [
+            "name"
+          ],
+          "returnType": "bool",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "_get_product_type",
+          "params": [
+            "name"
+          ],
+          "returnType": "str | None",
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "_strip_html",
+          "params": [
+            "text"
+          ],
+          "returnType": "str",
+          "exported": true,
+          "lineCount": 2
+        },
+        {
+          "name": "_clean_name",
+          "params": [
+            "name"
+          ],
+          "returnType": "str",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "_fetch_items",
+          "params": [
+            "keyword",
+            "display"
+          ],
+          "returnType": "list[dict]",
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "_calc_discount_rate",
+          "params": [
+            "lprice",
+            "hprice"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "_is_bad_name",
+          "params": [
+            "name"
+          ],
+          "returnType": "bool",
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "_has_chinese",
+          "params": [
+            "text"
+          ],
+          "returnType": "bool",
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "_to_product",
+          "params": [
+            "item",
+            "category_hint"
+          ],
+          "returnType": "dict | None",
+          "exported": true,
+          "lineCount": 47
+        },
+        {
+          "name": "_check_coupang_rating",
+          "params": [
+            "product"
+          ],
+          "returnType": "bool",
+          "exported": true,
+          "lineCount": 95
+        },
+        {
+          "name": "scrape_deals",
+          "params": [
+            "max_items"
+          ],
+          "returnType": "list[dict]",
+          "exported": true,
+          "lineCount": 53
+        },
+        {
+          "name": "save_products",
+          "params": [
+            "products",
+            "filename"
+          ],
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "load_products",
+          "params": [
+            "filename"
+          ],
+          "returnType": "list[dict]",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "run",
+          "params": [],
+          "exported": true,
+          "lineCount": 11
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "requests",
+          "specifiers": [
+            "requests"
+          ]
+        },
+        {
+          "source": "logging",
+          "specifiers": [
+            "logging"
+          ]
+        },
+        {
+          "source": "sys",
+          "specifiers": [
+            "sys"
+          ]
+        },
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        },
+        {
+          "source": "json",
+          "specifiers": [
+            "json"
+          ]
+        },
+        {
+          "source": "re",
+          "specifiers": [
+            "re"
+          ]
+        },
+        {
+          "source": "datetime",
+          "specifiers": [
+            "datetime"
+          ]
+        },
+        {
+          "source": "itertools",
+          "specifiers": [
+            "cycle"
+          ]
+        },
+        {
+          "source": "config",
+          "specifiers": [
+            "DATA_DIR",
+            "MAX_PRODUCTS_PER_RUN",
+            "NAVER_CLIENT_ID",
+            "NAVER_CLIENT_SECRET",
+            "REQUIRE_BRAND",
+            "CHECK_RATING",
+            "MIN_REVIEW_COUNT",
+            "MIN_RATING"
+          ]
+        }
+      ],
+      "exports": [
+        "is_blocked_product",
+        "_get_product_type",
+        "_strip_html",
+        "_clean_name",
+        "_fetch_items",
+        "_calc_discount_rate",
+        "_is_bad_name",
+        "_has_chinese",
+        "_to_product",
+        "_check_coupang_rating",
+        "scrape_deals",
+        "save_products",
+        "load_products",
+        "run"
+      ],
+      "totalLines": 412,
+      "hasStructuralAnalysis": true
+    },
+    "scraper/youtube_trending.py": {
+      "filePath": "scraper/youtube_trending.py",
+      "contentHash": "9053ce04b9a17342223fec1e834a6a1c34816ad3523b20ad1c2dc2dbac7dc3ba",
+      "functions": [
+        {
+          "name": "_search_videos",
+          "params": [
+            "keyword",
+            "max_results"
+          ],
+          "returnType": "list[dict]",
+          "exported": true,
+          "lineCount": 27
+        },
+        {
+          "name": "_get_view_counts",
+          "params": [
+            "video_ids"
+          ],
+          "returnType": "dict[str, int]",
+          "exported": true,
+          "lineCount": 19
+        },
+        {
+          "name": "_extract_product_name",
+          "params": [
+            "title",
+            "description"
+          ],
+          "returnType": "str | None",
+          "exported": true,
+          "lineCount": 33
+        },
+        {
+          "name": "_find_naver_product",
+          "params": [
+            "product_name"
+          ],
+          "returnType": "dict | None",
+          "exported": true,
+          "lineCount": 21
+        },
+        {
+          "name": "scrape_trending_products",
+          "params": [
+            "max_items"
+          ],
+          "returnType": "list[dict]",
+          "exported": true,
+          "lineCount": 72
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "logging",
+          "specifiers": [
+            "logging"
+          ]
+        },
+        {
+          "source": "random",
+          "specifiers": [
+            "random"
+          ]
+        },
+        {
+          "source": "sys",
+          "specifiers": [
+            "sys"
+          ]
+        },
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        },
+        {
+          "source": "datetime",
+          "specifiers": [
+            "datetime",
+            "timedelta",
+            "timezone"
+          ]
+        },
+        {
+          "source": "requests",
+          "specifiers": [
+            "requests"
+          ]
+        },
+        {
+          "source": "config",
+          "specifiers": [
+            "YOUTUBE_API_KEY",
+            "GROQ_API_KEY"
+          ]
+        }
+      ],
+      "exports": [
+        "_search_videos",
+        "_get_view_counts",
+        "_extract_product_name",
+        "_find_naver_product",
+        "scrape_trending_products"
+      ],
+      "totalLines": 229,
+      "hasStructuralAnalysis": true
+    },
+    "scraper/threads_benchmark.py": {
+      "filePath": "scraper/threads_benchmark.py",
+      "contentHash": "74399eaeedcf6289811ae2661d842748992ef202e8ad72f5d12e6ecf690ffd16",
+      "functions": [
+        {
+          "name": "_load_accounts",
+          "params": [],
+          "returnType": "list",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "_load_queue",
+          "params": [],
+          "returnType": "list",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "_save_queue",
+          "params": [
+            "queue"
+          ],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "_fetch_posts",
+          "params": [
+            "username"
+          ],
+          "returnType": "list[str]",
+          "exported": true,
+          "lineCount": 46
+        },
+        {
+          "name": "_walk_for_texts",
+          "params": [
+            "obj",
+            "depth"
+          ],
+          "returnType": "list[str]",
+          "exported": true,
+          "lineCount": 16
+        },
+        {
+          "name": "_extract_product_names",
+          "params": [
+            "texts",
+            "account"
+          ],
+          "returnType": "list[str]",
+          "exported": true,
+          "lineCount": 32
+        },
+        {
+          "name": "_search_naver",
+          "params": [
+            "query"
+          ],
+          "returnType": "dict | None",
+          "exported": true,
+          "lineCount": 31
+        },
+        {
+          "name": "run_benchmark",
+          "params": [],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 75
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "json",
+          "specifiers": [
+            "json"
+          ]
+        },
+        {
+          "source": "logging",
+          "specifiers": [
+            "logging"
+          ]
+        },
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        },
+        {
+          "source": "random",
+          "specifiers": [
+            "random"
+          ]
+        },
+        {
+          "source": "re",
+          "specifiers": [
+            "re"
+          ]
+        },
+        {
+          "source": "sys",
+          "specifiers": [
+            "sys"
+          ]
+        },
+        {
+          "source": "time",
+          "specifiers": [
+            "time"
+          ]
+        },
+        {
+          "source": "datetime",
+          "specifiers": [
+            "datetime"
+          ]
+        },
+        {
+          "source": "requests",
+          "specifiers": [
+            "requests"
+          ]
+        },
+        {
+          "source": "config",
+          "specifiers": [
+            "DATA_DIR",
+            "GROQ_API_KEY",
+            "NAVER_CLIENT_ID",
+            "NAVER_CLIENT_SECRET"
+          ]
+        }
+      ],
+      "exports": [
+        "_load_accounts",
+        "_load_queue",
+        "_save_queue",
+        "_fetch_posts",
+        "_walk_for_texts",
+        "_extract_product_names",
+        "_search_naver",
+        "run_benchmark"
+      ],
+      "totalLines": 291,
+      "hasStructuralAnalysis": true
+    },
+    "scraper/coupang_images.py": {
+      "filePath": "scraper/coupang_images.py",
+      "contentHash": "a549c5ede2925a8f1297b2b9f745f3ef5d2fe5c49b01005c8530e89af34ab671",
+      "functions": [
+        {
+          "name": "fetch_product_images",
+          "params": [
+            "product_url",
+            "max_images"
+          ],
+          "returnType": "list[str]",
+          "exported": true,
+          "lineCount": 60
+        },
+        {
+          "name": "_resolve_redirect",
+          "params": [
+            "url"
+          ],
+          "returnType": "str | None",
+          "exported": true,
+          "lineCount": 25
+        },
+        {
+          "name": "_extract_from_json",
+          "params": [
+            "html"
+          ],
+          "returnType": "list[str]",
+          "exported": true,
+          "lineCount": 28
+        },
+        {
+          "name": "_upgrade_image_url",
+          "params": [
+            "url"
+          ],
+          "returnType": "str",
+          "exported": true,
+          "lineCount": 18
+        },
+        {
+          "name": "_is_valid_image",
+          "params": [
+            "url"
+          ],
+          "returnType": "bool",
+          "exported": true,
+          "lineCount": 13
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "re",
+          "specifiers": [
+            "re"
+          ]
+        },
+        {
+          "source": "time",
+          "specifiers": [
+            "time"
+          ]
+        },
+        {
+          "source": "logging",
+          "specifiers": [
+            "logging"
+          ]
+        },
+        {
+          "source": "requests",
+          "specifiers": [
+            "requests"
+          ]
+        },
+        {
+          "source": "bs4",
+          "specifiers": [
+            "BeautifulSoup"
+          ]
+        }
+      ],
+      "exports": [
+        "fetch_product_images",
+        "_resolve_redirect",
+        "_extract_from_json",
+        "_upgrade_image_url",
+        "_is_valid_image"
+      ],
+      "totalLines": 193,
+      "hasStructuralAnalysis": true
+    },
+    "scraper/__init__.py": {
+      "filePath": "scraper/__init__.py",
+      "contentHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 1,
+      "hasStructuralAnalysis": true
+    },
+    "generator/content.py": {
+      "filePath": "generator/content.py",
+      "contentHash": "ff1a7b485a97bd791a4dcc22d1f222821d6574779521e5aa26f848e349110210",
+      "functions": [
+        {
+          "name": "_has_foreign_chars",
+          "params": [
+            "text"
+          ],
+          "returnType": "bool",
+          "exported": true,
+          "lineCount": 2
+        },
+        {
+          "name": "_generate_post1_ai",
+          "params": [
+            "product",
+            "product_code"
+          ],
+          "returnType": "str | None",
+          "exported": true,
+          "lineCount": 59
+        },
+        {
+          "name": "_post1_fallback",
+          "params": [
+            "name",
+            "product_code"
+          ],
+          "returnType": "str",
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "_collect_detail_images",
+          "params": [
+            "product"
+          ],
+          "returnType": "list[str]",
+          "exported": true,
+          "lineCount": 25
+        },
+        {
+          "name": "generate_post",
+          "params": [
+            "product"
+          ],
+          "returnType": "dict",
+          "exported": true,
+          "lineCount": 39
+        },
+        {
+          "name": "generate_posts_batch",
+          "params": [
+            "products"
+          ],
+          "returnType": "list[dict]",
+          "exported": true,
+          "lineCount": 10
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "random",
+          "specifiers": [
+            "random"
+          ]
+        },
+        {
+          "source": "re",
+          "specifiers": [
+            "re"
+          ]
+        },
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        },
+        {
+          "source": "sys",
+          "specifiers": [
+            "sys"
+          ]
+        },
+        {
+          "source": "logging",
+          "specifiers": [
+            "logging"
+          ]
+        },
+        {
+          "source": "config",
+          "specifiers": [
+            "COUPANG_PARTNERS_ACTIVE",
+            "GROQ_API_KEY"
+          ]
+        }
+      ],
+      "exports": [
+        "_has_foreign_chars",
+        "_generate_post1_ai",
+        "_post1_fallback",
+        "_collect_detail_images",
+        "generate_post",
+        "generate_posts_batch"
+      ],
+      "totalLines": 233,
+      "hasStructuralAnalysis": true
+    },
+    "generator/registry.py": {
+      "filePath": "generator/registry.py",
+      "contentHash": "28aa57e1d432d45afffee4d335d0834ed386fbffe580893846ad55d92906384b",
+      "functions": [
+        {
+          "name": "_extract_item_id",
+          "params": [
+            "url"
+          ],
+          "returnType": "str | None",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "_load",
+          "params": [],
+          "returnType": "dict",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "_save",
+          "params": [
+            "reg"
+          ],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "assign_code",
+          "params": [
+            "product_url",
+            "name",
+            "image_url"
+          ],
+          "returnType": "str",
+          "exported": true,
+          "lineCount": 32
+        },
+        {
+          "name": "get_all",
+          "params": [],
+          "returnType": "list[dict]",
+          "exported": true,
+          "lineCount": 12
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "json",
+          "specifiers": [
+            "json"
+          ]
+        },
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        },
+        {
+          "source": "re",
+          "specifiers": [
+            "re"
+          ]
+        },
+        {
+          "source": "sys",
+          "specifiers": [
+            "sys"
+          ]
+        },
+        {
+          "source": "config",
+          "specifiers": [
+            "DATA_DIR"
+          ]
+        }
+      ],
+      "exports": [
+        "_extract_item_id",
+        "_load",
+        "_save",
+        "assign_code",
+        "get_all"
+      ],
+      "totalLines": 82,
+      "hasStructuralAnalysis": true
+    },
+    "generator/reply.py": {
+      "filePath": "generator/reply.py",
+      "contentHash": "463196702930f83462e9d36cf3b48223f8695166f9e59d55c3aa0ec97b6d9006",
+      "functions": [
+        {
+          "name": "generate_reply",
+          "params": [
+            "comments_text"
+          ],
+          "returnType": "str | None",
+          "exported": true,
+          "lineCount": 23
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "logging",
+          "specifiers": [
+            "logging"
+          ]
+        },
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        },
+        {
+          "source": "sys",
+          "specifiers": [
+            "sys"
+          ]
+        },
+        {
+          "source": "config",
+          "specifiers": [
+            "GROQ_API_KEY",
+            "THREADS_USERNAME"
+          ]
+        }
+      ],
+      "exports": [
+        "generate_reply"
+      ],
+      "totalLines": 50,
+      "hasStructuralAnalysis": true
+    },
+    "generator/__init__.py": {
+      "filePath": "generator/__init__.py",
+      "contentHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 1,
+      "hasStructuralAnalysis": true
+    },
+    "poster/threads.py": {
+      "filePath": "poster/threads.py",
+      "contentHash": "58677520a4e9ecdf54b95d12c380e305b31d5703c3cce3afb55b6560b6424698",
+      "functions": [
+        {
+          "name": "_api",
+          "params": [
+            "method",
+            "path",
+            "**kwargs"
+          ],
+          "returnType": "dict",
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "create_text_container",
+          "params": [
+            "text"
+          ],
+          "returnType": "str",
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "create_image_container",
+          "params": [
+            "text",
+            "image_url"
+          ],
+          "returnType": "str",
+          "exported": true,
+          "lineCount": 13
+        },
+        {
+          "name": "create_carousel_item",
+          "params": [
+            "image_url"
+          ],
+          "returnType": "str | None",
+          "exported": true,
+          "lineCount": 22
+        },
+        {
+          "name": "create_carousel_container",
+          "params": [
+            "text",
+            "child_ids"
+          ],
+          "returnType": "str",
+          "exported": true,
+          "lineCount": 16
+        },
+        {
+          "name": "publish_container",
+          "params": [
+            "container_id"
+          ],
+          "returnType": "str",
+          "exported": true,
+          "lineCount": 11
+        },
+        {
+          "name": "get_post_url",
+          "params": [
+            "post_id"
+          ],
+          "returnType": "str | None",
+          "exported": true,
+          "lineCount": 15
+        },
+        {
+          "name": "post_thread_api",
+          "params": [
+            "post_text",
+            "image_url",
+            "detail_images"
+          ],
+          "returnType": "dict | None",
+          "exported": true,
+          "lineCount": 61
+        },
+        {
+          "name": "_create_carousel_post",
+          "params": [
+            "text",
+            "image_urls"
+          ],
+          "returnType": "str",
+          "exported": true,
+          "lineCount": 28
+        },
+        {
+          "name": "post_all_products",
+          "params": [
+            "contents"
+          ],
+          "returnType": "tuple[list[str], list[dict]]",
+          "exported": true,
+          "lineCount": 38
+        },
+        {
+          "name": "post_product",
+          "params": [
+            "content"
+          ],
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "asyncio",
+          "specifiers": [
+            "asyncio"
+          ]
+        },
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        },
+        {
+          "source": "sys",
+          "specifiers": [
+            "sys"
+          ]
+        },
+        {
+          "source": "logging",
+          "specifiers": [
+            "logging"
+          ]
+        },
+        {
+          "source": "requests",
+          "specifiers": [
+            "requests"
+          ]
+        },
+        {
+          "source": "time",
+          "specifiers": [
+            "time"
+          ]
+        },
+        {
+          "source": "config",
+          "specifiers": [
+            "THREADS_ACCESS_TOKEN",
+            "THREADS_USER_ID"
+          ]
+        }
+      ],
+      "exports": [
+        "_api",
+        "create_text_container",
+        "create_image_container",
+        "create_carousel_item",
+        "create_carousel_container",
+        "publish_container",
+        "get_post_url",
+        "post_thread_api",
+        "_create_carousel_post",
+        "post_all_products",
+        "post_product"
+      ],
+      "totalLines": 288,
+      "hasStructuralAnalysis": true
+    },
+    "poster/comment_replier.py": {
+      "filePath": "poster/comment_replier.py",
+      "contentHash": "820636bd1037775f4f6fd102b7c0d4f3cc8a4a6c67d9e181311ae4541c8ca257",
+      "functions": [
+        {
+          "name": "_api",
+          "params": [
+            "method",
+            "path",
+            "**kwargs"
+          ],
+          "returnType": "dict",
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "load_recent_posts",
+          "params": [],
+          "returnType": "list[dict]",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "save_recent_posts",
+          "params": [
+            "posts"
+          ],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "add_recent_post",
+          "params": [
+            "post_url",
+            "post_id",
+            "post_type"
+          ],
+          "exported": true,
+          "lineCount": 18
+        },
+        {
+          "name": "load_replied",
+          "params": [],
+          "returnType": "dict",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "save_replied",
+          "params": [
+            "data"
+          ],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "_comment_key",
+          "params": [
+            "reply_id",
+            "text"
+          ],
+          "returnType": "str",
+          "exported": true,
+          "lineCount": 2
+        },
+        {
+          "name": "get_replies",
+          "params": [
+            "post_id"
+          ],
+          "returnType": "list[dict]",
+          "exported": true,
+          "lineCount": 17
+        },
+        {
+          "name": "post_reply_to_thread",
+          "params": [
+            "parent_post_id",
+            "reply_text"
+          ],
+          "returnType": "bool",
+          "exported": true,
+          "lineCount": 36
+        },
+        {
+          "name": "check_and_reply_comments",
+          "params": [],
+          "exported": true,
+          "lineCount": 66
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "json",
+          "specifiers": [
+            "json"
+          ]
+        },
+        {
+          "source": "logging",
+          "specifiers": [
+            "logging"
+          ]
+        },
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        },
+        {
+          "source": "sys",
+          "specifiers": [
+            "sys"
+          ]
+        },
+        {
+          "source": "time",
+          "specifiers": [
+            "time"
+          ]
+        },
+        {
+          "source": "datetime",
+          "specifiers": [
+            "datetime",
+            "timedelta"
+          ]
+        },
+        {
+          "source": "hashlib",
+          "specifiers": [
+            "md5"
+          ]
+        },
+        {
+          "source": "requests",
+          "specifiers": [
+            "requests"
+          ]
+        },
+        {
+          "source": "config",
+          "specifiers": [
+            "THREADS_ACCESS_TOKEN",
+            "THREADS_USER_ID",
+            "DATA_DIR"
+          ]
+        },
+        {
+          "source": "generator.reply",
+          "specifiers": [
+            "generate_reply"
+          ]
+        }
+      ],
+      "exports": [
+        "_api",
+        "load_recent_posts",
+        "save_recent_posts",
+        "add_recent_post",
+        "load_replied",
+        "save_replied",
+        "_comment_key",
+        "get_replies",
+        "post_reply_to_thread",
+        "check_and_reply_comments"
+      ],
+      "totalLines": 216,
+      "hasStructuralAnalysis": true
+    },
+    "poster/engager.py": {
+      "filePath": "poster/engager.py",
+      "contentHash": "398e7e66cd45103b9cc5e6c9b5128ad540a6a9262835c9e034910d7e5fd2e5a0",
+      "functions": [
+        {
+          "name": "_load_commented",
+          "params": [],
+          "returnType": "set[str]",
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "_save_commented",
+          "params": [
+            "post_ids"
+          ],
+          "exported": true,
+          "lineCount": 11
+        },
+        {
+          "name": "_post_id_from_url",
+          "params": [
+            "url"
+          ],
+          "returnType": "str",
+          "exported": true,
+          "lineCount": 2
+        },
+        {
+          "name": "_extract_post_text",
+          "params": [
+            "page"
+          ],
+          "returnType": "str",
+          "exported": true,
+          "lineCount": 20
+        },
+        {
+          "name": "_generate_comment",
+          "params": [
+            "post_text",
+            "retry"
+          ],
+          "returnType": "str | None",
+          "exported": true,
+          "lineCount": 41
+        },
+        {
+          "name": "_is_quality_comment",
+          "params": [
+            "comment"
+          ],
+          "returnType": "bool",
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "_search_posts",
+          "params": [
+            "page",
+            "keyword",
+            "max_posts"
+          ],
+          "returnType": "list[str]",
+          "exported": true,
+          "lineCount": 33
+        },
+        {
+          "name": "_visit_and_comment",
+          "params": [
+            "page",
+            "post_url"
+          ],
+          "returnType": "tuple[bool, str]",
+          "exported": true,
+          "lineCount": 46
+        },
+        {
+          "name": "run_engagement_session",
+          "params": [
+            "max_comments"
+          ],
+          "exported": true,
+          "lineCount": 37
+        },
+        {
+          "name": "run_engagement",
+          "params": [
+            "page",
+            "max_comments"
+          ],
+          "exported": true,
+          "lineCount": 42
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "asyncio",
+          "specifiers": [
+            "asyncio"
+          ]
+        },
+        {
+          "source": "json",
+          "specifiers": [
+            "json"
+          ]
+        },
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        },
+        {
+          "source": "sys",
+          "specifiers": [
+            "sys"
+          ]
+        },
+        {
+          "source": "logging",
+          "specifiers": [
+            "logging"
+          ]
+        },
+        {
+          "source": "random",
+          "specifiers": [
+            "random"
+          ]
+        },
+        {
+          "source": "hashlib",
+          "specifiers": [
+            "hashlib"
+          ]
+        },
+        {
+          "source": "datetime",
+          "specifiers": [
+            "datetime",
+            "timedelta"
+          ]
+        },
+        {
+          "source": "playwright.async_api",
+          "specifiers": [
+            "Page",
+            "BrowserContext"
+          ]
+        },
+        {
+          "source": "config",
+          "specifiers": [
+            "GROQ_API_KEY",
+            "THREADS_USERNAME",
+            "DATA_DIR"
+          ]
+        }
+      ],
+      "exports": [
+        "_load_commented",
+        "_save_commented",
+        "_post_id_from_url",
+        "_extract_post_text",
+        "_generate_comment",
+        "_is_quality_comment",
+        "_search_posts",
+        "_visit_and_comment",
+        "run_engagement_session",
+        "run_engagement"
+      ],
+      "totalLines": 315,
+      "hasStructuralAnalysis": true
+    },
+    "poster/threads_login.py": {
+      "filePath": "poster/threads_login.py",
+      "contentHash": "98d552ac93896620810fe5c78b0e0231c680fd3ba0b532cac68e9b1f6f9e075f",
+      "functions": [
+        {
+          "name": "manual_login",
+          "params": [],
+          "exported": true,
+          "lineCount": 32
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "asyncio",
+          "specifiers": [
+            "asyncio"
+          ]
+        },
+        {
+          "source": "json",
+          "specifiers": [
+            "json"
+          ]
+        },
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        },
+        {
+          "source": "playwright.async_api",
+          "specifiers": [
+            "async_playwright"
+          ]
+        }
+      ],
+      "exports": [
+        "manual_login"
+      ],
+      "totalLines": 47,
+      "hasStructuralAnalysis": true
+    },
+    "poster/__init__.py": {
+      "filePath": "poster/__init__.py",
+      "contentHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 1,
+      "hasStructuralAnalysis": true
+    },
+    ".github/workflows/daily.yml": {
+      "filePath": ".github/workflows/daily.yml",
+      "contentHash": "800e71500395abbb51f08bf356b61b16a2e9e68f1088ad73f48aa136a6bbe120",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 52,
+      "hasStructuralAnalysis": true
+    },
+    "docs/index.html": {
+      "filePath": "docs/index.html",
+      "contentHash": "826260c601173708cd6f45109e9f6c18a72fe9a9fbc5dbafceea2baad1186ead",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 789,
+      "hasStructuralAnalysis": false
+    },
+    "docs/feed.html": {
+      "filePath": "docs/feed.html",
+      "contentHash": "a505a35633715f18003598652fef1e90e73ee62ff5a4f1a78018f093f4244806",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 333,
+      "hasStructuralAnalysis": false
+    }
+  }
+}

@@ -1,0 +1,325 @@
+{
+  "projectName": "꿀픽 파이프라인",
+  "projectDescription": "쿠팡/네이버/유튜브에서 상품을 자동 수집하고, Groq AI로 SNS 게시글을 생성한 뒤 Threads 공식 API(Meta Graph API)로 자동 포스팅하는 Python 기반 마케팅 자동화 파이프라인. 매일 오전 9시 GitHub Actions로 자동 실행되며, 포스팅 후 GitHub Pages에 상품 목록(index.html)과 피드 기록(feed.html)을 자동 갱신함. 우선순위 큐(수동 P1 / 벤치마크 P2 / 자동 P3), 댓글 자동 대댓글, 타 계정 노출 확대 댓글 기능까지 포함한 풀 자동화 구조.",
+  "languages": ["Python", "YAML", "Markdown", "HTML"],
+  "frameworks": ["anthropic", "groq", "playwright", "schedule", "requests", "beautifulsoup4", "python-dotenv", "aiofiles"],
+  "entryPoint": "main.py",
+  "totalFiles": 34,
+  "filteredByIgnore": 0,
+  "files": [
+    {
+      "path": "main.py",
+      "language": "python",
+      "sizeLines": 322,
+      "fileCategory": "code",
+      "description": "전체 파이프라인 진입점. 상품 수집→AI 생성→Threads 포스팅→댓글 대응→페이지 갱신의 5단계 흐름을 orchestrate. 우선순위 큐(P1/P2/P3) 관리 및 feed_posts.json 갱신 로직 포함."
+    },
+    {
+      "path": "config.py",
+      "language": "python",
+      "sizeLines": 52,
+      "fileCategory": "config",
+      "description": "환경변수 로드(dotenv), API 키(Anthropic/Threads/Naver/Groq/YouTube), 품질 필터(별점·리뷰수), 스케줄 시간, 데이터 경로 등 전역 설정 정의."
+    },
+    {
+      "path": "requirements.txt",
+      "language": "text",
+      "sizeLines": 8,
+      "fileCategory": "config",
+      "description": "Python 패키지 의존성 목록. playwright, anthropic, groq, schedule, python-dotenv, requests, aiofiles, beautifulsoup4."
+    },
+    {
+      "path": "PIPELINE.md",
+      "language": "markdown",
+      "sizeLines": 260,
+      "fileCategory": "docs",
+      "description": "프로젝트 운영 문서. 시스템 개요, 파일 구조, 수동 조작법, GitHub Secrets 목록, Threads API 토큰 갱신 절차, 트러블슈팅, 작업 이력 포함."
+    },
+    {
+      "path": "generate_page.py",
+      "language": "python",
+      "sizeLines": 842,
+      "fileCategory": "script",
+      "description": "상품 코드 레지스트리를 읽어 docs/index.html 생성. 다크 테마 카드형/리스트형 UI, 검색·정렬·뷰모드 전환, QR코드 공유, 로컬 클릭 집계(HOT/BEST 뱃지) 등 프론트엔드 기능 포함."
+    },
+    {
+      "path": "generate_feed_page.py",
+      "language": "python",
+      "sizeLines": 385,
+      "fileCategory": "script",
+      "description": "feed_posts.json을 읽어 docs/feed.html 생성. 포스팅 상태(generated/posted) 구분, Threads 원본 링크·쿠팡 상품 링크 표시, 다크 테마 피드 UI."
+    },
+    {
+      "path": "preview.py",
+      "language": "python",
+      "sizeLines": 451,
+      "fileCategory": "script",
+      "description": "실제 포스팅 없이 생성될 콘텐츠를 브라우저에서 미리보는 Dry-run 도구. Threads 피드 스타일 HTML 생성, Engager 댓글 샘플 시뮬레이션, 인포크 등록 가이드 포함."
+    },
+    {
+      "path": "add_product.py",
+      "language": "python",
+      "sizeLines": 192,
+      "fileCategory": "script",
+      "description": "우선순위 큐(priority_queue.json)에 상품을 수동 등록하는 CLI. 상품명 검색(네이버 API) 또는 쿠팡 URL 직접 입력, 큐 목록 조회·삭제·초기화 기능."
+    },
+    {
+      "path": "check_products.py",
+      "language": "python",
+      "sizeLines": 11,
+      "fileCategory": "script",
+      "description": "data/products.json의 수집된 상품 목록을 콘솔에 출력하는 간단한 확인 스크립트."
+    },
+    {
+      "path": "setup.py",
+      "language": "python",
+      "sizeLines": 161,
+      "fileCategory": "script",
+      "description": "새 PC에서 프로젝트를 자동 설치하는 스크립트. GitHub에서 코드 클론, venv 생성, 패키지 설치, Playwright 브라우저 설치, .env 파일 대화형 생성."
+    },
+    {
+      "path": "fix_posts.py",
+      "language": "python",
+      "sizeLines": 153,
+      "fileCategory": "script",
+      "description": "feed_posts.json의 포스팅 데이터 일괄 수정 유틸리티 스크립트."
+    },
+    {
+      "path": "list_posts.py",
+      "language": "python",
+      "sizeLines": 17,
+      "fileCategory": "script",
+      "description": "포스팅 기록(feed_posts.json)을 콘솔에 나열하는 간단한 조회 스크립트."
+    },
+    {
+      "path": "debug_beauty.py",
+      "language": "python",
+      "sizeLines": 161,
+      "fileCategory": "script",
+      "description": "뷰티/생활 카테고리 스크래핑 동작을 디버깅하는 스크립트."
+    },
+    {
+      "path": "debug_comment.py",
+      "language": "python",
+      "sizeLines": 117,
+      "fileCategory": "script",
+      "description": "댓글 대댓글 기능(comment_replier)을 독립 실행으로 디버깅하는 스크립트."
+    },
+    {
+      "path": "debug_coupang.py",
+      "language": "python",
+      "sizeLines": 68,
+      "fileCategory": "script",
+      "description": "쿠팡 스크래퍼(scraper/coupang.py) 동작을 독립 실행으로 디버깅하는 스크립트."
+    },
+    {
+      "path": "debug_naver.py",
+      "language": "python",
+      "sizeLines": 19,
+      "fileCategory": "script",
+      "description": "네이버 쇼핑 API 응답을 디버깅하는 간단한 스크립트."
+    },
+    {
+      "path": "debug_threads.py",
+      "language": "python",
+      "sizeLines": 130,
+      "fileCategory": "script",
+      "description": "Threads API 연결 및 포스팅 흐름을 디버깅하는 스크립트."
+    },
+    {
+      "path": "debug_youtube.py",
+      "language": "python",
+      "sizeLines": 25,
+      "fileCategory": "script",
+      "description": "YouTube Data API 검색 응답을 디버깅하는 스크립트."
+    },
+    {
+      "path": "scraper/coupang.py",
+      "language": "python",
+      "sizeLines": 233,
+      "fileCategory": "code",
+      "description": "Playwright(Chromium)를 이용한 쿠팡 홈페이지 스크래퍼. 봇 탐지 우회(webdriver 숨김), 프로모션 캐러셀·개인화 추천 섹션 파싱. 폴백 수집 소스로 사용됨."
+    },
+    {
+      "path": "scraper/naver_shopping.py",
+      "language": "python",
+      "sizeLines": 412,
+      "fileCategory": "code",
+      "description": "네이버 쇼핑 검색 API 스크래퍼. 22개 카테고리 키워드 순환, 공업용·B2B 차단 필터, 중복 유형 제거, 쿠팡 상품 우선 반환 로직. 하루 25,000건 무료 쿼터 활용."
+    },
+    {
+      "path": "scraper/youtube_trending.py",
+      "language": "python",
+      "sizeLines": 229,
+      "fileCategory": "code",
+      "description": "YouTube Data API v3로 한국 바이럴 생활용품 영상 검색 → Groq AI로 영상 제목/설명에서 상품명 추출 → 네이버 쇼핑으로 쿠팡 상품 매칭. 주요 수집 소스."
+    },
+    {
+      "path": "scraper/threads_benchmark.py",
+      "language": "python",
+      "sizeLines": 291,
+      "fileCategory": "code",
+      "description": "경쟁/참고 Threads 계정 프로필 페이지 스크래핑(Playwright). Groq AI로 게시글에서 상품명 추출 → 네이버 쇼핑 매칭 → priority=2로 우선순위 큐에 추가."
+    },
+    {
+      "path": "scraper/coupang_images.py",
+      "language": "python",
+      "sizeLines": 167,
+      "fileCategory": "code",
+      "description": "쿠팡 상품 상세 페이지에서 이미지 3~4장 수집(Playwright). carousel 포스팅용 이미지 다중 추출."
+    },
+    {
+      "path": "scraper/__init__.py",
+      "language": "python",
+      "sizeLines": 0,
+      "fileCategory": "code",
+      "description": "scraper 패키지 초기화 파일."
+    },
+    {
+      "path": "generator/content.py",
+      "language": "python",
+      "sizeLines": 233,
+      "fileCategory": "code",
+      "description": "Groq AI(llama-3.3-70b)로 상품별 Threads 게시글 생성. 훅-본문-포인트-해시태그 구조, 외국어 감지 시 재생성, 쿠팡 상세 이미지 carousel용 수집, 폴백 템플릿 포함."
+    },
+    {
+      "path": "generator/registry.py",
+      "language": "python",
+      "sizeLines": 82,
+      "fileCategory": "code",
+      "description": "상품 코드 레지스트리 관리(data/product_registry.json). 상품 URL마다 순번 코드([001], [002]...) 부여, itemId 기반 중복 감지, 차단 목록(blocked_item_ids) 지원."
+    },
+    {
+      "path": "generator/reply.py",
+      "language": "python",
+      "sizeLines": 50,
+      "fileCategory": "code",
+      "description": "Groq API로 팔로워 댓글에 대한 자연스러운 대댓글 텍스트 생성. 반말·친근체·1~2줄 형식."
+    },
+    {
+      "path": "generator/__init__.py",
+      "language": "python",
+      "sizeLines": 0,
+      "fileCategory": "code",
+      "description": "generator 패키지 초기화 파일."
+    },
+    {
+      "path": "poster/threads.py",
+      "language": "python",
+      "sizeLines": 288,
+      "fileCategory": "code",
+      "description": "Threads 공식 Meta Graph API 포스터. 텍스트/단일 이미지/carousel(2~4장) 세 가지 포스팅 모드 지원. 컨테이너 생성→30초 대기→게시→permalink 조회 플로우."
+    },
+    {
+      "path": "poster/comment_replier.py",
+      "language": "python",
+      "sizeLines": 216,
+      "fileCategory": "code",
+      "description": "Threads API로 최근 7일 게시글의 신규 댓글 감지 → Groq AI 대댓글 생성 → API로 대댓글 포스팅. 중복 대댓글 방지(replied_comments.json)."
+    },
+    {
+      "path": "poster/engager.py",
+      "language": "python",
+      "sizeLines": 315,
+      "fileCategory": "code",
+      "description": "타 계정 게시글에 사람 같은 자연스러운 댓글 달기(노출 확대). Playwright로 키워드 검색→게시글 방문→본문 추출→Groq 댓글 생성→입력. 하루 최대 10개, 3~5분 간격."
+    },
+    {
+      "path": "poster/threads_login.py",
+      "language": "python",
+      "sizeLines": 47,
+      "fileCategory": "script",
+      "description": "Threads 수동 로그인 후 쿠키를 JSON으로 저장하는 초기 설정 스크립트. engager.py의 Playwright 세션 인증에 사용됨."
+    },
+    {
+      "path": "poster/__init__.py",
+      "language": "python",
+      "sizeLines": 0,
+      "fileCategory": "code",
+      "description": "poster 패키지 초기화 파일."
+    },
+    {
+      "path": ".github/workflows/daily.yml",
+      "language": "yaml",
+      "sizeLines": 52,
+      "fileCategory": "infra",
+      "description": "GitHub Actions 자동화 워크플로. 매일 09:05 KST(cron 5 0 * * *) 실행, Python 3.11+Playwright 설치→파이프라인 실행→결과물(HTML/JSON) git commit & push."
+    },
+    {
+      "path": "docs/index.html",
+      "language": "html",
+      "sizeLines": null,
+      "fileCategory": "markup",
+      "description": "GitHub Pages로 공개되는 상품 목록 페이지. generate_page.py가 파이프라인 실행 시마다 자동 갱신."
+    },
+    {
+      "path": "docs/feed.html",
+      "language": "html",
+      "sizeLines": null,
+      "fileCategory": "markup",
+      "description": "GitHub Pages로 공개되는 Threads 포스팅 피드 기록 페이지. generate_feed_page.py가 자동 갱신."
+    }
+  ],
+  "importMap": {
+    "main.py": [
+      "config.py",
+      "scraper/coupang.py",
+      "scraper/naver_shopping.py",
+      "scraper/youtube_trending.py",
+      "scraper/threads_benchmark.py",
+      "generator/content.py",
+      "poster/threads.py",
+      "poster/comment_replier.py",
+      "poster/engager.py",
+      "generate_page.py",
+      "generate_feed_page.py"
+    ],
+    "scraper/coupang.py": ["config.py"],
+    "scraper/naver_shopping.py": ["config.py"],
+    "scraper/youtube_trending.py": ["config.py", "scraper/naver_shopping.py"],
+    "scraper/threads_benchmark.py": ["config.py", "scraper/naver_shopping.py"],
+    "scraper/coupang_images.py": [],
+    "generator/content.py": ["config.py", "generator/registry.py", "scraper/coupang_images.py"],
+    "generator/registry.py": ["config.py"],
+    "generator/reply.py": ["config.py"],
+    "poster/threads.py": ["config.py"],
+    "poster/comment_replier.py": ["config.py", "generator/reply.py"],
+    "poster/engager.py": ["config.py"],
+    "poster/threads_login.py": [],
+    "generate_page.py": ["config.py", "generator/registry.py"],
+    "generate_feed_page.py": ["config.py"],
+    "preview.py": [
+      "config.py",
+      "generator/content.py",
+      "scraper/naver_shopping.py",
+      "scraper/youtube_trending.py",
+      "generate_page.py"
+    ],
+    "add_product.py": ["config.py"],
+    "check_products.py": [],
+    "setup.py": [],
+    "fix_posts.py": [],
+    "list_posts.py": [],
+    "debug_beauty.py": ["config.py", "scraper/naver_shopping.py"],
+    "debug_comment.py": ["config.py", "poster/comment_replier.py"],
+    "debug_coupang.py": ["config.py", "scraper/coupang.py"],
+    "debug_naver.py": ["config.py", "scraper/naver_shopping.py"],
+    "debug_threads.py": ["config.py", "poster/threads.py"],
+    "debug_youtube.py": ["config.py", "scraper/youtube_trending.py"],
+    ".github/workflows/daily.yml": ["main.py"]
+  },
+  "moduleGroups": {
+    "scraper": "상품 수집 모듈 — 쿠팡(Playwright), 네이버 쇼핑 API, YouTube 트렌딩+Groq, Threads 벤치마킹 계정 스캔",
+    "generator": "콘텐츠 생성 모듈 — Groq AI 게시글 생성, 상품 코드 레지스트리, 대댓글 텍스트 생성",
+    "poster": "포스팅 모듈 — Threads 공식 API 포스터(carousel 지원), 댓글 대응, 타 계정 노출 확대 댓글",
+    "docs": "GitHub Pages 공개 HTML — 상품 목록(index.html), 피드 기록(feed.html)",
+    "data": "런타임 데이터 저장소 — product_registry.json, feed_posts.json, posted_ids.json, priority_queue.json, benchmark_accounts.json"
+  },
+  "apiDependencies": {
+    "groq": "llama-3.3-70b-versatile — 게시글 생성, 상품명 추출, 댓글 생성. 무료 14,400회/일",
+    "naver_shopping": "네이버 검색 API (쇼핑) — 상품 검색/매칭. 무료 25,000건/일",
+    "youtube_data_v3": "YouTube Data API v3 — 한국 트렌딩 영상 검색. 무료 10,000 units/일",
+    "threads_graph": "Meta Graph API (graph.threads.net v1.0) — 게시글 포스팅, 댓글 조회/대댓글. 무료 250개/일",
+    "coupang": "Playwright로 직접 스크래핑 (공식 API 없음)"
+  }
+}
