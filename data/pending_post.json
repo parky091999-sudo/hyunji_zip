@@ -1,36 +1,30 @@
 {
-  "for_date": "2026-06-11",
-  "generated_at": "2026-06-10T23:43:52.882421+09:00",
+  "for_date": "2026-06-12",
+  "generated_at": "2026-06-11T13:29:46.443600+09:00",
   "candidates": [
     {
       "product": {
-        "name": "우드 인테리어 삼각 튼튼한건조대 원룸 화이트 우드",
-        "price": "90,800원",
+        "name": "욕실 컬러변화세정제 폼타입 크리너 3개 550ml",
+        "price": "48,900원",
         "original_price": "",
         "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_6000142/60001427810.jpg",
-        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8094896185&ctag=8094896185&lptag=I22878996596&itemId=22878996596&vendorItemId=89913594549&spec=10305199",
+        "image_url": "https://shopping-phinf.pstatic.net/main_6035009/60350095010.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9584297193&ctag=9584297193&lptag=I28609841556&itemId=28609841556&vendorItemId=95553317976&spec=10305199",
         "badge": "쿠팡",
         "brand": "",
-        "category": "빨래건조대",
+        "category": "세제/세정제",
         "category_hint": "생활",
         "mall_name": "쿠팡",
         "source": "naver_shopping",
-        "scraped_at": "2026-06-09T17:30:01.657917",
-        "youtube_source": {
-          "title": "좁은 주방 2배 넓게 쓰는 신박한 방법! 싱크대 삼각 건조대 후기 #살림룰루",
-          "video_id": "Bt-0fwmjsjs",
-          "views": 1760,
-          "keyword": "신박한 주방용품"
-        }
+        "scraped_at": "2026-06-11T04:29:03.642403"
       },
-      "post_text": "좁은 주방에서 설거지하고 나면 세상 좁아지는 기분 드는 사람 있지? 😩\n나도 매번 건조대 놓을 공간 없어서 싱크대에 그릇 쌓아두거나 대충 옆에 늘어놓고 그랬거든. 근데 이거 써보고 완전 신세계 경험했음!\n이게 싱크대 한쪽 모서리에 쏙 들어가게 디자인돼서 공간 차지 진짜 덜 하더라고. 게다가 우드 포인트 덕분에 주방 인테리어 해칠 일도 없었음. 작은 삼각대인데도 생각보다 그릇이랑 컵 엄청 많이 올라가서 놀랐음. 물도 바로바로 빠지니까 위생 걱정도 없더라고.\n리뷰 보니까 나처럼 좁은 주방 때문에 스트레스받던 사람들이 왜 이제야 샀냐며 다들 극찬 일색이더라.\n\n✔️ 원룸이나 오피스텔처럼 주방 좁은 집에 사는 친구들한테 완전 추천함.\n✔️ 싱크대 옆에 놔두면 물도 바로 빠지고 깔끔하게 쓸 수 있을 거야!\n\n#생활꿀템 #원룸필수템 #주방정리 #살림템 #싱크대건조대",
-      "image_url": "https://shopping-phinf.pstatic.net/main_6000142/60001427810.jpg",
+      "post_text": "야, 솔직히 욕실 청소하다 보면 어디가 더러운지 헷갈릴 때 많지 않아? 😩\n\n진짜 깨끗하게 청소한 것 같아도 왠지 모르게 찝찝하고, 어디를 더 닦아야 할지 모를 때 딱이더라. 특히 거울이나 타일 사이사이 얼룩 같은 거 놓",
+      "image_url": "https://shopping-phinf.pstatic.net/main_6035009/60350095010.jpg",
       "detail_images": [
-        "https://shopping-phinf.pstatic.net/main_6000142/60001427810.jpg"
+        "https://shopping-phinf.pstatic.net/main_6035009/60350095010.jpg"
       ],
       "product_code": "",
-      "status": "used"
+      "status": "pending"
     }
   ]
 }
