@@ -1,899 +1,6 @@
 {
-  "scanned_at": "2026-06-11T23:14:58.468336+09:00",
+  "scanned_at": "2026-06-11T23:23:37.154241+09:00",
   "candidates": [
-    {
-      "product": {
-        "name": "한경희생활과학 HSM-1010TI 화이트",
-        "price": "87,990원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_5364564/53645644287.20250319120722.jpg",
-        "product_url": "https://search.shopping.naver.com/catalog/53645644287",
-        "badge": "네이버",
-        "brand": "한경희생활과학",
-        "category": "스팀청소기",
-        "category_hint": "생활/청소",
-        "mall_name": "네이버",
-        "source": "naver_shopping",
-        "scraped_at": "2026-06-11T14:14:54.507020"
-      },
-      "source_account": "검색:스팀청소기",
-      "selected": false
-    },
-    {
-      "product": {
-        "name": "한경희생활과학 HESM-D1600 화이트",
-        "price": "97,990원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_5425495/54254956861.20250624095652.jpg",
-        "product_url": "https://search.shopping.naver.com/catalog/54254956861",
-        "badge": "네이버",
-        "brand": "한경희생활과학",
-        "category": "스팀청소기",
-        "category_hint": "생활/청소",
-        "mall_name": "네이버",
-        "source": "naver_shopping",
-        "scraped_at": "2026-06-11T14:14:54.507232"
-      },
-      "source_account": "검색:스팀청소기",
-      "selected": false
-    },
-    {
-      "product": {
-        "name": "에이스전자 홈앤아트 AMS-200 화이트",
-        "price": "154,000원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_5368482/53684824119.20250321120951.jpg",
-        "product_url": "https://search.shopping.naver.com/catalog/53684824119",
-        "badge": "네이버",
-        "brand": "홈앤아트",
-        "category": "스팀청소기",
-        "category_hint": "생활/청소",
-        "mall_name": "네이버",
-        "source": "naver_shopping",
-        "scraped_at": "2026-06-11T14:14:54.507352"
-      },
-      "source_account": "검색:스팀청소기",
-      "selected": false
-    },
-    {
-      "product": {
-        "name": "듀플렉스 에어보나 AB-SM800 화이트",
-        "price": "39,800원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_5366578/53665785035.20250320142248.jpg",
-        "product_url": "https://search.shopping.naver.com/catalog/53665785035",
-        "badge": "네이버",
-        "brand": "에어보나",
-        "category": "스팀청소기",
-        "category_hint": "생활/청소",
-        "mall_name": "네이버",
-        "source": "naver_shopping",
-        "scraped_at": "2026-06-11T14:14:54.507453"
-      },
-      "source_account": "검색:스팀청소기",
-      "selected": false
-    },
-    {
-      "product": {
-        "name": "한경희생활과학 HSM-D1200 화이트",
-        "price": "81,750원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_5603051/56030512125.20250828100648.jpg",
-        "product_url": "https://search.shopping.naver.com/catalog/56030512125",
-        "badge": "네이버",
-        "brand": "한경희생활과학",
-        "category": "스팀청소기",
-        "category_hint": "생활/청소",
-        "mall_name": "네이버",
-        "source": "naver_shopping",
-        "scraped_at": "2026-06-11T14:14:54.507546"
-      },
-      "source_account": "검색:스팀청소기",
-      "selected": false
-    },
-    {
-      "product": {
-        "name": "벤하임 BSM-800WH 화이트",
-        "price": "39,900원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_5366718/53667182114.20260529093523.jpg",
-        "product_url": "https://search.shopping.naver.com/catalog/53667182114",
-        "badge": "네이버",
-        "brand": "벤하임",
-        "category": "스팀청소기",
-        "category_hint": "생활/청소",
-        "mall_name": "네이버",
-        "source": "naver_shopping",
-        "scraped_at": "2026-06-11T14:14:54.507667"
-      },
-      "source_account": "검색:스팀청소기",
-      "selected": false
-    },
-    {
-      "product": {
-        "name": "샤크 스팀 앤 스크럽 S8201KR 화이트",
-        "price": "270,000원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_5521221/55212216425.20250609162448.jpg",
-        "product_url": "https://search.shopping.naver.com/catalog/55212216425",
-        "badge": "네이버",
-        "brand": "샤크",
-        "category": "스팀청소기",
-        "category_hint": "생활/청소",
-        "mall_name": "네이버",
-        "source": "naver_shopping",
-        "scraped_at": "2026-06-11T14:14:54.507772"
-      },
-      "source_account": "검색:스팀청소기",
-      "selected": false
-    },
-    {
-      "product": {
-        "name": "비쎌 파워프레시 멀티 2in1 30049 화이트",
-        "price": "179,000원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_5366708/53667086657.20250320165305.jpg",
-        "product_url": "https://search.shopping.naver.com/catalog/53667086657",
-        "badge": "네이버",
-        "brand": "비쎌",
-        "category": "스팀청소기",
-        "category_hint": "생활/청소",
-        "mall_name": "네이버",
-        "source": "naver_shopping",
-        "scraped_at": "2026-06-11T14:14:54.508412"
-      },
-      "source_account": "검색:스팀청소기",
-      "selected": false
-    },
-    {
-      "product": {
-        "name": "블랙앤데커 FSMH13E5 화이트",
-        "price": "89,900원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_5366751/53667515879.20260109171602.jpg",
-        "product_url": "https://search.shopping.naver.com/catalog/53667515879",
-        "badge": "네이버",
-        "brand": "블랙앤데커",
-        "category": "스팀청소기",
-        "category_hint": "생활/청소",
-        "mall_name": "네이버",
-        "source": "naver_shopping",
-        "scraped_at": "2026-06-11T14:14:54.508501"
-      },
-      "source_account": "검색:스팀청소기",
-      "selected": false
-    },
-    {
-      "product": {
-        "name": "카처 SC4 EasyFix 화이트",
-        "price": "391,130원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_5368481/53684810867.20250321120208.jpg",
-        "product_url": "https://search.shopping.naver.com/catalog/53684810867",
-        "badge": "네이버",
-        "brand": "카처",
-        "category": "스팀청소기",
-        "category_hint": "생활/청소",
-        "mall_name": "네이버",
-        "source": "naver_shopping",
-        "scraped_at": "2026-06-11T14:14:54.508629"
-      },
-      "source_account": "검색:스팀청소기",
-      "selected": false
-    },
-    {
-      "product": {
-        "name": "지웰 좋은생활지웰 VENTUS-스팀하나로 무선 블랙",
-        "price": "495,000원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_5904555/59045558326.20260225112930.jpg",
-        "product_url": "https://search.shopping.naver.com/catalog/59045558326",
-        "badge": "네이버",
-        "brand": "좋은생활지웰",
-        "category": "스팀청소기",
-        "category_hint": "생활/청소",
-        "mall_name": "네이버",
-        "source": "naver_shopping",
-        "scraped_at": "2026-06-11T14:14:54.508737"
-      },
-      "source_account": "검색:스팀청소기",
-      "selected": false
-    },
-    {
-      "product": {
-        "name": "듀라이프 HB-105 옐로우",
-        "price": "31,600원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_5380842/53808424227.20250327172859.jpg",
-        "product_url": "https://search.shopping.naver.com/catalog/53808424227",
-        "badge": "네이버",
-        "brand": "듀라이프",
-        "category": "스팀청소기",
-        "category_hint": "생활/청소",
-        "mall_name": "네이버",
-        "source": "naver_shopping",
-        "scraped_at": "2026-06-11T14:14:54.508826"
-      },
-      "source_account": "검색:스팀청소기",
-      "selected": false
-    },
-    {
-      "product": {
-        "name": "카처 SC 4 Deluxe 화이트",
-        "price": "545,420원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_5368633/53686339911.20250321144047.jpg",
-        "product_url": "https://search.shopping.naver.com/catalog/53686339911",
-        "badge": "네이버",
-        "brand": "카처",
-        "category": "스팀청소기",
-        "category_hint": "생활/청소",
-        "mall_name": "네이버",
-        "source": "naver_shopping",
-        "scraped_at": "2026-06-11T14:14:54.508910"
-      },
-      "source_account": "검색:스팀청소기",
-      "selected": false
-    },
-    {
-      "product": {
-        "name": "카처 SC2 Deluxe 화이트",
-        "price": "239,320원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_5368883/53688833851.20250321174017.jpg",
-        "product_url": "https://search.shopping.naver.com/catalog/53688833851",
-        "badge": "네이버",
-        "brand": "카처",
-        "category": "스팀청소기",
-        "category_hint": "생활/청소",
-        "mall_name": "네이버",
-        "source": "naver_shopping",
-        "scraped_at": "2026-06-11T14:14:54.508995"
-      },
-      "source_account": "검색:스팀청소기",
-      "selected": false
-    },
-    {
-      "product": {
-        "name": "한경희생활과학 SI-3600WT 화이트",
-        "price": "81,070원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_5368482/53684823994.20250321120514.jpg",
-        "product_url": "https://search.shopping.naver.com/catalog/53684823994",
-        "badge": "네이버",
-        "brand": "한경희생활과학",
-        "category": "스팀청소기",
-        "category_hint": "생활/청소",
-        "mall_name": "네이버",
-        "source": "naver_shopping",
-        "scraped_at": "2026-06-11T14:14:54.509083"
-      },
-      "source_account": "검색:스팀청소기",
-      "selected": false
-    },
-    {
-      "product": {
-        "name": "한경희생활과학 HESM-D1000 화이트",
-        "price": "84,900원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_5368482/53684828588.20250321122125.jpg",
-        "product_url": "https://search.shopping.naver.com/catalog/53684828588",
-        "badge": "네이버",
-        "brand": "한경희생활과학",
-        "category": "스팀청소기",
-        "category_hint": "생활/청소",
-        "mall_name": "네이버",
-        "source": "naver_shopping",
-        "scraped_at": "2026-06-11T14:14:54.509169"
-      },
-      "source_account": "검색:스팀청소기",
-      "selected": false
-    },
-    {
-      "product": {
-        "name": "리빈치 LSC-200 화이트",
-        "price": "62,540원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_5366709/53667098974.20260209115300.jpg",
-        "product_url": "https://search.shopping.naver.com/catalog/53667098974",
-        "badge": "네이버",
-        "brand": "리빈치",
-        "category": "스팀청소기",
-        "category_hint": "생활/청소",
-        "mall_name": "네이버",
-        "source": "naver_shopping",
-        "scraped_at": "2026-06-11T14:14:54.509251"
-      },
-      "source_account": "검색:스팀청소기",
-      "selected": false
-    },
-    {
-      "product": {
-        "name": "한경희생활과학 HESM-D2200 화이트",
-        "price": "137,610원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_5368490/53684900998.20250321122659.jpg",
-        "product_url": "https://search.shopping.naver.com/catalog/53684900998",
-        "badge": "네이버",
-        "brand": "한경희생활과학",
-        "category": "스팀청소기",
-        "category_hint": "생활/청소",
-        "mall_name": "네이버",
-        "source": "naver_shopping",
-        "scraped_at": "2026-06-11T14:14:54.509346"
-      },
-      "source_account": "검색:스팀청소기",
-      "selected": false
-    },
-    {
-      "product": {
-        "name": "카처 SC2 EASY FIX 화이트",
-        "price": "244,990원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_5373402/53734029716.20250324122519.jpg",
-        "product_url": "https://search.shopping.naver.com/catalog/53734029716",
-        "badge": "네이버",
-        "brand": "카처",
-        "category": "스팀청소기",
-        "category_hint": "생활/청소",
-        "mall_name": "네이버",
-        "source": "naver_shopping",
-        "scraped_at": "2026-06-11T14:14:54.509429"
-      },
-      "source_account": "검색:스팀청소기",
-      "selected": false
-    },
-    {
-      "product": {
-        "name": "비쎌 파워프레시 디럭스 19799 화이트",
-        "price": "179,000원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_5366751/53667515863.20250320170455.jpg",
-        "product_url": "https://search.shopping.naver.com/catalog/53667515863",
-        "badge": "네이버",
-        "brand": "비쎌",
-        "category": "스팀청소기",
-        "category_hint": "생활/청소",
-        "mall_name": "네이버",
-        "source": "naver_shopping",
-        "scraped_at": "2026-06-11T14:14:54.509517"
-      },
-      "source_account": "검색:스팀청소기",
-      "selected": false
-    },
-    {
-      "product": {
-        "name": "한경희생활과학 HESM-D1300WT 화이트 그레이",
-        "price": "93,000원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_5368482/53684824200.20250321121412.jpg",
-        "product_url": "https://search.shopping.naver.com/catalog/53684824200",
-        "badge": "네이버",
-        "brand": "한경희생활과학",
-        "category": "스팀청소기",
-        "category_hint": "생활/청소",
-        "mall_name": "네이버",
-        "source": "naver_shopping",
-        "scraped_at": "2026-06-11T14:14:54.509644"
-      },
-      "source_account": "검색:스팀청소기",
-      "selected": false
-    },
-    {
-      "product": {
-        "name": "한경희생활과학 EHSM-D2000WT 화이트",
-        "price": "129,000원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_5425497/54254974866.20250417121613.jpg",
-        "product_url": "https://search.shopping.naver.com/catalog/54254974866",
-        "badge": "네이버",
-        "brand": "한경희생활과학",
-        "category": "스팀청소기",
-        "category_hint": "생활/청소",
-        "mall_name": "네이버",
-        "source": "naver_shopping",
-        "scraped_at": "2026-06-11T14:14:54.509739"
-      },
-      "source_account": "검색:스팀청소기",
-      "selected": false
-    },
-    {
-      "product": {
-        "name": "카처 SC3 EasyFix 옐로우",
-        "price": "346,490원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_5366692/53666920595.20250320161939.jpg",
-        "product_url": "https://search.shopping.naver.com/catalog/53666920595",
-        "badge": "네이버",
-        "brand": "카처",
-        "category": "스팀청소기",
-        "category_hint": "생활/청소",
-        "mall_name": "네이버",
-        "source": "naver_shopping",
-        "scraped_at": "2026-06-11T14:14:54.509823"
-      },
-      "source_account": "검색:스팀청소기",
-      "selected": false
-    },
-    {
-      "product": {
-        "name": "오아 보아르 워시B 화이트",
-        "price": "97,900원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_5368633/53686339865.20250321143834.jpg",
-        "product_url": "https://search.shopping.naver.com/catalog/53686339865",
-        "badge": "네이버",
-        "brand": "보아르",
-        "category": "스팀청소기",
-        "category_hint": "생활/청소",
-        "mall_name": "네이버",
-        "source": "naver_shopping",
-        "scraped_at": "2026-06-11T14:14:54.509911"
-      },
-      "source_account": "검색:스팀청소기",
-      "selected": false
-    },
-    {
-      "product": {
-        "name": "플랩슨 퓨어소닉 PSC01 화이트",
-        "price": "89,900원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_5368633/53686337753.20250321143442.jpg",
-        "product_url": "https://search.shopping.naver.com/catalog/53686337753",
-        "badge": "네이버",
-        "brand": "플랩슨",
-        "category": "스팀청소기",
-        "category_hint": "생활/청소",
-        "mall_name": "네이버",
-        "source": "naver_shopping",
-        "scraped_at": "2026-06-11T14:14:54.509997"
-      },
-      "source_account": "검색:스팀청소기",
-      "selected": false
-    },
-    {
-      "product": {
-        "name": "하츠 CSC-2401N 화이트",
-        "price": "72,680원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_5366751/53667515988.20250320171027.jpg",
-        "product_url": "https://search.shopping.naver.com/catalog/53667515988",
-        "badge": "네이버",
-        "brand": "하츠",
-        "category": "스팀청소기",
-        "category_hint": "생활/청소",
-        "mall_name": "네이버",
-        "source": "naver_shopping",
-        "scraped_at": "2026-06-11T14:14:54.510078"
-      },
-      "source_account": "검색:스팀청소기",
-      "selected": false
-    },
-    {
-      "product": {
-        "name": "블랙앤데커 BHSMP2314 블루",
-        "price": "199,000원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_5425497/54254977342.20251001170031.jpg",
-        "product_url": "https://search.shopping.naver.com/catalog/54254977342",
-        "badge": "네이버",
-        "brand": "블랙앤데커",
-        "category": "스팀청소기",
-        "category_hint": "생활/청소",
-        "mall_name": "네이버",
-        "source": "naver_shopping",
-        "scraped_at": "2026-06-11T14:14:54.510159"
-      },
-      "source_account": "검색:스팀청소기",
-      "selected": false
-    },
-    {
-      "product": {
-        "name": "셀렉프로 NJ-SFW803 화이트",
-        "price": "149,000원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_5424056/54240564409.20250421092527.jpg",
-        "product_url": "https://search.shopping.naver.com/catalog/54240564409",
-        "badge": "네이버",
-        "brand": "셀렉프로",
-        "category": "스팀청소기",
-        "category_hint": "생활/청소",
-        "mall_name": "네이버",
-        "source": "naver_shopping",
-        "scraped_at": "2026-06-11T14:14:54.510240"
-      },
-      "source_account": "검색:스팀청소기",
-      "selected": false
-    },
-    {
-      "product": {
-        "name": "한경희생활과학 HS-101Y 옐로우",
-        "price": "73,390원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_5366742/53667427527.20250320170308.jpg",
-        "product_url": "https://search.shopping.naver.com/catalog/53667427527",
-        "badge": "네이버",
-        "brand": "한경희생활과학",
-        "category": "스팀청소기",
-        "category_hint": "생활/청소",
-        "mall_name": "네이버",
-        "source": "naver_shopping",
-        "scraped_at": "2026-06-11T14:14:54.510334"
-      },
-      "source_account": "검색:스팀청소기",
-      "selected": false
-    },
-    {
-      "product": {
-        "name": "디베아 차이슨 THE NEW 진공 무선 청소기 화이트, 단품",
-        "price": "169,000원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_5321135/53211354775.20250225152336.jpg",
-        "product_url": "https://search.shopping.naver.com/catalog/53211354775",
-        "badge": "네이버",
-        "brand": "디베아",
-        "category": "무선청소기",
-        "category_hint": "생활/청소",
-        "mall_name": "네이버",
-        "source": "naver_shopping",
-        "scraped_at": "2026-06-11T14:14:55.682175"
-      },
-      "source_account": "검색:무선청소기",
-      "selected": false
-    },
-    {
-      "product": {
-        "name": "신일 350W BLDC 무선청소기 가벼운 원룸 핸디 가벼운 진공",
-        "price": "179,000원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_8882170/88821708297.2.jpg",
-        "product_url": "https://smartstore.naver.com/main/products/11277197966",
-        "badge": "신일 가전 판매처",
-        "brand": "신일전자",
-        "category": "무선청소기",
-        "category_hint": "생활/청소",
-        "mall_name": "신일 가전 판매처",
-        "source": "naver_shopping",
-        "scraped_at": "2026-06-11T14:14:55.682291"
-      },
-      "source_account": "검색:무선청소기",
-      "selected": false
-    },
-    {
-      "product": {
-        "name": "한경희 500W 자동 먼지비움 무선청소기 청정 스테이션 가정용 사무실",
-        "price": "299,000원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_8834104/88341044485.15.jpg",
-        "product_url": "https://smartstore.naver.com/main/products/10796538495",
-        "badge": "한경희 가전 판매처",
-        "brand": "한경희생활과학",
-        "category": "무선청소기",
-        "category_hint": "생활/청소",
-        "mall_name": "한경희 가전 판매처",
-        "source": "naver_shopping",
-        "scraped_at": "2026-06-11T14:14:55.682417"
-      },
-      "source_account": "검색:무선청소기",
-      "selected": false
-    },
-    {
-      "product": {
-        "name": "신일 자동먼지비움 슬림 무선 청소기 BLDC 원룸 가벼운 초경량",
-        "price": "199,000원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_9048060/90480607125.9.jpg",
-        "product_url": "https://smartstore.naver.com/main/products/12936096115",
-        "badge": "신일 가전 판매처",
-        "brand": "신일전자",
-        "category": "무선청소기",
-        "category_hint": "생활/청소",
-        "mall_name": "신일 가전 판매처",
-        "source": "naver_shopping",
-        "scraped_at": "2026-06-11T14:14:55.682542"
-      },
-      "source_account": "검색:무선청소기",
-      "selected": false
-    },
-    {
-      "product": {
-        "name": "삼성 VS90F40CRG 비스포크 AI 제트 400W 무선청소기 고온세척물걸레",
-        "price": "1,569,000원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_8846890/88468905871.13.jpg",
-        "product_url": "https://smartstore.naver.com/main/products/10924399836",
-        "badge": "삼성공식파트너 우주",
-        "brand": "삼성",
-        "category": "무선청소기",
-        "category_hint": "생활/청소",
-        "mall_name": "삼성공식파트너 우주",
-        "source": "naver_shopping",
-        "scraped_at": "2026-06-11T14:14:55.682674"
-      },
-      "source_account": "검색:무선청소기",
-      "selected": false
-    },
-    {
-      "product": {
-        "name": "다이슨 싸이클론 V10 레드, 단품",
-        "price": "342,080원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_5354996/53549963106.20250314160559.jpg",
-        "product_url": "https://search.shopping.naver.com/catalog/53549963106",
-        "badge": "네이버",
-        "brand": "다이슨",
-        "category": "무선청소기",
-        "category_hint": "생활/청소",
-        "mall_name": "네이버",
-        "source": "naver_shopping",
-        "scraped_at": "2026-06-11T14:14:55.682794"
-      },
-      "source_account": "검색:무선청소기",
-      "selected": false
-    },
-    {
-      "product": {
-        "name": "무선 미니청소기 소형 자취방 원룸청소기 머리카락",
-        "price": "109,400원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_9030815/90308159257.2.jpg",
-        "product_url": "https://smartstore.naver.com/main/products/12763648308",
-        "badge": "생활공작소 LAB",
-        "brand": "생활공작소",
-        "category": "무선청소기",
-        "category_hint": "생활/청소",
-        "mall_name": "생활공작소 LAB",
-        "source": "naver_shopping",
-        "scraped_at": "2026-06-11T14:14:55.682890"
-      },
-      "source_account": "검색:무선청소기",
-      "selected": false
-    },
-    {
-      "product": {
-        "name": "자동 먼지비움청소기 무선 미니 자취방청소기 핸드 원룸 머리카락",
-        "price": "179,800원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_9030817/90308172337.jpg",
-        "product_url": "https://smartstore.naver.com/main/products/12763661388",
-        "badge": "생활공작소 LAB",
-        "brand": "생활공작소",
-        "category": "무선청소기",
-        "category_hint": "생활/청소",
-        "mall_name": "생활공작소 LAB",
-        "source": "naver_shopping",
-        "scraped_at": "2026-06-11T14:14:55.683007"
-      },
-      "source_account": "검색:무선청소기",
-      "selected": false
-    },
-    {
-      "product": {
-        "name": "쿠진 흡입력 좋은 가벼운 BLDC 무선청소기 마하라이트 S1 (스틱형)",
-        "price": "149,000원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_8957141/89571417777.5.jpg",
-        "product_url": "https://smartstore.naver.com/main/products/12026907085",
-        "badge": "쿠진 공식스토어",
-        "brand": "쿠진",
-        "category": "무선청소기",
-        "category_hint": "생활/청소",
-        "mall_name": "쿠진 공식스토어",
-        "source": "naver_shopping",
-        "scraped_at": "2026-06-11T14:14:55.683112"
-      },
-      "source_account": "검색:무선청소기",
-      "selected": false
-    },
-    {
-      "product": {
-        "name": "블라우풍트 BLP-VC411KSP 블루, 단품",
-        "price": "299,000원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_5643974/56439748763.20260203085707.jpg",
-        "product_url": "https://search.shopping.naver.com/catalog/56439748763",
-        "badge": "네이버",
-        "brand": "블라우풍트",
-        "category": "무선청소기",
-        "category_hint": "생활/청소",
-        "mall_name": "네이버",
-        "source": "naver_shopping",
-        "scraped_at": "2026-06-11T14:14:55.683205"
-      },
-      "source_account": "검색:무선청소기",
-      "selected": false
-    },
-    {
-      "product": {
-        "name": "아이니즈 올인원 무선청소기 화이트, 단품",
-        "price": "89,000원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_5807508/58075082863.20251210105629.jpg",
-        "product_url": "https://search.shopping.naver.com/catalog/58075082863",
-        "badge": "네이버",
-        "brand": "아이니즈",
-        "category": "무선청소기",
-        "category_hint": "생활/청소",
-        "mall_name": "네이버",
-        "source": "naver_shopping",
-        "scraped_at": "2026-06-11T14:14:55.683277"
-      },
-      "source_account": "검색:무선청소기",
-      "selected": false
-    },
-    {
-      "product": {
-        "name": "LG전자 코드제로 무선청소기 AS520WA 카밍 베이지, 단품",
-        "price": "374,810원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_5382463/53824633909.20250328102429.jpg",
-        "product_url": "https://search.shopping.naver.com/catalog/53824633909",
-        "badge": "네이버",
-        "brand": "코드제로",
-        "category": "무선청소기",
-        "category_hint": "생활/청소",
-        "mall_name": "네이버",
-        "source": "naver_shopping",
-        "scraped_at": "2026-06-11T14:14:55.683406"
-      },
-      "source_account": "검색:무선청소기",
-      "selected": false
-    },
-    {
-      "product": {
-        "name": "캐치웰 CX PRO 매직타워 N 화이트, 단품",
-        "price": "279,230원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_5462942/54629429762.20260116091342.jpg",
-        "product_url": "https://search.shopping.naver.com/catalog/54629429762",
-        "badge": "네이버",
-        "brand": "캐치웰",
-        "category": "무선청소기",
-        "category_hint": "생활/청소",
-        "mall_name": "네이버",
-        "source": "naver_shopping",
-        "scraped_at": "2026-06-11T14:14:55.683458"
-      },
-      "source_account": "검색:무선청소기",
-      "selected": false
-    },
-    {
-      "product": {
-        "name": "신일청소기 소형 미니 무선청소기 핸디 자취방 원룸 머리카락",
-        "price": "59,000원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_8880346/88803469781.3.jpg",
-        "product_url": "https://smartstore.naver.com/main/products/11258959450",
-        "badge": "신일 온라인스토어",
-        "brand": "신일전자",
-        "category": "무선청소기",
-        "category_hint": "생활/청소",
-        "mall_name": "신일 온라인스토어",
-        "source": "naver_shopping",
-        "scraped_at": "2026-06-11T14:14:55.683523"
-      },
-      "source_account": "검색:무선청소기",
-      "selected": false
-    },
-    {
-      "product": {
-        "name": "삼성전자 비스포크슬림 무선청소기 VS15A680AEW 미스티 화이트, 단품",
-        "price": "408,390원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_5593252/55932526792.20250724163751.jpg",
-        "product_url": "https://search.shopping.naver.com/catalog/55932526792",
-        "badge": "네이버",
-        "brand": "비스포크슬림",
-        "category": "무선청소기",
-        "category_hint": "생활/청소",
-        "mall_name": "네이버",
-        "source": "naver_shopping",
-        "scraped_at": "2026-06-11T14:14:55.683642"
-      },
-      "source_account": "검색:무선청소기",
-      "selected": false
-    },
-    {
-      "product": {
-        "name": "오베닉 OJEOBV1-W 화이트, 단품",
-        "price": "45,820원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_5836138/58361388131.20260102111956.jpg",
-        "product_url": "https://search.shopping.naver.com/catalog/58361388131",
-        "badge": "네이버",
-        "brand": "오베닉",
-        "category": "무선청소기",
-        "category_hint": "생활/청소",
-        "mall_name": "네이버",
-        "source": "naver_shopping",
-        "scraped_at": "2026-06-11T14:14:55.683709"
-      },
-      "source_account": "검색:무선청소기",
-      "selected": false
-    },
-    {
-      "product": {
-        "name": "도맥스 소핀 세탁조 클리너 300ml",
-        "price": "27,000원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_5301571/53015716116.20250214110240.jpg",
-        "product_url": "https://search.shopping.naver.com/catalog/53015716116",
-        "badge": "네이버",
-        "brand": "도맥스",
-        "category": "세제/세정제",
-        "category_hint": "생활/청소",
-        "mall_name": "네이버",
-        "source": "naver_shopping",
-        "scraped_at": "2026-06-11T14:14:57.967895"
-      },
-      "source_account": "검색:세탁조클리너",
-      "selected": false
-    },
-    {
-      "product": {
-        "name": "세이브타임 티트리 세탁조 클리너 100ml",
-        "price": "69,940원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_5525380/55253805622.20250611160602.jpg",
-        "product_url": "https://search.shopping.naver.com/catalog/55253805622",
-        "badge": "네이버",
-        "brand": "세이브타임",
-        "category": "세제/세정제",
-        "category_hint": "생활/청소",
-        "mall_name": "네이버",
-        "source": "naver_shopping",
-        "scraped_at": "2026-06-11T14:14:57.968018"
-      },
-      "source_account": "검색:세탁조클리너",
-      "selected": false
-    },
     {
       "product": {
         "name": "닥터베크만 세탁조 액상 클리너 컴플리트케어 오션브리즈",
@@ -908,9 +15,351 @@
         "category_hint": "생활/청소",
         "mall_name": "쿠팡",
         "source": "naver_shopping",
-        "scraped_at": "2026-06-11T14:14:57.968127"
+        "scraped_at": "2026-06-11T14:22:58.435152"
       },
       "source_account": "검색:세탁조클리너",
+      "selected": false
+    },
+    {
+      "product": {
+        "name": "오슬로 304 스텐 믹싱볼 야채탈수기5L + 채칼6종세트",
+        "price": "39,900원",
+        "original_price": "",
+        "discount_rate": 0,
+        "image_url": "https://shopping-phinf.pstatic.net/main_5976748/59767486171.2.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=2988711166&ctag=2988711166&lptag=l761528742073&itemId=36278174507&vendorItemId=90890856128&spec=10305199",
+        "badge": "쿠팡",
+        "brand": "",
+        "category": "조리기구",
+        "category_hint": "주방",
+        "mall_name": "쿠팡",
+        "source": "naver_shopping",
+        "scraped_at": "2026-06-11T14:23:05.827073"
+      },
+      "source_account": "검색:과일탈수기",
+      "selected": false
+    },
+    {
+      "product": {
+        "name": "해태제과 종합선물세트 11종 1세트",
+        "price": "28,400원",
+        "original_price": "",
+        "discount_rate": 0,
+        "image_url": "https://shopping-phinf.pstatic.net/main_5895196/58951969605.5.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8610893945&ctag=8610893945&lptag=I21019335686&itemId=21019335686&vendorItemId=94266309953&spec=10305199",
+        "badge": "쿠팡",
+        "brand": "해태제과",
+        "category": "기타과자",
+        "category_hint": "먹는거",
+        "mall_name": "쿠팡",
+        "source": "naver_shopping",
+        "scraped_at": "2026-06-11T14:23:14.193153"
+      },
+      "source_account": "검색:간식 추천 쿠팡",
+      "selected": false
+    },
+    {
+      "product": {
+        "name": "금풍제과 보리건빵",
+        "price": "25,060원",
+        "original_price": "",
+        "discount_rate": 0,
+        "image_url": "https://shopping-phinf.pstatic.net/main_5885463/58854637269.62.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=2591853059&ctag=2591853059&lptag=l41507713221&itemId=3120547711&vendorItemId=70348203523&spec=10305197",
+        "badge": "쿠팡",
+        "brand": "",
+        "category": "기타과자",
+        "category_hint": "먹는거",
+        "mall_name": "쿠팡",
+        "source": "naver_shopping",
+        "scraped_at": "2026-06-11T14:23:14.193308"
+      },
+      "source_account": "검색:간식 추천 쿠팡",
+      "selected": false
+    },
+    {
+      "product": {
+        "name": "원조풍년 곤약쫀드기 220g 5개",
+        "price": "18,590원",
+        "original_price": "",
+        "discount_rate": 0,
+        "image_url": "https://shopping-phinf.pstatic.net/main_4641210/46412105560.4.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=7662550918&ctag=7662550918&lptag=I19594679776&itemId=19594679776&vendorItemId=82880641645&spec=10305199",
+        "badge": "쿠팡",
+        "brand": "",
+        "category": "기타과자",
+        "category_hint": "먹는거",
+        "mall_name": "쿠팡",
+        "source": "naver_shopping",
+        "scraped_at": "2026-06-11T14:23:14.193416"
+      },
+      "source_account": "검색:간식 추천 쿠팡",
+      "selected": false
+    },
+    {
+      "product": {
+        "name": "빈츠 하임 예감 빼빼로등 14종 구성 과자세트 1세트",
+        "price": "26,800원",
+        "original_price": "",
+        "discount_rate": 0,
+        "image_url": "https://shopping-phinf.pstatic.net/main_4515310/45153102172.5.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=7792630745&ctag=7792630745&lptag=I21085996180&itemId=21085996180&vendorItemId=88148076465&spec=10305198",
+        "badge": "쿠팡",
+        "brand": "",
+        "category": "기타과자",
+        "category_hint": "먹는거",
+        "mall_name": "쿠팡",
+        "source": "naver_shopping",
+        "scraped_at": "2026-06-11T14:23:14.193538"
+      },
+      "source_account": "검색:간식 추천 쿠팡",
+      "selected": false
+    },
+    {
+      "product": {
+        "name": "사무실간식개별포장 사무실과자 13종 (+1) 1세트 1개",
+        "price": "69,500원",
+        "original_price": "",
+        "discount_rate": 0,
+        "image_url": "https://shopping-phinf.pstatic.net/main_4546369/45463699115.1.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=7413299408&ctag=7413299408&lptag=I19213312394&itemId=19213312394&vendorItemId=77042493999&spec=10305199",
+        "badge": "쿠팡",
+        "brand": "",
+        "category": "기타과자",
+        "category_hint": "먹는거",
+        "mall_name": "쿠팡",
+        "source": "naver_shopping",
+        "scraped_at": "2026-06-11T14:23:14.193696"
+      },
+      "source_account": "검색:간식 추천 쿠팡",
+      "selected": false
+    },
+    {
+      "product": {
+        "name": "곡물그대로21 크리스피롤",
+        "price": "39,680원",
+        "original_price": "",
+        "discount_rate": 0,
+        "image_url": "https://shopping-phinf.pstatic.net/main_5976733/59767332105.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=4098054850&ctag=4098054850&lptag=l880162390209&itemId=83160980209&vendorItemId=85192997619&spec=10305197",
+        "badge": "쿠팡",
+        "brand": "",
+        "category": "기타과자",
+        "category_hint": "먹는거",
+        "mall_name": "쿠팡",
+        "source": "naver_shopping",
+        "scraped_at": "2026-06-11T14:23:14.193835"
+      },
+      "source_account": "검색:간식 추천 쿠팡",
+      "selected": false
+    },
+    {
+      "product": {
+        "name": "한봄 과자선물세트 간식꾸러미 단체선물 종합 간식 세트",
+        "price": "25,990원",
+        "original_price": "",
+        "discount_rate": 0,
+        "image_url": "https://shopping-phinf.pstatic.net/main_5994426/59944269875.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=6580974790&ctag=6580974790&lptag=l787140265227&itemId=54272170678&vendorItemId=92243724572&spec=10305198",
+        "badge": "쿠팡",
+        "brand": "",
+        "category": "기타과자",
+        "category_hint": "먹는거",
+        "mall_name": "쿠팡",
+        "source": "naver_shopping",
+        "scraped_at": "2026-06-11T14:23:14.193933"
+      },
+      "source_account": "검색:간식 추천 쿠팡",
+      "selected": false
+    },
+    {
+      "product": {
+        "name": "곡물그대로21 크리스피롤",
+        "price": "30,000원",
+        "original_price": "",
+        "discount_rate": 0,
+        "image_url": "https://shopping-phinf.pstatic.net/main_5976378/59763783431.4.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=49421&ctag=49421&lptag=l735125512424&itemId=55271312445&vendorItemId=85166625376&spec=10305197",
+        "badge": "쿠팡",
+        "brand": "",
+        "category": "기타과자",
+        "category_hint": "먹는거",
+        "mall_name": "쿠팡",
+        "source": "naver_shopping",
+        "scraped_at": "2026-06-11T14:23:14.194029"
+      },
+      "source_account": "검색:간식 추천 쿠팡",
+      "selected": false
+    },
+    {
+      "product": {
+        "name": "진저원 하루편강 생강간식",
+        "price": "33,000원",
+        "original_price": "",
+        "discount_rate": 0,
+        "image_url": "https://shopping-phinf.pstatic.net/main_4708306/47083061938.1.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=6619701503&ctag=6619701503&lptag=l121820504775&itemId=8521577140&vendorItemId=70845018448&spec=10305197",
+        "badge": "쿠팡",
+        "brand": "",
+        "category": "기타과자",
+        "category_hint": "먹는거",
+        "mall_name": "쿠팡",
+        "source": "naver_shopping",
+        "scraped_at": "2026-06-11T14:23:14.194180"
+      },
+      "source_account": "검색:간식 추천 쿠팡",
+      "selected": false
+    },
+    {
+      "product": {
+        "name": "곡물그대로21 크리스피롤",
+        "price": "40,000원",
+        "original_price": "",
+        "discount_rate": 0,
+        "image_url": "https://shopping-phinf.pstatic.net/main_5885825/58858254402.10.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=49421&ctag=49421&lptag=l294732917522&itemId=73291279425&vendorItemId=85322060440&spec=10305197",
+        "badge": "쿠팡",
+        "brand": "",
+        "category": "기타과자",
+        "category_hint": "먹는거",
+        "mall_name": "쿠팡",
+        "source": "naver_shopping",
+        "scraped_at": "2026-06-11T14:23:14.194245"
+      },
+      "source_account": "검색:간식 추천 쿠팡",
+      "selected": false
+    },
+    {
+      "product": {
+        "name": "국산 콩으로 만든 수제 두부과자",
+        "price": "17,920원",
+        "original_price": "",
+        "discount_rate": 0,
+        "image_url": "https://shopping-phinf.pstatic.net/main_5984484/59844846509.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8372604778&ctag=8372604778&lptag=l464715839222&itemId=16284234957&vendorItemId=86204448370&spec=10305199",
+        "badge": "쿠팡",
+        "brand": "",
+        "category": "기타과자",
+        "category_hint": "먹는거",
+        "mall_name": "쿠팡",
+        "source": "naver_shopping",
+        "scraped_at": "2026-06-11T14:23:14.194320"
+      },
+      "source_account": "검색:간식 추천 쿠팡",
+      "selected": false
+    },
+    {
+      "product": {
+        "name": "슈퍼패스딱붙어 합격기원간식세트 1개",
+        "price": "29,900원",
+        "original_price": "",
+        "discount_rate": 0,
+        "image_url": "https://shopping-phinf.pstatic.net/main_3910841/39108416764.43.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=6693896042&ctag=6693896042&lptag=I15479323107&itemId=15479323107&vendorItemId=84018758681&spec=10305198",
+        "badge": "쿠팡",
+        "brand": "허니팟",
+        "category": "기타과자",
+        "category_hint": "먹는거",
+        "mall_name": "쿠팡",
+        "source": "naver_shopping",
+        "scraped_at": "2026-06-11T14:23:14.194572"
+      },
+      "source_account": "검색:간식 추천 쿠팡",
+      "selected": false
+    },
+    {
+      "product": {
+        "name": "크라운 레트로 tv 과자세트 과자 10종 1세트",
+        "price": "32,360원",
+        "original_price": "",
+        "discount_rate": 0,
+        "image_url": "https://shopping-phinf.pstatic.net/main_6002787/60027874525.4.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8591513541&ctag=8591513541&lptag=I24910783545&itemId=24910783545&vendorItemId=94232401347&spec=10305199",
+        "badge": "쿠팡",
+        "brand": "크라운",
+        "category": "기타과자",
+        "category_hint": "먹는거",
+        "mall_name": "쿠팡",
+        "source": "naver_shopping",
+        "scraped_at": "2026-06-11T14:23:14.194628"
+      },
+      "source_account": "검색:간식 추천 쿠팡",
+      "selected": false
+    },
+    {
+      "product": {
+        "name": "올레놀샷 NMN 1개 15ml",
+        "price": "31,510원",
+        "original_price": "",
+        "discount_rate": 0,
+        "image_url": "https://shopping-phinf.pstatic.net/main_5760148/57601483053.106.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9164207296&ctag=9164207296&lptag=I26998880761&itemId=26998880761&vendorItemId=95113971937&spec=10305199",
+        "badge": "쿠팡",
+        "brand": "",
+        "category": "에센스/세럼/앰플",
+        "category_hint": "뷰티",
+        "mall_name": "쿠팡",
+        "source": "naver_shopping",
+        "scraped_at": "2026-06-11T14:23:21.590578"
+      },
+      "source_account": "검색:미백 앰플",
+      "selected": false
+    },
+    {
+      "product": {
+        "name": "민트리 탄산버블 두피 스케일러 15g",
+        "price": "24,900원",
+        "original_price": "",
+        "discount_rate": 0,
+        "image_url": "https://shopping-phinf.pstatic.net/main_5664650/56646502984.3.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=4973897891&ctag=4973897891&lptag=l232283981501&itemId=98185122033&vendorItemId=86460168507&spec=10305198",
+        "badge": "쿠팡",
+        "brand": "",
+        "category": "두피케어",
+        "category_hint": "뷰티",
+        "mall_name": "쿠팡",
+        "source": "naver_shopping",
+        "scraped_at": "2026-06-11T14:23:25.020031"
+      },
+      "source_account": "검색:두피 스케일러",
+      "selected": false
+    },
+    {
+      "product": {
+        "name": "해피바잉스토어 빈티지 캔들 북유럽 210g 1개 소나무향",
+        "price": "36,000원",
+        "original_price": "",
+        "discount_rate": 0,
+        "image_url": "https://shopping-phinf.pstatic.net/main_6031432/60314324360.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8266181566&ctag=8266181566&lptag=V95153111827&itemId=25093506692&vendorItemId=95153111827&spec=10305199",
+        "badge": "쿠팡",
+        "brand": "뉴앙시에",
+        "category": "아로마/캔들용품",
+        "category_hint": "인테리어",
+        "mall_name": "쿠팡",
+        "source": "naver_shopping",
+        "scraped_at": "2026-06-11T14:23:30.920832"
+      },
+      "source_account": "검색:북유럽 캔들",
+      "selected": false
+    },
+    {
+      "product": {
+        "name": "해피바잉스토어 빈티지 캔들 북유럽 210g 1개 소나무향",
+        "price": "67,100원",
+        "original_price": "",
+        "discount_rate": 0,
+        "image_url": "https://shopping-phinf.pstatic.net/main_6027162/60271621570.1.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8266181566&ctag=8266181566&lptag=V94271956108&itemId=25093506692&vendorItemId=94271956108&spec=10305199",
+        "badge": "쿠팡",
+        "brand": "뉴앙시에",
+        "category": "아로마/캔들용품",
+        "category_hint": "인테리어",
+        "mall_name": "쿠팡",
+        "source": "naver_shopping",
+        "scraped_at": "2026-06-11T14:23:30.920950"
+      },
+      "source_account": "검색:북유럽 캔들",
       "selected": false
     }
   ]
