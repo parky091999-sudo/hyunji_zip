@@ -55,7 +55,7 @@ def _load_rejected() -> set:
 
 
 def run():
-    from scraper.naver_shopping import scrape_deals
+    from scraper.naver_shopping import _fetch_items, _to_product, _is_chinese_seller_style
 
     logger.info("=" * 50)
     logger.info(f"벤치마크 스캔 시작: {datetime.now(KST).strftime('%Y-%m-%d %H:%M KST')}")
@@ -85,16 +85,25 @@ def run():
             if len(candidates) >= MAX_CANDIDATES:
                 break
             try:
-                results = scrape_deals(
-                    keyword=kw,
-                    max_items=8,
-                    min_rating=4.3,
-                    min_review_count=50,
-                )
-                for p in results:
+                logger.info(f"  검색: {kw}")
+                items = _fetch_items(kw)
+                logger.info(f"    → {len(items)}개 항목 수신")
+
+                for item in items:
+                    if len(candidates) >= MAX_CANDIDATES:
+                        break
+                    p = _to_product(item, category_hint=category)
+                    if not p:
+                        continue
+
+                    # 중국산/저품질 필터
+                    if _is_chinese_seller_style(p.get("name", "")):
+                        continue
+
                     url = p.get("product_url", "")
                     if not url or url in seen_urls or url in rejected:
                         continue
+
                     seen_urls.add(url)
                     candidates.append({
                         "product": p,
@@ -102,8 +111,7 @@ def run():
                         "selected": False,
                     })
                     logger.info(f"  ✅ [{category}] {p.get('name','')[:40]}")
-                    if len(candidates) >= MAX_CANDIDATES:
-                        break
+
                 time.sleep(0.5)
             except Exception as e:
                 logger.warning(f"  키워드 오류({kw}): {e}")
