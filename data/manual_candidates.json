@@ -1,5 +1,5 @@
 {
-  "scanned_at": "2026-06-11T23:33:45.081509+09:00",
+  "scanned_at": "2026-06-12T00:21:36.476967+09:00",
   "candidates": [
     {
       "product": {
@@ -15,7 +15,7 @@
         "category_hint": "생활/청소",
         "mall_name": "쿠팡",
         "source": "naver_shopping",
-        "scraped_at": "2026-06-11T14:33:06.342571"
+        "scraped_at": "2026-06-11T15:20:50.970368"
       },
       "source_account": "검색:세탁조클리너",
       "selected": false
@@ -34,9 +34,28 @@
         "category_hint": "주방",
         "mall_name": "쿠팡",
         "source": "naver_shopping",
-        "scraped_at": "2026-06-11T14:33:13.640862"
+        "scraped_at": "2026-06-11T15:20:55.872656"
       },
       "source_account": "검색:과일탈수기",
+      "selected": false
+    },
+    {
+      "product": {
+        "name": "휴대용 빨래건조기 UV살균 접이식 미니 건조기 스타일러 002S 002S",
+        "price": "27,000원",
+        "original_price": "",
+        "discount_rate": 0,
+        "image_url": "https://shopping-phinf.pstatic.net/main_4636969/46369692651.67.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=7930210672&ctag=7930210672&lptag=I21810029458&itemId=21810029458&vendorItemId=88858533465&spec=10305199",
+        "badge": "쿠팡",
+        "brand": "",
+        "category": "세탁/건조기",
+        "category_hint": "디지털/가전",
+        "mall_name": "쿠팡",
+        "source": "naver_shopping",
+        "scraped_at": "2026-06-11T15:21:05.944006"
+      },
+      "source_account": "검색:휴대용 의류건조기",
       "selected": false
     },
     {
@@ -53,7 +72,7 @@
         "category_hint": "먹는거",
         "mall_name": "쿠팡",
         "source": "naver_shopping",
-        "scraped_at": "2026-06-11T14:33:22.374978"
+        "scraped_at": "2026-06-11T15:21:07.394485"
       },
       "source_account": "검색:간식 추천 쿠팡",
       "selected": false
@@ -72,7 +91,7 @@
         "category_hint": "먹는거",
         "mall_name": "쿠팡",
         "source": "naver_shopping",
-        "scraped_at": "2026-06-11T14:33:22.375127"
+        "scraped_at": "2026-06-11T15:21:07.394622"
       },
       "source_account": "검색:간식 추천 쿠팡",
       "selected": false
@@ -91,7 +110,7 @@
         "category_hint": "먹는거",
         "mall_name": "쿠팡",
         "source": "naver_shopping",
-        "scraped_at": "2026-06-11T14:33:22.375223"
+        "scraped_at": "2026-06-11T15:21:07.394737"
       },
       "source_account": "검색:간식 추천 쿠팡",
       "selected": false
@@ -110,7 +129,7 @@
         "category_hint": "먹는거",
         "mall_name": "쿠팡",
         "source": "naver_shopping",
-        "scraped_at": "2026-06-11T14:33:22.375341"
+        "scraped_at": "2026-06-11T15:21:07.394845"
       },
       "source_account": "검색:간식 추천 쿠팡",
       "selected": false
@@ -129,7 +148,7 @@
         "category_hint": "먹는거",
         "mall_name": "쿠팡",
         "source": "naver_shopping",
-        "scraped_at": "2026-06-11T14:33:22.375481"
+        "scraped_at": "2026-06-11T15:21:07.394977"
       },
       "source_account": "검색:간식 추천 쿠팡",
       "selected": false
@@ -148,7 +167,7 @@
         "category_hint": "먹는거",
         "mall_name": "쿠팡",
         "source": "naver_shopping",
-        "scraped_at": "2026-06-11T14:33:22.375597"
+        "scraped_at": "2026-06-11T15:21:07.395069"
       },
       "source_account": "검색:간식 추천 쿠팡",
       "selected": false
@@ -167,7 +186,7 @@
         "category_hint": "먹는거",
         "mall_name": "쿠팡",
         "source": "naver_shopping",
-        "scraped_at": "2026-06-11T14:33:22.375712"
+        "scraped_at": "2026-06-11T15:21:07.395168"
       },
       "source_account": "검색:간식 추천 쿠팡",
       "selected": false
@@ -186,7 +205,7 @@
         "category_hint": "먹는거",
         "mall_name": "쿠팡",
         "source": "naver_shopping",
-        "scraped_at": "2026-06-11T14:33:22.375814"
+        "scraped_at": "2026-06-11T15:21:07.395259"
       },
       "source_account": "검색:간식 추천 쿠팡",
       "selected": false
@@ -205,7 +224,7 @@
         "category_hint": "먹는거",
         "mall_name": "쿠팡",
         "source": "naver_shopping",
-        "scraped_at": "2026-06-11T14:33:22.375923"
+        "scraped_at": "2026-06-11T15:21:07.395494"
       },
       "source_account": "검색:간식 추천 쿠팡",
       "selected": false
@@ -224,7 +243,7 @@
         "category_hint": "먹는거",
         "mall_name": "쿠팡",
         "source": "naver_shopping",
-        "scraped_at": "2026-06-11T14:33:22.375986"
+        "scraped_at": "2026-06-11T15:21:07.395602"
       },
       "source_account": "검색:간식 추천 쿠팡",
       "selected": false
@@ -243,7 +262,7 @@
         "category_hint": "먹는거",
         "mall_name": "쿠팡",
         "source": "naver_shopping",
-        "scraped_at": "2026-06-11T14:33:22.376058"
+        "scraped_at": "2026-06-11T15:21:07.395729"
       },
       "source_account": "검색:간식 추천 쿠팡",
       "selected": false
@@ -262,7 +281,7 @@
         "category_hint": "먹는거",
         "mall_name": "쿠팡",
         "source": "naver_shopping",
-        "scraped_at": "2026-06-11T14:33:22.376308"
+        "scraped_at": "2026-06-11T15:21:07.396169"
       },
       "source_account": "검색:간식 추천 쿠팡",
       "selected": false
@@ -281,7 +300,7 @@
         "category_hint": "먹는거",
         "mall_name": "쿠팡",
         "source": "naver_shopping",
-        "scraped_at": "2026-06-11T14:33:22.376364"
+        "scraped_at": "2026-06-11T15:21:07.396272"
       },
       "source_account": "검색:간식 추천 쿠팡",
       "selected": false
@@ -300,7 +319,7 @@
         "category_hint": "뷰티",
         "mall_name": "쿠팡",
         "source": "naver_shopping",
-        "scraped_at": "2026-06-11T14:33:29.561269"
+        "scraped_at": "2026-06-11T15:21:16.382864"
       },
       "source_account": "검색:미백 앰플",
       "selected": false
@@ -319,7 +338,7 @@
         "category_hint": "뷰티",
         "mall_name": "쿠팡",
         "source": "naver_shopping",
-        "scraped_at": "2026-06-11T14:33:32.983885"
+        "scraped_at": "2026-06-11T15:21:19.938035"
       },
       "source_account": "검색:두피 스케일러",
       "selected": false
@@ -338,7 +357,7 @@
         "category_hint": "인테리어",
         "mall_name": "쿠팡",
         "source": "naver_shopping",
-        "scraped_at": "2026-06-11T14:33:38.700302"
+        "scraped_at": "2026-06-11T15:21:28.448465"
       },
       "source_account": "검색:북유럽 캔들",
       "selected": false
@@ -357,9 +376,28 @@
         "category_hint": "인테리어",
         "mall_name": "쿠팡",
         "source": "naver_shopping",
-        "scraped_at": "2026-06-11T14:33:38.700420"
+        "scraped_at": "2026-06-11T15:21:28.448591"
       },
       "source_account": "검색:북유럽 캔들",
+      "selected": false
+    },
+    {
+      "product": {
+        "name": "데코아르 스마트 자동센서 스테인레스 휴지통 (20L 전용)",
+        "price": "54,900원",
+        "original_price": "",
+        "discount_rate": 0,
+        "image_url": "https://shopping-phinf.pstatic.net/main_5771787/57717876802.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=6582577923&ctag=6582577923&lptag=l050201694728&itemId=40208950176&vendorItemId=92082014509&spec=10305198",
+        "badge": "쿠팡",
+        "brand": "",
+        "category": "휴지통",
+        "category_hint": "수납/정리",
+        "mall_name": "쿠팡",
+        "source": "naver_shopping",
+        "scraped_at": "2026-06-11T15:21:35.976422"
+      },
+      "source_account": "검색:자동센서 휴지통",
       "selected": false
     }
   ]
