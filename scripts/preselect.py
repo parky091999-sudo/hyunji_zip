@@ -241,17 +241,57 @@ async def run():
 
     all_candidates = existing_good + new_candidates
 
+    # 카테고리별 균형을 맞춘 후보 선택
+    def _select_balanced(candidates: list, count: int) -> list:
+        """카테고리별로 균형있게 후보를 선택 (라운드-로빈)"""
+        if not candidates:
+            return []
+
+        # 카테고리별 그룹화
+        by_category = {}
+        for c in candidates:
+            cat = c.get("product", {}).get("category_hint", "기타")
+            if cat not in by_category:
+                by_category[cat] = []
+            by_category[cat].append(c)
+
+        logger.info(f"카테고리별 후보: {[(k, len(v)) for k, v in sorted(by_category.items())]}")
+
+        # 라운드-로빈으로 선택 (균형있게)
+        selected = []
+        category_idx = {cat: 0 for cat in by_category}
+        sorted_cats = sorted(by_category.keys())
+
+        while len(selected) < count and selected_total_available := sum(
+            len(by_category[cat]) - category_idx[cat] for cat in sorted_cats
+        ) > 0:
+            for cat in sorted_cats:
+                if len(selected) >= count:
+                    break
+                if category_idx[cat] < len(by_category[cat]):
+                    selected.append(by_category[cat][category_idx[cat]])
+                    category_idx[cat] += 1
+
+        logger.info(f"선택 완료: {len(selected)}개 (카테고리별 균형)")
+        for cat in sorted(by_category.keys()):
+            count_selected = sum(1 for c in selected if c.get("product", {}).get("category_hint") == cat)
+            logger.info(f"  {cat:15} {count_selected}개")
+
+        return selected[:count]
+
+    balanced = _select_balanced(all_candidates, CANDIDATES_COUNT)
+
     pending = {
         "for_date":     tomorrow,
         "generated_at": datetime.now(KST).isoformat(),
-        "candidates":   all_candidates[:CANDIDATES_COUNT],
+        "candidates":   balanced if balanced else all_candidates[:CANDIDATES_COUNT],
     }
 
     os.makedirs(DATA_DIR, exist_ok=True)
     with open(PENDING_PATH, "w", encoding="utf-8") as f:
         json.dump(pending, f, ensure_ascii=False, indent=2)
 
-    logger.info(f"pending_post.json 저장 완료 — 기존 {len(existing_good)}개 유지 + 신규 {len(new_candidates)}개 (for {tomorrow})")
+    logger.info(f"pending_post.json 저장 완료 — 기존 {len(existing_good)}개 + 신규 {len(new_candidates)}개 중 {CANDIDATES_COUNT}개 균형선택 (for {tomorrow})")
 
 
 if __name__ == "__main__":

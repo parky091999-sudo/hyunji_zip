@@ -62,7 +62,7 @@ def _mark_pending_used(product_url: str) -> None:
 
 
 def _pick_from_pending() -> dict | None:
-    """pending_post.json 에서 오늘/어제 날짜 후보 중 두 번째 포스팅할 것 선택"""
+    """pending_post.json 에서 오늘/어제 날짜 후보 중 포스팅할 것 선택 (카테고리 분산)"""
     pending = _load_json(PENDING_PATH, {})
     today = datetime.now(KST).strftime("%Y-%m-%d")
     yesterday = (datetime.now(KST) - timedelta(days=1)).strftime("%Y-%m-%d")
@@ -85,20 +85,26 @@ def _pick_from_pending() -> dict | None:
         url = c.get("product", {}).get("product_url", "")
         return not (url and url[:80] in posted_ids)
 
-    # 명시 승인된 것 우선 (status=="approved")
-    for c in candidates:
-        if c.get("status") == "approved" and _not_posted(c):
-            logger.info(f"  [승인된 후보] {c['product'].get('name', '')[:40]}")
-            return c
+    # 사용 가능한 후보 (반려되지 않은 것)
+    available = [c for c in candidates if c.get("status") != "rejected" and _not_posted(c)]
 
-    # 반려되지 않은 것 순서대로 (status=="pending" 또는 없음)
-    for c in candidates:
-        if c.get("status") != "rejected" and _not_posted(c):
-            logger.info(f"  [기본 후보] {c['product'].get('name', '')[:40]}")
-            return c
+    if not available:
+        logger.info("  pending 후보 전부 이미 포스팅/반려됨 → 실시간 수집으로 폴백")
+        return None
 
-    logger.info("  pending 후보 전부 이미 포스팅됨 → 실시간 수집으로 폴백")
-    return None
+    # 우선: 명시 승인된 것
+    approved = [c for c in available if c.get("status") == "approved"]
+    if approved:
+        selected = approved[0]
+        cat = selected.get("product", {}).get("category_hint", "기타")
+        logger.info(f"  [승인된 후보] {selected['product'].get('name', '')[:40]} ({cat})")
+        return selected
+
+    # 기본: 첫 번째 미사용 (preselect에서 이미 카테고리 균형)
+    selected = available[0]
+    cat = selected.get("product", {}).get("category_hint", "기타")
+    logger.info(f"  [기본 후보] {selected['product'].get('name', '')[:40]} ({cat})")
+    return selected
 
 
 async def _collect_fallback() -> dict | None:
