@@ -106,6 +106,57 @@ def _try_search_trend(start_date: str, end_date: str) -> dict[str, float] | None
         return None
 
 
+def get_keyword_momentum(keywords: list[str]) -> dict[str, float]:
+    """주어진 키워드들의 최근 모멘텀 점수 반환.
+
+    점수 = avg(최근 2주 ratio) / avg(직전 4주 ratio).
+    1.0 = 평년 수준, 1.3+ = 상승 추세 (시즌 진입), 0.7- = 하락.
+
+    네이버 데이터랩 search API 1회당 최대 5개 키워드 그룹 처리 가능.
+    빈 입력, API 키 없음, 에러 시 빈 dict 반환 (호출부에서 정렬 안 함).
+    """
+    if not keywords or not NAVER_CLIENT_ID or not NAVER_CLIENT_SECRET:
+        return {}
+
+    # 데이터랩 search API 제약: keywordGroups 최대 5개, 각 그룹 keywords 최대 20개
+    BATCH = 5
+    end_date   = datetime.now() - timedelta(days=1)
+    start_date = end_date - timedelta(weeks=6)
+    sd, ed = start_date.strftime("%Y-%m-%d"), end_date.strftime("%Y-%m-%d")
+
+    scores: dict[str, float] = {}
+    for i in range(0, len(keywords), BATCH):
+        chunk = keywords[i:i + BATCH]
+        body = {
+            "startDate":     sd,
+            "endDate":       ed,
+            "timeUnit":      "week",
+            "keywordGroups": [
+                {"groupName": kw, "keywords": [kw]} for kw in chunk
+            ],
+        }
+        try:
+            resp = requests.post(SEARCH_URL, json=body, headers=_make_headers(), timeout=10)
+            resp.raise_for_status()
+            for item in resp.json().get("results", []):
+                name = item.get("title") or ""
+                data = item.get("data", [])
+                if len(data) < 6:
+                    continue
+                recent = sum(d.get("ratio", 0) for d in data[-2:]) / 2
+                baseline = sum(d.get("ratio", 0) for d in data[-6:-2]) / 4
+                if baseline > 0:
+                    scores[name] = recent / baseline
+        except Exception as e:
+            logger.warning(f"키워드 모멘텀 조회 실패 ({chunk}): {e}")
+            continue
+
+    if scores:
+        top = sorted(scores.items(), key=lambda x: x[1], reverse=True)[:5]
+        logger.info(f"모멘텀 Top: {[(k, f'{v:.2f}x') for k, v in top]}")
+    return scores
+
+
 def get_trending_categories(top_n: int = 3) -> list[str]:
     """최근 4주 트렌드 기준 상위 카테고리 이름 목록 반환"""
     if not NAVER_CLIENT_ID or not NAVER_CLIENT_SECRET:

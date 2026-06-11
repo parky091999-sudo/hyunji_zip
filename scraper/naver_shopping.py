@@ -139,19 +139,37 @@ SEARCH_KEYWORDS: list[tuple[str, str]] = [
 ]
 
 
-def _build_keyword_order(trending_cats: list[str] | None) -> list[tuple[str, str]]:
-    """트렌딩 카테고리 키워드를 앞에, 나머지를 뒤에 배치"""
-    if not trending_cats:
-        return SEARCH_KEYWORDS
+def _build_keyword_order(
+    trending_cats: list[str] | None,
+    priority_keywords: list[tuple[str, str]] | None = None,
+) -> list[tuple[str, str]]:
+    """검색 키워드 우선순위 빌드.
 
-    priority: list[tuple[str, str]] = []
-    others:   list[tuple[str, str]] = []
-    for cat_name, kw_list in SEARCH_KEYWORDS_BY_CATEGORY.items():
-        if cat_name in trending_cats:
-            priority.extend(kw_list)
-        else:
-            others.extend(kw_list)
-    return priority + others
+    우선순위 (위에서 아래로):
+    1. priority_keywords (시즌·모멘텀 부스트된 키워드) — 맨 앞
+    2. trending_cats 카테고리 키워드 — 그 다음
+    3. 나머지 — 마지막
+
+    priority_keywords가 SEARCH_KEYWORDS에도 있으면 중복 제거 (뒤에서 제외).
+    """
+    priority = list(priority_keywords or [])
+    seen_keys = {kw for kw, _ in priority}
+
+    if trending_cats:
+        cat_block: list[tuple[str, str]] = []
+        others: list[tuple[str, str]] = []
+        for cat_name, kw_list in SEARCH_KEYWORDS_BY_CATEGORY.items():
+            for kw, hint in kw_list:
+                if kw in seen_keys:
+                    continue
+                if cat_name in trending_cats:
+                    cat_block.append((kw, hint))
+                else:
+                    others.append((kw, hint))
+        return priority + cat_block + others
+
+    rest = [(kw, hint) for kw, hint in SEARCH_KEYWORDS if kw not in seen_keys]
+    return priority + rest
 
 MIN_LPRICE = 15_000  # 15,000원 미만 단순 소품 제외
 
@@ -477,13 +495,23 @@ def _check_coupang_rating(product: dict) -> bool:
         return True
 
 
-def scrape_deals(max_items: int = MAX_PRODUCTS_PER_RUN, trending_cats: list[str] | None = None) -> list[dict]:
-    """상품 수집 (네이버 쇼핑 API) — 트렌딩 카테고리 우선, 쿠팡 판매 상품 필터"""
+def scrape_deals(
+    max_items: int = MAX_PRODUCTS_PER_RUN,
+    trending_cats: list[str] | None = None,
+    priority_keywords: list[tuple[str, str]] | None = None,
+) -> list[dict]:
+    """상품 수집 (네이버 쇼핑 API).
+
+    검색 우선순위: priority_keywords(시즌·모멘텀) → trending_cats → 나머지.
+    쿠팡 판매 상품만 통과.
+    """
     if not NAVER_CLIENT_ID or not NAVER_CLIENT_SECRET:
         logger.error("네이버 API 키 미설정")
         return []
 
-    keywords = _build_keyword_order(trending_cats)
+    keywords = _build_keyword_order(trending_cats, priority_keywords)
+    if priority_keywords:
+        logger.info(f"시즌·모멘텀 우선 키워드 {len(priority_keywords)}개 배치")
     if trending_cats:
         logger.info(f"트렌딩 카테고리 우선 검색: {trending_cats}")
 

@@ -93,14 +93,47 @@ async def _collect_products(need: int, posted_ids: set[str], rejected_urls: set[
     if len(products) < need and NAVER_CLIENT_ID:
         logger.info(f"네이버 쇼핑으로 {need - len(products)}개 보충...")
         from scraper.naver_shopping import scrape_deals
+
+        # ── 시즌 키워드 + 모멘텀 부스트 ──────────────────────────────────────
+        priority_keywords: list[tuple[str, str]] = []
+        try:
+            from scraper.seasonal_keywords import get_seasonal_keywords
+            seasonal = get_seasonal_keywords()
+            if seasonal:
+                logger.info(f"  시즌 키워드({datetime.now(KST).month}월) {len(seasonal)}개")
+                try:
+                    from scraper.naver_datalab import get_keyword_momentum
+                    kw_only = [kw for kw, _ in seasonal]
+                    scores  = get_keyword_momentum(kw_only)
+                    # 모멘텀 점수 높은 순으로 시즌 키워드 정렬 (점수 없으면 원래 순서)
+                    priority_keywords = sorted(
+                        seasonal,
+                        key=lambda x: scores.get(x[0], 1.0),
+                        reverse=True,
+                    )
+                    if scores:
+                        logger.info(
+                            f"  모멘텀 정렬 후 Top3: {[k for k,_ in priority_keywords[:3]]}"
+                        )
+                except Exception as e:
+                    logger.warning(f"  모멘텀 조회 스킵: {e}")
+                    priority_keywords = seasonal
+        except Exception as e:
+            logger.warning(f"  시즌 키워드 스킵: {e}")
+
         try:
             from scraper.naver_datalab import get_trending_categories
             trending_cats = get_trending_categories(top_n=3)
-            logger.info(f"  데이터랩 트렌딩: {trending_cats or '없음(전체 키워드 사용)'}")
+            logger.info(f"  데이터랩 트렌딩 카테고리: {trending_cats or '없음'}")
         except Exception as e:
-            logger.warning(f"데이터랩 스킵: {e}")
+            logger.warning(f"데이터랩 카테고리 스킵: {e}")
             trending_cats = None
-        extra = scrape_deals(max_items=need - len(products), trending_cats=trending_cats)
+
+        extra = scrape_deals(
+            max_items=need - len(products),
+            trending_cats=trending_cats,
+            priority_keywords=priority_keywords,
+        )
         for p in extra:
             if _product_key(p) not in posted_ids and p not in products and not _is_rejected(p):
                 products.append(p)
