@@ -28,7 +28,7 @@ def load_firebase_config() -> str:
 
 _TICKER_MSG = "이 페이지의 링크는 쿠팡파트너스 활동의 일환으로, 구매 시 일정액의 수수료를 제공받을 수 있습니다"
 
-CATEGORIES = ["전체", "먹는거", "뷰티", "주방", "생활", "디지털/가전", "인테리어", "기타"]
+CATEGORIES = ["전체", "식품", "뷰티", "주방", "생활", "디지털/가전", "인테리어", "기타"]
 
 
 def build_cards(products: list[dict]) -> str:
@@ -181,7 +181,7 @@ def build_html(products: list[dict]) -> str:
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--border);
-    padding: 16px 16px 14px;
+    padding: 12px 16px 12px;
     text-align: center;
     position: sticky;
     top: 33px;
@@ -193,14 +193,32 @@ def build_html(products: list[dict]) -> str:
     justify-content: space-between;
     margin-bottom: 10px;
   }}
+  /* 워드마크 — 한글 '꿀픽' 단독, 미세 그라데이션 + 그림자 */
   .logo {{
-    font-size: 1.8rem;
-    font-weight: 900;
-    letter-spacing: -1px;
+    font-size: 1.65rem;
+    font-weight: 800;
+    letter-spacing: -1.5px;
     flex: 1;
     text-align: center;
+    background: linear-gradient(135deg, var(--accent) 0%, #FFB454 65%, var(--accent2) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    text-shadow: 0 1px 0 rgba(255,107,53,0.06);
+    padding: 0 4px;
+    line-height: 1;
   }}
-  .logo .accent {{ color: var(--accent); }}
+  .logo::after {{
+    content: '';
+    display: block;
+    width: 22px;
+    height: 2px;
+    margin: 6px auto 0;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    opacity: 0.7;
+  }}
   .tagline {{
     font-size: 0.73rem;
     color: var(--text2);
@@ -275,20 +293,21 @@ def build_html(products: list[dict]) -> str:
   .cat-pill {{
     font-size: 0.72rem;
     font-weight: 600;
-    padding: 5px 12px;
+    padding: 5px 13px;
     border-radius: 20px;
     border: 1.5px solid var(--border);
     background: var(--surface2);
     color: var(--text2);
     cursor: pointer;
-    transition: all .15s;
+    transition: all .18s ease;
     white-space: nowrap;
   }}
-  .cat-pill:hover {{ border-color: var(--accent); color: var(--accent); }}
+  .cat-pill:hover {{ border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }}
   .cat-pill.active {{
-    background: var(--accent);
+    background: linear-gradient(135deg, var(--accent), #FF8552);
     border-color: var(--accent);
     color: #fff;
+    box-shadow: 0 2px 8px rgba(255,107,53,0.25);
   }}
 
   /* ── 컨트롤 바 ── */
@@ -475,11 +494,27 @@ def build_html(products: list[dict]) -> str:
     transition: all .2s;
   }}
   .grid.list-view {{ grid-template-columns: 1fr; gap: 8px; }}
-  .grid.list-view .card {{ flex-direction: row; height: 76px; }}
+  .grid.list-view .card {{ flex-direction: row; height: 76px; position: relative; }}
   .grid.list-view .card img {{ width: 76px; height: 76px; aspect-ratio: 1/1; flex-shrink: 0; border-radius: var(--radius) 0 0 var(--radius); }}
-  .grid.list-view .card-body {{ padding: 6px 12px; justify-content: center; align-items: center; text-align: center; gap: 3px; }}
-  .grid.list-view .badge-row {{ margin-bottom: 0; justify-content: center; }}
-  .grid.list-view .name {{ -webkit-line-clamp: 2; margin-bottom: 0; font-size: 0.8rem; flex: initial; }}
+  /* 리스트뷰: 상품명만 가운데, 코드/HOT 뱃지는 좌측 상단(이미지 우측 위) */
+  .grid.list-view .card-body {{ padding: 8px 14px 8px 14px; justify-content: center; align-items: center; text-align: center; gap: 0; }}
+  .grid.list-view .badge-row {{
+    position: absolute;
+    top: 4px;
+    left: 84px;
+    margin: 0;
+    gap: 4px;
+    z-index: 2;
+  }}
+  .grid.list-view .name {{
+    -webkit-line-clamp: 2;
+    margin: 0;
+    font-size: 0.82rem;
+    font-weight: 600;
+    flex: initial;
+    text-align: center;
+    padding-top: 10px; /* 상단 뱃지 영역 회피 */
+  }}
 
   /* ── 카드 ── */
   .card {{
@@ -555,7 +590,7 @@ def build_html(products: list[dict]) -> str:
 <header>
   <div class="header-top">
     <div style="width:50px"></div>
-    <div class="logo">🍯 <span class="accent">꿀픽</span></div>
+    <div class="logo">꿀픽</div>
     <div class="header-btns">
       <button class="icon-btn" id="theme-btn" onclick="toggleTheme()" title="다크/라이트">☀️</button>
       <button class="icon-btn" onclick="showQR()" title="QR코드">
@@ -642,7 +677,7 @@ def build_html(products: list[dict]) -> str:
   /* ── 카테고리 자동 추론 ── */
   function inferCategory(name) {{
     const n = name.toLowerCase();
-    if (/메론|멜론|과일|사과|딸기|포도|감귤|고기|한우|삼겹|식품|간식|과자|젤리|견과|쌀|김치|반찬|즉석|밀키트|음료|주스|차류|원두|해산물|생선|간재미|오징어|새우|소스|양념|장아찌|육포|빵|떡|꿀\b/.test(n)) return '먹는거';
+    if (/메론|멜론|과일|사과|딸기|포도|감귤|고기|한우|삼겹|식품|간식|과자|젤리|견과|쌀|김치|반찬|즉석|밀키트|음료|주스|차류|원두|해산물|생선|간재미|오징어|새우|소스|양념|장아찌|육포|빵|떡|꿀\b/.test(n)) return '식품';
     if (/크림|샴푸|세럼|마스크팩|화장품|뷰티|헤어|두피|클렌징|세안|렌즈|로션|에센스|토너|선크림/.test(n)) return '뷰티';
     if (/도마|식기세척기|주방|냄비|프라이팬|에어프라이어|정수기|조리|커피|그릇|칼|가위|집게/.test(n)) return '주방';
     if (/휴지통|청소기|세탁|수납|정리함|쓰레기|걸레|진공|빨래|청소/.test(n)) return '생활';
