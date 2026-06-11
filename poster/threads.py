@@ -132,13 +132,18 @@ def get_post_url(post_id: str) -> str | None:
         return None
 
 
-def create_reply(post_id: str, text: str) -> str | None:
-    """포스트에 댓글 달기
+PAGE_BASE = "https://parky091999-sudo.github.io/coupang-pipeline"
 
-    반환: 댓글 ID (실패 시 None)
+
+def create_reply(post_id: str, text: str) -> str | None:
+    """포스트에 댓글 달기 — Threads API 규격: reply_to_id로 컨테이너 생성 후 publish.
+
+    반환: 게시된 댓글 ID (실패 시 None)
     """
     if not THREADS_ACCESS_TOKEN:
         logger.warning("THREADS_ACCESS_TOKEN 미설정 — 댓글 불가")
+        return None
+    if not post_id:
         return None
 
     try:
@@ -148,26 +153,57 @@ def create_reply(post_id: str, text: str) -> str | None:
             params={
                 "media_type": "TEXT",
                 "text": text,
-                "reply_settings": "everyone",
+                "reply_to_id": post_id,
                 "access_token": THREADS_ACCESS_TOKEN,
             },
         )
-        reply_id = data.get("id", "")
+        container_id = data.get("id", "")
+        if not container_id:
+            logger.warning("댓글 컨테이너 생성 실패")
+            return None
 
-        # 이 reply를 원래 포스트에 연결
-        _api(
+        time.sleep(5)  # 컨테이너 처리 대기
+        pub = _api(
             "POST",
-            f"/{post_id}/replies",
+            f"/{THREADS_USER_ID}/threads_publish",
             params={
-                "media_id": reply_id,
+                "creation_id": container_id,
                 "access_token": THREADS_ACCESS_TOKEN,
             },
         )
-        logger.info(f"  댓글 작성 완료: {reply_id}")
+        reply_id = pub.get("id") or container_id
+        logger.info(f"  댓글 게시 완료: {reply_id}")
         return reply_id
     except Exception as e:
         logger.warning(f"댓글 작성 실패: {e}")
         return None
+
+
+def fetch_my_posts(limit: int = 100) -> list[dict]:
+    """내 최근 게시글 목록 [{id, permalink, text}] — permalink↔실제 media id 매칭용"""
+    if not THREADS_ACCESS_TOKEN:
+        return []
+    try:
+        data = _api(
+            "GET",
+            f"/{THREADS_USER_ID}/threads",
+            params={
+                "fields": "id,permalink,text",
+                "limit": limit,
+                "access_token": THREADS_ACCESS_TOKEN,
+            },
+        )
+        return data.get("data", [])
+    except Exception as e:
+        logger.warning(f"내 게시글 목록 조회 실패: {e}")
+        return []
+
+
+def post_product_link_comment(post_id: str, code: str) -> str | None:
+    """포스팅 직후 첫 댓글로 상품 페이지 링크 달기 (본문 외부링크 회피 정석 패턴)"""
+    if not (post_id and code):
+        return None
+    return create_reply(post_id, f"상품 정보 👉 {PAGE_BASE}/r/{code}.html")
 
 
 def find_recent_post_by_marker(marker: str, limit: int = 25) -> dict | None:

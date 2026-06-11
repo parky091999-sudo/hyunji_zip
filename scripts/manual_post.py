@@ -179,6 +179,7 @@ async def run():
 
     # ── 멱등 가드: 동일 코드 게시글이 이미 있으면 게시 생략, 기록만 복구
     result = None
+    already = None
     if code:
         already = find_recent_post_by_marker(f"[{code}] 검색")
         if already:
@@ -237,6 +238,13 @@ async def run():
 
     if post_url and post_id:
         add_recent_post(post_url, post_id, "manual", code)
+        # 첫 댓글로 상품 페이지 링크 (가드복구 글은 이미 달려있을 수 있어 스킵)
+        if code and not already:
+            try:
+                from poster.threads import post_product_link_comment
+                post_product_link_comment(post_id, code)
+            except Exception as e:
+                logger.warning(f"링크 댓글 실패(무시): {e}")
 
     logger.info(f"수동 포스팅 완료: {status} | {post_url or '(URL 없음)'}")
 

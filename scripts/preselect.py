@@ -262,9 +262,12 @@ async def run():
         category_idx = {cat: 0 for cat in by_category}
         sorted_cats = sorted(by_category.keys())
 
-        while len(selected) < count and selected_total_available := sum(
-            len(by_category[cat]) - category_idx[cat] for cat in sorted_cats
-        ) > 0:
+        while len(selected) < count:
+            remaining = sum(
+                len(by_category[cat]) - category_idx[cat] for cat in sorted_cats
+            )
+            if remaining <= 0:
+                break
             for cat in sorted_cats:
                 if len(selected) >= count:
                     break
