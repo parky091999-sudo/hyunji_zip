@@ -1,5 +1,5 @@
 {
-  "scanned_at": "2026-06-11T13:32:13.562086+09:00",
+  "scanned_at": "2026-06-11T21:09:49.435292+09:00",
   "candidates": [
     {
       "product": {
@@ -11,6 +11,18 @@
         "source": "benchmark"
       },
       "source_account": "living_flex",
+      "selected": false
+    },
+    {
+      "product": {
+        "name": "중국식품 중국수입 마라탕 샤브 훠궈 식재료 문어볼 피쉬볼 냉동 400g 1개",
+        "price": "3,310원",
+        "image_url": "https://shopping-phinf.pstatic.net/main_4301371/43013712313.94.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=7530263200&ctag=7530263200&lptag=I19175475758&itemId=19175475758&vendorItemId=85936728894&spec=10305199",
+        "brand": "",
+        "source": "benchmark"
+      },
+      "source_account": "remeet_jeong",
       "selected": false
     }
   ]
