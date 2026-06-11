@@ -13,6 +13,7 @@ import io
 import logging
 import os
 import sys
+import time
 
 import requests
 
@@ -46,18 +47,36 @@ def _download_image(url: str) -> bytes | None:
     return None
 
 
+def _to_clean_jpeg(img_bytes: bytes) -> bytes:
+    """Gemini 출력 바이트를 표준 JPEG으로 강제 재인코딩.
+
+    Threads API가 imgBB의 비표준 컨테이너(WebP/PNG with alpha 등) fetch에
+    실패하는 문제(2207052/2207083) 회피용. PIL로 RGB 변환 후 quality=92 JPEG.
+    """
+    from PIL import Image
+    im = Image.open(io.BytesIO(img_bytes)).convert("RGB")
+    buf = io.BytesIO()
+    im.save(buf, format="JPEG", quality=92, optimize=True)
+    return buf.getvalue()
+
+
 def _upload_imgbb(img_bytes: bytes) -> str | None:
     try:
         b64 = base64.b64encode(img_bytes).decode()
         r = requests.post(
             "https://api.imgbb.com/1/upload",
-            data={"key": IMGBB_API_KEY, "image": b64},
+            data={
+                "key": IMGBB_API_KEY,
+                "image": b64,
+                # 명시적 .jpg 확장자 — Threads가 Content-Type/URL 모두 jpg로 인식
+                "name": f"kkulpick_{int(time.time())}",
+            },
             timeout=30,
         )
         if r.status_code == 200:
             d = r.json()["data"]
-            # display_url = 직접 렌더링 가능한 이미지 URL (Threads가 fetch 가능해야 함)
-            return d.get("display_url") or d.get("url")
+            # url = 원본 직접 URL (확장자 보존). display_url은 변환 거치는 경우 있어 회피.
+            return d.get("url") or d.get("display_url")
         logger.warning(f"imgBB 오류: {r.status_code}")
     except Exception as e:
         logger.warning(f"imgBB 업로드 실패: {e}")
@@ -119,6 +138,12 @@ def generate_and_upload_images(product: dict, post_text: str = "") -> list[str]:
                 if part.inline_data is not None:
                     raw = part.inline_data.data
                     img_bytes = base64.b64decode(raw) if isinstance(raw, str) else raw
+                    # Gemini 출력은 컨테이너 형식이 들쭉날쭉(WebP/PNG with alpha 등) — Threads가
+                    # imgBB의 비표준 형식 fetch에 실패해 carousel 0/N으로 폴백되는 버그 회피.
+                    try:
+                        img_bytes = _to_clean_jpeg(img_bytes)
+                    except Exception as e:
+                        logger.warning(f"  JPEG 재인코딩 실패, 원본 업로드 시도: {e}")
                     url = _upload_imgbb(img_bytes)
                     if url:
                         results.append(url)
