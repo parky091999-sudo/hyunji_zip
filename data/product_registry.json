@@ -138,6 +138,7 @@
       "category": "생활",
       "registered_at": "2026-06-11T01:59:20.118454+09:00",
       "posted": true,
+      "removed": true,
       "short_name": "삼각 건조대"
     },
     "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9526850240&ctag=9526850240&lpt": {
@@ -148,7 +149,7 @@
       "category": "",
       "registered_at": "2026-06-11T02:45:32.934658+09:00",
       "posted": true,
-      "short_name": "휴대"
+      "short_name": "휴대용 의류건조기"
     }
   }
 }

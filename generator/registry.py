@@ -115,5 +115,5 @@ def get_all() -> list[dict]:
             "registered_at": v.get("registered_at", ""),
         }
         for v in reg["products"].values()
-        if v.get("posted", False)
+        if v.get("posted", False) and not v.get("removed", False)
     ]
