@@ -22,25 +22,6 @@
     },
     {
       "product": {
-        "name": "비쎌 BA-BS2233S 그레이블루, 단품",
-        "price": "228,000원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_5359713/53597131820.20251117094258.jpg",
-        "product_url": "https://search.shopping.naver.com/catalog/53597131820",
-        "badge": "네이버",
-        "brand": "비쎌",
-        "category": "스팀청소기",
-        "category_hint": "생활/청소",
-        "mall_name": "네이버",
-        "source": "naver_shopping",
-        "scraped_at": "2026-06-11T14:14:54.507122"
-      },
-      "source_account": "검색:스팀청소기",
-      "selected": false
-    },
-    {
-      "product": {
         "name": "한경희생활과학 HESM-D1600 화이트",
         "price": "97,990원",
         "original_price": "",
