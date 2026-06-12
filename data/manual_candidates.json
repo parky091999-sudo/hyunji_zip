@@ -380,25 +380,6 @@
       },
       "source_account": "검색:북유럽 캔들",
       "selected": false
-    },
-    {
-      "product": {
-        "name": "데코아르 스마트 자동센서 스테인레스 휴지통 (20L 전용)",
-        "price": "54,900원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_5771787/57717876802.jpg",
-        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=6582577923&ctag=6582577923&lptag=l050201694728&itemId=40208950176&vendorItemId=92082014509&spec=10305198",
-        "badge": "쿠팡",
-        "brand": "",
-        "category": "휴지통",
-        "category_hint": "수납/정리",
-        "mall_name": "쿠팡",
-        "source": "naver_shopping",
-        "scraped_at": "2026-06-11T15:21:35.976422"
-      },
-      "source_account": "검색:자동센서 휴지통",
-      "selected": false
     }
   ]
 }
