@@ -1,30 +1,78 @@
 {
   "for_date": "2026-06-13",
-  "generated_at": "2026-06-12T00:04:34.857079+09:00",
+  "generated_at": "2026-06-12T09:30:56.286459+09:00",
   "candidates": [
     {
       "product": {
-        "name": "욕실 컬러변화세정제 폼타입 크리너 3개 550ml",
+        "name": "레드빈 전동 무선 발각질제거기 v2 1개",
         "price": "48,900원",
         "original_price": "",
         "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_6035009/60350095010.jpg",
-        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9584297193&ctag=9584297193&lptag=I28609841556&itemId=28609841556&vendorItemId=95553317976&spec=10305199",
+        "image_url": "https://shopping-phinf.pstatic.net/main_5575357/55753577549.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8904361169&ctag=8904361169&lptag=I26004267081&itemId=26004267081&vendorItemId=92986353936&spec=10305198",
         "badge": "쿠팡",
-        "brand": "",
-        "category": "세제/세정제",
-        "category_hint": "생활",
+        "brand": "레드빈",
+        "category": "발각질제거기",
+        "category_hint": "건강",
         "mall_name": "쿠팡",
         "source": "naver_shopping",
-        "scraped_at": "2026-06-11T15:03:41.723715"
+        "scraped_at": "2026-06-12T00:29:45.063579"
       },
-      "post_text": "화장실 청소할 때마다 독한 냄새 때문에 숨 참는 사람, 여기 모여봐! 🤢\n솔이랑 락스 들고 쪼그려 앉아서 벅벅 문지를 때마다 팔이랑 허리 아픈 건 기본이고, 그 냄새 때문에 눈물 콧물 쏙 빠지는 거 나만 그런 거 아니더라고. 진짜 귀찮고 힘든데 안 할 수도 없고, 이런 고민하는 사람한테 이 폼 클리너가 딱임.\n\n그냥 더러운 곳에 칙칙 뿌려두면 오염물이 분해되면서 색깔이 스르륵 변하는 거 알아? 🌈 변색된 거 확인하고 물로 쏴악 헹궈주기만 하면 청소 끝이래. 폼 타입이라 변기 안쪽이나 타일 틈새 같은 구석진 곳에도 빈틈없이 싹 덮어주는 게 진짜 편했음. 덕분에 독한 냄새도 거의 안 나서 청소하면서 숨 참을 필요도 없더라고.\n\n후기들 보니까 이걸",
-      "image_url": "https://shopping-phinf.pstatic.net/main_6035009/60350095010.jpg",
+      "post_text": "발바닥이 자꾸 거칠어져서 침대에 닿을 때마다 신경 쓰이는 사람 손? 🙋‍♀️\n\n걷고 나면 발바닥이 쉽게 푸석해지거나, 건조한 계절에 발꿈치가 갈라져서 속상한 친구들한테 이거 딱이겠더라고. 굳이 돈 들여서 숍에 갈 필요 없이 집에서 편하게 관리하고 싶은 사람한테 특히 추천함.\n\n이게 그냥 밀거나 긁어내는 게 아니라, 미세한 입자의 헤드가 부드럽게 회전하면서 불필요한 각질만 깔끔하게 정리해 줘. 게다가 무선이라 콘센트 찾을 필요 없이 욕실이든 거실이든 편하게 쓸 수 있는 것도 대박임. 써본 사람들이 하나같이 '발이 아기 피부처럼 매끈해진다'고 극찬하더라.\n\n✔ 팁: 샤워 후에 물기 닦고 보습 크림 바르기 전에 쓰면 효과가 더 좋더라고.\n일주일에 한두 번 꾸준히 관리하면 따로 신경 쓸 일 없이 발이 보들보들할 거야.\n\n#전자기기 #가전추천 #테크템 #발관리 #홈케어",
+      "image_url": "https://shopping-phinf.pstatic.net/main_5575357/55753577549.jpg",
       "detail_images": [
-        "https://shopping-phinf.pstatic.net/main_6035009/60350095010.jpg"
+        "https://shopping-phinf.pstatic.net/main_5575357/55753577549.jpg"
       ],
       "product_code": "",
-      "status": "excluded"
+      "status": "pending"
+    },
+    {
+      "product": {
+        "name": "아이룸 전동 무선 발각질 제거기  1개",
+        "price": "47,000원",
+        "original_price": "",
+        "discount_rate": 0,
+        "image_url": "https://shopping-phinf.pstatic.net/main_4357320/43573201797.8.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=7598213797&ctag=7598213797&lptag=I20093246513&itemId=20093246513&vendorItemId=87540093727&spec=10305198",
+        "badge": "쿠팡",
+        "brand": "아이룸",
+        "category": "발각질제거기",
+        "category_hint": "건강",
+        "mall_name": "쿠팡",
+        "source": "naver_shopping",
+        "scraped_at": "2026-06-12T00:29:45.064083"
+      },
+      "post_text": "까끌거리는 발 뒤꿈치 때문에 여름에 샌들 신기 망설여지는 날 있더라. 😭\n\n풋샵 가서 관리받자니 시간도 돈도 부담스러울 때가 많거든. 근데 또 그냥 두면 점점 더 거칠어지고 갈라져서 스타킹 올 나가는 일도 생기더라고. 신경 쓰이는 발을 그냥 두",
+      "image_url": "https://shopping-phinf.pstatic.net/main_4357320/43573201797.8.jpg",
+      "detail_images": [
+        "https://shopping-phinf.pstatic.net/main_4357320/43573201797.8.jpg"
+      ],
+      "product_code": "",
+      "status": "pending"
+    },
+    {
+      "product": {
+        "name": "나디 해피바디 발 종아리 마사지기 BM-508 온열 전동 홈케어",
+        "price": "128,990원",
+        "original_price": "",
+        "discount_rate": 0,
+        "image_url": "https://shopping-phinf.pstatic.net/main_4005221/40052215030.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=7251231516&ctag=7251231516&lptag=I18446204222&itemId=18446204222&vendorItemId=85587127094&spec=10305197",
+        "badge": "쿠팡",
+        "brand": "나디",
+        "category": "다리/발마사지기",
+        "category_hint": "건강",
+        "mall_name": "쿠팡",
+        "source": "naver_shopping",
+        "scraped_at": "2026-06-12T00:29:45.721288"
+      },
+      "post_text": "세상에.. 다리가 이렇게 시원해질 수 있다는 거, 진짜 몰랐음! ✨\n\n하루 종일 서서 일하거나 운동해서 다리 퉁퉁 붓는 사람, 혹은 오래 앉아있어서 다리가 저릿저릿한 사람 있잖아? 집에 오면 다리가 천근만근이더라고. 그런 고통 겪는 사람한테 딱인 꿀템 발견했어.\n\n이게 발바닥부터 종아리까지 감싸주면서 압력 마사지를 해주거든. 게다가 온열 기능이 있어서 따뜻하게 찜질하듯이 근육을 풀어주더라. 손으로 주무르는 것보다 훨씬 깊고 시원하게 풀어주는 느낌임. 덕분에 부었던 다리가 한결 가벼워지는 걸 바로 느낄 수 있었어.\n\n써본 사람들이 다들 '퇴근 후 필수템'이라고 후기를 남겼더라.\n\n✔ 자기 전에 15분 정도 해주면 하루 피로가 싹 풀려서 잠도 솔솔 오고, 다음 날 아침이 훨씬 개운할 거야.\n✔ 드라마 보거나 책 읽을 때 꾸준히 해주면 다리 라인 관리에도 도움 많이 된다고 함.\n\n#건강템 #홈케어 #마사지기 #피로회복 #몸관리",
+      "image_url": "https://shopping-phinf.pstatic.net/main_4005221/40052215030.jpg",
+      "detail_images": [
+        "https://shopping-phinf.pstatic.net/main_4005221/40052215030.jpg"
+      ],
+      "product_code": "",
+      "status": "pending"
     }
   ]
 }
