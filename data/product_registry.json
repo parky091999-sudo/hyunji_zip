@@ -1,5 +1,5 @@
 {
-  "next_code": 17,
+  "next_code": 18,
   "blocked_item_ids": [],
   "products": {
     "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8849967732&ctag=8849967732&lpt": {
@@ -161,6 +161,16 @@
       "registered_at": "2026-06-11T23:03:26.347204+09:00",
       "posted": true,
       "short_name": "자동 껍질 제거기"
+    },
+    "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=7563103498&ctag=7563103498&lpt": {
+      "code": "017",
+      "name": "스텐 무타공 욕실선반 물빠짐 부착식 삼각 코너선반 이동식 후크 수건걸이 포함 화이트 N219  1개  단품",
+      "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=7563103498&ctag=7563103498&lptag=V92014282357&itemId=19929902201&vendorItemId=92014282357&spec=10305199",
+      "image_url": "https://shopping-phinf.pstatic.net/main_6002166/60021665465.jpg",
+      "category": "",
+      "registered_at": "2026-06-12T12:14:52.003245+09:00",
+      "posted": true,
+      "short_name": "욕실"
     }
   }
 }
