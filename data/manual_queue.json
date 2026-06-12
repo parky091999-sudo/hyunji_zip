@@ -34,5 +34,29 @@
     "added_at": "2026-06-07T02:57:07.715Z",
     "edited": true,
     "content_gen_at": "2026-06-07T13:45:45.094278+09:00"
+  },
+  {
+    "product": {
+      "name": "민트리 탄산버블 두피 스케일러 15g",
+      "price": "24,900원",
+      "original_price": "",
+      "discount_rate": 0,
+      "image_url": "https://shopping-phinf.pstatic.net/main_5664650/56646502984.3.jpg",
+      "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=4973897891&ctag=4973897891&lptag=l232283981501&itemId=98185122033&vendorItemId=86460168507&spec=10305198",
+      "badge": "쿠팡",
+      "brand": "",
+      "category": "두피케어",
+      "category_hint": "뷰티",
+      "mall_name": "쿠팡",
+      "source": "naver_shopping",
+      "scraped_at": "2026-06-11T15:21:19.938035"
+    },
+    "image_url": "https://shopping-phinf.pstatic.net/main_5664650/56646502984.3.jpg",
+    "detail_images": [],
+    "post_text": "",
+    "product_code": "preview",
+    "source_account": "검색:두피 스케일러",
+    "added_at": "2026-06-12T01:00:01.956Z",
+    "edited": false
   }
 ]
