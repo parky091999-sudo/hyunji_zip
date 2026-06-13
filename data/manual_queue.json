@@ -48,5 +48,29 @@
     "added_at": "2026-06-12T01:01:25.934Z",
     "edited": false,
     "content_gen_at": "2026-06-12T10:02:49.232678+09:00"
+  },
+  {
+    "product": {
+      "name": "휴대용 빨래건조기 UV살균 접이식 미니 건조기 스타일러 002S 002S",
+      "price": "27,000원",
+      "original_price": "",
+      "discount_rate": 0,
+      "image_url": "https://shopping-phinf.pstatic.net/main_4636969/46369692651.67.jpg",
+      "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=7930210672&ctag=7930210672&lptag=I21810029458&itemId=21810029458&vendorItemId=88858533465&spec=10305199",
+      "badge": "쿠팡",
+      "brand": "",
+      "category": "세탁/건조기",
+      "category_hint": "디지털/가전",
+      "mall_name": "쿠팡",
+      "source": "naver_shopping",
+      "scraped_at": "2026-06-11T15:21:05.944006"
+    },
+    "image_url": "https://shopping-phinf.pstatic.net/main_4636969/46369692651.67.jpg",
+    "detail_images": [],
+    "post_text": "",
+    "product_code": "preview",
+    "source_account": "검색:휴대용 의류건조기",
+    "added_at": "2026-06-13T17:17:53.833Z",
+    "edited": false
   }
 ]
