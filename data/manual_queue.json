@@ -1,6 +1,20 @@
 [
   {
     "product": {
+      "product_url": "https://link.coupang.com/a/exXYTDSjTM?abTestInfo=100412_group_A",
+      "name": "무아스 플라즈마 BLDC 헤어드라이기",
+      "image_url": "",
+      "price": ""
+    },
+    "image_url": "",
+    "detail_images": [],
+    "post_text": "",
+    "product_code": "preview",
+    "source_account": "direct_url",
+    "added_at": "2026-06-13T09:19:08.335Z"
+  },
+  {
+    "product": {
       "product_url": "https://link.coupang.com/a/exBjt9szPo?abTestInfo=100412_group_A",
       "name": "실리콘 국자거치대",
       "image_url": "",
