@@ -129,7 +129,7 @@ def build_html(posts: list[dict]) -> str:
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>현지의 zip 피드 | Threads 포스팅 기록</title>
+<title>피드</title>
 <style>
   *, *::before, *::after {{ box-sizing: border-box; margin: 0; padding: 0; }}
   :root {{
@@ -359,7 +359,7 @@ def build_html(posts: list[dict]) -> str:
 
 <header>
   <div class="header-row">
-    <div class="logo">🌿 <span class="accent">현지의 zip</span><span class="sub">피드</span></div>
+    <div class="logo"></div>
     <a class="nav-btn" href="index.html">상품 목록 →</a>
   </div>
 </header>
@@ -380,7 +380,7 @@ def build_html(posts: list[dict]) -> str:
     <div class="disclosure-title">안내</div>
     <div class="disclosure-text">{disclosure}</div>
   </div>
-  <div class="footer-copy">© 현지의 zip</div>
+  <div class="footer-copy"></div>
 </footer>
 
 </body>

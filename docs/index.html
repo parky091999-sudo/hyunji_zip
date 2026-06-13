@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>꿀픽 | 진짜 쓸만한 것들만 모았어요</title>
+<title>홈</title>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
@@ -93,7 +93,7 @@
     justify-content: space-between;
     margin-bottom: 10px;
   }
-  /* 워드마크 — 한글 '꿀픽' 단독, 미세 그라데이션 + 그림자 */
+  /* 워드마크 — 한글 '현지의 zip' 단독, 미세 그라데이션 + 그림자 */
   .logo {
     font-size: 1.65rem;
     font-weight: 800;
@@ -490,7 +490,7 @@
 <header>
   <div class="header-top">
     <div style="width:50px"></div>
-    <div class="logo">꿀픽</div>
+    <div class="logo"></div>
     <div class="header-btns">
       <button class="icon-btn" id="theme-btn" onclick="toggleTheme()" title="다크/라이트">☀️</button>
       <button class="icon-btn" onclick="showQR()" title="QR코드">
@@ -547,12 +547,12 @@
 
     <a class="card" data-code="020" data-name="마이디어 6인용 식기세척기 hdw-601w 화이트 방문설치 자동건조 직배수 식세기" data-category="생활"
        href="https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=7485794615&ctag=7485794615&lptag=I19564684746&itemId=19564684746&vendorItemId=86672582405&spec=10305197" target="_blank" rel="noopener noreferrer" onclick="recordClick('020')">
-      <img src="https://shopping-phinf.pstatic.net/main_4234044/42340443912.18.jpg" alt="6인" loading="lazy" onerror="this.parentElement.classList.add('no-img')">
+      <img src="https://shopping-phinf.pstatic.net/main_4234044/42340443912.18.jpg" alt="6인용 식기세척기" loading="lazy" onerror="this.parentElement.classList.add('no-img')">
       <div class="card-body">
         <div class="badge-row">
           <span class="badge">[020]</span>
         </div>
-        <p class="name">6인</p>
+        <p class="name">6인용 식기세척기</p>
       </div>
     </a>
     <a class="card" data-code="018" data-name="트리코 우베 크런치롤 1개 1kg" data-category="생활"
@@ -736,7 +736,7 @@
       상품 가격 및 재고는 실시간으로 변동될 수 있으며, 쿠팡 페이지에서 최종 확인 후 구매해 주세요.
     </div>
   </div>
-  <div class="footer-copy">© 꿀픽</div>
+  <div class="footer-copy"></div>
 </footer>
 
 <div id="qr-modal" class="modal-overlay" onclick="hideQR()">
@@ -752,7 +752,7 @@
 
 <script>
   /* ── 상품 데이터 ── */
-  const PRODUCTS_DATA = [{"code": "001", "name": "라비드 수분 크림", "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8849967732&ctag=8849967732&lptag=I25798233944&itemId=25798233944&vendorItemId=92800900135&spec=10305199", "image_url": "https://shopping-phinf.pstatic.net/main_5539049/55390497493.9.jpg", "category": "뷰티", "registered_at": ""}, {"code": "002", "name": "우디스텐 원목 압축도마", "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9398328940&ctag=9398328940&lptag=I27914508308&itemId=27914508308&vendorItemId=94873137382&spec=10305199", "image_url": "https://shopping-phinf.pstatic.net/main_5912012/59120122138.jpg", "category": "주방", "registered_at": ""}, {"code": "003", "name": "CLABO 딥클린 샴푸", "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=5652252849&ctag=5652252849&lptag=I8574817075&itemId=8574817075&vendorItemId=92419089816&spec=10305197", "image_url": "https://shopping-phinf.pstatic.net/main_5720025/57200255943.jpg", "category": "뷰티", "registered_at": ""}, {"code": "004", "name": "헬로키티 정수기 디스펜서", "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8645052268&ctag=8645052268&lptag=P8645052268&itemId=27727944467&vendorItemId=94689248135&spec=10305199", "image_url": "https://shopping-phinf.pstatic.net/main_5880827/58808274258.jpg", "category": "주방", "registered_at": ""}, {"code": "005", "name": "스마트 휴지통(20L)", "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=6582577923&ctag=6582577923&lptag=l050201694728&itemId=40208950176&vendorItemId=92082014509&spec=10305198", "image_url": "https://shopping-phinf.pstatic.net/main_5771787/57717876802.jpg", "category": "생활", "registered_at": ""}, {"code": "006", "name": "6인용 식기세척기", "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=5655029966&ctag=5655029966&lptag=I9265334954&itemId=9265334954&vendorItemId=71163768673&spec=10305199", "image_url": "https://shopping-phinf.pstatic.net/main_5932285/59322851701.1.jpg", "category": "주방", "registered_at": ""}, {"code": "007", "name": "넥밴드 목걸이형 선풍기", "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=5954126991&ctag=5954126991&lptag=I19303587546&itemId=19303587546&vendorItemId=92075466958&spec=10305198", "image_url": "https://shopping-phinf.pstatic.net/main_5924557/59245572574.1.jpg", "category": "디지털/가전", "registered_at": ""}, {"code": "008", "name": "국내산 간재미무침", "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=1950168221&ctag=1950168221&lptag=I3312740152&itemId=3312740152&vendorItemId=70068989986&spec=10305199", "image_url": "https://shopping-phinf.pstatic.net/main_5465817/54658171664.jpg", "category": "생활", "registered_at": "2026-06-07T22:20:14.665107+09:00"}, {"code": "009", "name": "더마 LED 마스크 피부관리기", "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=144078772&ctag=144078772&lptag=I418339449&itemId=418339449&vendorItemId=4027752053&spec=10305197", "image_url": "https://shopping-phinf.pstatic.net/main_2165635/21656357875.47.jpg", "category": "뷰티", "registered_at": "2026-06-07T22:24:31.500535+09:00"}, {"code": "010", "name": "하미과 메론", "url": "https://link.coupang.com/a/epkxxrVWOz?abTestInfo=100412_group_A", "image_url": "https://shopping-phinf.pstatic.net/main_6002262/60022625465.jpg", "category": "식품", "registered_at": "2026-06-09T02:41:59.952607+09:00"}, {"code": "011", "name": "전동 후추그라인더", "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8923523045&ctag=8923523045&lptag=I26078683398&itemId=26078683398&vendorItemId=93059656519&spec=10305198", "image_url": "https://shopping-phinf.pstatic.net/main_5733255/57332559712.8.jpg", "category": "주방", "registered_at": "2026-06-09T03:18:18.899642+09:00"}, {"code": "012", "name": "휴대용 선풍기", "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9544762614&ctag=9544762614&lptag=I28474601961&itemId=28474601961&vendorItemId=95424830533&spec=10305198", "image_url": "https://shopping-phinf.pstatic.net/main_6024768/60247686492.jpg", "category": "디지털/가전", "registered_at": "2026-06-10T01:27:38.524711+09:00"}, {"code": "013", "name": "스팀청소기", "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9414993291&ctag=9414993291&lptag=I27976259146&itemId=27976259146&vendorItemId=94381995919&spec=10305198", "image_url": "https://shopping-phinf.pstatic.net/main_5915999/59159994257.10.jpg", "category": "생활", "registered_at": "2026-06-10T02:27:57.431164+09:00"}, {"code": "015", "name": "휴대용 의류건조기", "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9526850240&ctag=9526850240&lptag=I28406301581&itemId=28406301581&vendorItemId=95552128940&spec=10305199", "image_url": "https://shopping-phinf.pstatic.net/main_5998634/59986344743.2.jpg", "category": "생활", "registered_at": "2026-06-11T02:45:32.934658+09:00"}, {"code": "016", "name": "자동 껍질 제거기", "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9259122538&ctag=9259122538&lptag=I27394439934&itemId=27394439934&vendorItemId=94549415028&spec=10305198", "image_url": "https://shopping-phinf.pstatic.net/main_6033007/60330072885.jpg", "category": "주방", "registered_at": "2026-06-11T23:03:26.347204+09:00"}, {"code": "017", "name": "무타공 욕실선반", "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=7563103498&ctag=7563103498&lptag=V92014282357&itemId=19929902201&vendorItemId=92014282357&spec=10305199", "image_url": "https://shopping-phinf.pstatic.net/main_6002166/60021665465.jpg", "category": "생활", "registered_at": "2026-06-12T12:14:52.003245+09:00"}, {"code": "018", "name": "우베 크런치롤", "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9577543856&ctag=9577543856&lptag=I28588347633&itemId=28588347633&vendorItemId=95561478308&spec=10305199", "image_url": "https://shopping-phinf.pstatic.net/main_6029377/60293779722.1.jpg", "category": "생활", "registered_at": "2026-06-12T20:26:07.324183+09:00"}, {"code": "020", "name": "6인", "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=7485794615&ctag=7485794615&lptag=I19564684746&itemId=19564684746&vendorItemId=86672582405&spec=10305197", "image_url": "https://shopping-phinf.pstatic.net/main_4234044/42340443912.18.jpg", "category": "생활", "registered_at": "2026-06-13T11:31:42.408837+09:00"}];
+  const PRODUCTS_DATA = [{"code": "001", "name": "라비드 수분 크림", "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8849967732&ctag=8849967732&lptag=I25798233944&itemId=25798233944&vendorItemId=92800900135&spec=10305199", "image_url": "https://shopping-phinf.pstatic.net/main_5539049/55390497493.9.jpg", "category": "뷰티", "registered_at": ""}, {"code": "002", "name": "우디스텐 원목 압축도마", "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9398328940&ctag=9398328940&lptag=I27914508308&itemId=27914508308&vendorItemId=94873137382&spec=10305199", "image_url": "https://shopping-phinf.pstatic.net/main_5912012/59120122138.jpg", "category": "주방", "registered_at": ""}, {"code": "003", "name": "CLABO 딥클린 샴푸", "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=5652252849&ctag=5652252849&lptag=I8574817075&itemId=8574817075&vendorItemId=92419089816&spec=10305197", "image_url": "https://shopping-phinf.pstatic.net/main_5720025/57200255943.jpg", "category": "뷰티", "registered_at": ""}, {"code": "004", "name": "헬로키티 정수기 디스펜서", "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8645052268&ctag=8645052268&lptag=P8645052268&itemId=27727944467&vendorItemId=94689248135&spec=10305199", "image_url": "https://shopping-phinf.pstatic.net/main_5880827/58808274258.jpg", "category": "주방", "registered_at": ""}, {"code": "005", "name": "스마트 휴지통(20L)", "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=6582577923&ctag=6582577923&lptag=l050201694728&itemId=40208950176&vendorItemId=92082014509&spec=10305198", "image_url": "https://shopping-phinf.pstatic.net/main_5771787/57717876802.jpg", "category": "생활", "registered_at": ""}, {"code": "006", "name": "6인용 식기세척기", "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=5655029966&ctag=5655029966&lptag=I9265334954&itemId=9265334954&vendorItemId=71163768673&spec=10305199", "image_url": "https://shopping-phinf.pstatic.net/main_5932285/59322851701.1.jpg", "category": "주방", "registered_at": ""}, {"code": "007", "name": "넥밴드 목걸이형 선풍기", "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=5954126991&ctag=5954126991&lptag=I19303587546&itemId=19303587546&vendorItemId=92075466958&spec=10305198", "image_url": "https://shopping-phinf.pstatic.net/main_5924557/59245572574.1.jpg", "category": "디지털/가전", "registered_at": ""}, {"code": "008", "name": "국내산 간재미무침", "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=1950168221&ctag=1950168221&lptag=I3312740152&itemId=3312740152&vendorItemId=70068989986&spec=10305199", "image_url": "https://shopping-phinf.pstatic.net/main_5465817/54658171664.jpg", "category": "생활", "registered_at": "2026-06-07T22:20:14.665107+09:00"}, {"code": "009", "name": "더마 LED 마스크 피부관리기", "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=144078772&ctag=144078772&lptag=I418339449&itemId=418339449&vendorItemId=4027752053&spec=10305197", "image_url": "https://shopping-phinf.pstatic.net/main_2165635/21656357875.47.jpg", "category": "뷰티", "registered_at": "2026-06-07T22:24:31.500535+09:00"}, {"code": "010", "name": "하미과 메론", "url": "https://link.coupang.com/a/epkxxrVWOz?abTestInfo=100412_group_A", "image_url": "https://shopping-phinf.pstatic.net/main_6002262/60022625465.jpg", "category": "식품", "registered_at": "2026-06-09T02:41:59.952607+09:00"}, {"code": "011", "name": "전동 후추그라인더", "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8923523045&ctag=8923523045&lptag=I26078683398&itemId=26078683398&vendorItemId=93059656519&spec=10305198", "image_url": "https://shopping-phinf.pstatic.net/main_5733255/57332559712.8.jpg", "category": "주방", "registered_at": "2026-06-09T03:18:18.899642+09:00"}, {"code": "012", "name": "휴대용 선풍기", "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9544762614&ctag=9544762614&lptag=I28474601961&itemId=28474601961&vendorItemId=95424830533&spec=10305198", "image_url": "https://shopping-phinf.pstatic.net/main_6024768/60247686492.jpg", "category": "디지털/가전", "registered_at": "2026-06-10T01:27:38.524711+09:00"}, {"code": "013", "name": "스팀청소기", "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9414993291&ctag=9414993291&lptag=I27976259146&itemId=27976259146&vendorItemId=94381995919&spec=10305198", "image_url": "https://shopping-phinf.pstatic.net/main_5915999/59159994257.10.jpg", "category": "생활", "registered_at": "2026-06-10T02:27:57.431164+09:00"}, {"code": "015", "name": "휴대용 의류건조기", "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9526850240&ctag=9526850240&lptag=I28406301581&itemId=28406301581&vendorItemId=95552128940&spec=10305199", "image_url": "https://shopping-phinf.pstatic.net/main_5998634/59986344743.2.jpg", "category": "생활", "registered_at": "2026-06-11T02:45:32.934658+09:00"}, {"code": "016", "name": "자동 껍질 제거기", "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9259122538&ctag=9259122538&lptag=I27394439934&itemId=27394439934&vendorItemId=94549415028&spec=10305198", "image_url": "https://shopping-phinf.pstatic.net/main_6033007/60330072885.jpg", "category": "주방", "registered_at": "2026-06-11T23:03:26.347204+09:00"}, {"code": "017", "name": "무타공 욕실선반", "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=7563103498&ctag=7563103498&lptag=V92014282357&itemId=19929902201&vendorItemId=92014282357&spec=10305199", "image_url": "https://shopping-phinf.pstatic.net/main_6002166/60021665465.jpg", "category": "생활", "registered_at": "2026-06-12T12:14:52.003245+09:00"}, {"code": "018", "name": "우베 크런치롤", "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9577543856&ctag=9577543856&lptag=I28588347633&itemId=28588347633&vendorItemId=95561478308&spec=10305199", "image_url": "https://shopping-phinf.pstatic.net/main_6029377/60293779722.1.jpg", "category": "생활", "registered_at": "2026-06-12T20:26:07.324183+09:00"}, {"code": "020", "name": "6인용 식기세척기", "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=7485794615&ctag=7485794615&lptag=I19564684746&itemId=19564684746&vendorItemId=86672582405&spec=10305197", "image_url": "https://shopping-phinf.pstatic.net/main_4234044/42340443912.18.jpg", "category": "생활", "registered_at": "2026-06-13T11:31:42.408837+09:00"}];
 
   /* ── 카테고리 자동 추론 (이름 기반, 키워드 풀 확장) ── */
   function inferCategory(name) {
@@ -793,7 +793,7 @@
       firebase.initializeApp(_FB_CONFIG);
       _db = firebase.firestore();
     } catch(e) {
-      console.warn('[꿀픽] Firebase init error:', e);
+      console.warn('[현지zip] Firebase init error:', e);
     }
   }
 
@@ -819,7 +819,7 @@
       buildCarousel();
       if (currentSort === 'popular') setSort('popular');
     } catch(e) {
-      console.warn('[꿀픽] Firebase load error:', e);
+      console.warn('[현지zip] Firebase load error:', e);
     }
   }
 
@@ -843,7 +843,7 @@
       [`days.${today}`]: firebase.firestore.FieldValue.increment(1),
     }).catch(() => {
       ref.set({ total: 1, days: { [today]: 1 } })
-         .catch(e => console.warn('[꿀픽] write error:', e));
+         .catch(e => console.warn('[현지zip] write error:', e));
     });
   }
 
@@ -1100,7 +1100,7 @@
   function sharePage() {
     const url = window.location.href;
     if (navigator.share) {
-      navigator.share({ title: '꿀픽', text: '매일 하나씩, 진짜 쓸만한 것들만', url }).catch(() => {});
+      navigator.share({ title: '', text: '', url }).catch(() => {});
     } else {
       navigator.clipboard.writeText(url).then(showToast).catch(() => { prompt('링크를 복사하세요:', url); });
     }

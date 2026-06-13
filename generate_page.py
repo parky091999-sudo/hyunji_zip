@@ -103,7 +103,7 @@ def build_html(products: list[dict]) -> str:
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>현지의 zip | 자취 살림 기록</title>
+<title>홈</title>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
@@ -590,7 +590,7 @@ def build_html(products: list[dict]) -> str:
 <header>
   <div class="header-top">
     <div style="width:50px"></div>
-    <div class="logo">현지의 zip</div>
+    <div class="logo"></div>
     <div class="header-btns">
       <button class="icon-btn" id="theme-btn" onclick="toggleTheme()" title="다크/라이트">☀️</button>
       <button class="icon-btn" onclick="showQR()" title="QR코드">
@@ -656,7 +656,7 @@ def build_html(products: list[dict]) -> str:
       상품 가격 및 재고는 실시간으로 변동될 수 있으며, 쿠팡 페이지에서 최종 확인 후 구매해 주세요.
     </div>
   </div>
-  <div class="footer-copy">© 현지의 zip</div>
+  <div class="footer-copy"></div>
 </footer>
 
 <div id="qr-modal" class="modal-overlay" onclick="hideQR()">
@@ -1020,7 +1020,7 @@ def build_html(products: list[dict]) -> str:
   function sharePage() {{
     const url = window.location.href;
     if (navigator.share) {{
-      navigator.share({{ title: '현지의 zip', text: '자취 살림 기록 + 가끔 좋은 거 공유', url }}).catch(() => {{}});
+      navigator.share({{ title: '', text: '', url }}).catch(() => {{}});
     }} else {{
       navigator.clipboard.writeText(url).then(showToast).catch(() => {{ prompt('링크를 복사하세요:', url); }});
     }}
