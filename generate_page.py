@@ -58,7 +58,8 @@ def build_cards(products: list[dict]) -> str:
        href="{url}" {target} onclick="recordClick('{code}')">
       {img_tag}
       <div class="card-body">
-        <p class="name"><span class="code-prefix">[{code}]</span> {display_name}<span class="badge-row"></span></p>
+        <div class="badge-row"></div>
+        <p class="name"><span class="code-prefix">[{code}]</span> {display_name}</p>
       </div>
     </a>"""
     return html
@@ -429,8 +430,8 @@ def build_html(products: list[dict]) -> str:
     transition: border-color .15s, transform .15s;
   }}
   .c-card:hover {{ border-color: var(--accent); transform: translateY(-2px); }}
-  .c-card.rank-best {{ border-color: #50DC78; }}
-  .c-card.rank-hot  {{ border-color: var(--accent); }}
+  .c-card.rank-best {{ border-color: #b8d4b4; }}  /* 파스텔 세이지 */
+  .c-card.rank-hot  {{ border-color: #f3b9a3; }}  /* 파스텔 살구 */
   .c-card img {{
     width: 100%;
     aspect-ratio: 1/1;
@@ -448,16 +449,16 @@ def build_html(products: list[dict]) -> str:
     margin-bottom: 4px;
     letter-spacing: 0.03em;
   }}
-  .c-badge.best {{ background: rgba(80,220,120,0.2); color: #50DC78; border: 1px solid rgba(80,220,120,0.3); }}
-  .c-badge.hot  {{ background: rgba(255,107,53,0.2); color: var(--accent); border: 1px solid rgba(255,107,53,0.3); }}
-  .c-badge.new  {{ background: rgba(255,209,102,0.2); color: var(--accent2); border: 1px solid rgba(255,209,102,0.3); }}
+  .c-badge.best {{ background: #d7e5cf; color: #6e9558; border: 1px solid #c2d6b8; }}
+  .c-badge.hot  {{ background: #f7d9cf; color: #c47a65; border: 1px solid #efc6b7; }}
+  .c-badge.new  {{ background: #ede1f0; color: #8b6da3; border: 1px solid #ddd0e0; }}
   .c-overlay-badge {{
     position: absolute; top: 4px; left: 4px;
-    font-size: 0.58rem; font-weight: 800;
+    font-size: 0.58rem; font-weight: 700;
     padding: 2px 6px; border-radius: 5px; line-height: 1.3;
   }}
-  .c-overlay-badge.hot {{ background: rgba(255,107,53,.92); color: #fff; }}
-  .c-overlay-badge.new {{ background: rgba(255,209,102,.95); color: #5a3e00; }}
+  .c-overlay-badge.hot {{ background: #f3b9a3; color: #6b3a2a; }}
+  .c-overlay-badge.new {{ background: #d4c3dc; color: #5a4368; }}
   /* 카테고리 보기: Best/추천 배너 절반 이하 축소 */
   #featured-section.compact {{ padding-top: 8px; }}
   #featured-section.compact .featured-title {{ margin-bottom: 5px; font-size: 0.68rem; }}
@@ -487,9 +488,10 @@ def build_html(products: list[dict]) -> str:
     transition: all .2s;
   }}
   .grid.list-view {{ grid-template-columns: 1fr; gap: 8px; }}
-  .grid.list-view .card {{ flex-direction: row; height: 76px; position: relative; }}
-  .grid.list-view .card img {{ width: 76px; height: 76px; aspect-ratio: 1/1; flex-shrink: 0; border-radius: var(--radius) 0 0 var(--radius); }}
+  .grid.list-view .card {{ flex-direction: row; height: 88px; }}
+  .grid.list-view .card img {{ width: 88px; height: 88px; aspect-ratio: 1/1; flex-shrink: 0; border-radius: var(--radius) 0 0 var(--radius); }}
   .grid.list-view .card-body {{ padding: 10px 14px; justify-content: center; align-items: flex-start; text-align: left; gap: 0; }}
+  .grid.list-view .badge-row:not(:empty) {{ margin-bottom: 4px; }}
   .grid.list-view .name {{
     -webkit-line-clamp: 2;
     margin: 0;
@@ -524,15 +526,15 @@ def build_html(products: list[dict]) -> str:
     font-weight: 700;
     margin-right: 4px;
   }}
-  .badge-row {{ display: inline-flex; align-items: center; gap: 4px; margin-left: 5px; flex-wrap: wrap; vertical-align: middle; }}
+  .badge-row {{ display: flex; align-items: center; gap: 4px; flex-wrap: wrap; min-height: 0; }}
+  .badge-row:not(:empty) {{ margin-bottom: 6px; }}
   .badge-new, .badge-hot, .badge-best {{
     display: inline-block;
-    font-size: 0.58rem;
+    font-size: 0.6rem;
     font-weight: 700;
-    padding: 1px 6px;
+    padding: 2px 7px;
     border-radius: 8px;
     letter-spacing: 0.04em;
-    vertical-align: middle;
     line-height: 1.4;
   }}
   .badge-new  {{ background: #ede1f0; color: #8b6da3; }}  /* 연 라벤더 */
