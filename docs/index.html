@@ -11,32 +11,32 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --bg: #0d0d0d;
-    --surface: #181818;
-    --surface2: #222;
-    --border: #2c2c2c;
-    --accent: #FF6B35;
-    --accent2: #FFD166;
-    --text: #f0f0f0;
-    --text2: #777;
+    --bg: #faf6f0;
+    --surface: #ffffff;
+    --surface2: #f4ebe0;
+    --border: #ece0cd;
+    --accent: #e8a294;
+    --accent2: #c9a87c;
+    --text: #5a4a3a;
+    --text2: #a89a85;
     --radius: 16px;
-    --ticker-bg: linear-gradient(90deg, #1a0a00, #2a1000, #1a0a00);
-    --ticker-border: rgba(255,107,53,0.3);
-    --ticker-color: rgba(255,209,102,0.9);
-    --header-bg: rgba(13,13,13,0.9);
+    --ticker-bg: linear-gradient(90deg, #f7ebdd, #f4e3cf, #f7ebdd);
+    --ticker-border: rgba(232,162,148,0.25);
+    --ticker-color: rgba(120,90,70,0.85);
+    --header-bg: rgba(250,246,240,0.92);
   }
 
-  body.light {
-    --bg: #f5f5f5;
-    --surface: #ffffff;
-    --surface2: #efefef;
-    --border: #dedede;
-    --text: #111111;
-    --text2: #888888;
-    --ticker-bg: linear-gradient(90deg, #fff3ed, #fff0e6, #fff3ed);
-    --ticker-border: rgba(255,107,53,0.2);
-    --ticker-color: rgba(180,80,20,0.9);
-    --header-bg: rgba(245,245,245,0.95);
+  body.dark {
+    --bg: #2a2520;
+    --surface: #34302a;
+    --surface2: #3d3830;
+    --border: #4a4338;
+    --text: #f0e6d8;
+    --text2: #a89a85;
+    --ticker-bg: linear-gradient(90deg, #2a1d10, #2f2118, #2a1d10);
+    --ticker-border: rgba(232,162,148,0.3);
+    --ticker-color: rgba(240,210,190,0.9);
+    --header-bg: rgba(42,37,32,0.92);
   }
 
   body {
@@ -93,31 +93,27 @@
     justify-content: space-between;
     margin-bottom: 10px;
   }
-  /* 워드마크 — 한글 '현지의 zip' 단독, 미세 그라데이션 + 그림자 */
+  /* 워드마크 — hyunji_zip, 파스텔 톤 */
   .logo {
-    font-size: 1.65rem;
-    font-weight: 800;
-    letter-spacing: -1.5px;
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
     flex: 1;
     text-align: center;
-    background: linear-gradient(135deg, var(--accent) 0%, #FFB454 65%, var(--accent2) 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: transparent;
-    text-shadow: 0 1px 0 rgba(255,107,53,0.06);
+    color: var(--accent);
     padding: 0 4px;
     line-height: 1;
+    font-family: 'Courier New', monospace;
   }
   .logo::after {
     content: '';
     display: block;
-    width: 22px;
-    height: 2px;
-    margin: 6px auto 0;
+    width: 18px;
+    height: 1.5px;
+    margin: 5px auto 0;
     border-radius: 2px;
-    background: linear-gradient(90deg, var(--accent), var(--accent2));
-    opacity: 0.7;
+    background: var(--accent);
+    opacity: 0.4;
   }
   .tagline {
     font-size: 0.73rem;
@@ -396,24 +392,14 @@
   .grid.list-view { grid-template-columns: 1fr; gap: 8px; }
   .grid.list-view .card { flex-direction: row; height: 76px; position: relative; }
   .grid.list-view .card img { width: 76px; height: 76px; aspect-ratio: 1/1; flex-shrink: 0; border-radius: var(--radius) 0 0 var(--radius); }
-  /* 리스트뷰: 상품명만 가운데, 코드/HOT 뱃지는 좌측 상단(이미지 우측 위) */
-  .grid.list-view .card-body { padding: 8px 14px 8px 14px; justify-content: center; align-items: center; text-align: center; gap: 0; }
-  .grid.list-view .badge-row {
-    position: absolute;
-    top: 4px;
-    left: 84px;
-    margin: 0;
-    gap: 4px;
-    z-index: 2;
-  }
+  .grid.list-view .card-body { padding: 10px 14px; justify-content: center; align-items: flex-start; text-align: left; gap: 0; }
   .grid.list-view .name {
     -webkit-line-clamp: 2;
     margin: 0;
     font-size: 0.82rem;
-    font-weight: 600;
+    font-weight: 500;
     flex: initial;
-    text-align: center;
-    padding-top: 10px; /* 상단 뱃지 영역 회피 */
+    text-align: left;
   }
 
   /* ── 카드 ── */
@@ -426,31 +412,47 @@
     flex-direction: column;
     text-decoration: none;
     color: inherit;
+    box-shadow: 0 2px 6px rgba(120,90,70,0.06);
     transition: transform .2s ease, border-color .2s, box-shadow .2s;
   }
-  .card:hover { transform: translateY(-3px); border-color: #3a3a3a; box-shadow: 0 10px 28px rgba(0,0,0,0.45); }
-  body.light .card:hover { box-shadow: 0 10px 28px rgba(0,0,0,0.12); border-color: #ccc; }
-  .grid.list-view .card:hover { transform: translateX(3px); }
+  .card:hover { transform: translateY(-2px); border-color: var(--accent); box-shadow: 0 6px 14px rgba(120,90,70,0.10); }
+  body.dark .card { box-shadow: 0 2px 6px rgba(0,0,0,0.20); }
+  body.dark .card:hover { box-shadow: 0 6px 14px rgba(0,0,0,0.30); }
+  .grid.list-view .card:hover { transform: translateX(2px); }
   .card img { width: 100%; aspect-ratio: 1/1; object-fit: cover; background: var(--surface2); display: block; }
   .card.no-img img { display: none; }
-  .card-body { padding: 10px 10px 12px; display: flex; flex-direction: column; flex: 1; }
-  .badge-row { display: flex; align-items: center; gap: 5px; margin-bottom: 7px; flex-wrap: wrap; }
-  .badge {
-    display: inline-block;
-    background: rgba(255,107,53,0.12);
+  .card-body { padding: 10px 12px 12px; display: flex; flex-direction: column; flex: 1; }
+  .code-prefix {
     color: var(--accent);
-    font-size: 0.67rem;
     font-weight: 700;
-    padding: 2px 8px;
-    border-radius: 20px;
-    border: 1px solid rgba(255,107,53,0.25);
-    flex-shrink: 0;
+    margin-right: 4px;
   }
-  .badge-new  { display: inline-block; background: rgba(255,209,102,0.12); color: var(--accent2); font-size: 0.62rem; font-weight: 800; padding: 2px 6px; border-radius: 20px; border: 1px solid rgba(255,209,102,0.25); letter-spacing: 0.04em; flex-shrink: 0; }
-  .badge-hot  { display: inline-block; background: rgba(255,107,53,0.12); color: #FF6B6B; font-size: 0.62rem; font-weight: 800; padding: 2px 6px; border-radius: 20px; border: 1px solid rgba(255,59,59,0.25); letter-spacing: 0.04em; flex-shrink: 0; }
-  .badge-best { display: inline-block; background: rgba(80,220,120,0.12); color: #50DC78; font-size: 0.62rem; font-weight: 800; padding: 2px 6px; border-radius: 20px; border: 1px solid rgba(80,220,120,0.25); letter-spacing: 0.04em; flex-shrink: 0; }
-  .name { font-size: 0.82rem; font-weight: 600; line-height: 1.45; color: #c0c0c0; flex: 1; text-align: center; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
-  body.light .name { color: #333; }
+  .badge-row { display: inline-flex; align-items: center; gap: 4px; margin-left: 5px; flex-wrap: wrap; vertical-align: middle; }
+  .badge-new, .badge-hot, .badge-best {
+    display: inline-block;
+    font-size: 0.58rem;
+    font-weight: 700;
+    padding: 1px 6px;
+    border-radius: 8px;
+    letter-spacing: 0.04em;
+    vertical-align: middle;
+    line-height: 1.4;
+  }
+  .badge-new  { background: #ede1f0; color: #8b6da3; }  /* 연 라벤더 */
+  .badge-hot  { background: #f7d9cf; color: #c47a65; }  /* 연 살구 */
+  .badge-best { background: #d7e5cf; color: #6e9558; }  /* 연 세이지 */
+  .name {
+    font-size: 0.82rem;
+    font-weight: 500;
+    line-height: 1.45;
+    color: var(--text);
+    flex: 1;
+    text-align: left;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
 
   .empty, #no-result { text-align: center; padding: 60px 20px; color: var(--text2); font-size: 0.88rem; grid-column: 1 / -1; }
   #no-result { display: none; }
@@ -490,7 +492,7 @@
 <header>
   <div class="header-top">
     <div style="width:50px"></div>
-    <div class="logo"></div>
+    <div class="logo">hyunji_zip</div>
     <div class="header-btns">
       <button class="icon-btn" id="theme-btn" onclick="toggleTheme()" title="다크/라이트">☀️</button>
       <button class="icon-btn" onclick="showQR()" title="QR코드">
@@ -549,180 +551,126 @@
        href="https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=7485794615&ctag=7485794615&lptag=I19564684746&itemId=19564684746&vendorItemId=86672582405&spec=10305197" target="_blank" rel="noopener noreferrer" onclick="recordClick('020')">
       <img src="https://shopping-phinf.pstatic.net/main_4234044/42340443912.18.jpg" alt="6인용 식기세척기" loading="lazy" onerror="this.parentElement.classList.add('no-img')">
       <div class="card-body">
-        <div class="badge-row">
-          <span class="badge">[020]</span>
-        </div>
-        <p class="name">6인용 식기세척기</p>
+        <p class="name"><span class="code-prefix">[020]</span> 6인용 식기세척기<span class="badge-row"></span></p>
       </div>
     </a>
     <a class="card" data-code="018" data-name="트리코 우베 크런치롤 1개 1kg" data-category="생활"
        href="https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9577543856&ctag=9577543856&lptag=I28588347633&itemId=28588347633&vendorItemId=95561478308&spec=10305199" target="_blank" rel="noopener noreferrer" onclick="recordClick('018')">
       <img src="https://shopping-phinf.pstatic.net/main_6029377/60293779722.1.jpg" alt="우베 크런치롤" loading="lazy" onerror="this.parentElement.classList.add('no-img')">
       <div class="card-body">
-        <div class="badge-row">
-          <span class="badge">[018]</span>
-        </div>
-        <p class="name">우베 크런치롤</p>
+        <p class="name"><span class="code-prefix">[018]</span> 우베 크런치롤<span class="badge-row"></span></p>
       </div>
     </a>
     <a class="card" data-code="017" data-name="스텐 무타공 욕실선반 물빠짐 부착식 삼각 코너선반 이동식 후크 수건걸이 포함 화이트 n219  1개  단품" data-category="생활"
        href="https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=7563103498&ctag=7563103498&lptag=V92014282357&itemId=19929902201&vendorItemId=92014282357&spec=10305199" target="_blank" rel="noopener noreferrer" onclick="recordClick('017')">
       <img src="https://shopping-phinf.pstatic.net/main_6002166/60021665465.jpg" alt="무타공 욕실선반" loading="lazy" onerror="this.parentElement.classList.add('no-img')">
       <div class="card-body">
-        <div class="badge-row">
-          <span class="badge">[017]</span>
-        </div>
-        <p class="name">무타공 욕실선반</p>
+        <p class="name"><span class="code-prefix">[017]</span> 무타공 욕실선반<span class="badge-row"></span></p>
       </div>
     </a>
     <a class="card" data-code="016" data-name="misuko 자동 껍질 제거기 마늘 과일용 usb 충전  1개" data-category="주방"
        href="https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9259122538&ctag=9259122538&lptag=I27394439934&itemId=27394439934&vendorItemId=94549415028&spec=10305198" target="_blank" rel="noopener noreferrer" onclick="recordClick('016')">
       <img src="https://shopping-phinf.pstatic.net/main_6033007/60330072885.jpg" alt="자동 껍질 제거기" loading="lazy" onerror="this.parentElement.classList.add('no-img')">
       <div class="card-body">
-        <div class="badge-row">
-          <span class="badge">[016]</span>
-        </div>
-        <p class="name">자동 껍질 제거기</p>
+        <p class="name"><span class="code-prefix">[016]</span> 자동 껍질 제거기<span class="badge-row"></span></p>
       </div>
     </a>
     <a class="card" data-code="015" data-name="휴대용 의류건조기 접이식 소형 여행용 자취 원룸 1인용 미니건조기  기본 색상  아이보리 건조 스마트 타이머 휴대용 200w" data-category="생활"
        href="https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9526850240&ctag=9526850240&lptag=I28406301581&itemId=28406301581&vendorItemId=95552128940&spec=10305199" target="_blank" rel="noopener noreferrer" onclick="recordClick('015')">
       <img src="https://shopping-phinf.pstatic.net/main_5998634/59986344743.2.jpg" alt="휴대용 의류건조기" loading="lazy" onerror="this.parentElement.classList.add('no-img')">
       <div class="card-body">
-        <div class="badge-row">
-          <span class="badge">[015]</span>
-        </div>
-        <p class="name">휴대용 의류건조기</p>
+        <p class="name"><span class="code-prefix">[015]</span> 휴대용 의류건조기<span class="badge-row"></span></p>
       </div>
     </a>
     <a class="card" data-code="013" data-name="ponte 독일 다기능 스팀청소기 핸디 고압 화이트 pvc-4809" data-category="생활"
        href="https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9414993291&ctag=9414993291&lptag=I27976259146&itemId=27976259146&vendorItemId=94381995919&spec=10305198" target="_blank" rel="noopener noreferrer" onclick="recordClick('013')">
       <img src="https://shopping-phinf.pstatic.net/main_5915999/59159994257.10.jpg" alt="스팀청소기" loading="lazy" onerror="this.parentElement.classList.add('no-img')">
       <div class="card-body">
-        <div class="badge-row">
-          <span class="badge">[013]</span>
-        </div>
-        <p class="name">스팀청소기</p>
+        <p class="name"><span class="code-prefix">[013]</span> 스팀청소기<span class="badge-row"></span></p>
       </div>
     </a>
     <a class="card" data-code="012" data-name="quzo 아이스 터보 휴대용 선풍기 급속냉각 손풍기  회색  h-202" data-category="디지털/가전"
        href="https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9544762614&ctag=9544762614&lptag=I28474601961&itemId=28474601961&vendorItemId=95424830533&spec=10305198" target="_blank" rel="noopener noreferrer" onclick="recordClick('012')">
       <img src="https://shopping-phinf.pstatic.net/main_6024768/60247686492.jpg" alt="휴대용 선풍기" loading="lazy" onerror="this.parentElement.classList.add('no-img')">
       <div class="card-body">
-        <div class="badge-row">
-          <span class="badge">[012]</span>
-        </div>
-        <p class="name">휴대용 선풍기</p>
+        <p class="name"><span class="code-prefix">[012]</span> 휴대용 선풍기<span class="badge-row"></span></p>
       </div>
     </a>
     <a class="card" data-code="011" data-name="코지스 전동 충전식 원터치 소금 후추그라인더 1세트 200ml" data-category="주방"
        href="https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8923523045&ctag=8923523045&lptag=I26078683398&itemId=26078683398&vendorItemId=93059656519&spec=10305198" target="_blank" rel="noopener noreferrer" onclick="recordClick('011')">
       <img src="https://shopping-phinf.pstatic.net/main_5733255/57332559712.8.jpg" alt="전동 후추그라인더" loading="lazy" onerror="this.parentElement.classList.add('no-img')">
       <div class="card-body">
-        <div class="badge-row">
-          <span class="badge">[011]</span>
-        </div>
-        <p class="name">전동 후추그라인더</p>
+        <p class="name"><span class="code-prefix">[011]</span> 전동 후추그라인더<span class="badge-row"></span></p>
       </div>
     </a>
     <a class="card" data-code="010" data-name="초고당도 농장직송 고령 하미과 메론" data-category="식품"
        href="https://link.coupang.com/a/epkxxrVWOz?abTestInfo=100412_group_A" target="_blank" rel="noopener noreferrer" onclick="recordClick('010')">
       <img src="https://shopping-phinf.pstatic.net/main_6002262/60022625465.jpg" alt="하미과 메론" loading="lazy" onerror="this.parentElement.classList.add('no-img')">
       <div class="card-body">
-        <div class="badge-row">
-          <span class="badge">[010]</span>
-        </div>
-        <p class="name">하미과 메론</p>
+        <p class="name"><span class="code-prefix">[010]</span> 하미과 메론<span class="badge-row"></span></p>
       </div>
     </a>
     <a class="card" data-code="009" data-name="더마 led 마스크 피부관리기 kd-m 클렙튼 셀프 스킨케어 홈케어" data-category="뷰티"
        href="https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=144078772&ctag=144078772&lptag=I418339449&itemId=418339449&vendorItemId=4027752053&spec=10305197" target="_blank" rel="noopener noreferrer" onclick="recordClick('009')">
       <img src="https://shopping-phinf.pstatic.net/main_2165635/21656357875.47.jpg" alt="더마 LED 마스크 피부관리기" loading="lazy" onerror="this.parentElement.classList.add('no-img')">
       <div class="card-body">
-        <div class="badge-row">
-          <span class="badge">[009]</span>
-        </div>
-        <p class="name">더마 LED 마스크 피부관리기</p>
+        <p class="name"><span class="code-prefix">[009]</span> 더마 LED 마스크 피부관리기<span class="badge-row"></span></p>
       </div>
     </a>
     <a class="card" data-code="008" data-name="밥도둑세상 국내산간재미 간재미무침 1k 1kg 1개" data-category="생활"
        href="https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=1950168221&ctag=1950168221&lptag=I3312740152&itemId=3312740152&vendorItemId=70068989986&spec=10305199" target="_blank" rel="noopener noreferrer" onclick="recordClick('008')">
       <img src="https://shopping-phinf.pstatic.net/main_5465817/54658171664.jpg" alt="국내산 간재미무침" loading="lazy" onerror="this.parentElement.classList.add('no-img')">
       <div class="card-body">
-        <div class="badge-row">
-          <span class="badge">[008]</span>
-        </div>
-        <p class="name">국내산 간재미무침</p>
+        <p class="name"><span class="code-prefix">[008]</span> 국내산 간재미무침<span class="badge-row"></span></p>
       </div>
     </a>
     <a class="card" data-code="007" data-name="비즈 목덜이 넥밴드 선풍기 2개   화이트1+1 bz-fl20" data-category="디지털/가전"
        href="https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=5954126991&ctag=5954126991&lptag=I19303587546&itemId=19303587546&vendorItemId=92075466958&spec=10305198" target="_blank" rel="noopener noreferrer" onclick="recordClick('007')">
       <img src="https://shopping-phinf.pstatic.net/main_5924557/59245572574.1.jpg" alt="넥밴드 목걸이형 선풍기" loading="lazy" onerror="this.parentElement.classList.add('no-img')">
       <div class="card-body">
-        <div class="badge-row">
-          <span class="badge">[007]</span>
-        </div>
-        <p class="name">넥밴드 목걸이형 선풍기</p>
+        <p class="name"><span class="code-prefix">[007]</span> 넥밴드 목걸이형 선풍기<span class="badge-row"></span></p>
       </div>
     </a>
     <a class="card" data-code="006" data-name="쿠쿠 식기세척기 6인용 cdw-a0611tw 방문설치" data-category="주방"
        href="https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=5655029966&ctag=5655029966&lptag=I9265334954&itemId=9265334954&vendorItemId=71163768673&spec=10305199" target="_blank" rel="noopener noreferrer" onclick="recordClick('006')">
       <img src="https://shopping-phinf.pstatic.net/main_5932285/59322851701.1.jpg" alt="6인용 식기세척기" loading="lazy" onerror="this.parentElement.classList.add('no-img')">
       <div class="card-body">
-        <div class="badge-row">
-          <span class="badge">[006]</span>
-        </div>
-        <p class="name">6인용 식기세척기</p>
+        <p class="name"><span class="code-prefix">[006]</span> 6인용 식기세척기<span class="badge-row"></span></p>
       </div>
     </a>
     <a class="card" data-code="005" data-name="데코아르 스마트 자동센서 스테인레스 휴지통 (20l 전용)" data-category="생활"
        href="https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=6582577923&ctag=6582577923&lptag=l050201694728&itemId=40208950176&vendorItemId=92082014509&spec=10305198" target="_blank" rel="noopener noreferrer" onclick="recordClick('005')">
       <img src="https://shopping-phinf.pstatic.net/main_5771787/57717876802.jpg" alt="스마트 휴지통(20L)" loading="lazy" onerror="this.parentElement.classList.add('no-img')">
       <div class="card-body">
-        <div class="badge-row">
-          <span class="badge">[005]</span>
-        </div>
-        <p class="name">스마트 휴지통(20L)</p>
+        <p class="name"><span class="code-prefix">[005]</span> 스마트 휴지통(20L)<span class="badge-row"></span></p>
       </div>
     </a>
     <a class="card" data-code="004" data-name="산리오 헬로키티 미니 물 정수기 디스펜서 2l 핑크" data-category="주방"
        href="https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8645052268&ctag=8645052268&lptag=P8645052268&itemId=27727944467&vendorItemId=94689248135&spec=10305199" target="_blank" rel="noopener noreferrer" onclick="recordClick('004')">
       <img src="https://shopping-phinf.pstatic.net/main_5880827/58808274258.jpg" alt="헬로키티 정수기 디스펜서" loading="lazy" onerror="this.parentElement.classList.add('no-img')">
       <div class="card-body">
-        <div class="badge-row">
-          <span class="badge">[004]</span>
-        </div>
-        <p class="name">헬로키티 정수기 디스펜서</p>
+        <p class="name"><span class="code-prefix">[004]</span> 헬로키티 정수기 디스펜서<span class="badge-row"></span></p>
       </div>
     </a>
     <a class="card" data-code="003" data-name="clabo 딥클린 샴푸 트로피칼 시트러스 960ml 2개 약산성 두피케어" data-category="뷰티"
        href="https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=5652252849&ctag=5652252849&lptag=I8574817075&itemId=8574817075&vendorItemId=92419089816&spec=10305197" target="_blank" rel="noopener noreferrer" onclick="recordClick('003')">
       <img src="https://shopping-phinf.pstatic.net/main_5720025/57200255943.jpg" alt="CLABO 딥클린 샴푸" loading="lazy" onerror="this.parentElement.classList.add('no-img')">
       <div class="card-body">
-        <div class="badge-row">
-          <span class="badge">[003]</span>
-        </div>
-        <p class="name">CLABO 딥클린 샴푸</p>
+        <p class="name"><span class="code-prefix">[003]</span> CLABO 딥클린 샴푸<span class="badge-row"></span></p>
       </div>
     </a>
     <a class="card" data-code="002" data-name="네오플램 아르코 우디스텐 도마 우드화이버 원목 압축도마 1개 패들" data-category="주방"
        href="https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9398328940&ctag=9398328940&lptag=I27914508308&itemId=27914508308&vendorItemId=94873137382&spec=10305199" target="_blank" rel="noopener noreferrer" onclick="recordClick('002')">
       <img src="https://shopping-phinf.pstatic.net/main_5912012/59120122138.jpg" alt="우디스텐 원목 압축도마" loading="lazy" onerror="this.parentElement.classList.add('no-img')">
       <div class="card-body">
-        <div class="badge-row">
-          <span class="badge">[002]</span>
-        </div>
-        <p class="name">우디스텐 원목 압축도마</p>
+        <p class="name"><span class="code-prefix">[002]</span> 우디스텐 원목 압축도마<span class="badge-row"></span></p>
       </div>
     </a>
     <a class="card" data-code="001" data-name="라비드 비비드 퍼플 속건조 케어 수분 크림 50g 2개" data-category="뷰티"
        href="https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8849967732&ctag=8849967732&lptag=I25798233944&itemId=25798233944&vendorItemId=92800900135&spec=10305199" target="_blank" rel="noopener noreferrer" onclick="recordClick('001')">
       <img src="https://shopping-phinf.pstatic.net/main_5539049/55390497493.9.jpg" alt="라비드 수분 크림" loading="lazy" onerror="this.parentElement.classList.add('no-img')">
       <div class="card-body">
-        <div class="badge-row">
-          <span class="badge">[001]</span>
-        </div>
-        <p class="name">라비드 수분 크림</p>
+        <p class="name"><span class="code-prefix">[001]</span> 라비드 수분 크림<span class="badge-row"></span></p>
       </div>
     </a>
   <div id="no-result">검색 결과가 없습니다</div>
@@ -1070,17 +1018,17 @@
 
   /* ── 다크/라이트 모드 ── */
   function applyTheme(theme) {
-    document.body.classList.toggle('light', theme === 'light');
-    document.getElementById('theme-btn').textContent = theme === 'light' ? '🌙' : '☀️';
+    document.body.classList.toggle('dark', theme === 'dark');
+    document.getElementById('theme-btn').textContent = theme === 'dark' ? '☀️' : '🌙';
   }
 
   function toggleTheme() {
-    const next = document.body.classList.contains('light') ? 'dark' : 'light';
+    const next = document.body.classList.contains('dark') ? 'light' : 'dark';
     localStorage.setItem(THEME_KEY, next);
     applyTheme(next);
   }
 
-  applyTheme(localStorage.getItem(THEME_KEY) || 'dark');
+  applyTheme(localStorage.getItem(THEME_KEY) || 'light');
 
   /* ── QR ── */
   let qrGenerated = false;

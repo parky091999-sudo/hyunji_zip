@@ -58,10 +58,7 @@ def build_cards(products: list[dict]) -> str:
        href="{url}" {target} onclick="recordClick('{code}')">
       {img_tag}
       <div class="card-body">
-        <div class="badge-row">
-          <span class="badge">[{code}]</span>
-        </div>
-        <p class="name">{display_name}</p>
+        <p class="name"><span class="code-prefix">[{code}]</span> {display_name}<span class="badge-row"></span></p>
       </div>
     </a>"""
     return html
@@ -111,32 +108,32 @@ def build_html(products: list[dict]) -> str:
   *, *::before, *::after {{ box-sizing: border-box; margin: 0; padding: 0; }}
 
   :root {{
-    --bg: #0d0d0d;
-    --surface: #181818;
-    --surface2: #222;
-    --border: #2c2c2c;
-    --accent: #FF6B35;
-    --accent2: #FFD166;
-    --text: #f0f0f0;
-    --text2: #777;
+    --bg: #faf6f0;
+    --surface: #ffffff;
+    --surface2: #f4ebe0;
+    --border: #ece0cd;
+    --accent: #e8a294;
+    --accent2: #c9a87c;
+    --text: #5a4a3a;
+    --text2: #a89a85;
     --radius: 16px;
-    --ticker-bg: linear-gradient(90deg, #1a0a00, #2a1000, #1a0a00);
-    --ticker-border: rgba(255,107,53,0.3);
-    --ticker-color: rgba(255,209,102,0.9);
-    --header-bg: rgba(13,13,13,0.9);
+    --ticker-bg: linear-gradient(90deg, #f7ebdd, #f4e3cf, #f7ebdd);
+    --ticker-border: rgba(232,162,148,0.25);
+    --ticker-color: rgba(120,90,70,0.85);
+    --header-bg: rgba(250,246,240,0.92);
   }}
 
-  body.light {{
-    --bg: #f5f5f5;
-    --surface: #ffffff;
-    --surface2: #efefef;
-    --border: #dedede;
-    --text: #111111;
-    --text2: #888888;
-    --ticker-bg: linear-gradient(90deg, #fff3ed, #fff0e6, #fff3ed);
-    --ticker-border: rgba(255,107,53,0.2);
-    --ticker-color: rgba(180,80,20,0.9);
-    --header-bg: rgba(245,245,245,0.95);
+  body.dark {{
+    --bg: #2a2520;
+    --surface: #34302a;
+    --surface2: #3d3830;
+    --border: #4a4338;
+    --text: #f0e6d8;
+    --text2: #a89a85;
+    --ticker-bg: linear-gradient(90deg, #2a1d10, #2f2118, #2a1d10);
+    --ticker-border: rgba(232,162,148,0.3);
+    --ticker-color: rgba(240,210,190,0.9);
+    --header-bg: rgba(42,37,32,0.92);
   }}
 
   body {{
@@ -193,31 +190,27 @@ def build_html(products: list[dict]) -> str:
     justify-content: space-between;
     margin-bottom: 10px;
   }}
-  /* 워드마크 — 한글 '현지의 zip' 단독, 미세 그라데이션 + 그림자 */
+  /* 워드마크 — hyunji_zip, 파스텔 톤 */
   .logo {{
-    font-size: 1.65rem;
-    font-weight: 800;
-    letter-spacing: -1.5px;
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
     flex: 1;
     text-align: center;
-    background: linear-gradient(135deg, var(--accent) 0%, #FFB454 65%, var(--accent2) 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: transparent;
-    text-shadow: 0 1px 0 rgba(255,107,53,0.06);
+    color: var(--accent);
     padding: 0 4px;
     line-height: 1;
+    font-family: 'Courier New', monospace;
   }}
   .logo::after {{
     content: '';
     display: block;
-    width: 22px;
-    height: 2px;
-    margin: 6px auto 0;
+    width: 18px;
+    height: 1.5px;
+    margin: 5px auto 0;
     border-radius: 2px;
-    background: linear-gradient(90deg, var(--accent), var(--accent2));
-    opacity: 0.7;
+    background: var(--accent);
+    opacity: 0.4;
   }}
   .tagline {{
     font-size: 0.73rem;
@@ -496,24 +489,14 @@ def build_html(products: list[dict]) -> str:
   .grid.list-view {{ grid-template-columns: 1fr; gap: 8px; }}
   .grid.list-view .card {{ flex-direction: row; height: 76px; position: relative; }}
   .grid.list-view .card img {{ width: 76px; height: 76px; aspect-ratio: 1/1; flex-shrink: 0; border-radius: var(--radius) 0 0 var(--radius); }}
-  /* 리스트뷰: 상품명만 가운데, 코드/HOT 뱃지는 좌측 상단(이미지 우측 위) */
-  .grid.list-view .card-body {{ padding: 8px 14px 8px 14px; justify-content: center; align-items: center; text-align: center; gap: 0; }}
-  .grid.list-view .badge-row {{
-    position: absolute;
-    top: 4px;
-    left: 84px;
-    margin: 0;
-    gap: 4px;
-    z-index: 2;
-  }}
+  .grid.list-view .card-body {{ padding: 10px 14px; justify-content: center; align-items: flex-start; text-align: left; gap: 0; }}
   .grid.list-view .name {{
     -webkit-line-clamp: 2;
     margin: 0;
     font-size: 0.82rem;
-    font-weight: 600;
+    font-weight: 500;
     flex: initial;
-    text-align: center;
-    padding-top: 10px; /* 상단 뱃지 영역 회피 */
+    text-align: left;
   }}
 
   /* ── 카드 ── */
@@ -526,31 +509,47 @@ def build_html(products: list[dict]) -> str:
     flex-direction: column;
     text-decoration: none;
     color: inherit;
+    box-shadow: 0 2px 6px rgba(120,90,70,0.06);
     transition: transform .2s ease, border-color .2s, box-shadow .2s;
   }}
-  .card:hover {{ transform: translateY(-3px); border-color: #3a3a3a; box-shadow: 0 10px 28px rgba(0,0,0,0.45); }}
-  body.light .card:hover {{ box-shadow: 0 10px 28px rgba(0,0,0,0.12); border-color: #ccc; }}
-  .grid.list-view .card:hover {{ transform: translateX(3px); }}
+  .card:hover {{ transform: translateY(-2px); border-color: var(--accent); box-shadow: 0 6px 14px rgba(120,90,70,0.10); }}
+  body.dark .card {{ box-shadow: 0 2px 6px rgba(0,0,0,0.20); }}
+  body.dark .card:hover {{ box-shadow: 0 6px 14px rgba(0,0,0,0.30); }}
+  .grid.list-view .card:hover {{ transform: translateX(2px); }}
   .card img {{ width: 100%; aspect-ratio: 1/1; object-fit: cover; background: var(--surface2); display: block; }}
   .card.no-img img {{ display: none; }}
-  .card-body {{ padding: 10px 10px 12px; display: flex; flex-direction: column; flex: 1; }}
-  .badge-row {{ display: flex; align-items: center; gap: 5px; margin-bottom: 7px; flex-wrap: wrap; }}
-  .badge {{
-    display: inline-block;
-    background: rgba(255,107,53,0.12);
+  .card-body {{ padding: 10px 12px 12px; display: flex; flex-direction: column; flex: 1; }}
+  .code-prefix {{
     color: var(--accent);
-    font-size: 0.67rem;
     font-weight: 700;
-    padding: 2px 8px;
-    border-radius: 20px;
-    border: 1px solid rgba(255,107,53,0.25);
-    flex-shrink: 0;
+    margin-right: 4px;
   }}
-  .badge-new  {{ display: inline-block; background: rgba(255,209,102,0.12); color: var(--accent2); font-size: 0.62rem; font-weight: 800; padding: 2px 6px; border-radius: 20px; border: 1px solid rgba(255,209,102,0.25); letter-spacing: 0.04em; flex-shrink: 0; }}
-  .badge-hot  {{ display: inline-block; background: rgba(255,107,53,0.12); color: #FF6B6B; font-size: 0.62rem; font-weight: 800; padding: 2px 6px; border-radius: 20px; border: 1px solid rgba(255,59,59,0.25); letter-spacing: 0.04em; flex-shrink: 0; }}
-  .badge-best {{ display: inline-block; background: rgba(80,220,120,0.12); color: #50DC78; font-size: 0.62rem; font-weight: 800; padding: 2px 6px; border-radius: 20px; border: 1px solid rgba(80,220,120,0.25); letter-spacing: 0.04em; flex-shrink: 0; }}
-  .name {{ font-size: 0.82rem; font-weight: 600; line-height: 1.45; color: #c0c0c0; flex: 1; text-align: center; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }}
-  body.light .name {{ color: #333; }}
+  .badge-row {{ display: inline-flex; align-items: center; gap: 4px; margin-left: 5px; flex-wrap: wrap; vertical-align: middle; }}
+  .badge-new, .badge-hot, .badge-best {{
+    display: inline-block;
+    font-size: 0.58rem;
+    font-weight: 700;
+    padding: 1px 6px;
+    border-radius: 8px;
+    letter-spacing: 0.04em;
+    vertical-align: middle;
+    line-height: 1.4;
+  }}
+  .badge-new  {{ background: #ede1f0; color: #8b6da3; }}  /* 연 라벤더 */
+  .badge-hot  {{ background: #f7d9cf; color: #c47a65; }}  /* 연 살구 */
+  .badge-best {{ background: #d7e5cf; color: #6e9558; }}  /* 연 세이지 */
+  .name {{
+    font-size: 0.82rem;
+    font-weight: 500;
+    line-height: 1.45;
+    color: var(--text);
+    flex: 1;
+    text-align: left;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }}
 
   .empty, #no-result {{ text-align: center; padding: 60px 20px; color: var(--text2); font-size: 0.88rem; grid-column: 1 / -1; }}
   #no-result {{ display: none; }}
@@ -590,7 +589,7 @@ def build_html(products: list[dict]) -> str:
 <header>
   <div class="header-top">
     <div style="width:50px"></div>
-    <div class="logo"></div>
+    <div class="logo">hyunji_zip</div>
     <div class="header-btns">
       <button class="icon-btn" id="theme-btn" onclick="toggleTheme()" title="다크/라이트">☀️</button>
       <button class="icon-btn" onclick="showQR()" title="QR코드">
@@ -990,17 +989,17 @@ def build_html(products: list[dict]) -> str:
 
   /* ── 다크/라이트 모드 ── */
   function applyTheme(theme) {{
-    document.body.classList.toggle('light', theme === 'light');
-    document.getElementById('theme-btn').textContent = theme === 'light' ? '🌙' : '☀️';
+    document.body.classList.toggle('dark', theme === 'dark');
+    document.getElementById('theme-btn').textContent = theme === 'dark' ? '☀️' : '🌙';
   }}
 
   function toggleTheme() {{
-    const next = document.body.classList.contains('light') ? 'dark' : 'light';
+    const next = document.body.classList.contains('dark') ? 'light' : 'dark';
     localStorage.setItem(THEME_KEY, next);
     applyTheme(next);
   }}
 
-  applyTheme(localStorage.getItem(THEME_KEY) || 'dark');
+  applyTheme(localStorage.getItem(THEME_KEY) || 'light');
 
   /* ── QR ── */
   let qrGenerated = false;
