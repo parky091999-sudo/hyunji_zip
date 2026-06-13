@@ -1,7 +1,7 @@
 """
 콘텐츠 생성기
 - 글1: Groq AI로 상품별 맞춤 생성 (스토리텔링 + 해시태그)
-- 글2: 코드 기반 유도 — 본문엔 [CODE]만, 실제 링크는 첫 댓글에 자동 게시
+- 글2: 코드 기반 유도 — 본문에 "프로필 링크에서 [CODE] 검색" 안내
 - COUPANG_PARTNERS_ACTIVE=True 시 본문 끝에 공정위 고지문 자동 추가 (자연스럽게 끝에만)
 - ★ 수정: 쿠팡 상세페이지에서 이미지 3~4장 수집 → carousel 포스팅용
 """
@@ -73,7 +73,7 @@ _POST1_SYSTEM = """
 - 텍스트만 출력. 따옴표·메타설명·안내문구 넣지 마
 """.strip()
 
-_CODE_LINE = "링크는 댓글에 👇 [{code}]"
+_CODE_LINE = "제품 정보는 프로필 링크에서 [{code}] 검색 👆"
 
 # 외국어 탐지 — 명시적 \u 이스케이프로 인코딩 이슈 완전 차단
 # 허용: 한글(U+AC00-U+D7A3, U+1100-U+11FF, U+3130-U+318F), ASCII(0x00-0x7F), 이모지 등
@@ -405,11 +405,11 @@ def generate_post(product: dict, assign_code_now: bool = True) -> dict:
         post_text_1 = _generate_post1_ai(product, "CODE")
         if post_text_1:
             # CODE 플레이스홀더 제거 (포스팅 시점에 실제 코드로 교체)
-            post_text_1 = re.sub(r'\n\n링크는 댓글에 👇 \[CODE\]', '', post_text_1)
+            post_text_1 = re.sub(r'\n\n제품 정보는 프로필 링크에서 \[CODE\] 검색 👆', '', post_text_1)
             style = "ai"
         else:
             body = _post1_fallback(name, "CODE")
-            post_text_1 = re.sub(r'\n\n링크는 댓글에 👇 \[CODE\]', '', body)
+            post_text_1 = re.sub(r'\n\n제품 정보는 프로필 링크에서 \[CODE\] 검색 👆', '', body)
             style = "fallback"
 
     if COUPANG_PARTNERS_ACTIVE:
@@ -444,13 +444,13 @@ def ensure_korean(text: str, product: dict, product_code: str = "") -> str:
     regen = _generate_post1_ai(product, code or "CODE")
     if regen and not _has_foreign_chars(regen):
         if not code:
-            regen = re.sub(r"\n\n링크는 댓글에 👇 \[CODE\]", "", regen)
+            regen = re.sub(r"\n\n제품 정보는 프로필 링크에서 \[CODE\] 검색 👆", "", regen)
         return regen
 
     logger.warning("재생성 실패 → 안전 템플릿 사용")
     fb = _post1_fallback(product.get("name", ""), code or "CODE")
     if not code:
-        fb = re.sub(r"\n\n링크는 댓글에 👇 \[CODE\]", "", fb)
+        fb = re.sub(r"\n\n제품 정보는 프로필 링크에서 \[CODE\] 검색 👆", "", fb)
     return fb
 
 
