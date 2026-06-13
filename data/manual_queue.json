@@ -1,6 +1,20 @@
 [
   {
     "product": {
+      "product_url": "https://link.coupang.com/a/exBjt9szPo?abTestInfo=100412_group_A",
+      "name": "실리콘 국자거치대",
+      "image_url": "",
+      "price": ""
+    },
+    "image_url": "",
+    "detail_images": [],
+    "post_text": "",
+    "product_code": "preview",
+    "source_account": "direct_url",
+    "added_at": "2026-06-13T04:01:45.443Z"
+  },
+  {
+    "product": {
       "name": "민트리 탄산버블 두피 스케일러 15g",
       "price": "24,900원",
       "original_price": "",
