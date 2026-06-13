@@ -105,6 +105,7 @@ def build_html(products: list[dict]) -> str:
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after {{ box-sizing: border-box; margin: 0; padding: 0; }}
 
@@ -495,8 +496,8 @@ def build_html(products: list[dict]) -> str:
   .grid.list-view .name {{
     -webkit-line-clamp: 2;
     margin: 0;
-    font-size: 1.64rem;
-    font-weight: 500;
+    font-size: 1.15rem;
+    font-weight: 400;
     flex: initial;
     text-align: left;
   }}
@@ -541,8 +542,9 @@ def build_html(products: list[dict]) -> str:
   .badge-hot  {{ background: #f7d9cf; color: #c47a65; }}  /* 연 살구 */
   .badge-best {{ background: #d7e5cf; color: #6e9558; }}  /* 연 세이지 */
   .name {{
-    font-size: 1.64rem;
-    font-weight: 500;
+    font-family: 'Jua', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 400;
     line-height: 1.35;
     color: var(--text);
     flex: 1;
