@@ -40,7 +40,7 @@ MIN_RATING = 4.5          # 최소 별점
 # 쿠팡파트너스 수익화 활성화 여부
 # False: 링크만 게시, 광고 고지 없음 (수익 발생 전)
 # True:  [광고] 표시 + 공정위 고지문 자동 추가 (파트너스 가입 후 True로 변경)
-COUPANG_PARTNERS_ACTIVE = False
+COUPANG_PARTNERS_ACTIVE = True
 
 # 스케줄 시간 (24시간 기준)
 SCHEDULE_TIMES = ["09:00", "13:00", "19:00"]
