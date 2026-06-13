@@ -15,7 +15,7 @@ from config import DATA_DIR, LOG_DIR, THREADS_ACCESS_TOKEN
 
 TRACKER_PATH = os.path.join(DATA_DIR, "last_casual_post.json")
 FEED_POSTS_PATH = os.path.join(DATA_DIR, "feed_posts.json")
-INTERVAL_DAYS = 1
+INTERVAL_HOURS = 6  # 하루 2번(09시/21시 KST) — 같은 슬롯 중복 방지용 6시간 게이트
 
 KST = timezone(timedelta(hours=9))
 
@@ -51,7 +51,15 @@ def _should_post() -> bool:
         return True
     last_dt = datetime.fromisoformat(last_posted)
     elapsed = datetime.now(KST) - last_dt.replace(tzinfo=KST) if last_dt.tzinfo is None else datetime.now(KST) - last_dt
-    return elapsed.days >= INTERVAL_DAYS
+    return elapsed.total_seconds() / 3600 >= INTERVAL_HOURS
+
+
+def _pick_post_type() -> str | None:
+    """KST 시간대 기반 일상글 타입 선택.
+    저녁(18시 이후) → question 강제 (댓글 골든타임에 질문형으로 참여 유도).
+    그 외 → 랜덤 (None 반환, generate_general_post가 알아서 선택)."""
+    hour = datetime.now(KST).hour
+    return "question" if hour >= 18 else None
 
 
 def run():
@@ -65,16 +73,17 @@ def run():
 
     if not _should_post():
         tracker = _load_json(TRACKER_PATH, {})
-        logger.info(f"아직 {INTERVAL_DAYS}일 미경과 (마지막: {tracker.get('last_posted_at', '없음')}) — 건너뜀")
+        logger.info(f"아직 {INTERVAL_HOURS}시간 미경과 (마지막: {tracker.get('last_posted_at', '없음')}) — 건너뜀")
         return
 
     if not THREADS_ACCESS_TOKEN:
         logger.warning("THREADS_ACCESS_TOKEN 미설정 — 건너뜀")
         return
 
-    logger.info(f"{INTERVAL_DAYS}일 경과 — 일상글 생성 시작")
+    forced_type = _pick_post_type()
+    logger.info(f"{INTERVAL_HOURS}시간 경과 — 일상글 생성 시작 (타입: {forced_type or 'random'})")
     from generator.content import generate_general_post
-    post_text = generate_general_post()
+    post_text = generate_general_post(post_type=forced_type)
 
     if not post_text:
         logger.warning("일상글 생성 실패 — 종료")

@@ -132,7 +132,7 @@ def get_post_url(post_id: str) -> str | None:
         return None
 
 
-PAGE_BASE = "https://parky091999-sudo.github.io/hyunji-zip"
+PAGE_BASE = "https://parky091999-sudo.github.io/hyunji_zip"
 
 
 def create_reply(post_id: str, text: str) -> str | None:

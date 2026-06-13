@@ -4,10 +4,10 @@
 쿠팡 파트너스 상품을 자동/수동으로 Threads에 포스팅하는 파이프라인.
 GitHub Actions로 자동화, GitHub Pages로 상품 페이지 제공.
 
-**저장소:** https://github.com/parky091999-sudo/hyunji-zip (2026-06-13 coupang-pipeline에서 rename)  
+**저장소:** https://github.com/parky091999-sudo/hyunji_zip (2026-06-13 coupang-pipeline에서 rename)  
 **Threads 계정:** @hyunji_ssi (display name: 현지)  
 **컨셉:** 1인 가구 자취생 "현지"의 일상 + 가끔 좋은 거 공유 (광고 톤 X)  
-**프로필 링크:** https://bit.ly/hyunji-zip → GitHub Pages 리다이렉트  
+**프로필 링크:** https://bit.ly/hyunji_zip → GitHub Pages 리다이렉트  
 **상품 페이지:** GitHub Pages (docs/index.html)  
 **관리 페이지:** docs/admin.html (PAT: localStorage `kkul_pat`)
 

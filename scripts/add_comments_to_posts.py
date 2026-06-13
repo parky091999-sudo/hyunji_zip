@@ -1,6 +1,6 @@
 """
 기존 포스팅 글에 상품 페이지 링크 댓글 일괄 추가 (1회성 백필)
-- 링크: https://parky091999-sudo.github.io/hyunji-zip/r/{code}.html
+- 링크: https://parky091999-sudo.github.io/hyunji_zip/r/{code}.html
 - threads_url(shortcode)을 API media id로 변환해 댓글 작성
 - replied_comments.json 으로 멱등 보장 (재실행해도 중복 안 달림)
 """

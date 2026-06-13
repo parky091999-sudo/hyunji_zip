@@ -1,8 +1,9 @@
-name: Casual Post (일상글, 3일에 1번)
+name: Casual Post (일상글, 하루 2번)
 
 on:
   schedule:
-    - cron: '17 0 * * *'   # 09:17 KST (지연 시 저녁 도착도 허용창 내)
+    - cron: '17 0 * * *'   # 09:17 KST (오전 슬롯)
+    - cron: '17 12 * * *'  # 21:17 KST (저녁 슬롯 — question 타입 강제, 댓글 골든타임)
   workflow_dispatch:
 
 # 포스팅 워크플로 동시 실행 금지 — 크론 지연으로 겹칠 때 중복 게시 방지

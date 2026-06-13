@@ -102,7 +102,7 @@ def _is_keyword_comment(text: str) -> bool:
 
 
 def _keyword_reply(product_code: str) -> str:
-    return f"프로필 링크에서 [{product_code}] 검색하면 바로 나와 👀"
+    return f"프로필 링크 들어가서 [{product_code}] 검색하면 나와 👀"
 
 
 _OWN_USERNAME = None

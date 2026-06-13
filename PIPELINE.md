@@ -15,8 +15,8 @@
 | 수동 포스팅 | 매일 낮 12:05 KST (수동 큐에 상품 있을 때만) |
 | 사전 선정 | 매일 오전 9:00 KST (다음날 후보 3개 미리 선정) |
 | 벤치마크 스캔 | 매주 일요일 23:00 KST (29개 계정 전체 스캔) |
-| 관리 페이지 | https://parky091999-sudo.github.io/hyunji-zip/admin.html |
-| 상품 페이지 | https://parky091999-sudo.github.io/hyunji-zip/ |
+| 관리 페이지 | https://parky091999-sudo.github.io/hyunji_zip/admin.html |
+| 상품 페이지 | https://parky091999-sudo.github.io/hyunji_zip/ |
 
 ---
 
@@ -49,8 +49,8 @@
 
 | 페이지 | URL |
 |--------|-----|
-| 상품 목록 | https://parky091999-sudo.github.io/hyunji-zip/ |
-| 피드 기록 | https://parky091999-sudo.github.io/hyunji-zip/feed.html |
+| 상품 목록 | https://parky091999-sudo.github.io/hyunji_zip/ |
+| 피드 기록 | https://parky091999-sudo.github.io/hyunji_zip/feed.html |
 
 ---
 
@@ -224,8 +224,8 @@ MIN_RATING = 4.5            # 최소 별점
 
 **직장 PC에서 로컬 실행하려면:**
 ```bash
-git clone https://github.com/parky091999-sudo/hyunji-zip.git
-cd hyunji-zip
+git clone https://github.com/parky091999-sudo/hyunji_zip.git
+cd hyunji_zip
 pip install -r requirements.txt
 # .env 파일 새로 만들고 환경변수 입력
 ```
@@ -236,7 +236,7 @@ pip install -r requirements.txt
 
 - [ ] Threads 프로필 사진 업로드 (data/profile_pic.png 파일)
 - [ ] Threads 소개글 설정: `매일 꿀템 하나씩 추천\n제품 정보는 아래 링크를 클릭하세요 👇`
-- [ ] Threads 링크 설정: `https://parky091999-sudo.github.io/hyunji-zip/`
+- [ ] Threads 링크 설정: `https://parky091999-sudo.github.io/hyunji_zip/`
 - [ ] Meta Developer 앱 시크릿 재설정 (채팅에 노출됨)
 - [ ] 쿠팡파트너스 가입 후 `COUPANG_PARTNERS_ACTIVE = True` 전환
 - [ ] 60일 후 (2026-07-30) Threads 토큰 갱신

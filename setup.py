@@ -12,7 +12,7 @@ import sys
 import os
 import shutil
 
-REPO_URL = "https://github.com/parky091999-sudo/hyunji-zip.git"
+REPO_URL = "https://github.com/parky091999-sudo/hyunji_zip.git"
 CLONE_DIR = "coupang_pipeline"
 
 # .env에 들어갈 항목들: (키, 설명, 기본값 or None)
