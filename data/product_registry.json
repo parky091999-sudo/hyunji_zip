@@ -1,5 +1,5 @@
 {
-  "next_code": 20,
+  "next_code": 21,
   "blocked_item_ids": [],
   "products": {
     "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8849967732&ctag=8849967732&lpt": {
@@ -189,6 +189,14 @@
       "image_url": "https://shopping-phinf.pstatic.net/main_6029017/60290171407.jpg",
       "category": "",
       "registered_at": "2026-06-12T21:22:11.233446+09:00"
+    },
+    "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=7485794615&ctag=7485794615&lpt": {
+      "code": "020",
+      "name": "마이디어 6인용 식기세척기 HDW-601W 화이트 방문설치 자동건조 직배수 식세기",
+      "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=7485794615&ctag=7485794615&lptag=I19564684746&itemId=19564684746&vendorItemId=86672582405&spec=10305197",
+      "image_url": "https://shopping-phinf.pstatic.net/main_4234044/42340443912.18.jpg",
+      "category": "",
+      "registered_at": "2026-06-13T11:13:34.391894+09:00"
     }
   }
 }
