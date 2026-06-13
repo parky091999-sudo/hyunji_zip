@@ -1,6 +1,6 @@
 {
   "for_date": "2026-06-15",
-  "generated_at": "2026-06-14T03:45:03.505284+09:00",
+  "generated_at": "2026-06-14T06:40:15.693625+09:00",
   "candidates": [
     {
       "product": {
@@ -58,6 +58,30 @@
     },
     {
       "product": {
+        "name": "주방 휴지통 자동센서 스텐 쓰레기통",
+        "price": "132,400원",
+        "original_price": "",
+        "discount_rate": 0,
+        "image_url": "https://shopping-phinf.pstatic.net/main_5368600/53686005806.1.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8543853726&ctag=8543853726&lptag=I25110074495&itemId=25110074495&vendorItemId=94538325663&spec=10305199",
+        "badge": "쿠팡",
+        "brand": "",
+        "category": "휴지통",
+        "category_hint": "주방",
+        "mall_name": "쿠팡",
+        "source": "naver_shopping",
+        "scraped_at": "2026-06-13T21:39:38.639785"
+      },
+      "post_text": "손에 뭐 묻은 채로 쓰레기통 뚜껑 열기 찝찝했던 적, 다들 한 번쯤 있을 걸?\n특히 요리하다 보면 재료 손질하고 껍질 버릴 일 진짜 많잖아. 그럴 때마다 손 씻고 뚜껑 열고 닫고 다시 손 씻고… 이게 여간 귀",
+      "image_url": "https://shopping-phinf.pstatic.net/main_5368600/53686005806.1.jpg",
+      "detail_images": [
+        "https://shopping-phinf.pstatic.net/main_5368600/53686005806.1.jpg"
+      ],
+      "product_code": "",
+      "status": "pending"
+    },
+    {
+      "product": {
         "name": "페이스팩토리 전동 다이아필 각질제거기 화이트 FF-27",
         "price": "40,880원",
         "original_price": "",
@@ -101,6 +125,36 @@
       "image_url": "https://shopping-phinf.pstatic.net/main_2386835/23868356238.jpg",
       "detail_images": [
         "https://shopping-phinf.pstatic.net/main_2386835/23868356238.jpg"
+      ],
+      "product_code": "",
+      "status": "pending"
+    },
+    {
+      "product": {
+        "name": "Apple 정품 매직 키보드 iPad Air(M4 모델)용",
+        "price": "389,670원",
+        "original_price": "",
+        "discount_rate": 0,
+        "image_url": "https://shopping-phinf.pstatic.net/main_5976656/59766567069.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=6582369148&ctag=6582369148&lptag=l326752325009&itemId=55220376309&vendorItemId=92061519627&spec=10305197",
+        "badge": "쿠팡",
+        "brand": "",
+        "category": "케이스/파우치",
+        "category_hint": "생활",
+        "mall_name": "쿠팡",
+        "source": "naver_shopping",
+        "scraped_at": "2026-06-13T21:39:25.173897",
+        "youtube_source": {
+          "title": "🔥 요즘 인스타에서 난리 난 투명 투명한 &#39;아이패드 RGB 키보드 케이스&#39;",
+          "video_id": "NgGe7otHVY4",
+          "views": 1526,
+          "keyword": "요즘 핫한 생활용품"
+        }
+      },
+      "post_text": "아이패드 샀는데 맨날 넷플릭스 머신으로 쓰고 있는 사람 나뿐이야? 😂\n솔직히 아이패드로 진짜 '일'을 하려고 하면 뭔가 2% 부족한 느낌 들 때 있잖아. 가벼워서 좋은데 막상 문서 작업이나 리포트 쓸 때 아쉬움이 남더라고.\n근데 이거 딱 붙이는 순간 그냥 노트북 쓰는 것처럼 바뀌어버림. 키보드감도 쫀득해서 장문 타이핑하기 진짜 편하고, 트랙패드 덕분에 마우스 없이도 섬세한 작업이 가능하더라고.\n나도 살까 말까 엄청 고민하다가 후기 찾아봤는데, 다들 '진작 살 걸 그랬다'고 그러더라. 나도 써보니 왜 그랬는지 바로 이해했음!\n\n✔️ 카페나 도서관에서 노트북 들고 가기 귀찮을 때, 아이패드랑 이것만 챙겨가도 충분하더라. 가벼운데 작업 효율은 확 올라감!\n\n#자취템 #필수템 #아이패드악세서리 #업무효율 #내돈내산",
+      "image_url": "https://shopping-phinf.pstatic.net/main_5976656/59766567069.jpg",
+      "detail_images": [
+        "https://shopping-phinf.pstatic.net/main_5976656/59766567069.jpg"
       ],
       "product_code": "",
       "status": "pending"
