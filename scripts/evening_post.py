@@ -255,6 +255,10 @@ async def run():
             image_url = fetch_image_by_name(product.get("name", ""))
             if image_url:
                 product["image_url"] = image_url
+                if code and code not in ("", "preview"):
+                    from generator.registry import update_image
+                    update_image(code, image_url, verified=False)
+                    logger.warning(f"이미지 이름검색 보충 — 실제 상품 일치 확인 필요 [{code}]")
         except Exception as e:
             logger.warning(f"이미지 보충 실패: {e}")
 

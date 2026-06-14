@@ -277,6 +277,21 @@ def run_operational_check(feed: list[dict]) -> None:
     else:
         print("\n[이미지 누락] 이상 없음", flush=True)
 
+    # ── 2b. 미검증 이미지 (이름 검색으로 보충 — 실제 상품과 다를 수 있음) ──────
+    unverified = [
+        v for v in reg["products"].values()
+        if v.get("posted") and not v.get("removed")
+        and v.get("image_url") and v.get("image_verified") is False
+    ]
+    if unverified:
+        print(f"\n[이미지 미검증] {len(unverified)}건 — 상품명 검색으로 보충된 이미지, 실제 상품 일치 확인 필요:", flush=True)
+        for v in unverified:
+            print(f"  [{v['code']}] {v.get('name','')[:40]}", flush=True)
+            print(f"         {v.get('image_url','')[:80]}", flush=True)
+        print("  → 확인 후 image_verified: true 업데이트 또는 올바른 이미지로 교체 필요", flush=True)
+    else:
+        print("\n[이미지 검증] 미검증 이미지 없음", flush=True)
+
     # ── 3. 파트너스 페이지 미반영 ────────────────────────────────────────────
     registry_codes = {
         v["code"] for v in reg["products"].values()

@@ -112,6 +112,17 @@ def mark_posted(code: str, category: str = "", short_name: str = ""):
     _save(reg)
 
 
+def update_image(code: str, image_url: str, verified: bool = True):
+    """이미지 URL 업데이트. verified=False면 이름 검색으로 보충된 미검증 이미지."""
+    reg = _load()
+    for v in reg["products"].values():
+        if v["code"] == code:
+            v["image_url"] = image_url
+            v["image_verified"] = verified
+            break
+    _save(reg)
+
+
 def get_all() -> list[dict]:
     """실제 포스팅된 상품 목록만 반환 — 링크인바이오 페이지 생성용"""
     reg = _load()
