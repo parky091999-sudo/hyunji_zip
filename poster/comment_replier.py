@@ -254,26 +254,20 @@ async def check_and_reply_comments():
                     reply_count += 1
                     await asyncio.sleep(10)
 
-            # ── 2) 일반 댓글: 묶어서 자연스러운 대댓글 1개 ──
+            # ── 2) 일반 댓글: 각 댓글에 개별 대댓글 (해당 댓글 id로 reply_to_id 지정) ──
             others = [r for r in new_replies if r not in kw_hits]
-            if not others:
-                continue
-            combined = "\n".join([
-                f"@{r.get('username', '?')}: {r.get('text', '')}"
-                for r in others[:3]
-            ])
-            reply_text = generate_reply(combined)
-            if not reply_text:
-                continue
-
-            success = post_reply_to_thread(post_id, reply_text)
-            if success:
-                for r in others:
+            for r in others[:3]:  # 회당 최대 3개
+                comment_text = f"@{r.get('username', '?')}: {r.get('text', '')}"
+                reply_text = generate_reply(comment_text)
+                if not reply_text:
+                    continue
+                success = post_reply_to_thread(r.get("id", ""), reply_text)
+                if success:
                     post_replied.add(_comment_key(r.get("id", ""), r.get("text", "")))
-                replied[post_id] = list(post_replied)
-                save_replied(replied)
-                reply_count += 1
-                await asyncio.sleep(15)
+                    replied[post_id] = list(post_replied)
+                    save_replied(replied)
+                    reply_count += 1
+                    await asyncio.sleep(15)
 
         except Exception as e:
             logger.error(f"댓글 처리 오류 ({post_id}): {e}")
