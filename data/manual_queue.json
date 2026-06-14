@@ -98,5 +98,29 @@
     "added_at": "2026-06-13T17:18:05.470Z",
     "edited": false,
     "content_gen_at": "2026-06-14T02:19:11.771886+09:00"
+  },
+  {
+    "product": {
+      "name": "오페라 미룩스 LED 마스크",
+      "price": "455,000원",
+      "original_price": "",
+      "discount_rate": 0,
+      "image_url": "https://shopping-phinf.pstatic.net/main_3863085/38630851673.152.jpg",
+      "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=6239617459&ctag=6239617459&lptag=P6239617459&itemId=12586949221&vendorItemId=79854913981&spec=10305199",
+      "badge": "쿠팡",
+      "brand": "지티지웰니스",
+      "category": "피부케어기기",
+      "category_hint": "뷰티",
+      "mall_name": "쿠팡",
+      "source": "naver_shopping",
+      "scraped_at": "2026-06-13T17:19:01.057645"
+    },
+    "image_url": "https://shopping-phinf.pstatic.net/main_3863085/38630851673.152.jpg",
+    "detail_images": [],
+    "post_text": "",
+    "product_code": "preview",
+    "source_account": "검색:LED 마스크",
+    "added_at": "2026-06-14T04:48:50.227Z",
+    "edited": false
   }
 ]
