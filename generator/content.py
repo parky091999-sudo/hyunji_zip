@@ -453,12 +453,14 @@ def generate_post(product: dict, assign_code_now: bool = True) -> dict:
 
 def ensure_not_truncated(text: str, product: dict, product_code: str = "") -> str:
     """포스팅 직전 잘림 게이트.
-    수동 큐 / pending_post 에 저장된 본문이 토큰 한도로 잘렸을 때
+    수동 큐 / pending_post 에 저장된 본문이 토큰 한도로 잘렸거나 비어있을 때
     AI로 재생성해서 완성된 문장을 보장한다. 실패 시 폴백 템플릿."""
-    if not text or not looks_truncated(text):
+    is_empty = not (text and text.strip())
+    if not is_empty and not looks_truncated(text):
         return text
-    logger.warning("포스팅 직전 본문 잘림 감지 → 재생성 시도")
-    m = re.search(r"\[(\d{3})\] 검색", text)
+    reason = "비어있음" if is_empty else "잘림"
+    logger.warning(f"포스팅 직전 본문 {reason} 감지 → 재생성 시도")
+    m = re.search(r"\[(\d{3})\] 검색", text or "")
     code = product_code or (m.group(1) if m else "")
     regen = _generate_post1_ai(product, code or "CODE")
     if regen and not looks_truncated(regen):

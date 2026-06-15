@@ -111,6 +111,14 @@ def _keyword_reply(product_code: str) -> str:
 _SHORT_REACTIONS = {"ㅋㅋ", "ㅎㅎ", "ㅠㅠ", "오오", "헐", "와", "대박", "굳", "ㄷㄷ", "진짜", "맞아", "맞지"}
 _SHORT_REPLY_EMOJIS = ["ㅎㅎ 😊", "ㅋㅋ", "😊", "ㅎㅎ", "그치 ㅎㅎ"]
 
+# 한 단어처럼 보여도 문장 단편/오타로 의미 추정이 위험한 어미.
+# 이런 어미로 끝나면 'emoji' 분류하지 않고 안전한 짧은 공감만 달도록 'skip' 처리.
+# (사례: "버리건지"='버리던지' 오타를 음식으로 오인해 "버리건지 맛있어" 응답 → 차단)
+_AMBIGUOUS_ENDINGS = (
+    "건지", "던지", "는지", "을지", "ㄹ지",
+    "냐", "니", "어", "야",
+    "고", "데", "면", "지만", "라서", "면서",
+)
 
 
 def _classify_short_comment(text: str) -> str:
@@ -126,6 +134,9 @@ def _classify_short_comment(text: str) -> str:
     if len(clean) <= 8 and " " not in t.strip():
         # 이미 알려진 감탄사면 스킵
         if clean in _SHORT_REACTIONS or t in _SHORT_REACTIONS:
+            return "skip"
+        # 모호한 어미(오타·문장 단편 가능성)면 안전하게 스킵
+        if any(clean.endswith(e) for e in _AMBIGUOUS_ENDINGS):
             return "skip"
         # 단어 하나(단순 명사 등 '카레', '냉장고')면 이모지만
         return "emoji"

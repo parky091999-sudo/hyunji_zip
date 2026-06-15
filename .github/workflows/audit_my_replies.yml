@@ -1,0 +1,36 @@
+name: Audit My Replies (수동)
+
+on:
+  workflow_dispatch:
+    inputs:
+      delete:
+        description: '실제 삭제 (체크 안 하면 dry-run)'
+        required: false
+        default: 'false'
+        type: boolean
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Run audit
+        env:
+          THREADS_ACCESS_TOKEN: ${{ secrets.THREADS_ACCESS_TOKEN }}
+          THREADS_USER_ID:      ${{ secrets.THREADS_USER_ID }}
+        run: |
+          if [ "${{ github.event.inputs.delete }}" = "true" ]; then
+            python scripts/audit_my_replies.py --delete
+          else
+            python scripts/audit_my_replies.py
+          fi
