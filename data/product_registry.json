@@ -1,5 +1,5 @@
 {
-  "next_code": 26,
+  "next_code": 27,
   "blocked_item_ids": [],
   "products": {
     "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8849967732&ctag=8849967732&lpt": {
@@ -252,6 +252,16 @@
       "registered_at": "2026-06-15T11:07:38.306980+09:00",
       "posted": true,
       "short_name": "유리창닦이 스퀴지"
+    },
+    "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=7930210672&ctag=7930210672&lpt": {
+      "code": "026",
+      "name": "휴대용 빨래건조기 UV살균 접이식 미니 건조기 스타일러 002S 002S",
+      "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=7930210672&ctag=7930210672&lptag=I21810029458&itemId=21810029458&vendorItemId=88858533465&spec=10305199",
+      "image_url": "https://shopping-phinf.pstatic.net/main_4636969/46369692651.67.jpg",
+      "category": "디지털/가전",
+      "registered_at": "2026-06-15T19:10:38.696308+09:00",
+      "posted": true,
+      "short_name": "휴대용 미니 건조기"
     }
   }
 }
