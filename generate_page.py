@@ -569,6 +569,11 @@ def build_html(products: list[dict]) -> str:
   .disclosure-title {{ font-size: 0.68rem; font-weight: 700; color: #555; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 5px; }}
   .disclosure-text {{ font-size: 0.7rem; color: var(--text2); line-height: 1.65; }}
   .footer-copy {{ font-size: 0.65rem; color: #333; text-align: center; }}
+  /* 운영자 모드 토글 — 본인 기기에서 한 번 눌러 클릭 집계 제외 */
+  .owner-toggle {{ text-align: center; margin-top: 14px; }}
+  .owner-toggle button {{ background: transparent; border: 1px solid var(--border); color: var(--text2); font-size: 0.62rem; padding: 4px 10px; border-radius: 6px; cursor: pointer; opacity: 0.55; }}
+  .owner-toggle button:hover {{ opacity: 1; }}
+  .owner-toggle button.on {{ background: #ffe9b3; border-color: #e0c070; color: #6b4a10; opacity: 1; }}
 
   /* ── QR 모달 ── */
   .modal-overlay {{ display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.75); backdrop-filter: blur(8px); z-index: 500; align-items: center; justify-content: center; }}
@@ -665,7 +670,34 @@ def build_html(products: list[dict]) -> str:
     </div>
   </div>
   <div class="footer-copy"></div>
+  <div class="owner-toggle">
+    <button id="owner-btn" type="button" onclick="toggleOwner()" title="이 기기에서 발생한 클릭을 통계에서 제외/포함합니다">
+      운영자 모드: <span id="owner-state">OFF</span>
+    </button>
+  </div>
 </footer>
+
+<script>
+  (function() {{
+    function refresh() {{
+      var on = localStorage.getItem('kkul_owner') === '1';
+      var s = document.getElementById('owner-state');
+      var b = document.getElementById('owner-btn');
+      if (s) s.textContent = on ? 'ON' : 'OFF';
+      if (b) b.classList.toggle('on', on);
+    }}
+    window.toggleOwner = function() {{
+      var on = localStorage.getItem('kkul_owner') === '1';
+      if (on) localStorage.removeItem('kkul_owner');
+      else    localStorage.setItem('kkul_owner', '1');
+      refresh();
+      alert(on
+        ? '운영자 모드 OFF\\n이 기기 클릭이 통계에 집계됩니다.'
+        : '운영자 모드 ON\\n이 기기 클릭은 통계에서 제외됩니다.\\n(설정은 이 브라우저에만 저장됨)');
+    }};
+    refresh();
+  }})();
+</script>
 
 <div id="qr-modal" class="modal-overlay" onclick="hideQR()">
   <div class="modal-box" onclick="event.stopPropagation()">
