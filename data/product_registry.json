@@ -1,5 +1,5 @@
 {
-  "next_code": 27,
+  "next_code": 28,
   "blocked_item_ids": [],
   "products": {
     "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8849967732&ctag=8849967732&lpt": {
@@ -262,6 +262,16 @@
       "registered_at": "2026-06-15T19:10:38.696308+09:00",
       "posted": true,
       "short_name": "휴대용 미니 건조기"
+    },
+    "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=6582369148&ctag=6582369148&lpt": {
+      "code": "027",
+      "name": "Apple 정품 매직 키보드 iPad Air(M4 모델)용",
+      "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=6582369148&ctag=6582369148&lptag=l326752325009&itemId=55220376309&vendorItemId=92061519627&spec=10305197",
+      "image_url": "https://shopping-phinf.pstatic.net/main_5976656/59766567069.jpg",
+      "category": "생활",
+      "registered_at": "2026-06-16T11:15:39.616467+09:00",
+      "posted": true,
+      "short_name": "매직 키보드"
     }
   }
 }
