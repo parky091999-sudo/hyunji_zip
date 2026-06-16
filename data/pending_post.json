@@ -1,6 +1,6 @@
 {
   "for_date": "2026-06-18",
-  "generated_at": "2026-06-17T03:45:10.930347+09:00",
+  "generated_at": "2026-06-17T04:59:56.578324+09:00",
   "candidates": [
     {
       "product": {
@@ -76,6 +76,66 @@
       "image_url": "https://shopping-phinf.pstatic.net/main_4846115/48461153685.9.jpg",
       "detail_images": [
         "https://shopping-phinf.pstatic.net/main_4846115/48461153685.9.jpg"
+      ],
+      "product_code": "",
+      "status": "pending"
+    },
+    {
+      "product": {
+        "name": "RC 남은음식보관 2단 음식보관 케이스 오렌지+그린",
+        "price": "17,090원",
+        "original_price": "",
+        "discount_rate": 0,
+        "image_url": "https://shopping-phinf.pstatic.net/main_5857892/58578920493.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8416854126&ctag=8416854126&lptag=I27520921887&itemId=27520921887&vendorItemId=94485687682&spec=10305199",
+        "badge": "쿠팡",
+        "brand": "",
+        "category": "보관/밀폐용기",
+        "category_hint": "생활",
+        "mall_name": "쿠팡",
+        "source": "naver_shopping",
+        "scraped_at": "2026-06-16T19:57:54.100273",
+        "youtube_source": {
+          "title": "식품등급 남은음식 보관커버 #주방꿀템 #살림꿀템  #주방아이템#음식보관 #수박보관 #냉장고정리 #주방정리 #주방필수템#살림템추천 #생활용품추천 #자취꿀템 #집꾸미기",
+          "video_id": "6zJZF9LBiWA",
+          "views": 29772,
+          "keyword": "자취 필수템 추천"
+        }
+      },
+      "post_text": "냉장고에서 남은 음식을 찾을 때마다 식기류가랑 음식들이 뒤죽박죽으로 섞여 있어 짜증 나던데, 이거 있으면 해결될 문제였어 🙄\n그냥 음식 담고 덮으면 끝이고, 여러 개 있으면 스택도 가능하더라고\n이거 쓰니까 냉장고가 훨씬 깨끗해지고, 남은 음식 보관도 수월해졌어\n리뷰 보니까 대부분 만족한다고 하더라\n✔ 식기류마다 따로따로 담아야 했던 고민 이제 그만하면 되고, 식기세척기도 잘 안 들어가는 크기의 음식이라면 이 거에 담으면 되니까 편하더라고\n✔ 그리고 이거 쓰면 냉장고정리도 한번에 되니까 주말에 시간 쪼개서 정리할 필요 없어\n\n#살림템 #생활꿀템 #자취템 #음식보관 #주방정리",
+      "image_url": "https://shopping-phinf.pstatic.net/main_5857892/58578920493.jpg",
+      "detail_images": [
+        "https://shopping-phinf.pstatic.net/main_5857892/58578920493.jpg"
+      ],
+      "product_code": "",
+      "status": "pending"
+    },
+    {
+      "product": {
+        "name": "포트메리온 보타닉가든 티스푼 세트",
+        "price": "38,400원",
+        "original_price": "",
+        "discount_rate": 0,
+        "image_url": "https://shopping-phinf.pstatic.net/main_5984630/59846303973.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8786366727&ctag=8786366727&lptag=l9460866328&itemId=083664968&vendorItemId=3756882622&spec=10305197",
+        "badge": "쿠팡",
+        "brand": "",
+        "category": "식기",
+        "category_hint": "생활",
+        "mall_name": "쿠팡",
+        "source": "naver_shopping",
+        "scraped_at": "2026-06-16T19:58:00.793330",
+        "youtube_source": {
+          "title": "티스푼 안찾습니다~",
+          "video_id": "5IpTMYjUwFw",
+          "views": 2519,
+          "keyword": "자취 필수템 추천"
+        }
+      },
+      "post_text": "티스푼이 사라지는 집은 정말 이해가 안 가는 것 같아\n그런데 요즘은 티스푼을 찾지 않아도 되게 된 거 같더라고\n포트메리온 보타닉가든 티스푼 세트를 쓸 때마다 티스푼이 항상 같은 자리에 돌아오는 게 신기하더라고\n이건 백개가 넘은 후기에서 하나같이 만족한다는 거 보면 신뢰가 가더라고\n✔ 아침에 차 마실 때, ☕️ 티스푼을 찾지 않아도 되니까 편하더라고\n✔ 그리고 세트로 된 티스푼이라서 항상 같은 자리에 정리되어 있어서 좋더라고\n\n#살림꿀템 #자취템 #티스푼 #생활템 #필수템",
+      "image_url": "https://shopping-phinf.pstatic.net/main_5984630/59846303973.jpg",
+      "detail_images": [
+        "https://shopping-phinf.pstatic.net/main_5984630/59846303973.jpg"
       ],
       "product_code": "",
       "status": "pending"
