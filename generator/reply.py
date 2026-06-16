@@ -4,6 +4,7 @@ Groq API를 사용한 자연스러운 대댓글 생성
 """
 import logging
 import os
+import re
 import sys
 
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
@@ -11,6 +12,32 @@ from config import GROQ_API_KEY, THREADS_USERNAME
 from generator.content import has_foreign_chars
 
 logger = logging.getLogger(__name__)
+
+# 답글 전용 추가 게이트: 영어 알파벳도 차단 (본문은 브랜드명 등 영어 허용이라 분리)
+_LATIN_RE = re.compile(r"[A-Za-z]")
+
+# 답글이 조사로 끝나면 명백히 잘림. 본문용 looks_truncated는 답글의 'ㅋ/ㅎ/써' 등
+# 자연스러운 종결까지 잘림으로 잡아 false positive 다수 → 답글 전용 좁은 규칙.
+_TRUNC_TAIL_RE = re.compile(
+    r"(?:을|를|이|가|은|는|의|에|로|와|과|도|만|에서|에게|한테|부터|까지|보다|처럼|랑|이랑)$"
+)
+
+
+def _looks_truncated_reply(text: str) -> bool:
+    tail = (text or "").rstrip().rstrip(".,!?~)…").strip()
+    if not tail:
+        return False
+    return bool(_TRUNC_TAIL_RE.search(tail))
+
+
+def _bad_reply_reason(text: str) -> str | None:
+    if has_foreign_chars(text):
+        return "외국어"
+    if _LATIN_RE.search(text):
+        return "영어"
+    if _looks_truncated_reply(text):
+        return "잘림"
+    return None
 
 _SYSTEM_PROMPT = f"""너는 Threads(@hyunji_ssi)를 운영하는 20대 자취생 '현지'야.
 게시글에 달린 댓글에 대댓글을 달아줘. 처음 보는 사람이 댓글을 단 거라서,
@@ -53,14 +80,13 @@ _SYSTEM_PROMPT = f"""너는 Threads(@hyunji_ssi)를 운영하는 20대 자취생
 
 
 def generate_reply(comments_text: str) -> str | None:
-    """댓글 텍스트 받아서 자연스러운 대댓글 생성. 외국어 포함 시 None 반환."""
+    """댓글 텍스트 받아서 자연스러운 대댓글 생성. 외국어/영어/잘림 시 재시도 후 None."""
     if not GROQ_API_KEY:
         logger.warning("GROQ_API_KEY 미설정 — 대댓글 생성 스킵")
         return None
     try:
         from groq import Groq
         client = Groq(api_key=GROQ_API_KEY)
-        # 외국어 포함 응답이 나오면 최대 2회 재시도 후 스킵 (잘못된 답글 게시 차단)
         for attempt in range(3):
             response = client.chat.completions.create(
                 model="llama-3.3-70b-versatile",
@@ -68,18 +94,19 @@ def generate_reply(comments_text: str) -> str | None:
                     {"role": "system", "content": _SYSTEM_PROMPT},
                     {"role": "user", "content": f"달린 댓글:\n{comments_text}"},
                 ],
-                max_tokens=80,
+                max_tokens=120,
                 temperature=0.85 if attempt == 0 else 0.5,
             )
             reply = response.choices[0].message.content.strip()
             if not reply:
                 continue
-            if has_foreign_chars(reply):
-                logger.warning(f"대댓글 외국어 감지 → 재시도 {attempt + 1}/3: {reply[:40]}")
+            reason = _bad_reply_reason(reply)
+            if reason:
+                logger.warning(f"대댓글 {reason} 감지 → 재시도 {attempt + 1}/3: {reply[:40]}")
                 continue
             logger.info(f"대댓글 생성: {reply[:40]}")
             return reply
-        logger.warning("대댓글 3회 시도 모두 외국어 포함 → 스킵")
+        logger.warning("대댓글 3회 시도 모두 게이트 차단 → 스킵")
         return None
     except Exception as e:
         logger.error(f"Groq 대댓글 생성 실패: {e}")

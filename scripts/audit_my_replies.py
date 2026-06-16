@@ -20,6 +20,7 @@ sys.path.insert(0, ROOT)
 
 from config import DATA_DIR, THREADS_ACCESS_TOKEN, THREADS_USER_ID, THREADS_USERNAME
 from generator.content import has_foreign_chars
+from generator.reply import _LATIN_RE, _looks_truncated_reply
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 logger = logging.getLogger("audit_my_replies")
@@ -130,6 +131,10 @@ def main():
         reason = []
         if has_foreign_chars(text):
             reason.append("외국어")
+        if _LATIN_RE.search(text):
+            reason.append("영어")
+        if _looks_truncated_reply(text):
+            reason.append("잘림")
         if is_misclassified(text):
             reason.append("단어오인식")
         if reason:
