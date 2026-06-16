@@ -1,6 +1,6 @@
 {
-  "for_date": "2026-06-17",
-  "generated_at": "2026-06-16T05:35:12.379838+09:00",
+  "for_date": "2026-06-18",
+  "generated_at": "2026-06-17T03:45:10.930347+09:00",
   "candidates": [
     {
       "product": {
@@ -16,9 +16,9 @@
         "category_hint": "건강",
         "mall_name": "쿠팡",
         "source": "naver_shopping",
-        "scraped_at": "2026-06-15T18:49:57.185417"
+        "scraped_at": "2026-06-16T18:42:55.583806"
       },
-      "post_text": "",
+      "post_text": "내 피부가 이렇게 달라질 줄은 몰랐어\n그냥 얼굴에 붙였다가 뗐는데 Dead Skin Cells가 다 사라져있는 거야, 그럴 수도 있더라고\n근데 이거 쓰면 원래 피부 상태로 돌아가서 보통 피부 관리 제품도 더 잘 받아주더라고\n리뷰 보니까 산 사람들 하나같이 왜 이제 샀냐고 하더라, 확실히 좋은 것 같아\n✔ 피부 관리할 때 가장 중요한 건 꾸준함이니까, 이 친구랑 매일 함께하면 더 좋은 효과 기대할 수 있을 거야\n✔ 그리고 이건 화이트로만 나와서 깨끗하고 심플한 디자인이 마음에 든달까, 다른 색상도 나왔으면 좋겠어\n\n#건강 #뷰티템 #스킨케어 #화이트디자인 #테크추천",
       "image_url": "https://shopping-phinf.pstatic.net/main_5027322/50273223171.12.jpg",
       "detail_images": [
         "https://shopping-phinf.pstatic.net/main_5027322/50273223171.12.jpg"
@@ -28,144 +28,54 @@
     },
     {
       "product": {
-        "name": "냉티슈 바르는데오퍼퓸 땀닦는물티슈 쿨링티슈 쿨링바디티슈 2개 10g",
-        "price": "15,400원",
+        "name": "하이얼 미니 76L 1도어 냉장고",
+        "price": "169,000원",
         "original_price": "",
         "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_5631352/56313524238.jpg",
-        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8989891169&ctag=8989891169&lptag=I26331876104&itemId=26331876104&vendorItemId=93309122773&spec=10305199",
+        "image_url": "https://shopping-phinf.pstatic.net/main_5528966/55289665261.26.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=42566748&ctag=42566748&lptag=l3302710973&itemId=017397303&vendorItemId=4802326982&spec=10305197",
         "badge": "쿠팡",
         "brand": "",
-        "category": "데오드란트",
+        "category": "냉장고",
         "category_hint": "생활",
         "mall_name": "쿠팡",
         "source": "naver_shopping",
-        "scraped_at": "2026-06-15T18:48:27.701116",
+        "scraped_at": "2026-06-16T18:41:44.420897",
         "youtube_source": {
-          "title": "올여름 삶의 질이 달라집니다! 다이소 추천 여름 필수템 7가지",
-          "video_id": "5ai0rfg_djk",
-          "views": 116581,
-          "keyword": "생활꿀템 추천"
+          "title": "2026 삼성/LG 1도어 냉장고 비교! 딱 하나만 추천하라면?1도어 냉장고 고민 끝! 삼성 vs LG 실사용 비교 총정리",
+          "video_id": "SEPFLd4wnaQ",
+          "views": 15661,
+          "keyword": "주방 가전 추천"
         }
       },
-      "post_text": "",
-      "image_url": "https://shopping-phinf.pstatic.net/main_5631352/56313524238.jpg",
+      "post_text": "자취방에 냉장고 들일 공간 없다고 포기했던 사람, 이거 진짜 괜찮은데? 😮\n\n원룸 살면 냉장고 놓을 자리도 마땅치 않고, 그렇다고 미니 냉장고는 음료수 몇 개 넣으면 끝이잖아. 근데 이건 76리터라 꽤 넉넉해서 간식이나 반찬 몇 가지는 충분히 들어가더라. 냉동실도 작게 따로 있어서 아이스크림도 보관 가능했음.\n\n후기 보니까 자취생들이나 혼자 사는 사람들한테 진짜 인기 많더라고.\n\n✔ 팁: 책상 옆이나 침대 옆에 두고 쓰기 딱 좋음. 물 마시러 주방까지 갈 필요 없어. 음료수나 간단한 과일 넣어두면 편하고, 배달음식 남은 거 보관하기도 좋더라.\n\n#자취템 #필수템 #살림템 #미니냉장고",
+      "image_url": "https://shopping-phinf.pstatic.net/main_5528966/55289665261.26.jpg",
       "detail_images": [
-        "https://shopping-phinf.pstatic.net/main_5631352/56313524238.jpg"
+        "https://shopping-phinf.pstatic.net/main_5528966/55289665261.26.jpg"
       ],
       "product_code": "",
       "status": "pending"
     },
     {
       "product": {
-        "name": "아이룸 전동 무선 발각질 제거기  1개",
-        "price": "47,000원",
+        "name": "도도풋케어 발각질제거기 전동멀티케어 무선전동 1개 1개입",
+        "price": "69,000원",
         "original_price": "",
         "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_4357320/43573201797.8.jpg",
-        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=7598213797&ctag=7598213797&lptag=I20093246513&itemId=20093246513&vendorItemId=87540093727&spec=10305198",
+        "image_url": "https://shopping-phinf.pstatic.net/main_4846115/48461153685.9.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8071086672&ctag=8071086672&lptag=I22717108244&itemId=22717108244&vendorItemId=90287969284&spec=10305198",
         "badge": "쿠팡",
-        "brand": "아이룸",
+        "brand": "도도풋케어",
         "category": "발각질제거기",
         "category_hint": "건강",
         "mall_name": "쿠팡",
         "source": "naver_shopping",
-        "scraped_at": "2026-06-15T18:49:57.185844"
+        "scraped_at": "2026-06-16T18:42:55.583983"
       },
-      "post_text": "샌들 신을 때마다 발꿈치 신경 쓰였던 사람? 이거 보면 깜짝 놀랄 걸! 👣\n맨들맨들한 발은 로망인데 막상 집에서 셀프 케어하려면 시간도 오래 걸리고 너무 힘들잖아. 손톱으로 긁어도 벅벅하고 하얗게 뜨는 각질 보면서 한숨 쉬었던 사람들한테 진짜 딱임.\n\n이게 그냥 밀기만 하는 게 아니라 전동이라 알아서 부드럽게 각질을 갈아주더라. 게다가 무선이라 욕실 어디서든 편하게 쓸 수 있고, 헤드 종류도 여러 개라 원하는 강도로 조절할 수 있었음. 나도 반신반의했는데 써본 사람들이 하나같이 '왜 이제 알았나' 싶다더라고.\n\n✔ 샤워하고 나서 발이 좀 불어있을 때 쓰면 훨씬 효과가 좋더라.\n✔ 꾸준히 일주일에 한두 번씩 관리해주면 발 관리숍 따로 갈 필요 없었어. 홈케어의 신세계임!\n\n#테크템 #가전추천 #전자기기 #홈케어 #발관리",
-      "image_url": "https://shopping-phinf.pstatic.net/main_4357320/43573201797.8.jpg",
+      "post_text": "맨발로 다니다가 발바닥 굳은살 보고 깜짝 놀란 사람 나 말고 또 있음? 🦶\n혼자 살다 보면 발 관리는 늘 뒷전이더라. 특히 요즘처럼 샌들 신을 일 많아지면 더 신경 쓰이잖아.\n이거 진짜 신세계인 게, 그냥 쓱 문지르기만 해도 묵은 각질이 파우더처럼 떨어져 나가는 거 알았어? 무선이라 욕실이나 방에서 편하게 쓸 수 있고, 부드럽게 돌아가서 자극적이지 않더라고.\n리뷰 보니까 다들 매끈해진 발 보면서 진작 살 걸 그랬다고 후회하더라.\n\n✔ 샤워하고 발이 살짝 불었을 때 쓰면 더 효과 좋았음!\n✔ 사용 후에는 꼭 로션 발라서 보습까지 마무리해 줘야 해. 발이 진짜 아기 발처럼 부들부들해지는 경험을 할 수 있을 거야.\n\n#가전추천 #건강관리 #발관리 #셀프케어 #현지템",
+      "image_url": "https://shopping-phinf.pstatic.net/main_4846115/48461153685.9.jpg",
       "detail_images": [
-        "https://shopping-phinf.pstatic.net/main_4357320/43573201797.8.jpg"
-      ],
-      "product_code": "",
-      "status": "pending"
-    },
-    {
-      "product": {
-        "name": "레오나르디 오로 노빌레 화이트 콘디멘토 코스트코 1개 500ml",
-        "price": "26,900원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_5554388/55543882607.419.jpg",
-        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8658703328&ctag=8658703328&lptag=I25876708056&itemId=25876708056&vendorItemId=92175414467&spec=10305199",
-        "badge": "쿠팡",
-        "brand": "레오나르디",
-        "category": "식초",
-        "category_hint": "생활",
-        "mall_name": "쿠팡",
-        "source": "naver_shopping",
-        "scraped_at": "2026-06-15T18:48:33.122743",
-        "youtube_source": {
-          "title": "코스트코 18년차 회원이 이번주 구경하고 온 제품들😎",
-          "video_id": "QaY4vti4b98",
-          "views": 186332,
-          "keyword": "살림템 추천"
-        }
-      },
-      "post_text": "맨날 먹던 그 맛에 질렸을 때, 요리 만렙 된 기분 내고 싶을 때 필요한 거 알려줄게. ✨\n\n그냥 맨날 똑같은 양념으로 요리하는 거 좀 질릴 때 있잖아. 근데 막 이것저것 넣고 복잡하게 만들기는 귀찮고, 요리에 뭔가 특별한 터치를 더하고 싶은 사람한테 딱 임.\n\n이건 일반 발사믹이랑 좀 다른데, '화이트 콘디멘토'라고 불리거든. 색깔이 투명해서 음식 색깔 변할 걱정 없이 요리에 은은한 풍미를 더해줘. 새콤달콤하면서도 과하지 않은 게 진짜 매력임. 그래서 그냥 드레싱 말고도 활용도가 엄청 다양하더라.\n\n코스트코 유튜버들이나 살림 인싸들이 괜히 쟁이는 게 아니더라고. 써본 사람들이 하나같이 \"이거 없이 어떻게 살았지?\"라고 하는 거 많이 봤어.\n\n✔ 샐러드나 카프레제는 물론이고, 심지어 파스타나 과일에 살짝 뿌려 먹으면 진짜 신세계가 열림.\n✔ 생선 구이나 닭가슴살 요리할 때 마지막에 몇 방울 똑 떨어뜨려주면 잡내도 잡아주고 고급진 맛이 더해져.\n\n#자취템 #살림꿀템 #요리템 #필수템",
-      "image_url": "https://shopping-phinf.pstatic.net/main_5554388/55543882607.419.jpg",
-      "detail_images": [
-        "https://shopping-phinf.pstatic.net/main_5554388/55543882607.419.jpg"
-      ],
-      "product_code": "",
-      "status": "pending"
-    },
-    {
-      "product": {
-        "name": "커드온 초강력 스프링 압축봉 커튼봉 4m60cm까지",
-        "price": "20,900원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_5976766/59767668525.jpg",
-        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=0895101518&ctag=0895101518&lptag=l739621646223&itemId=63264692371&vendorItemId=71344167323&spec=10305199",
-        "badge": "쿠팡",
-        "brand": "",
-        "category": "커튼",
-        "category_hint": "생활",
-        "mall_name": "쿠팡",
-        "source": "naver_shopping",
-        "scraped_at": "2026-06-15T20:34:17.516409",
-        "youtube_source": {
-          "title": "못질없이 공간확장(0015번)#생활꿀템 #자취템 #쿠팡추천 #공간활용 #압축봉 #원룸꿀템 #전세집필수템 #수납꿀템 #집꾸미기 #초강력압축봉",
-          "video_id": "h95SWZ8hVp4",
-          "views": 3408,
-          "keyword": "자취 필수템 추천"
-        }
-      },
-      "post_text": "집에 못 박는 거 싫어하는 사람 여기 주목! 나 같은 자취생들은 벽에 함부로 구멍 뚫는 거 진짜 망설여지잖아. 😥\n\n근데 수납 공간은 항상 부족하고, 행거는 자리만 차지하고.. 이럴 때 딱 필요한 게 있더라고. 바로 못질 없이도 뭐든 척척 걸 수 있는 압축봉이야.\n\n이게 그냥 압축봉이 아니라 스프링이 진짜 초강력임. 쓱 늘려서 원하는 공간에 끼우기만 하면 끝인데, 웬만한 무게는 거뜬히 버티는 거 보고 깜짝 놀랐어. 특히 최대 4미터 넘게 늘어나는 긴 제품도 있어서 넓은 공간에도 활용하기 좋더라. 설치도 너무 쉽고 튼튼해서 벽 손상 걱정 없이 쓸 수 있는 게 진짜 최고더라고.\n\n써본 사람들이 하나같이 \"왜 이제야 알았을까\" 하고 후회한다고 입 모아 얘기하는 걸 봤어.\n\n✔ 옷장 안에 추가 선반 만들거나 주방 틈새 공간 활용할 때 써봐. 컵이나 작은 팬 같은 거 걸어두면 주방이 엄청 깔끔해짐.\n✔ 커튼봉으로 쓰면 못 없이도 예쁜 창가 인테리어를 완성할 수 있음! 드레스룸 행거로 쓰거나 빨래 건조대로 쓰는 사람도 많더라고.\n\n#자취템 #공간활용 #원룸필수템 #못없이뚝딱 #살림템",
-      "image_url": "https://shopping-phinf.pstatic.net/main_5976766/59767668525.jpg",
-      "detail_images": [
-        "https://shopping-phinf.pstatic.net/main_5976766/59767668525.jpg"
-      ],
-      "product_code": "",
-      "status": "pending"
-    },
-    {
-      "product": {
-        "name": "() 오뚜기 양조식초 /양조/식초/청소용/세척/빨래/식용/먹는/세탁물/헹굼/빨래용/대용량/대량/행굼 6개 1.8L",
-        "price": "68,200원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_5926167/59261675643.jpg",
-        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9240378587&ctag=9240378587&lptag=I28013296558&itemId=28013296558&vendorItemId=94970627743&spec=10305199",
-        "badge": "쿠팡",
-        "brand": "오뚜기",
-        "category": "식초",
-        "category_hint": "생활",
-        "mall_name": "쿠팡",
-        "source": "naver_shopping",
-        "scraped_at": "2026-06-15T20:34:19.706297",
-        "youtube_source": {
-          "title": "섬유유연제 안쓰는 이유 #자취템추천 #꿀템 #생활용품",
-          "video_id": "9aj5RIez37k",
-          "views": 1974,
-          "keyword": "자취 필수템 추천"
-        }
-      },
-      "post_text": "",
-      "image_url": "https://shopping-phinf.pstatic.net/main_5926167/59261675643.jpg",
-      "detail_images": [
-        "https://shopping-phinf.pstatic.net/main_5926167/59261675643.jpg"
+        "https://shopping-phinf.pstatic.net/main_4846115/48461153685.9.jpg"
       ],
       "product_code": "",
       "status": "pending"
