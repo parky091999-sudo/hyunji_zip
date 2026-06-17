@@ -1,6 +1,6 @@
 {
   "for_date": "2026-06-19",
-  "generated_at": "2026-06-18T02:29:55.211112+09:00",
+  "generated_at": "2026-06-18T04:14:36.429220+09:00",
   "candidates": [
     {
       "product": {
@@ -46,6 +46,60 @@
       "image_url": "https://shopping-phinf.pstatic.net/main_5976751/59767510551.4.jpg",
       "detail_images": [
         "https://shopping-phinf.pstatic.net/main_5976751/59767510551.4.jpg"
+      ],
+      "product_code": "",
+      "status": "pending"
+    },
+    {
+      "product": {
+        "name": "냉티슈 바르는데오퍼퓸 땀닦는물티슈 쿨링티슈 쿨링바디티슈 2개 10g",
+        "price": "15,400원",
+        "original_price": "",
+        "discount_rate": 0,
+        "image_url": "https://shopping-phinf.pstatic.net/main_5631352/56313524238.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8989891169&ctag=8989891169&lptag=I26331876104&itemId=26331876104&vendorItemId=93309122773&spec=10305199",
+        "badge": "쿠팡",
+        "brand": "",
+        "category": "데오드란트",
+        "category_hint": "생활",
+        "mall_name": "쿠팡",
+        "source": "naver_shopping",
+        "scraped_at": "2026-06-17T19:12:43.795851",
+        "youtube_source": {
+          "title": "올여름 삶의 질이 달라집니다! 다이소 추천 여름 필수템 7가지",
+          "video_id": "5ai0rfg_djk",
+          "views": 130770,
+          "keyword": "생활꿀템 추천"
+        }
+      },
+      "post_text": "점심 먹고 다시 사무실 들어가는데, 이미 땀으로 샤워한 것 같은 기분 아는 사람? 💦\n\n진짜, 밖에 잠깐만 나갔다 와도 끈적이는 피부 때문에 너무 찝찝하잖아. 특히 나처럼 땀 많은 사람들은 여름에 샤워를 하루에도 몇 번씩 하고 싶은데 그럴 수도 없으니 답답했음. 그럴 때 이거 하나 있으면 완전 신세계더라.\n\n그냥 물티슈가 아니라 닦는 순간 시원한 쿨링감이 확 올라오고, 데오도란트 효과까지 있어서 땀 냄새 걱정 없이 상쾌하게 만들어줘. 게다가 작아서 가방이나 주머니에 쏙 넣어 다니기 진짜 편하거든. 써본 사람들이 다들 '이거 없으면 여름 못 난다'고 하더라.\n\n✔ 운동 끝나고 나서 땀 식히는 데 최고고, 밖에 오래 서 있다가 지하철 타기 전에 팔다리 한번 슥 닦으면 진짜 개운함. 더워서 잠 못 잘 것 같을 때도 이걸로 몸 한번 닦으면 잠시나마 시원하게 잘 수 있었음!\n\n#자취템 #여름필수템 #쿨링템 #개운함 #휴대용",
+      "image_url": "https://shopping-phinf.pstatic.net/main_5631352/56313524238.jpg",
+      "detail_images": [
+        "https://shopping-phinf.pstatic.net/main_5631352/56313524238.jpg"
+      ],
+      "product_code": "",
+      "status": "pending"
+    },
+    {
+      "product": {
+        "name": "페이스팩토리 전동 다이아필 각질제거기 화이트 FF-27",
+        "price": "40,880원",
+        "original_price": "",
+        "discount_rate": 0,
+        "image_url": "https://shopping-phinf.pstatic.net/main_5027322/50273223171.12.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8327675475&ctag=8327675475&lptag=I24041145299&itemId=24041145299&vendorItemId=91061374698&spec=10305197",
+        "badge": "쿠팡",
+        "brand": "페이스팩토리",
+        "category": "발각질제거기",
+        "category_hint": "건강",
+        "mall_name": "쿠팡",
+        "source": "naver_shopping",
+        "scraped_at": "2026-06-17T19:13:23.462630"
+      },
+      "post_text": "내가 피부 관리를 제대로 시작한 건, 친구가 내 피부를 보고 충격받았다는 말을 듣고부터야\n그 때부터 집에서 간단하게 피부 관리를 할 수 있는 방법을 찾게 됐어. 그리고 전동 다이아필 각질제거기를 알게 됐는데, 이건 정말 특별해. 각질 제거뿐만 아니라 피부를 섬세하게 관리할 수 있어.\n이거 사용하고 나서 피부결이 좋아졌다는 후기를 본 사람도 많더라고.\n✔ 밤에 세안 후, 각질 제거기를 사용해서 피부를 정리하고, ✔ 아침에 화장품을 발라주면 피부가 더 환해지는 것 같아.\n\n#건강관리 #테크템 #전자기기 #IT템 #뷰티템",
+      "image_url": "https://shopping-phinf.pstatic.net/main_5027322/50273223171.12.jpg",
+      "detail_images": [
+        "https://shopping-phinf.pstatic.net/main_5027322/50273223171.12.jpg"
       ],
       "product_code": "",
       "status": "pending"
