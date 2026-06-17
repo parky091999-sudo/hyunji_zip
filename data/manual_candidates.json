@@ -1,6 +1,25 @@
 {
-  "scanned_at": "2026-06-16T01:36:24.918080+09:00",
+  "scanned_at": "2026-06-17T18:40:28.348441+09:00",
   "candidates": [
+    {
+      "product": {
+        "name": "금풍제과 보리건빵",
+        "price": "25,980원",
+        "original_price": "",
+        "discount_rate": 0,
+        "image_url": "https://shopping-phinf.pstatic.net/main_5885463/58854637269.62.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=2591853059&ctag=2591853059&lptag=l41507713221&itemId=3120547711&vendorItemId=70348203523&spec=10305197",
+        "badge": "쿠팡",
+        "brand": "",
+        "category": "기타과자",
+        "category_hint": "먹는거",
+        "mall_name": "쿠팡",
+        "source": "naver_shopping",
+        "scraped_at": "2026-06-17T09:40:07.406215"
+      },
+      "source_account": "검색:간식 추천 쿠팡",
+      "selected": false
+    },
     {
       "product": {
         "name": "해태제과 종합선물세트 11종 1세트",
@@ -15,45 +34,26 @@
         "category_hint": "먹는거",
         "mall_name": "쿠팡",
         "source": "naver_shopping",
-        "scraped_at": "2026-06-15T16:36:03.604365"
+        "scraped_at": "2026-06-17T09:40:07.406334"
       },
       "source_account": "검색:간식 추천 쿠팡",
       "selected": false
     },
     {
       "product": {
-        "name": "금풍제과 보리건빵",
-        "price": "24,480원",
+        "name": "곡물그대로21 크리스피롤",
+        "price": "41,130원",
         "original_price": "",
         "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_5885463/58854637269.62.jpg",
-        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=2591853059&ctag=2591853059&lptag=l41507713221&itemId=3120547711&vendorItemId=70348203523&spec=10305197",
+        "image_url": "https://shopping-phinf.pstatic.net/main_5976733/59767332105.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=4098054850&ctag=4098054850&lptag=l880162390209&itemId=83160980209&vendorItemId=85192997619&spec=10305197",
         "badge": "쿠팡",
         "brand": "",
         "category": "기타과자",
         "category_hint": "먹는거",
         "mall_name": "쿠팡",
         "source": "naver_shopping",
-        "scraped_at": "2026-06-15T16:36:03.604543"
-      },
-      "source_account": "검색:간식 추천 쿠팡",
-      "selected": false
-    },
-    {
-      "product": {
-        "name": "사무실간식개별포장 사무실과자 13종 (+1) 1세트 1개",
-        "price": "69,500원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_4546369/45463699115.1.jpg",
-        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=7413299408&ctag=7413299408&lptag=I19213312394&itemId=19213312394&vendorItemId=77042493999&spec=10305199",
-        "badge": "쿠팡",
-        "brand": "",
-        "category": "기타과자",
-        "category_hint": "먹는거",
-        "mall_name": "쿠팡",
-        "source": "naver_shopping",
-        "scraped_at": "2026-06-15T16:36:03.604657"
+        "scraped_at": "2026-06-17T09:40:07.406561"
       },
       "source_account": "검색:간식 추천 쿠팡",
       "selected": false
@@ -72,26 +72,26 @@
         "category_hint": "먹는거",
         "mall_name": "쿠팡",
         "source": "naver_shopping",
-        "scraped_at": "2026-06-15T16:36:03.604759"
+        "scraped_at": "2026-06-17T09:40:07.406669"
       },
       "source_account": "검색:간식 추천 쿠팡",
       "selected": false
     },
     {
       "product": {
-        "name": "곡물그대로21 크리스피롤",
-        "price": "39,680원",
+        "name": "사무실간식개별포장 사무실과자 13종 (+1) 1세트 1개",
+        "price": "69,500원",
         "original_price": "",
         "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_5976733/59767332105.jpg",
-        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=4098054850&ctag=4098054850&lptag=l880162390209&itemId=83160980209&vendorItemId=85192997619&spec=10305197",
+        "image_url": "https://shopping-phinf.pstatic.net/main_4546369/45463699115.1.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=7413299408&ctag=7413299408&lptag=I19213312394&itemId=19213312394&vendorItemId=77042493999&spec=10305199",
         "badge": "쿠팡",
         "brand": "",
         "category": "기타과자",
         "category_hint": "먹는거",
         "mall_name": "쿠팡",
         "source": "naver_shopping",
-        "scraped_at": "2026-06-15T16:36:03.604851"
+        "scraped_at": "2026-06-17T09:40:07.406780"
       },
       "source_account": "검색:간식 추천 쿠팡",
       "selected": false
@@ -110,7 +110,7 @@
         "category_hint": "먹는거",
         "mall_name": "쿠팡",
         "source": "naver_shopping",
-        "scraped_at": "2026-06-15T16:36:03.604968"
+        "scraped_at": "2026-06-17T09:40:07.406884"
       },
       "source_account": "검색:간식 추천 쿠팡",
       "selected": false
@@ -129,7 +129,7 @@
         "category_hint": "먹는거",
         "mall_name": "쿠팡",
         "source": "naver_shopping",
-        "scraped_at": "2026-06-15T16:36:03.605092"
+        "scraped_at": "2026-06-17T09:40:07.406995"
       },
       "source_account": "검색:간식 추천 쿠팡",
       "selected": false
@@ -137,39 +137,39 @@
     {
       "product": {
         "name": "올레놀샷 NMN 1개 15ml",
-        "price": "31,400원",
+        "price": "30,460원",
         "original_price": "",
         "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_5760148/57601483053.109.jpg",
-        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9164207296&ctag=9164207296&lptag=I26998880761&itemId=26998880761&vendorItemId=95364967268&spec=10305199",
+        "image_url": "https://shopping-phinf.pstatic.net/main_5760148/57601483053.112.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9164207296&ctag=9164207296&lptag=I26998880761&itemId=26998880761&vendorItemId=95248150273&spec=10305199",
         "badge": "쿠팡",
         "brand": "",
         "category": "에센스/세럼/앰플",
         "category_hint": "뷰티",
         "mall_name": "쿠팡",
         "source": "naver_shopping",
-        "scraped_at": "2026-06-15T16:36:06.016859"
+        "scraped_at": "2026-06-17T09:40:09.660606"
       },
       "source_account": "검색:미백 앰플",
       "selected": false
     },
     {
       "product": {
-        "name": "오페라 미룩스 LED 마스크",
-        "price": "455,000원",
+        "name": "민트리 탄산버블 두피 스케일러 15g",
+        "price": "35,900원",
         "original_price": "",
         "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_3863085/38630851673.152.jpg",
-        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=6239617459&ctag=6239617459&lptag=P6239617459&itemId=12586949221&vendorItemId=79854913981&spec=10305199",
+        "image_url": "https://shopping-phinf.pstatic.net/main_5664650/56646502984.4.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=4973897891&ctag=4973897891&lptag=l232283981501&itemId=98185122033&vendorItemId=91841313155&spec=10305199",
         "badge": "쿠팡",
-        "brand": "지티지웰니스",
-        "category": "피부케어기기",
+        "brand": "",
+        "category": "두피케어",
         "category_hint": "뷰티",
         "mall_name": "쿠팡",
         "source": "naver_shopping",
-        "scraped_at": "2026-06-15T16:36:10.280412"
+        "scraped_at": "2026-06-17T09:40:12.843280"
       },
-      "source_account": "검색:LED 마스크",
+      "source_account": "검색:두피 스케일러",
       "selected": false
     }
   ]
