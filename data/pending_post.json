@@ -1,6 +1,6 @@
 {
   "for_date": "2026-06-18",
-  "generated_at": "2026-06-17T05:19:52.338426+09:00",
+  "generated_at": "2026-06-17T11:01:59.754755+09:00",
   "candidates": [
     {
       "product": {
@@ -136,6 +136,36 @@
       "image_url": "https://shopping-phinf.pstatic.net/main_5984630/59846303973.jpg",
       "detail_images": [
         "https://shopping-phinf.pstatic.net/main_5984630/59846303973.jpg"
+      ],
+      "product_code": "",
+      "status": "pending"
+    },
+    {
+      "product": {
+        "name": "레오나르디 오로 노빌레 화이트 콘디멘토 코스트코 1개 500ml",
+        "price": "26,900원",
+        "original_price": "",
+        "discount_rate": 0,
+        "image_url": "https://shopping-phinf.pstatic.net/main_5554388/55543882607.419.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8658703328&ctag=8658703328&lptag=I25876708056&itemId=25876708056&vendorItemId=92175414467&spec=10305199",
+        "badge": "쿠팡",
+        "brand": "레오나르디",
+        "category": "식초",
+        "category_hint": "생활",
+        "mall_name": "쿠팡",
+        "source": "naver_shopping",
+        "scraped_at": "2026-06-17T02:01:16.877104",
+        "youtube_source": {
+          "title": "코스트코 18년차 회원이 이번주 구경하고 온 제품들😎",
+          "video_id": "QaY4vti4b98",
+          "views": 191218,
+          "keyword": "살림템 추천"
+        }
+      },
+      "post_text": "싱거운 요리에 뭔가 특별함을 더하고 싶은데 뭘 뿌려야 할지 모를 때 있거든. ✨\n\n혼자 먹는 밥상, 맨날 똑같은 샐러드나 구운 채소만 먹으면 좀 질리더라고. 그럴 때 이거 하나면 평범한 식탁도 근사해지는 거 알아?\n\n일반 발사믹은 색깔 때문에 음식에 뿌리면 지저분해 보이기도 하고, 맛도 강해서 부담스러울 때가 많거든. 근데 이건 투명한 노란빛이라 어떤 요리에도 깔끔하게 어울리더라. 게다가 텁텁하지 않고 산뜻하게 새콤달콤한 맛이라 요리 초보도 실패 없이 고급진 맛 내기 딱 좋음.\n\n나도 코스트코 갔다가 우연히 사 와서 써봤는데 왜 이제 알았나 싶을 정도로 만족했음.\n\n✔ 구운 채소나 샐러드 위에 가",
+      "image_url": "https://shopping-phinf.pstatic.net/main_5554388/55543882607.419.jpg",
+      "detail_images": [
+        "https://shopping-phinf.pstatic.net/main_5554388/55543882607.419.jpg"
       ],
       "product_code": "",
       "status": "pending"
