@@ -117,25 +117,6 @@
     },
     {
       "product": {
-        "name": "진저원 하루편강 생강간식",
-        "price": "33,000원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_4708306/47083061938.1.jpg",
-        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=6619701503&ctag=6619701503&lptag=l121820504775&itemId=8521577140&vendorItemId=70845018448&spec=10305197",
-        "badge": "쿠팡",
-        "brand": "",
-        "category": "기타과자",
-        "category_hint": "먹는거",
-        "mall_name": "쿠팡",
-        "source": "naver_shopping",
-        "scraped_at": "2026-06-17T09:40:07.406995"
-      },
-      "source_account": "검색:간식 추천 쿠팡",
-      "selected": false
-    },
-    {
-      "product": {
         "name": "올레놀샷 NMN 1개 15ml",
         "price": "30,460원",
         "original_price": "",
