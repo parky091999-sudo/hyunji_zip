@@ -1,5 +1,5 @@
 {
-  "next_code": 32,
+  "next_code": 33,
   "blocked_item_ids": [],
   "products": {
     "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8849967732&ctag=8849967732&lpt": {
@@ -312,6 +312,16 @@
       "registered_at": "2026-06-18T11:14:12.430823+09:00",
       "posted": true,
       "short_name": "티스푼 세트"
+    },
+    "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=6619701503&ctag=6619701503&lpt": {
+      "code": "032",
+      "name": "진저원 하루편강 생강간식",
+      "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=6619701503&ctag=6619701503&lptag=l121820504775&itemId=8521577140&vendorItemId=70845018448&spec=10305197",
+      "image_url": "https://shopping-phinf.pstatic.net/main_4708306/47083061938.1.jpg",
+      "category": "먹는거",
+      "registered_at": "2026-06-18T21:09:07.097571+09:00",
+      "posted": true,
+      "short_name": "생강 간식"
     }
   }
 }
