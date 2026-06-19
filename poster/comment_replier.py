@@ -24,7 +24,33 @@ logger = logging.getLogger(__name__)
 
 RECENT_POSTS_PATH = os.path.join(DATA_DIR, "recent_posts.json")
 REPLIED_PATH = os.path.join(DATA_DIR, "replied_comments.json")
+FEED_POSTS_PATH = os.path.join(DATA_DIR, "feed_posts.json")
 GRAPH_BASE = "https://graph.threads.net/v1.0"
+
+
+def _shortcode(url: str) -> str:
+    return url.rstrip("/").split("/post/")[-1] if url and "/post/" in url else ""
+
+
+def _load_post_texts_by_id(recent: list[dict]) -> dict[str, str]:
+    """recent_posts ↔ feed_posts 매칭: post_id → 원본 글 본문.
+    대댓 컨텍스트로 사용 (다의어 추론용)."""
+    if not os.path.exists(FEED_POSTS_PATH):
+        return {}
+    try:
+        with open(FEED_POSTS_PATH, encoding="utf-8") as f:
+            feed = json.load(f)
+    except Exception:
+        return {}
+    feed_by_sc = {_shortcode(p.get("threads_url", "")): p.get("post_text", "")
+                  for p in feed if p.get("threads_url")}
+    out = {}
+    for p in recent:
+        pid = p.get("post_id", "")
+        sc = _shortcode(p.get("url", ""))
+        if pid and sc and feed_by_sc.get(sc):
+            out[pid] = feed_by_sc[sc]
+    return out
 
 
 def _api(method: str, path: str, **kwargs) -> dict:
@@ -247,7 +273,8 @@ async def check_and_reply_comments():
     replied = load_replied()
     reply_count = 0
     own = _get_own_username()
-    logger.info(f"댓글 확인 시작: {len(target_posts)}개 포스트 (내 계정: @{own})")
+    post_texts = _load_post_texts_by_id(posts)
+    logger.info(f"댓글 확인 시작: {len(target_posts)}개 포스트 (내 계정: @{own}, 본문매칭 {len(post_texts)}개)")
 
     for post in target_posts:
         post_id = post.get("post_id", "")
@@ -316,7 +343,7 @@ async def check_and_reply_comments():
                         logger.info(f"  단어 댓글 → 짧게: '{raw_text}' → '{reply_text}'")
                     else:
                         comment_text = f"@{r.get('username', '?')}: {raw_text}"
-                        reply_text   = generate_reply(comment_text)
+                        reply_text   = generate_reply(comment_text, parent_post_text=post_texts.get(post_id, ""))
                         if not reply_text:
                             continue
 

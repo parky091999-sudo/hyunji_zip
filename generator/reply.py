@@ -63,6 +63,16 @@ _SYSTEM_PROMPT = f"""너는 Threads(@hyunji_ssi)를 운영하는 20대 자취생
 - 문장 전체 의미를 보고 답해. 단어 하나 뽑아서 "X 맛있어" 식으로 답하면 안 됨.
 - 의미가 불확실하면 차라리 "ㅎㅎ 그치", "맞아 ㅎㅎ" 같은 공감만 짧게.
 
+━━ 다의어는 원본 글 주제로 판단 (매우 중요) ━━
+- 댓글 위에 [원본 글] 섹션이 있으면 그게 진짜 맥락이야. 단어 하나로 엉뚱한 분야로 빠지지 마.
+- 다의어 예시:
+  · "건식" — 빨래/욕실 글: 건식 화장실/건식 빨래. 반려동물 글일 때만 사료.
+  · "습식" — 빨래/욕실 글: 습식 청소/습식 욕실. 반려동물 글일 때만 사료.
+  · "트레이" "그릇" "패드" 등도 원본 글 주제에 맞춰 해석.
+- 원본 글이 빨래·청소·욕실 얘기인데 "건식 좋아" 댓글이 오면 → "맞아 건식이 관리 편하지"
+  같이 같은 주제로 받아. 절대 "건식 사료" "먹어" 같은 엉뚱한 분야로 빠지지 마.
+- 원본 글 주제와 댓글이 안 맞으면 차라리 짧은 공감("ㅎㅎ 그치", "맞아")만.
+
 ━━ 반응 방식 ━━
 - 공감: 자기도 비슷하다고 가볍게 한 마디
 - 질문: 짧게 답해주기
@@ -79,20 +89,26 @@ _SYSTEM_PROMPT = f"""너는 Threads(@hyunji_ssi)를 운영하는 20대 자취생
 텍스트만 출력. 따옴표·설명 없이."""
 
 
-def generate_reply(comments_text: str) -> str | None:
-    """댓글 텍스트 받아서 자연스러운 대댓글 생성. 외국어/영어/잘림 시 재시도 후 None."""
+def generate_reply(comments_text: str, parent_post_text: str = "") -> str | None:
+    """댓글 텍스트 받아서 자연스러운 대댓글 생성. 외국어/영어/잘림 시 재시도 후 None.
+    parent_post_text: 댓글이 달린 원본 글 본문 (다의어/주제 추론에 사용)."""
     if not GROQ_API_KEY:
         logger.warning("GROQ_API_KEY 미설정 — 대댓글 생성 스킵")
         return None
     try:
         from groq import Groq
         client = Groq(api_key=GROQ_API_KEY)
+        parent = (parent_post_text or "").strip()
+        if parent:
+            user_msg = f"[원본 글]\n{parent[:500]}\n\n[달린 댓글]\n{comments_text}"
+        else:
+            user_msg = f"달린 댓글:\n{comments_text}"
         for attempt in range(3):
             response = client.chat.completions.create(
                 model="llama-3.3-70b-versatile",
                 messages=[
                     {"role": "system", "content": _SYSTEM_PROMPT},
-                    {"role": "user", "content": f"달린 댓글:\n{comments_text}"},
+                    {"role": "user", "content": user_msg},
                 ],
                 max_tokens=120,
                 temperature=0.85 if attempt == 0 else 0.5,
