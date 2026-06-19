@@ -1,19 +1,5 @@
 [
   {
-    "url": "https://www.threads.com/@kkul_pick711/post/DZcsIV1lsgq",
-    "post_id": "18079006463231189",
-    "posted_at": "2026-06-11T14:04:38.721849",
-    "post_type": "manual",
-    "product_code": "016"
-  },
-  {
-    "url": "https://www.threads.com/@kkul_pick711/post/DZeGue9FMT2",
-    "post_id": "18123099430578202",
-    "posted_at": "2026-06-12T03:16:15.577488",
-    "post_type": "manual",
-    "product_code": "017"
-  },
-  {
     "url": "https://www.threads.com/@kkul_pick711/post/DZe_Da-Ec3E",
     "post_id": "17872214082654571",
     "posted_at": "2026-06-12T11:28:26.082979",
@@ -159,5 +145,12 @@
     "posted_at": "2026-06-18T12:10:53.298667",
     "post_type": "manual",
     "product_code": "032"
+  },
+  {
+    "url": "https://www.threads.com/@hyunji_ssi/post/DZwRj46jnRX",
+    "post_id": "18111340765927956",
+    "posted_at": "2026-06-19T04:37:15.550242",
+    "post_type": "story",
+    "product_code": "033"
   }
 ]

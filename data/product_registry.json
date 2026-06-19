@@ -1,5 +1,5 @@
 {
-  "next_code": 33,
+  "next_code": 34,
   "blocked_item_ids": [],
   "products": {
     "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8849967732&ctag=8849967732&lpt": {
@@ -322,6 +322,16 @@
       "registered_at": "2026-06-18T21:09:07.097571+09:00",
       "posted": true,
       "short_name": "생강 간식"
+    },
+    "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=0864950887&ctag=0864950887&lpt": {
+      "code": "033",
+      "name": "미니홈 에어핏 TCD-300 의류관리기 에어다리미 걸이형건조기 자가설치 소형",
+      "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=0864950887&ctag=0864950887&lptag=l219416029018&itemId=10104698219&vendorItemId=93053180634&spec=10305198",
+      "image_url": "https://shopping-phinf.pstatic.net/main_5976765/59767657489.jpg",
+      "category": "생활",
+      "registered_at": "2026-06-19T13:35:14.265940+09:00",
+      "posted": true,
+      "short_name": "의류관리기 에어"
     }
   }
 }
