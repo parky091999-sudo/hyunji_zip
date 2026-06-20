@@ -1,6 +1,6 @@
 {
   "for_date": "2026-06-22",
-  "generated_at": "2026-06-21T00:58:46.229625+09:00",
+  "generated_at": "2026-06-21T03:00:14.156210+09:00",
   "candidates": [
     {
       "product": {
@@ -22,6 +22,36 @@
       "image_url": "https://shopping-phinf.pstatic.net/main_5027322/50273223171.12.jpg",
       "detail_images": [
         "https://shopping-phinf.pstatic.net/main_5027322/50273223171.12.jpg"
+      ],
+      "product_code": "",
+      "status": "pending"
+    },
+    {
+      "product": {
+        "name": "이케아 키친크로스 행주 주방행주 마리아테레스행주 타올 1개",
+        "price": "29,900원",
+        "original_price": "",
+        "discount_rate": 0,
+        "image_url": "https://shopping-phinf.pstatic.net/main_6000675/60006758794.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=7027501732&ctag=7027501732&lptag=I19680494228&itemId=19680494228&vendorItemId=86785964224&spec=10305199",
+        "badge": "쿠팡",
+        "brand": "이케아",
+        "category": "주방수납장",
+        "category_hint": "생활",
+        "mall_name": "쿠팡",
+        "source": "naver_shopping",
+        "scraped_at": "2026-06-20T17:58:04.658023",
+        "youtube_source": {
+          "title": "구축 아파트 주방 리모델링 추천 #구축아파트 #인테리어",
+          "video_id": "f7h3IFwbKSU",
+          "views": 45726,
+          "keyword": "주방 가전 추천"
+        }
+      },
+      "post_text": "요리하다가 행주 하나 때문에 시간 다 버리는 사람 있지? 🤦‍♀️\n그럴 때마다 왜 이제까지 이런 행주를 안 썼을까 싶더라고\n이 행주는 물기를 엄청 잘 흡수하고 빨리 마르니까 세탁하기도 편리하고, 부엌이 더러워지는 것도 막아주더라고\n리뷰 보니까 대부분이 만족도 높게 평가하더라\n✔ 행주를 자주 교체해야 하는데, 이건 세탁기에도 넣을 수 있고 건조도 빠르더라\n✔ 요리할 때마다 행주를 쓸데없는 곳에 두고 다니는 사람이라면, 이 행주 하나면 부엌 정리도 쉬워질 거 같애\n\n#생활꿀템 #살림템 #자취템 #필수템 #주방용품",
+      "image_url": "https://shopping-phinf.pstatic.net/main_6000675/60006758794.jpg",
+      "detail_images": [
+        "https://shopping-phinf.pstatic.net/main_6000675/60006758794.jpg"
       ],
       "product_code": "",
       "status": "pending"
@@ -52,6 +82,36 @@
     },
     {
       "product": {
+        "name": "삼성전자 BESPOKE 스팀 9600 로봇청소기 방문설치",
+        "price": "984,000원",
+        "original_price": "",
+        "discount_rate": 0,
+        "image_url": "https://shopping-phinf.pstatic.net/main_5528740/55287408519.78.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9977858988&ctag=9977858988&lptag=l292251820802&itemId=21282829005&vendorItemId=89258830163&spec=10305197",
+        "badge": "쿠팡",
+        "brand": "",
+        "category": "로봇청소기",
+        "category_hint": "생활",
+        "mall_name": "쿠팡",
+        "source": "naver_shopping",
+        "scraped_at": "2026-06-20T17:58:09.744438",
+        "youtube_source": {
+          "title": "&quot;그냥 사면 절대 못받아요!&quot; 삼성 감사 페스티벌 20% 환급! 이건 알고 사세요🔥 삼성가전추천┃TV추천┃냉장고추천┃에어컨추천┃로봇청소기추천┃세탁기┃건조기┃노트북┃태블릿┃",
+          "video_id": "LKVp01CgiuQ",
+          "views": 17922,
+          "keyword": "주방 가전 추천"
+        }
+      },
+      "post_text": "일상이 너무 똑같아질 때마다, 가끔은 집 안을 청소하거나 요리하는 것만으로도 스트레스가 풀리더라\n그런데 청소기 하나 때문에 내 생활이 확 달라졌어\n그냥 바닥을 쓸어내리거나 먼지를 제거하는 게 아니라, 스팀 기능이 있어서 바닥을 완전히 청소할 수 있더라고\n게다가 로봇청소기라서 자동으로 돌아다니면서 청소해주니까, 내가 따로 신경 쓸 필요가 없더라\n리뷰 보니까 이거 쓰고 나서 청소에 시간을 많이 들이지 않는다고 하더라\n✔ 이거 쓰면 청소 시간을 줄일 수 있고, 바닥도 깨끗하게 청소할 수 있어. 특히나 방문설치가 포함되어 있어서, 당일 바로 쓸 수 있더라고\n✔ 아침에 출근하기 전에 이거 돌리면, 집 안이 깨끗하게 청소된 상태로 집을 나설 수 있어\n\n#생활꿀템 #살림템 #로봇청소기 #청소템 #집꾸미기",
+      "image_url": "https://shopping-phinf.pstatic.net/main_5528740/55287408519.78.jpg",
+      "detail_images": [
+        "https://shopping-phinf.pstatic.net/main_5528740/55287408519.78.jpg"
+      ],
+      "product_code": "",
+      "status": "pending"
+    },
+    {
+      "product": {
         "name": "나디 해피바디 발 종아리 마사지기 BM-508 온열 전동 홈케어",
         "price": "122,550원",
         "original_price": "",
@@ -70,6 +130,36 @@
       "image_url": "https://shopping-phinf.pstatic.net/main_4005221/40052215030.jpg",
       "detail_images": [
         "https://shopping-phinf.pstatic.net/main_4005221/40052215030.jpg"
+      ],
+      "product_code": "",
+      "status": "pending"
+    },
+    {
+      "product": {
+        "name": "하이얼 미니 76L 1도어 냉장고",
+        "price": "173,300원",
+        "original_price": "",
+        "discount_rate": 0,
+        "image_url": "https://shopping-phinf.pstatic.net/main_5528966/55289665261.26.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=42566748&ctag=42566748&lptag=l3302710973&itemId=017397303&vendorItemId=4802326982&spec=10305197",
+        "badge": "쿠팡",
+        "brand": "",
+        "category": "냉장고",
+        "category_hint": "생활",
+        "mall_name": "쿠팡",
+        "source": "naver_shopping",
+        "scraped_at": "2026-06-20T17:58:10.824536",
+        "youtube_source": {
+          "title": "2026 삼성/LG 1도어 냉장고 비교! 딱 하나만 추천하라면?1도어 냉장고 고민 끝! 삼성 vs LG 실사용 비교 총정리",
+          "video_id": "SEPFLd4wnaQ",
+          "views": 17515,
+          "keyword": "주방 가전 추천"
+        }
+      },
+      "post_text": "오늘은 내가 일상에서 정말 많이 쓰는 물건을 소개할 거야\n내 방이랑 작은 공간에 딱인 1도어 냉장고야\n이거덕분에 요리하고 먹는 걸 더 편하게 할 수 있더라고\n게다가 작아 보이지만 은근히 많이 들어가더라고\n리뷰 보니까 다른 1도어 냉장고랑 비교해도 이게 가장 만족도가 높았어\n✔ 아침에 일어나서 우유랑 요거트를 꺼내 먹을 때,\n✔ 밤에 맥주랑 음료를 꺼내 먹을 때 이 냉장고가 정말 유용하더라고\n\n#생활꿀템 #자취템 #살림템 #필수템 #1도어냉장고",
+      "image_url": "https://shopping-phinf.pstatic.net/main_5528966/55289665261.26.jpg",
+      "detail_images": [
+        "https://shopping-phinf.pstatic.net/main_5528966/55289665261.26.jpg"
       ],
       "product_code": "",
       "status": "pending"
