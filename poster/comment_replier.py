@@ -135,6 +135,7 @@ def _keyword_reply(product_code: str) -> str:
 
 # ── 짧은/단순 반응 댓글 처리 ────────────────────────────────────────────────────
 _SHORT_REACTIONS = {"ㅋㅋ", "ㅎㅎ", "ㅠㅠ", "오오", "헐", "와", "대박", "굳", "ㄷㄷ", "진짜", "맞아", "맞지"}
+_HEART_RE = re.compile(r"반하리|반해버|반했|반함|반해\s*$|반하겠|반하네|반할")
 _SHORT_REPLY_EMOJIS = ["ㅎㅎ 😊", "ㅋㅋ", "😊", "ㅎㅎ", "그치 ㅎㅎ"]
 
 # 한 단어처럼 보여도 문장 단편/오타로 의미 추정이 위험한 어미.
@@ -329,6 +330,18 @@ async def check_and_reply_comments():
                 # 댓글별 개별 try — 한 댓글에서 에러나도 다른 댓글 처리 계속
                 try:
                     raw_text = r.get("text", "")
+
+                    # 반하리/반해버렸 등 하트 감정 댓글 → ❤️ 만
+                    if _HEART_RE.search(raw_text):
+                        logger.info(f"  하트 댓글: '{raw_text[:30]}' → ❤️")
+                        if post_reply_to_thread(r.get("id", ""), "❤️"):
+                            post_replied.add(_comment_key(r.get("id", ""), raw_text))
+                            replied[post_id] = list(post_replied)
+                            save_replied(replied)
+                            reply_count += 1
+                            await asyncio.sleep(15)
+                        continue
+
                     kind     = _classify_short_comment(raw_text)
 
                     if kind == "skip":
