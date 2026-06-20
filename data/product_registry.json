@@ -1,5 +1,5 @@
 {
-  "next_code": 35,
+  "next_code": 36,
   "blocked_item_ids": [],
   "products": {
     "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8849967732&ctag=8849967732&lpt": {
@@ -342,6 +342,16 @@
       "registered_at": "2026-06-20T11:03:01.813882+09:00",
       "posted": true,
       "short_name": "스킨 딜리트"
+    },
+    "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=7280230895&ctag=7280230895&lpt": {
+      "code": "035",
+      "name": "오아 UV 듀얼 초음파 살균 렌즈세척기",
+      "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=7280230895&ctag=7280230895&lptag=l133226856585&itemId=53283651865&vendorItemId=92330625206&spec=10305197",
+      "image_url": "https://shopping-phinf.pstatic.net/main_5896351/58963512720.jpg",
+      "category": "생활",
+      "registered_at": "2026-06-20T20:31:33.614356+09:00",
+      "posted": true,
+      "short_name": "UV 렌즈세"
     }
   }
 }
