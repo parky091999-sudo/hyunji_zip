@@ -6,6 +6,7 @@ import json
 import logging
 import os
 import random
+import re
 import sys
 from datetime import datetime, timezone, timedelta
 
@@ -104,7 +105,12 @@ def run():
     if len(body) < 100:
         logger.warning(f"일상글 너무 짧음({len(body)}자) — 잘림 의심으로 게시 차단")
         return
-    last_char = body.rstrip("#가-힣 \n").rstrip()[-1:] if body else ""
+    # 끝 이모지 제거 후 마지막 의미 문자 확인 (이모지 장식 뒤 '?' 등 정상 종결 오탐 방지)
+    _EMOJI_TAIL_RE = re.compile(
+        r'[\U00010000-\U0010FFFF\U0001F000-\U0001FAFF☀-➿⌚-⏿▪-➿]+$'
+    )
+    body_no_emoji = _EMOJI_TAIL_RE.sub("", body).rstrip("#가-힣 \n").rstrip()
+    last_char = body_no_emoji[-1:] if body_no_emoji else ""
     if last_char and last_char not in "다요임어야겠네봄않함봐!?~)♥.…":
         logger.warning(f"일상글 문장 미완성('...{body[-15:]}') — 잘림 의심으로 게시 차단")
         return
