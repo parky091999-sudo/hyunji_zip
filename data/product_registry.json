@@ -1,5 +1,5 @@
 {
-  "next_code": 38,
+  "next_code": 39,
   "blocked_item_ids": [],
   "products": {
     "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8849967732&ctag=8849967732&lpt": {
@@ -372,6 +372,14 @@
       "registered_at": "2026-06-23T11:25:39.401459+09:00",
       "posted": true,
       "short_name": "미니 1도어 냉장고"
+    },
+    "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9615907109&ctag=9615907109&lpt": {
+      "code": "038",
+      "name": "Koizumi 코이즈미 전동 후추 소금 그라인더 KPM-0100/S",
+      "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9615907109&ctag=9615907109&lptag=P9615907109&itemId=28711860933&vendorItemId=95652625174&spec=10305199",
+      "image_url": "https://shopping-phinf.pstatic.net/main_6056393/60563931305.jpg",
+      "category": "",
+      "registered_at": "2026-06-23T21:11:15.231582+09:00"
     }
   }
 }
