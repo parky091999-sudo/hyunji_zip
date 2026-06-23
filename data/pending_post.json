@@ -1,6 +1,6 @@
 {
   "for_date": "2026-06-24",
-  "generated_at": "2026-06-23T11:18:20.391633+09:00",
+  "generated_at": "2026-06-23T11:30:34.398118+09:00",
   "candidates": [
     {
       "product": {
@@ -22,36 +22,6 @@
       "image_url": "https://shopping-phinf.pstatic.net/main_5027322/50273223171.12.jpg",
       "detail_images": [
         "https://shopping-phinf.pstatic.net/main_5027322/50273223171.12.jpg"
-      ],
-      "product_code": "",
-      "status": "pending"
-    },
-    {
-      "product": {
-        "name": "하이얼 미니 76L 1도어 냉장고",
-        "price": "173,300원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_5528966/55289665261.26.jpg",
-        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=42566748&ctag=42566748&lptag=l3302710973&itemId=017397303&vendorItemId=4802326982&spec=10305197",
-        "badge": "쿠팡",
-        "brand": "",
-        "category": "냉장고",
-        "category_hint": "생활",
-        "mall_name": "쿠팡",
-        "source": "naver_shopping",
-        "scraped_at": "2026-06-22T18:21:35.173638",
-        "youtube_source": {
-          "title": "2026 삼성/LG 1도어 냉장고 비교! 딱 하나만 추천하라면?1도어 냉장고 고민 끝! 삼성 vs LG 실사용 비교 총정리",
-          "video_id": "SEPFLd4wnaQ",
-          "views": 18361,
-          "keyword": "주방 가전 추천"
-        }
-      },
-      "post_text": "자취 시작하고 나서 가장 신경 쓰였던 게 뭐였는지 알아?\n난 음식 보관하는 문제였어. 음식물 쓰레기가 많이 나고, 냄새가 베서 다른 음식 먹을 때마다 거슬렸음. 근데 작은 냉장고 하나로 다 해결되더라고.\n이 냉장고, 76L로 작지만 음식 보관에 충분하고, 1도어라 설치 공간을 많이 차지하지 않아. 게다가 소비전력이 낮아서 전기세도 많이 안 나와서 좋더라.\n리뷰 보니까 다른 사람들도 만족도 매우 높았고, 내 경험도 같더라고.\n✔ 식재료 보관이나 음식남은거 보관할 때 진짜 유용하고,\n✔ 방 한 구석에 넣어두고 사용하기도 편리하더라.\n\n#살림템 #생활꿀템 #자취템 #필수템 #살림꿀템",
-      "image_url": "https://shopping-phinf.pstatic.net/main_5528966/55289665261.26.jpg",
-      "detail_images": [
-        "https://shopping-phinf.pstatic.net/main_5528966/55289665261.26.jpg"
       ],
       "product_code": "",
       "status": "pending"

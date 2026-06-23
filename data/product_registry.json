@@ -1,5 +1,5 @@
 {
-  "next_code": 37,
+  "next_code": 38,
   "blocked_item_ids": [],
   "products": {
     "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8849967732&ctag=8849967732&lpt": {
@@ -362,6 +362,16 @@
       "registered_at": "2026-06-22T11:16:02.443699+09:00",
       "posted": true,
       "short_name": "자동 캔 오프너"
+    },
+    "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=42566748&ctag=42566748&lptag=l": {
+      "code": "037",
+      "name": "하이얼 미니 76L 1도어 냉장고",
+      "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=42566748&ctag=42566748&lptag=l3302710973&itemId=017397303&vendorItemId=4802326982&spec=10305197",
+      "image_url": "https://shopping-phinf.pstatic.net/main_5528966/55289665261.26.jpg",
+      "category": "생활",
+      "registered_at": "2026-06-23T11:25:39.401459+09:00",
+      "posted": true,
+      "short_name": "미니 1도어 냉장고"
     }
   }
 }
