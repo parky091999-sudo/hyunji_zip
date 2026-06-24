@@ -1,5 +1,5 @@
 {
-  "next_code": 40,
+  "next_code": 41,
   "blocked_item_ids": [],
   "products": {
     "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8849967732&ctag=8849967732&lpt": {
@@ -390,6 +390,16 @@
       "registered_at": "2026-06-24T11:03:39.618533+09:00",
       "posted": true,
       "short_name": "로봇청소기"
+    },
+    "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8744861949&ctag=8744861949&lpt": {
+      "code": "040",
+      "name": "어반픽스 전동 소금 후추 스테인레스 그라인더 2P 2개 70ml",
+      "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8744861949&ctag=8744861949&lptag=I25416115811&itemId=25416115811&vendorItemId=92409413240&spec=10305198",
+      "image_url": "https://shopping-phinf.pstatic.net/main_5719338/57193387055.jpg",
+      "category": "주방",
+      "registered_at": "2026-06-24T20:48:56.017738+09:00",
+      "posted": true,
+      "short_name": "전동 소금 후추 그라인더"
     }
   }
 }
