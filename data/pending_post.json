@@ -1,6 +1,6 @@
 {
   "for_date": "2026-06-26",
-  "generated_at": "2026-06-25T01:37:31.390314+09:00",
+  "generated_at": "2026-06-25T03:24:09.668563+09:00",
   "candidates": [
     {
       "product": {
@@ -52,6 +52,30 @@
       "image_url": "https://shopping-phinf.pstatic.net/main_6004669/60046693991.5.jpg",
       "detail_images": [
         "https://shopping-phinf.pstatic.net/main_6004669/60046693991.5.jpg"
+      ],
+      "product_code": "",
+      "status": "pending"
+    },
+    {
+      "product": {
+        "name": "씨즌M닷컴 카카오프렌즈 휴대용 UV살균 칫솔케이스 라이언 RYAN 라이언001",
+        "price": "27,900원",
+        "original_price": "",
+        "discount_rate": 0,
+        "image_url": "https://shopping-phinf.pstatic.net/main_2386835/23868356238.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=1501239636&ctag=1501239636&lptag=P1501239636&itemId=2577588578&vendorItemId=70569850445&spec=10305199",
+        "badge": "쿠팡",
+        "brand": "",
+        "category": "구강청정기",
+        "category_hint": "생활",
+        "mall_name": "쿠팡",
+        "source": "naver_shopping",
+        "scraped_at": "2026-06-24T18:23:14.211150"
+      },
+      "post_text": "칫솔을 보관할 때마다 바닥에 두니까 물기가 안 마르더라고\n그런데 칫솔을 어떻게 하면 잘 보관할 수 있을까 고민하는 사람 많을 거 같아\n그럴 때 이건 진짜 유용하더라고. UV 살균 기능이 있어서 칫솔을 항상 청결하게 유지할 수 있고, 휴대용이라서 어디서나 사용할 수 있더라고\n리뷰 보니까 산 사람들이 하나같이 칫솔 관리가 편해졌다고 하더라\n✔ 아침에 출근할 때, ✔ 여행갈 때 이런 칫솔 케이스를 쓰면 편리하더라고\n\n#생활꿀템 #자취템 #필수템 #살림템 #칫솔관리",
+      "image_url": "https://shopping-phinf.pstatic.net/main_2386835/23868356238.jpg",
+      "detail_images": [
+        "https://shopping-phinf.pstatic.net/main_2386835/23868356238.jpg"
       ],
       "product_code": "",
       "status": "pending"
