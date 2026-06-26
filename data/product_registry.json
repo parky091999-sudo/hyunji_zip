@@ -1,5 +1,5 @@
 {
-  "next_code": 42,
+  "next_code": 43,
   "blocked_item_ids": [],
   "products": {
     "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8849967732&ctag=8849967732&lpt": {
@@ -410,6 +410,16 @@
       "registered_at": "2026-06-25T20:44:22.432150+09:00",
       "posted": true,
       "short_name": "전자레인지 다이얼식"
+    },
+    "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8867285435&ctag=8867285435&lpt": {
+      "code": "042",
+      "name": "쿠쿠 제빵기 세트",
+      "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8867285435&ctag=8867285435&lptag=l9262001342201&itemId=60102943122&vendorItemId=83398544838&spec=10305197",
+      "image_url": "https://shopping-phinf.pstatic.net/main_5406836/54068361382.1.jpg",
+      "category": "생활",
+      "registered_at": "2026-06-26T11:02:03.492388+09:00",
+      "posted": true,
+      "short_name": "제빵기 세트"
     }
   }
 }

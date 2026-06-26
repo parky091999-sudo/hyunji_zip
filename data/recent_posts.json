@@ -1,12 +1,5 @@
 [
   {
-    "url": "https://www.threads.com/@hyunji_ssi/post/DZugrTAlNmo",
-    "post_id": "18115758247659902",
-    "posted_at": "2026-06-18T12:10:53.298667",
-    "post_type": "manual",
-    "product_code": "032"
-  },
-  {
     "url": "https://www.threads.com/@hyunji_ssi/post/DZwRj46jnRX",
     "post_id": "18111340765927956",
     "posted_at": "2026-06-19T04:37:15.550242",
@@ -103,5 +96,12 @@
     "posted_at": "2026-06-25T11:46:27.719894",
     "post_type": "story",
     "product_code": "041"
+  },
+  {
+    "url": "https://www.threads.com/@hyunji_ssi/post/DaCBo6zFoWJ",
+    "post_id": "18432791383132636",
+    "posted_at": "2026-06-26T02:04:28.900933",
+    "post_type": "story",
+    "product_code": "042"
   }
 ]
