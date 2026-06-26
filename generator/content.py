@@ -119,6 +119,32 @@ def _has_foreign_chars(text: str) -> bool:
 has_foreign_chars = _has_foreign_chars  # 외부 모듈용 공개 별칭
 
 
+# ── 영어 혼입 탐지 ──────────────────────────────────────────────────────────
+# _FOREIGN_RE는 기본 영어(A-Z)를 막지 않아 "끝인거imore라고", "더efficient하게" 같은
+# LLM 글리치나 영어 단어가 본문에 그대로 게시됐다. 일상적으로 굳어진 약어만 허용하고
+# 나머지 영어 단어(2자+)는 부적절 영어로 보고 재생성 트리거.
+_ENGLISH_WHITELIST = {
+    "LED", "UV", "USB", "TV", "PC", "AS", "IH", "DIY", "AI", "OK", "QR", "LCD",
+    "OLED", "HDMI", "GPS", "BLE", "IOT", "NFC", "RGB", "SSD", "HDD", "CPU",
+    "ML", "KG", "CM", "MM", "MG", "KW", "HZ", "DB", "DC", "AC",
+    "ABS", "PE", "PP", "PVC", "PET", "BPA", "SPF", "PA", "CC", "BB",
+}
+_ENG_WORD_RE = re.compile(r"[A-Za-z]{2,}")
+
+
+def _has_bad_english(text: str) -> bool:
+    """본문에 부적절한 영어(약어 화이트리스트 외 영어 단어, 한글에 끼어든 영어)가 있으면 True.
+    해시태그·URL·제품코드 라인은 제외."""
+    t = re.sub(r"#\S+|https?://\S+|\[\d+\]", " ", text)
+    for w in _ENG_WORD_RE.findall(t):
+        if w.upper() not in _ENGLISH_WHITELIST:
+            return True
+    return False
+
+
+has_bad_english = _has_bad_english  # 외부 모듈용 공개 별칭
+
+
 # ── 본문 잘림 감지 ──────────────────────────────────────────────────────────
 # 토큰 한도로 마지막 문장이 절단된 상태에서 그대로 게시되는 것을 막는 게이트.
 # verify_posts._is_truncated와 같은 휴리스틱(푸터/해시태그/체크마크 제외 후
@@ -261,7 +287,12 @@ def _build_user_msg(product: dict) -> str:
 
 _VARIETY_ONLY = "\n\n[필수] 첫 문장을 금지 목록과 완전히 다른 새로운 패턴으로 시작해."
 
-_KOREAN_ONLY = "\n\n[필수] 한국어로만 출력. 태국어·중국어·일본어·베트남어·아랍어 등 어떤 외국어도 절대 사용 금지. 한글+영문+이모지만 허용."
+_KOREAN_ONLY = (
+    "\n\n[필수] 한국어로만 출력. 태국어·중국어·일본어·베트남어·아랍어 등 어떤 외국어도 절대 사용 금지. "
+    "영어 단어도 쓰지 마라 — 한글에 영어를 붙이거나(예: '끝인거imore라고', '더efficient하게') 영어 단어를 섞지 말고 "
+    "전부 한국어로 풀어써라. 브랜드·제품명도 한글로 표기. "
+    "(단 LED·UV·USB·TV 처럼 일상적으로 굳어진 약어만 예외) 한글과 이모지 위주로만 작성."
+)
 
 
 def _generate_with_gemini(product: dict, product_code: str) -> str | None:
@@ -286,6 +317,9 @@ def _generate_with_gemini(product: dict, product_code: str) -> str | None:
                 continue
             if _has_foreign_chars(candidate):
                 logger.warning(f"Gemini 외국어 감지 → 재시도 {attempt + 1}/3")
+                continue
+            if _has_bad_english(candidate):
+                logger.warning(f"Gemini 영어 혼입 감지 → 재시도 {attempt + 1}/3")
                 continue
             if _is_dup_hook(candidate):
                 logger.warning(f"Gemini 첫 문장 반복 감지 → 재시도 {attempt + 1}/3")
@@ -330,6 +364,9 @@ def _generate_with_groq(product: dict, product_code: str) -> str | None:
                 continue
             if _has_foreign_chars(candidate):
                 logger.warning(f"Groq 외국어 감지 → 재시도 {attempt + 1}/3")
+                continue
+            if _has_bad_english(candidate):
+                logger.warning(f"Groq 영어 혼입 감지 → 재시도 {attempt + 1}/3")
                 continue
             if _is_dup_hook(candidate):
                 logger.warning(f"Groq 첫 문장 반복 감지 → 재시도 {attempt + 1}/3")
@@ -492,18 +529,18 @@ def ensure_korean(text: str, product: dict, product_code: str = "") -> str:
     """포스팅 직전 최종 언어 게이트.
     외국어 감지 시: 정제(polish) → 재생성 → 안전 템플릿 순으로 한국어 텍스트를 보장.
     (수동 큐처럼 생성 시점 필터를 거치지 않은 텍스트의 마지막 방어선)"""
-    if not text or not _has_foreign_chars(text):
+    if not text or (not _has_foreign_chars(text) and not _has_bad_english(text)):
         return text
-    logger.warning("포스팅 직전 외국어 감지 → 정제 시도")
+    logger.warning("포스팅 직전 외국어/영어 혼입 감지 → 정제 시도")
     fixed = polish_post(text, product)
-    if fixed and not _has_foreign_chars(fixed):
+    if fixed and not _has_foreign_chars(fixed) and not _has_bad_english(fixed):
         return fixed
 
     m = re.search(r"\[(\d{3})\] 검색", text)
     code = product_code or (m.group(1) if m else "")
     logger.warning("정제 실패 → 본문 재생성")
     regen = _generate_post1_ai(product, code or "CODE")
-    if regen and not _has_foreign_chars(regen):
+    if regen and not _has_foreign_chars(regen) and not _has_bad_english(regen):
         if not code:
             regen = re.sub(r"\n\n제품 정보는 프로필 링크에서 \[CODE\] 검색 👆", "", regen)
         return regen
@@ -527,7 +564,8 @@ def polish_post(text: str, product: dict) -> str | None:
         "위 초안을 바탕으로 자연스러운 한국어 SNS 포스팅으로 다듬어 주세요.\n"
         "규칙:\n"
         "- 초안의 구조·내용·방향을 최대한 유지\n"
-        "- 외국어(영어 제외) 단어가 있으면 한국어로 교체\n"
+        "- 외국어 및 영어 단어가 있으면 한국어로 교체 (LED·UV·USB·TV 같이 굳어진 약어만 예외)\n"
+        "- 한글에 붙은 영어(예: '끝인거imore라고', '더efficient하게')는 자연스러운 한국어로 바로잡기\n"
         "- 어색한 표현만 자연스럽게 수정\n"
         "- 이모지·해시태그·코드 라인 그대로 유지\n"
         "- 다듬은 텍스트만 출력, 설명 금지"
@@ -544,8 +582,8 @@ def polish_post(text: str, product: dict) -> str | None:
             temperature=0.4,
         )
         result = resp.choices[0].message.content.strip()
-        if _has_foreign_chars(result):
-            logger.warning("polish_post: 외국어 여전히 포함 → 원본 사용")
+        if _has_foreign_chars(result) or _has_bad_english(result):
+            logger.warning("polish_post: 외국어/영어 여전히 포함 → 원본 사용")
             return None
         return _fix_linebreaks(result)
     except Exception as e:
