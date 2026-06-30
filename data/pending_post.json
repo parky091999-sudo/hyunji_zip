@@ -1,6 +1,6 @@
 {
   "for_date": "2026-07-02",
-  "generated_at": "2026-07-01T01:37:29.561697+09:00",
+  "generated_at": "2026-07-01T03:23:23.000565+09:00",
   "candidates": [
     {
       "product": {
@@ -76,6 +76,36 @@
       "image_url": "https://shopping-phinf.pstatic.net/main_5765679/57656797195.5.jpg",
       "detail_images": [
         "https://shopping-phinf.pstatic.net/main_5765679/57656797195.5.jpg"
+      ],
+      "product_code": "",
+      "status": "pending"
+    },
+    {
+      "product": {
+        "name": "이케아 NORDEN 노르덴 게이트레그테이블 자작나무 26/89/152x80cm 804.238.83 152cm 4인용",
+        "price": "422,740원",
+        "original_price": "",
+        "discount_rate": 0,
+        "image_url": "https://shopping-phinf.pstatic.net/main_5329528/53295280413.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=7027515334&ctag=7027515334&lptag=I17331748133&itemId=17331748133&vendorItemId=93169278433&spec=10305199",
+        "badge": "쿠팡",
+        "brand": "이케아",
+        "category": "식탁/의자",
+        "category_hint": "생활",
+        "mall_name": "쿠팡",
+        "source": "naver_shopping",
+        "scraped_at": "2026-06-30T18:22:28.698468",
+        "youtube_source": {
+          "title": "이케아가 사고쳤다는 만능 테이블  #생활꿀템 #홈인테리어 #살림꿀템 #이케아추천템 #접이식테이블",
+          "video_id": "-UkSXdVNRz8",
+          "views": 69036,
+          "keyword": "생활꿀템 추천"
+        }
+      },
+      "post_text": "혼자 살면 넓은 식탁은 사치라고 생각했던 사람, 이거 보면 깜짝 놀랄 걸? 😳\n나처럼 원룸이나 작은 집에 살아서 큰 테이블 놓기 부담스러웠던 사람한테 진짜 딱이더라고. 평소엔 공간 차지 안 하고 깔끔하게 쓰고 싶은데, 가끔 친구 초대하거나 작업할 때 넓은 공간이 필요한 그런 상황!\n\n이게 필요할 땐 양쪽 날개를 펼쳐서 4인용 식탁으로 확 넓게 쓸 수 있는데, 안 쓸 때는 양쪽을 접어서 26cm짜리 콘솔처럼 좁게 만들 수 있더라. 게다가 자작나무 원목이라 엄청 튼튼하고 고급스러운 느낌까지 줘서 인테리어 효과도 좋음. 👍\n\n써본 사람들이 하나같이 \"왜 이제야 샀을까\" 하면서 주변에 강추한다고 하더라.\n\n✔ 평소에는 한쪽 날개만 펼쳐서 나만의 작업 공간이나 간이 식탁으로 쓰다가, 손님 올 때는 양쪽 날개를 다 펼쳐서 넉넉한 4인용 테이블로 활용하면 진짜 좋음.\n✔ 테이블 다리 안쪽에 수납 공간도 깨알같이 있어서 잡동사니 넣어두기에도 딱이더라고.\n\n#자취템 #살림꿀템",
+      "image_url": "https://shopping-phinf.pstatic.net/main_5329528/53295280413.jpg",
+      "detail_images": [
+        "https://shopping-phinf.pstatic.net/main_5329528/53295280413.jpg"
       ],
       "product_code": "",
       "status": "pending"
