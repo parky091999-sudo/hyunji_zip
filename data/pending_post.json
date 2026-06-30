@@ -1,150 +1,81 @@
 {
-  "for_date": "2026-07-01",
-  "generated_at": "2026-06-30T04:19:08.177757+09:00",
+  "for_date": "2026-07-02",
+  "generated_at": "2026-07-01T01:37:29.561697+09:00",
   "candidates": [
     {
       "product": {
-        "name": "울팜 아삭 달달 국내산 친환경 양배추 제주 무안 밀양, 3kg, 1박스",
-        "price": "7,360원",
-        "original_price": "",
-        "discount_rate": 53,
-        "image_url": "https://thumbnail.coupangcdn.com/thumbnails/remote/292x292ex/image/vendor_inventory/8a34/741a87cec98a43927698a385ebe91516bdeca50eae559a07f35c80fba258.jpg",
-        "product_url": "https://www.coupang.com/vp/products/8795096974?vendorItemId=92213254126&sourceType=HOME_GW_PROMOTION&searchId=feed-90348f334eda454fa3dfef911948226a-3.33.107:gw_promotion",
-        "badge": "특가진행중",
-        "scraped_at": "2026-06-29T19:17:18.153784"
-      },
-      "post_text": "요즘 집에서 혼자 먹을 때, 먹는 걸로 스트레스 받는 사람 많을 것 같아\n그럴 때마다 가벼운 국물이나 샐러드를 먹게 되는데, 그럴 때 양배추가 꼭 있어야 더 맛있더라고\n게다가 양배추는 다른 채소에 비해 보관이 비교적 쉽고, 다양한 요리에도 활용할 수 있어 좋은데, 최근에 발견한 친환경 양배추가 진짜 좋더라\n리뷰 보니까 다른 곳에서 산 사람들은 비슷한 양에 두세 배는 더 비싸게 산 거 같았어\n✔ 국물 요리할 때 넣어도 좋고, 샐러드용으로도 좋을 것 같아\n✔ 요리가 아니라 그냥 간단하게 먹을 때도 양배추를 크게 썰어서 소금과 후추만 뿌려 먹어도 맛있더라고\n\n#친환경식품 #제주무안밀양 #양배추 #잇템 #꿀템",
-      "image_url": "https://thumbnail.coupangcdn.com/thumbnails/remote/292x292ex/image/vendor_inventory/8a34/741a87cec98a43927698a385ebe91516bdeca50eae559a07f35c80fba258.jpg",
-      "detail_images": [
-        "//thumbnail.coupangcdn.com/thumbnails/remote/492x492ex/image/vendor_inventory/8a34/741a87cec98a43927698a385ebe91516bdeca50eae559a07f35c80fba258.jpg"
-      ],
-      "product_code": "",
-      "status": "pending"
-    },
-    {
-      "product": {
-        "name": "소미썸 수분초 수분 사각패드 60매 3개 60매입",
-        "price": "29,390원",
+        "name": "위드샨 전동 충전식 발각질제거기 자동 굳은살제거 풋파일",
+        "price": "28,900원",
         "original_price": "",
         "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_6062717/60627170915.jpg",
-        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9618588529&ctag=9618588529&lptag=I28721320598&itemId=28721320598&vendorItemId=95661791517&spec=10305199",
-        "badge": "쿠팡",
-        "brand": "소미썸",
-        "category": "스킨/토너",
-        "category_hint": "생활",
-        "mall_name": "쿠팡",
-        "source": "naver_shopping",
-        "scraped_at": "2026-06-29T17:14:21.288904",
-        "youtube_source": {
-          "title": "진짜 좋을까? 다이소 품절템 내돈내산 솔직후기!",
-          "video_id": "ely7x4i88X8",
-          "views": 172365,
-          "keyword": "살림템 추천"
-        }
-      },
-      "post_text": "아침에 아무리 좋은 크림 발라도 점심만 되면 속당김 오는 사람 있어? 😩\n간단하게 피부에 수분 채우고 싶은데 여러 단계 바르기 귀찮을 때 이거 진짜 딱이더라.\n이게 사각 모양이라 원하는 부위에 딱 붙여놓기도 좋고, 수분초 성분 덕분인지 엄청 촉촉해서 금방 피부가 편안해지는 느낌이었어.\n유튜브랑 커뮤니티 보니까 다들 품절 대란이라고 왜 이제 알았냐고 극찬하더라.\n\n✔ 아침 세안 후 바로 양 볼이나 이마에 팩처럼 얹어두면 화장 진짜 잘 먹음.\n✔ 샤워하고 나와서 피부가 건조하다 싶을 때 넉넉하게 꺼내서 스킨팩처럼 써봐. 진정도 되고 피부결도 보들보들해지는 거 알았어!\n\n#자취템 #뷰티템 #수분패드 #스킨케어 #피부관리",
-      "image_url": "https://shopping-phinf.pstatic.net/main_6062717/60627170915.jpg",
-      "detail_images": [
-        "https://shopping-phinf.pstatic.net/main_6062717/60627170915.jpg"
-      ],
-      "product_code": "",
-      "status": "pending"
-    },
-    {
-      "product": {
-        "name": "Ambition 여성 50-80kg 편한 순면 팬티 세트",
-        "price": "11,250원",
-        "original_price": "",
-        "discount_rate": 71,
-        "image_url": "https://thumbnail.coupangcdn.com/thumbnails/remote/292x292ex/image/vendor_inventory/20f3/786a60a81ed13d01b146cc13dbd658d7c0010e1bf87b5b38b771a5169bd2.png",
-        "product_url": "https://www.coupang.com/vp/products/9495188260?vendorItemId=95613331155&sourceType=HOME_GW_PROMOTION&searchId=feed-90348f334eda454fa3dfef911948226a-3.33.107:gw_promotion",
-        "badge": "특가진행중",
-        "scraped_at": "2026-06-29T19:17:18.202592"
-      },
-      "post_text": "내가 요즘 가장 자주 입는 거 중 하나가 된 건, 생각지도 못했던 곳에서 나왔어\n일상 속에서 편안함을 주는 게 최고인 거 같더라고.\n그것은 바로 편안한 속옷, 특히 순면 팬티야.\n여러 가지 색상과 디자인으로 나왔는데, 내가 가장 좋아하는 것은 50-80kg용 팬티 세트더라.\n이거 진짜 편하고 좋더라고.\n리뷰 보니까 다른 사람들도 하나같이 왜 이제 샀냐고 하더라\n✔ 아침에 출근할 때 입기 좋은 속옷,✔ 운동할 때 입기 좋은 속옷\n\n#추천템 #꿀템 #잇템 #아이디어상품 #편안한속옷",
-      "image_url": "https://thumbnail.coupangcdn.com/thumbnails/remote/292x292ex/image/vendor_inventory/20f3/786a60a81ed13d01b146cc13dbd658d7c0010e1bf87b5b38b771a5169bd2.png",
-      "detail_images": [
-        "//thumbnail.coupangcdn.com/thumbnails/remote/492x492ex/image/vendor_inventory/20f3/786a60a81ed13d01b146cc13dbd658d7c0010e1bf87b5b38b771a5169bd2.png"
-      ],
-      "product_code": "",
-      "status": "pending"
-    },
-    {
-      "product": {
-        "name": "코멧 홈 욕실 변기솔 + 바닥솔 세트 5개",
-        "price": "23,290원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_5997584/59975842568.jpg",
-        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=6590970363&ctag=6590970363&lptag=I24152587266&itemId=24152587266&vendorItemId=91171288066&spec=10305197",
-        "badge": "쿠팡",
-        "brand": "COMET",
-        "category": "솔",
-        "category_hint": "생활",
-        "mall_name": "쿠팡",
-        "source": "naver_shopping",
-        "scraped_at": "2026-06-29T17:14:29.365972",
-        "youtube_source": {
-          "title": "가성비 청소꿀템 추천할게요",
-          "video_id": "V0dacUhmMCk",
-          "views": 143209,
-          "keyword": "살림템 추천"
-        }
-      },
-      "post_text": "내가 요리하고 청소할 때마다 가장 많이 하는 일은 설거지하는 거 같아\n그동안은 수세미로 닦았는데 손이 너무 아팠어\n근데 최근에 바닥솔과 변기솔을 하나씩 사서 사용해본 결과, 정말 편리하더라\n리뷰 보니까 다들 만족도가 높고, 물기도 잘 안 남아\n✔ 아침에 일어나서 설거지하고, 저녁에 청소를 할 때 이 바닥솔과 변기솔을 사용하면, 정말 편리하고 빠르게 끝낼 수 있더라고\n✔ 이 바닥솔과 변기솔을 사용하면, 설거지와 청소가 정말 쉽고 빠르게 끝날 수 있어\n\n#생활꿀템 #자취템 #살림템 #필수템 #청소템",
-      "image_url": "https://shopping-phinf.pstatic.net/main_5997584/59975842568.jpg",
-      "detail_images": [
-        "https://shopping-phinf.pstatic.net/main_5997584/59975842568.jpg"
-      ],
-      "product_code": "",
-      "status": "pending"
-    },
-    {
-      "product": {
-        "name": "라프레슈 카이막 200g 천상의 맛 수제 디저트 터키 튀르키예, 1개",
-        "price": "19,900원",
-        "original_price": "",
-        "discount_rate": 16,
-        "image_url": "https://thumbnail.coupangcdn.com/thumbnails/remote/292x292ex/image/vendor_inventory/f99f/ad6544b4cc079d9ef56a4b7449d7c3cbaa738c4bc16e3c7cca456746e62b.png",
-        "product_url": "https://www.coupang.com/vp/products/8597899327?vendorItemId=92196080156&sourceType=HOME_GW_PROMOTION&searchId=feed-90348f334eda454fa3dfef911948226a-3.33.107:gw_promotion",
-        "badge": "특가진행중",
-        "scraped_at": "2026-06-29T19:17:18.251879"
-      },
-      "post_text": "디저트 맛집 가서 수작을 본 적 있는 사람, 그맛을 집에서 낼 수 있으면 어떨까?\n그렇다고 집에서 디저트 만들기 시작하다 보면, 재료 준비부터 소요되는 시간이 상당해 더 부담스럽더라고\n근데 최근에 천사의 맛이라는 수제 디저트를 알게 됐어, 터키에서 바로 날아오는 거라고 하더라고\n이거 리뷰 보니까 사람들은 왜 이제야 알았냐고 하더라, 너무 맛있대\n✔ 내 경우에는 그냥 티타임에 먹기 좋은 크기와 양이라, 친구 방문했을 때 내준다고 좋더라고\n✔ 또 가끔 디저트 맛집 가서도 수작을 본 적 있는데, 이건 집에서 바로 먹을 수 있단 점이 매력임\n\n#꿀템 #아이디어상품 #디저트 #수제디저트 #추천템",
-      "image_url": "https://thumbnail.coupangcdn.com/thumbnails/remote/292x292ex/image/vendor_inventory/f99f/ad6544b4cc079d9ef56a4b7449d7c3cbaa738c4bc16e3c7cca456746e62b.png",
-      "detail_images": [
-        "//thumbnail.coupangcdn.com/thumbnails/remote/492x492ex/image/vendor_inventory/f99f/ad6544b4cc079d9ef56a4b7449d7c3cbaa738c4bc16e3c7cca456746e62b.png"
-      ],
-      "product_code": "",
-      "status": "pending"
-    },
-    {
-      "product": {
-        "name": "Silver &amp; Style 실버앤스타일 욕실 발매트 60x40cm 그레이",
-        "price": "30,910원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_6022376/60223766841.jpg",
-        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9567880828&ctag=9567880828&lptag=I28555764443&itemId=28555764443&vendorItemId=95500465925&spec=10305199",
+        "image_url": "https://shopping-phinf.pstatic.net/main_6038947/60389474222.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=0992902612&ctag=0992902612&lptag=l457707465222&itemId=64257574027&vendorItemId=93733652641&spec=10305198",
         "badge": "쿠팡",
         "brand": "",
-        "category": "발매트",
+        "category": "발각질제거기",
+        "category_hint": "건강",
+        "mall_name": "쿠팡",
+        "source": "naver_shopping",
+        "scraped_at": "2026-06-30T16:35:45.814786"
+      },
+      "post_text": "혹시 발바닥 까끌거려서 이불에 걸릴 때마다 신경 쓰이는 사람 있어? 👣\n\n특히 요즘처럼 샌들 신을 일 많을 때 발 신경 쓰이는데, 혼자 관리하기 진짜 힘들거든. 앉아서 벅벅 문지르는 것도 한계가 있더라고.\n\n근데 이거는 그냥 스위치 켜고 발에 대고만 있으면 알아서 굳은살이 갈려나가는 거 알아? 건전지 갈 필요 없이 충전해서 쓰는 것도 편하더라.\n\n후기 보니까 다들 왜 이제야 이걸 알았냐고 하더라고. 발이 진짜 아기 발처럼 맨들맨들해진대 💖\n\n✔ 발 불리지 않은 마른 상태에서 써야 훨씬 효과 좋음!\n✔ 그리고 쓰고 나서 보습 크림 꼭 발라줘. 진짜 다음 날 아침에 발 만져보면 깜짝 놀랄 걸.\n\n#건강템 #가전추천 #테크템 #풋케어 #자기관리",
+      "image_url": "https://shopping-phinf.pstatic.net/main_6038947/60389474222.jpg",
+      "detail_images": [
+        "//thumbnail.coupangcdn.com/thumbnails/remote/492x492ex/image/vendor_inventory/d4e0/96772b30d9a50463428e337ce0eed4099a7f0bd9eeaa795834ad9b0362f4.jpg"
+      ],
+      "product_code": "",
+      "status": "pending"
+    },
+    {
+      "product": {
+        "name": "소가 휴대용 손선풍기 냉각 에어컨 선풍기 크림 FS16",
+        "price": "49,000원",
+        "original_price": "",
+        "discount_rate": 0,
+        "image_url": "https://shopping-phinf.pstatic.net/main_5430440/54304408894.3.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8719990594&ctag=8719990594&lptag=I25328830887&itemId=25328830887&vendorItemId=92083590315&spec=10305198",
+        "badge": "쿠팡",
+        "brand": "소가",
+        "category": "선풍기",
+        "category_hint": "디지털",
+        "mall_name": "쿠팡",
+        "source": "naver_shopping",
+        "scraped_at": "2026-06-30T16:35:21.295083"
+      },
+      "post_text": "더운 여름이 되면 피부 관리가 제일 걱정되지 않아?\n특히 외출할 때는 더워서 땀이 나고, 그땀으로 인해 피부 트러블이 생기기도 해서요.\n그럴 때마다 손에 들고 다니는 작은 친구가 계셨으면 좋겠어.\n그런 친구 중 하나가 바로 손에 들고 다니면서 쓸 수 있는 작은 냉각 선풍기야.\n이 작은 친구는 실제로 사용해 봤는데, 손에 들고 다니면서 쓸 수 있어서 너무 편리하더라고.\n게다가 작은 크기라서 어디에 두어도 공간을 차지하지 않아서 좋았어.\n✔ 외출할 때, 특히 여름에 자주 사용하면 더운 날씨에 피부를 보호할 수 있을 것 같아.\n✔ 집에서 사용할 때도, 방에 에어컨을 틀지 않고도 시원한 바람을 느낄 수 있어.\n\n#피부관리 #셀프케어 #화장품추천 #뷰티템 #여름용품",
+      "image_url": "https://shopping-phinf.pstatic.net/main_5430440/54304408894.3.jpg",
+      "detail_images": [
+        "//thumbnail.coupangcdn.com/thumbnails/remote/492x492ex/image/vendor_inventory/b040/7eabb05c441b53c934f6952bbc73bdb85f0660ce33afab6a07f349fa7e28.jpg"
+      ],
+      "product_code": "",
+      "status": "pending"
+    },
+    {
+      "product": {
+        "name": "소보카 휴대폰화면확대기 1개 화이트16인치",
+        "price": "24,900원",
+        "original_price": "",
+        "discount_rate": 0,
+        "image_url": "https://shopping-phinf.pstatic.net/main_5765679/57656797195.5.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9350784475&ctag=9350784475&lptag=I27024953339&itemId=27024953339&vendorItemId=93993558005&spec=10305198",
+        "badge": "쿠팡",
+        "brand": "",
+        "category": "휴대폰거치대",
         "category_hint": "생활",
         "mall_name": "쿠팡",
         "source": "naver_shopping",
-        "scraped_at": "2026-06-29T17:14:32.246446",
+        "scraped_at": "2026-06-30T16:34:02.244315",
         "youtube_source": {
-          "title": "내돈내산 코스트코 찐으로 만족하고 추천하는 만족템 4가지 #코스트코정보 #살림 #코스트코추천템",
-          "video_id": "ENVoGIAmcyg",
-          "views": 113155,
-          "keyword": "살림템 추천"
+          "title": "화면 작아서 답답한 사람 필수 #자취템#쇼핑추천#추천템#쇼츠#shorts",
+          "video_id": "XNEO_Hcob_w",
+          "views": 2305,
+          "keyword": "자취 필수템 추천"
         }
       },
-      "post_text": "욕실에서 발을 뗄 수가 없을 때가 있지 않아? 물기를 완전히 제거하기가 힘들어서 계속 물기가 남아있는 거니까\n그럴 때마다 욕실을 청소하고 싶어지만, 바닥이 미끄러워서 넘어질 위험이 커서 더 고민이야\n근데 발이 미끄러지지 않도록 도와주는 아이템이 하나 있더라고, 발을 뗄 때도 안심할 수 있게 해줘\n리뷰 보니까 거의 모든 사람들이 만족한다고 하더라\n✔ 물기가 많은 욕실에다가 그냥 깔아놓으면 편하고, 세척하기도 쉬워\n✔ 특히 욕실에서 미끄러질 때 가장 위험한 부분은 출구야, 거기에 꼭 두면 좋은템임\n\n#생활꿀템\n\n#살림꿀템\n\n#자취템\n\n#미끄럼방지\n\n#욕실발매트",
-      "image_url": "https://shopping-phinf.pstatic.net/main_6022376/60223766841.jpg",
+      "post_text": "폰으로 영화나 드라마 볼 때마다 자꾸 눈 찡그리게 되는 사람 여기 모여봐 🥹\n혼자 밥 먹거나 침대에 누워서 시간 보낼 때 폰 화면 너무 작아서 답답할 때 많잖아. 이럴 때 큰 화면으로 편하게 보고 싶을 때 딱 좋더라.\n이게 16인치짜리라서 진짜 시원하게 보여. 화면도 깨끗하고 선명하게 확대해주니까 눈에 피로도 덜 가고 몰입감도 훨씬 좋아지더라고. 게다가 하얀색이라 인테리어 해치지 않고 깔끔해서 더 좋았음.\n후기 보니까 다들 '진작 살 걸 그랬다'면서 너무 만족하더라.\n✔ 침대에 기대서 드라마 볼 때 진짜 최고야. 폰 거치대에 세워놓는 것보다 훨씬 편하고 몰입감도 좋음.\n✔ 요리할 때 레시피 보거나 운동하면서 영상 볼 때도 유용하게 쓸 수 있어.\n\n#자취템 #필수템 #생활꿀템 #폰화면확대기 #집순이템",
+      "image_url": "https://shopping-phinf.pstatic.net/main_5765679/57656797195.5.jpg",
       "detail_images": [
-        "https://shopping-phinf.pstatic.net/main_6022376/60223766841.jpg"
+        "https://shopping-phinf.pstatic.net/main_5765679/57656797195.5.jpg"
       ],
       "product_code": "",
       "status": "pending"
