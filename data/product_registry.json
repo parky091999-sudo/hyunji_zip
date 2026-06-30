@@ -1,5 +1,5 @@
 {
-  "next_code": 45,
+  "next_code": 46,
   "blocked_item_ids": [],
   "products": {
     "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8849967732&ctag=8849967732&lpt": {
@@ -440,6 +440,16 @@
       "registered_at": "2026-06-27T11:07:33.747684+09:00",
       "posted": true,
       "short_name": "전동 소금 후추 그라인"
+    },
+    "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8637632464&ctag=8637632464&lpt": {
+      "code": "045",
+      "name": "다쓱 주방 전동 그라인더 스테인레스 후추 깨갈이 소금갈이 1개",
+      "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8637632464&ctag=8637632464&lptag=I25063702207&itemId=25063702207&vendorItemId=92014819100&spec=10305199",
+      "image_url": "https://shopping-phinf.pstatic.net/main_5350827/53508279781.6.jpg",
+      "category": "주방",
+      "registered_at": "2026-06-30T11:11:24.300337+09:00",
+      "posted": true,
+      "short_name": "전동 그라인더"
     }
   }
 }
