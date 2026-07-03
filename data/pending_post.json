@@ -1,6 +1,6 @@
 {
-  "for_date": "2026-07-04",
-  "generated_at": "2026-07-03T11:17:08.270608+09:00",
+  "for_date": "2026-07-05",
+  "generated_at": "2026-07-04T01:04:38.695220+09:00",
   "candidates": [
     {
       "product": {
@@ -16,9 +16,9 @@
         "category_hint": "건강",
         "mall_name": "쿠팡",
         "source": "naver_shopping",
-        "scraped_at": "2026-07-02T16:18:50.943024"
+        "scraped_at": "2026-07-03T16:02:58.876189"
       },
-      "post_text": "매번 피부과 갈 돈은 없고, 집에서 관리하려니 귀찮고 답답했던 적 있어? 😥 특히 건조하고 찬 바람 불 때마다 피부가 푸석해지고 화장이 들뜨는 게 고민인 사람들에게 딱이더라.\n\n이게 전문가들이 쓰는 다이아몬드 헤드로 미세한 각질까지 부드럽게 제거해 줘. 손으로 문지르는 것보다 훨씬 자극 없이 깨끗하게 관리할 수 있더라고. 실제로 후기 보니까 칙칙했던 피부 톤이 맑아지고 피부결이 정말 보드라워졌다는 얘기가 많았음.\n\n✔ 샤워하고 나서 피부가 살짝 촉촉한 상태일 때 쓰는 게 제일 효과 좋더라.\n✔ 주 1~2회 정도만 꾸준히 해주면 매끈한 피부로 관리하는 데 진짜 도움될 거야!\n\n#테크템 #가전추천 #전자기기 #피부관리",
+      "post_text": "피부 때문에 스트레스 받는 날이 더 많아지는 것 같아\n피부 관리를 하는데 가장 중요한 게 각질 제거라고 하더라\n근데 손으로 하는 각질 제거는 너무 피곤하고, 피부에도 자극이 될 수 있더라고\n그래서 전동 각질 제거기를 쓰게 됐어\n이거 진짜 편하고 효과가 좋더라\n✔ 밤에 세안 후에 사용하면 피부가 더 민감해서 각질 제거 효과가 더 좋고\n✔ 세안 후에 사용하고 나면 보습 제품이 더 잘 흡수되는 거 같아\n\n#뷰티템 #테크 #전자기기 #IT템 #건강관리",
       "image_url": "https://shopping-phinf.pstatic.net/main_5027322/50273223171.12.jpg",
       "detail_images": [
         "https://shopping-phinf.pstatic.net/main_5027322/50273223171.12.jpg"
@@ -28,78 +28,54 @@
     },
     {
       "product": {
-        "name": "대용량 에어후라이기 에어프라이어 군밤 고구마 삼겹살 계란 프라이기 가정용튀김기",
-        "price": "81,800원",
+        "name": "클렙튼 티에스트 더마 LED 마스크 피부관리기",
+        "price": "85,570원",
         "original_price": "",
         "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_5865056/58650568815.jpg",
-        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=2196441499&ctag=2196441499&lptag=I3737410536&itemId=3737410536&vendorItemId=71722593516&spec=10305199",
+        "image_url": "https://shopping-phinf.pstatic.net/main_5976751/59767510551.4.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=401847727&ctag=401847727&lptag=l8434391924&itemId=134984394&vendorItemId=4027752053&spec=10305197",
+        "badge": "쿠팡",
+        "brand": "클렙튼",
+        "category": "피부케어기기",
+        "category_hint": "뷰티",
+        "mall_name": "쿠팡",
+        "source": "naver_shopping",
+        "scraped_at": "2026-07-03T16:03:06.187500"
+      },
+      "post_text": "피부 관리 하다 보면 꼭 하나씩 갖고 싶은 게 생기더라\n그중 하나가 바로 집에서 간편하게 할 수 있는 피부 광채를 주는 건데, 이건 그냥 피부에 광을 내주는_led 마스크야\n게다가 다양한 색깔이 있어서, 각기 다른 효과를 줄 수 있더라고\n리뷰 보니까 산 사람들이 하나같이 피부톤이 밝아졌다고 하더라\n✔ 아침에 일어나서 일주일에 한 번씩 10분씩 사용하면 피부가 환하고 생기 있어\n✔ 피부가 예민한 날에는 진정 효과를 주는 색상으로 사용하면 좋더라\n\n#뷰티템 #뷰티꿀템 #화장품추천 #피부관리 #셀프케어",
+      "image_url": "https://shopping-phinf.pstatic.net/main_5976751/59767510551.4.jpg",
+      "detail_images": [
+        "https://shopping-phinf.pstatic.net/main_5976751/59767510551.4.jpg"
+      ],
+      "product_code": "",
+      "status": "pending"
+    },
+    {
+      "product": {
+        "name": "목우촌 주부9단 살코기햄-아이스팩+보냉팩 포장",
+        "price": "20,910원",
+        "original_price": "",
+        "discount_rate": 0,
+        "image_url": "https://shopping-phinf.pstatic.net/main_5885805/58858052881.9.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=2595883321&ctag=2595883321&lptag=l455412138674&itemId=64138745541&vendorItemId=89027755787&spec=10305199",
         "badge": "쿠팡",
         "brand": "",
-        "category": "에어프라이어",
+        "category": "축산가공식품",
         "category_hint": "생활",
         "mall_name": "쿠팡",
         "source": "naver_shopping",
-        "scraped_at": "2026-07-02T16:17:28.173475",
+        "scraped_at": "2026-07-03T16:02:08.518339",
         "youtube_source": {
-          "title": "다이소 사장님, 보고 계신가요? 제발 이거 만들어주세요!! 😭🙏 #다이소",
-          "video_id": "UPIj7OI-thE",
-          "views": 17580,
-          "keyword": "신박한 주방용품"
+          "title": "다이소 주부 9단도 극찬한 주방 정리템   #다이소 #꿀템 #생활용품 #추천 #리뷰",
+          "video_id": "muQSNYyi2Zs",
+          "views": 41522,
+          "keyword": "주방 가전 추천"
         }
       },
-      "post_text": "집에서 튀김 요리 해 먹고 싶은데 냄새랑 기름 때문에 엄두가 안 난 적 없어? 나처럼 기름 쓰는 거 부담스러워하는 자취생들한테 이거 진짜 딱임. 그냥 재료 넣고 버튼만 누르면 끝이라 요리 초보도 편하게 쓸 수 있더라고.\n\n이게 대용량이라 군밤이나 통삼겹살처럼 부피 큰 것도 한 번에 조리 가능함. 게다가 기름 없이도 바삭하게 익혀주고, 심지어 계란 후라이처럼 간단한 것도 얘 하나면 충분하더라고! 기름 튀길 걱정 안 해도 되고 냄새도 훨씬 덜하더라. 후기 보니까 다들 왜 이제 샀냐고 난리났었음.\n\n✔︎ 주말에 집에서 혼술 안주 만들거나, 친구들 놀러 왔을 때 간편하게 요리하고 싶을 때 최고야.\n✔︎ 예열 없이 바로 재료 넣고 버튼만 누르면 되니 세상 편",
-      "image_url": "https://shopping-phinf.pstatic.net/main_5865056/58650568815.jpg",
+      "post_text": "집에서 혼자 식사할 때마다, 가장 큰 고민은 바로 식재료 관리였어\n그때마다 생고기나 생선은 냉동실에 얼려놔야하고, 조리된 음식은 냉장실에 넣어놔야 하는데, 그 과정이 항상 귀찮더라고\n근데 살코기 햄은 냉동보관하면 더 맛있고 신선하게 유지할 수 있더라고\n리뷰 보니까 냉동고에 넣었다가 필요할 때마다 꺼내서 바로 사용하는 사람들이 많더라고\n✔ 식사 준비할 때, 냉동실에 넣어놨던 살코기 햄을 꺼내서 바로 조리하면 되고, ✔ 냉동실에 보관하면 오래 저장 가능해서 편리하더라고\n\n#살림템 #자취템 #주방정리 #생활용품 #추천상품",
+      "image_url": "https://shopping-phinf.pstatic.net/main_5885805/58858052881.9.jpg",
       "detail_images": [
-        "https://shopping-phinf.pstatic.net/main_5865056/58650568815.jpg"
-      ],
-      "product_code": "",
-      "status": "pending"
-    },
-    {
-      "product": {
-        "name": "나디 해피바디 발 종아리 마사지기 BM-508 온열 전동 홈케어",
-        "price": "118,000원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_4005221/40052215030.jpg",
-        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=7251231516&ctag=7251231516&lptag=I18446204222&itemId=18446204222&vendorItemId=85587127094&spec=10305197",
-        "badge": "쿠팡",
-        "brand": "나디",
-        "category": "다리/발마사지기",
-        "category_hint": "건강",
-        "mall_name": "쿠팡",
-        "source": "naver_shopping",
-        "scraped_at": "2026-07-02T16:18:51.757698"
-      },
-      "post_text": "다리에 쥐나서 한밤중에 갑자기 깨본 사람이라면 이거 진짜 공감할 거야 🥹\n퇴근하고 집에 오면 다리가 너무 땡겨서 주무르다 잠드는 사람한테 딱이더라고.\n이게 발이랑 종아리를 한 번에 감싸면서 시원하게 주물러주는데, 따뜻한 온열 기능까지 있어서 피로가 확 풀리는 느낌이었어. 강도 조절도 섬세하게 돼서 내 컨디션에 맞춰 쓸 수 있는 것도 좋았음.\n써본 사람들이 왜 다들 '삶의 질이 달라졌다'고 입 모아 말하는지 써보니까 바로 알겠더라니까.\n\n✔️ 샤워하고 따뜻하게 몸 데운 다음에 침대에 누워서 쓰면 진짜 천국이 따로 없어. 자기 전에 딱 20분만 투자해봐, 다음 날 아침이 달라질 거야.\n\n#가전추천 #건강템 #홈케어 #퇴근필수템 #셀프케어",
-      "image_url": "https://shopping-phinf.pstatic.net/main_4005221/40052215030.jpg",
-      "detail_images": [
-        "https://shopping-phinf.pstatic.net/main_4005221/40052215030.jpg"
-      ],
-      "product_code": "",
-      "status": "pending"
-    },
-    {
-      "product": {
-        "name": "제노벤 스팀청소기 고압 살균 올인원 가정용 차량용 3세대 회이트",
-        "price": "144,900원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_5634717/56347172178.3.jpg",
-        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8867649453&ctag=8867649453&lptag=I25865217656&itemId=25865217656&vendorItemId=92851559275&spec=10305199",
-        "badge": "쿠팡",
-        "brand": "",
-        "category": "스팀청소기",
-        "category_hint": "생활",
-        "mall_name": "쿠팡",
-        "source": "naver_shopping",
-        "scraped_at": "2026-07-02T16:18:44.857897"
-      },
-      "post_text": "요즘 집에서 청소할 때마다 마스크 쓰고 하는데 그래도 불안한 사람 있지?\n그럴 때마다 생각하는 게 스팀청소기였어. 그런데 일반 청소기랑은 다르게 스팀으로 청소하는 제품은 진짜 효과가 확 달라.\n스팀이랑 고압이 같이 날아오니까 정말 지저분한 곳도 금방 깨끗해지더라고.\n리뷰도 엄청 좋았고, 실제로 사용해 본 사람들 모두가 만족한 제품이라서 더 신뢰가 갔어.\n✔ 특히 집에 반려동물이 있다면, 이것 좀 써보라고 할 정도야. 그리고 차에도 쓸 수 있단 점이 메리트였어.\n✔ 스팀청소기 쓸 때 팁은, 먼저 청소할 곳을 잘 건드려서 먼지 제거부터 하고, 그 다음에 스팀으로 살균하는게 좋더라고.\n\n#살림템 #생활꿀템 #자취템 #필수템 #청소템",
-      "image_url": "https://shopping-phinf.pstatic.net/main_5634717/56347172178.3.jpg",
-      "detail_images": [
-        "https://shopping-phinf.pstatic.net/main_5634717/56347172178.3.jpg"
+        "https://shopping-phinf.pstatic.net/main_5885805/58858052881.9.jpg"
       ],
       "product_code": "",
       "status": "pending"
