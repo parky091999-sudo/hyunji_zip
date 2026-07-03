@@ -1,6 +1,6 @@
 {
   "for_date": "2026-07-05",
-  "generated_at": "2026-07-04T01:04:38.695220+09:00",
+  "generated_at": "2026-07-04T03:04:08.919789+09:00",
   "candidates": [
     {
       "product": {
@@ -76,6 +76,60 @@
       "image_url": "https://shopping-phinf.pstatic.net/main_5885805/58858052881.9.jpg",
       "detail_images": [
         "https://shopping-phinf.pstatic.net/main_5885805/58858052881.9.jpg"
+      ],
+      "product_code": "",
+      "status": "pending"
+    },
+    {
+      "product": {
+        "name": "풀무원건강생활 스팀쿡 에어프라이어 오리진 10.5L AV10C10WA 화이트 + 블랙",
+        "price": "194,800원",
+        "original_price": "",
+        "discount_rate": 0,
+        "image_url": "https://shopping-phinf.pstatic.net/main_5956847/59568479876.1.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=7279104589&ctag=7279104589&lptag=I18580667289&itemId=18580667289&vendorItemId=88510262448&spec=10305199",
+        "badge": "쿠팡",
+        "brand": "풀무원건강생활",
+        "category": "에어프라이어",
+        "category_hint": "생활",
+        "mall_name": "쿠팡",
+        "source": "naver_shopping",
+        "scraped_at": "2026-07-03T18:02:10.252555",
+        "youtube_source": {
+          "title": "다이소 사장님, 보고 계신가요? 제발 이거 만들어주세요!! 😭🙏 #다이소",
+          "video_id": "UPIj7OI-thE",
+          "views": 17582,
+          "keyword": "신박한 주방용품"
+        }
+      },
+      "post_text": "요리를 할 때마다 후라이팬을 여러 개 써야 하는 게 너무 짜증나지 않아?\n그럴 때마다 스팀으로 요리하면 어떨까 하는 생각이 많이 들었어\n근데 스팀기구 별도로 사는 것도 부담이고, 그냥 후라이팬에 물 좀 더 타서 해도 되지 싶었어\n이거 보니까 10.5L까지 들어가서 큰 거도 한 번에 구울 수 있더라고\n리뷰 보니까 산 사람들이 하나같이 왜 이제 샀냐고 하더라\n✔ 이거 쓰면 음식 맛도 업그레이드되고, 기름 안 들러서 건강에도 좋고, 무엇보다 후라이팬에 물 더 타지 않아도 되니까편리하더라\n✔ 스팀 쿡 기능으로 채소 요리할 때도 넘 좋았음\n\n#살림템 #자취템 #필수템 #살림꿀템 #에어프라이어",
+      "image_url": "https://shopping-phinf.pstatic.net/main_5956847/59568479876.1.jpg",
+      "detail_images": [
+        "https://shopping-phinf.pstatic.net/main_5956847/59568479876.1.jpg"
+      ],
+      "product_code": "",
+      "status": "pending"
+    },
+    {
+      "product": {
+        "name": "제노벤 스팀청소기 고압 살균 올인원 가정용 차량용 3세대 회이트",
+        "price": "144,900원",
+        "original_price": "",
+        "discount_rate": 0,
+        "image_url": "https://shopping-phinf.pstatic.net/main_5634717/56347172178.3.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8867649453&ctag=8867649453&lptag=I25865217656&itemId=25865217656&vendorItemId=92851559275&spec=10305199",
+        "badge": "쿠팡",
+        "brand": "",
+        "category": "스팀청소기",
+        "category_hint": "생활",
+        "mall_name": "쿠팡",
+        "source": "naver_shopping",
+        "scraped_at": "2026-07-03T18:02:33.373206"
+      },
+      "post_text": "청소하려고 보면 눈에 안 보이는 세균이나 묵은 때가 진짜 많다는 거 알아? 😱\n\n혼자 살면서 대충대충 청소하다 보면 주방 가스레인지나 화장실 곰팡이처럼 눈에 거슬리는 곳이 생기더라. 그런 곳은 솔이나 수세미로 아무리 문질러도 찝찝함이 남아있을 때가 많잖아.\n\n근데 이건 뜨거운 스팀이 고압으로 쫙쫙 나오면서 묵은 때랑 세균까지 한방에 날려버리더라고. 예전 모델보다 훨씬 가볍고 쓰기 좋게 나와서 집안 구석구석은 물론이고 차 안까지 이거 하나로 살균 청소할 수 있다는 게 진짜 편했어.\n\n내 주변에 써본 사람들도 다들 이걸 왜 이제야 알았냐고 하더라니까.\n\n✔ 특히 욕실 타일 틈새 곰팡이나 주방 후드 기름때 제거할 때 최고야. 찌든 때 위에 스팀 쓱 뿌려주면 힘 하나도 안 들이고 깨끗해지는 거 보고 깜짝 놀랄 걸. 🧺\n\n#살림템 #자취템 #필수템 #청소꿀",
+      "image_url": "https://shopping-phinf.pstatic.net/main_5634717/56347172178.3.jpg",
+      "detail_images": [
+        "https://shopping-phinf.pstatic.net/main_5634717/56347172178.3.jpg"
       ],
       "product_code": "",
       "status": "pending"
