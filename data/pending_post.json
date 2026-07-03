@@ -1,6 +1,6 @@
 {
   "for_date": "2026-07-05",
-  "generated_at": "2026-07-04T03:39:24.404127+09:00",
+  "generated_at": "2026-07-04T06:33:34.955929+09:00",
   "candidates": [
     {
       "product": {
@@ -22,6 +22,30 @@
       "image_url": "https://shopping-phinf.pstatic.net/main_5027322/50273223171.12.jpg",
       "detail_images": [
         "https://shopping-phinf.pstatic.net/main_5027322/50273223171.12.jpg"
+      ],
+      "product_code": "",
+      "status": "pending"
+    },
+    {
+      "product": {
+        "name": "소가 휴대용 손선풍기 냉각 에어컨 선풍기 크림 FS16",
+        "price": "23,900원",
+        "original_price": "",
+        "discount_rate": 0,
+        "image_url": "https://shopping-phinf.pstatic.net/main_5430440/54304408894.3.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8719990594&ctag=8719990594&lptag=I25328830887&itemId=25328830887&vendorItemId=91668883746&spec=10305198",
+        "badge": "쿠팡",
+        "brand": "소가",
+        "category": "선풍기",
+        "category_hint": "디지털",
+        "mall_name": "쿠팡",
+        "source": "naver_shopping",
+        "scraped_at": "2026-07-03T21:33:06.194852"
+      },
+      "post_text": "여름에 화장하고 밖에만 나가면 베이스 무너지는 게 제일 스트레스인 사람 있어? 🥵\n\n땀 흘리면 화장도 망가지고, 얼굴에 열 오르면 바로 칙칙해지는 게 너무 싫더라고. 그래서 뭘 해도 얼굴만은 시원하게 유지하고 싶은 사람한테 딱임. 이거 그냥 바람만 나오는 게 아니고, 냉각 기능이 있어서 피부에 닿는 바람이 진짜 시원해. 게다가 크림색이라 내 가방 속 다른 소지품들이랑도 잘 어울리고 엄청 세련돼 보이더라.\n\n써본 사람들이 다들 '이거 덕분에 여름에 화장 망할 일 없다'고 하더라고.\n\n✔ 지하철이나 버스 기다릴 때, 야외 카페에서 앉아있을 때 틀면 진짜 천국이 따로 없어. 특히 화장하기 전에 얼굴에 한 번 싹 식혀주고 시작하면 베이스가 찰싹 달라붙는 느낌임!\n\n#여름필수템 #더위탈출 #데일리템 #자취템 #디지털템",
+      "image_url": "https://shopping-phinf.pstatic.net/main_5430440/54304408894.3.jpg",
+      "detail_images": [
+        "https://shopping-phinf.pstatic.net/main_5430440/54304408894.3.jpg"
       ],
       "product_code": "",
       "status": "pending"
