@@ -1,5 +1,5 @@
 {
-  "next_code": 48,
+  "next_code": 49,
   "blocked_item_ids": [],
   "products": {
     "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8849967732&ctag=8849967732&lpt": {
@@ -470,6 +470,16 @@
       "registered_at": "2026-07-04T11:13:10.234113+09:00",
       "posted": true,
       "short_name": "1종 주방세"
+    },
+    "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=2196441499&ctag=2196441499&lpt": {
+      "code": "048",
+      "name": "대용량 에어후라이기 에어프라이어 군밤 고구마 삼겹살 계란 프라이기 가정용튀김기",
+      "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=2196441499&ctag=2196441499&lptag=I3737410536&itemId=3737410536&vendorItemId=71722593516&spec=10305199",
+      "image_url": "https://shopping-phinf.pstatic.net/main_5865056/58650568815.jpg",
+      "category": "생활",
+      "registered_at": "2026-07-04T19:56:53.751527+09:00",
+      "posted": true,
+      "short_name": "에어프라이어"
     }
   }
 }
