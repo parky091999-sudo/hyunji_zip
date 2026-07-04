@@ -1,6 +1,6 @@
 {
   "for_date": "2026-07-06",
-  "generated_at": "2026-07-05T03:15:37.922600+09:00",
+  "generated_at": "2026-07-05T06:16:25.462360+09:00",
   "candidates": [
     {
       "product": {
@@ -22,6 +22,30 @@
       "image_url": "https://shopping-phinf.pstatic.net/main_5027322/50273223171.12.jpg",
       "detail_images": [
         "https://shopping-phinf.pstatic.net/main_5027322/50273223171.12.jpg"
+      ],
+      "product_code": "",
+      "status": "pending"
+    },
+    {
+      "product": {
+        "name": "소가 휴대용 손선풍기 냉각 에어컨 선풍기 크림 FS16",
+        "price": "23,900원",
+        "original_price": "",
+        "discount_rate": 0,
+        "image_url": "https://shopping-phinf.pstatic.net/main_5430440/54304408894.3.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8719990594&ctag=8719990594&lptag=I25328830887&itemId=25328830887&vendorItemId=91668883746&spec=10305198",
+        "badge": "쿠팡",
+        "brand": "소가",
+        "category": "선풍기",
+        "category_hint": "디지털",
+        "mall_name": "쿠팡",
+        "source": "naver_shopping",
+        "scraped_at": "2026-07-04T21:15:22.385625"
+      },
+      "post_text": "야외에서 열심히 놀고 들어왔는데 얼굴에 열 오르고 화장은 다 지워져 있는 거 너무 속상하더라 🫠\n\n특히 지하철 기다릴 때나 잠깐 밖에 나갈 때도 더위 때문에 얼굴 벌개지는 거 진짜 싫었거든. 땀 때문에 화장 뜨고 번지는 건 기본이고.\n\n근데 이 손에 쏙 들어오는 냉각 선풍기는 바람만 나오는 게 아니라, 차가운 냉각 패드가 달려있어서 피부에 대면 진짜 시원해. 에어컨 바람 쐴 때처럼 확 시원해지는 느낌인 거 알았어? 크림처럼 한 손에 쏙 들어오는 크기라 파우치에 넣고 다니기도 딱 좋음.\n\n써본 사람들이 하나같이 \"이거 없이 어떻게 살았지?\" 하면서 극찬하는 이유가 있었더라고.\n\n✔️ 더운 날 화장하기 전에 이걸로 얼굴 전체 살짝 식혀주면 모공도 쫀쫀해지고 화장도 더 착붙는 거 알았어?\n✔️ 운동하고 나서 목이나 팔처럼 열 오른 곳에 대주면 금방 시원해져서 열감 내리는 데 진짜 최고임.\n\n#디지털템 #여름필수템 #꿀템추천 #피부관리 #자취템",
+      "image_url": "https://shopping-phinf.pstatic.net/main_5430440/54304408894.3.jpg",
+      "detail_images": [
+        "https://shopping-phinf.pstatic.net/main_5430440/54304408894.3.jpg"
       ],
       "product_code": "",
       "status": "pending"
