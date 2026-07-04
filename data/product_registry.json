@@ -1,5 +1,5 @@
 {
-  "next_code": 47,
+  "next_code": 48,
   "blocked_item_ids": [],
   "products": {
     "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8849967732&ctag=8849967732&lpt": {
@@ -460,6 +460,16 @@
       "registered_at": "2026-06-30T20:51:52.040401+09:00",
       "posted": true,
       "short_name": "수분 사각패"
+    },
+    "https://www.coupang.com/vp/products/5709092677?vendorItemId=90967342077&sourceTy": {
+      "code": "047",
+      "name": "화이트트리 1종 안심 주방세제, 500ml, 1개",
+      "url": "https://www.coupang.com/vp/products/5709092677?vendorItemId=90967342077&sourceType=HOME_GW_PROMOTION&searchId=feed-12e5ab91de7a44c7b538d694767fb58e-3.33.107:gw_promotion",
+      "image_url": "https://thumbnail.coupangcdn.com/thumbnails/remote/292x292ex/image/vendor_inventory/ad38/ba4175aff8459836a993faa447c270df8cea42bf321adedac8c437bb9b2c.jpg",
+      "category": "주방",
+      "registered_at": "2026-07-04T11:13:10.234113+09:00",
+      "posted": true,
+      "short_name": "1종 주방세"
     }
   }
 }
