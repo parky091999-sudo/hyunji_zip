@@ -1,6 +1,6 @@
 {
   "for_date": "2026-07-06",
-  "generated_at": "2026-07-05T06:16:25.462360+09:00",
+  "generated_at": "2026-07-05T11:09:20.496668+09:00",
   "candidates": [
     {
       "product": {
@@ -70,6 +70,36 @@
       "image_url": "https://shopping-phinf.pstatic.net/main_5976751/59767510551.4.jpg",
       "detail_images": [
         "https://shopping-phinf.pstatic.net/main_5976751/59767510551.4.jpg"
+      ],
+      "product_code": "",
+      "status": "pending"
+    },
+    {
+      "product": {
+        "name": "소보카 휴대폰화면확대기 1개 화이트16인치",
+        "price": "24,900원",
+        "original_price": "",
+        "discount_rate": 0,
+        "image_url": "https://shopping-phinf.pstatic.net/main_5765679/57656797195.5.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9350784475&ctag=9350784475&lptag=I27024953339&itemId=27024953339&vendorItemId=93993558005&spec=10305198",
+        "badge": "쿠팡",
+        "brand": "",
+        "category": "휴대폰거치대",
+        "category_hint": "생활",
+        "mall_name": "쿠팡",
+        "source": "naver_shopping",
+        "scraped_at": "2026-07-05T02:07:22.903816",
+        "youtube_source": {
+          "title": "화면 작아서 답답한 사람 필수 #자취템#쇼핑추천#추천템#쇼츠#shorts",
+          "video_id": "XNEO_Hcob_w",
+          "views": 2305,
+          "keyword": "자취 필수템 추천"
+        }
+      },
+      "post_text": "폰 화면 작아서 드라마 볼 때 답답하다고 생각한 사람, 집중! 🧐\n\n진짜 폰으로 영화나 드라마 한 편 다 보고 나면 눈도 침침하고 목도 아프고 그러더라. 특히 혼자 맛있는 거 먹으면서 영상 볼 때, 폰 붙잡고 있기도 애매하고 그렇잖아. 나처럼 1인 가구는 거실에 큰 TV 없으면 폰으로 모든 걸 해결하는 경우가 많거든.\n\n근데 이거 써보니까 내 폰 화면을 무려 16인치짜리 미니 TV로 만들어주더라. 폰을 딱 올려두면 화면이 확대돼서 보이는 건데, 화질이 막 엄청 선명한 건 아니어도 눈 피로감은 확실히 줄여주더라고. 게다가 깔끔한 화이트 색상이라 방 분위기도 해치지 않고 괜찮았음.\n\n친구들이 우리 집에 놀러 왔을 때 이거 보고 다들 신기해하고 탐내더라. 써본 사람들은 왜 이걸 이제 알았냐고 하던 걸?\n\n✔ 자기 전에 침대에 누워서 좋아하는 드라마 몰아볼 때 진짜 좋고,\n✔ 밥 먹을 때 식탁에 올려두고 유튜브 보면서 혼밥하면 세상 편한 거 알아?\n\n#자취템 #필수템 #생활꿀템 #홈엔터테인먼트 #내돈내산",
+      "image_url": "https://shopping-phinf.pstatic.net/main_5765679/57656797195.5.jpg",
+      "detail_images": [
+        "https://shopping-phinf.pstatic.net/main_5765679/57656797195.5.jpg"
       ],
       "product_code": "",
       "status": "pending"
