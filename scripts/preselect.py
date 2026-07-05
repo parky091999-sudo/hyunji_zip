@@ -241,26 +241,52 @@ async def run():
 
     all_candidates = existing_good + new_candidates
 
-    # 카테고리별 균형을 맞춘 후보 선택
+    # 카테고리별 균형 및 과포화 상품(그라인더, 식기세척기 등) 배제한 후보 선택
     def _select_balanced(candidates: list, count: int) -> list:
-        """카테고리별로 균형있게 후보를 선택 (라운드-로빈)"""
+        """카테고리별로 균형있게 후보를 선택하고 과포화 키워드 및 중복 상품 배제"""
         if not candidates:
             return []
 
-        # 카테고리별 그룹화
+        # 최근 포스팅 카테고리 빈도 및 과포화 단어 집계
+        recent_cat_counts = {}
+        saturated_kw = {"그라인더", "후추", "소금", "식기세척기", "식세기", "선풍기", "손풍기", "건조기", "휴지통", "쓰레기통", "마스크", "티스푼"}
+        reg_path = os.path.join(DATA_DIR, "product_registry.json")
+        if os.path.exists(reg_path):
+            try:
+                reg_data = json.load(open(reg_path, encoding="utf-8"))
+                for v in list(reg_data.get("products", {}).values())[-20:]:
+                    if v.get("posted"):
+                        c_cat = v.get("category", "기타")
+                        recent_cat_counts[c_cat] = recent_cat_counts.get(c_cat, 0) + 1
+            except Exception:
+                pass
+
+        # 카테고리별 그룹화 및 과포화 상품 후순위 밀기
         by_category = {}
         for c in candidates:
             cat = c.get("product", {}).get("category_hint", "기타")
+            p_name = c.get("product", {}).get("name", "")
+            if any(sk in p_name for sk in saturated_kw):
+                logger.info(f"  과포화 키워드 포함으로 배제/후순위: {p_name[:30]}")
+                continue
             if cat not in by_category:
                 by_category[cat] = []
             by_category[cat].append(c)
 
+        # 만약 과포화 제외 후 후보가 부족하면 과포화 상품도 포함하되 뒤쪽으로
+        if sum(len(v) for v in by_category.values()) < count:
+            for c in candidates:
+                cat = c.get("product", {}).get("category_hint", "기타")
+                if c not in by_category.get(cat, []):
+                    by_category.setdefault(cat, []).append(c)
+
         logger.info(f"카테고리별 후보: {[(k, len(v)) for k, v in sorted(by_category.items())]}")
 
-        # 라운드-로빈으로 선택 (균형있게)
+        # 최근 포스팅 빈도가 적은 카테고리부터 우선 정렬하여 라운드-로빈 선택
         selected = []
         category_idx = {cat: 0 for cat in by_category}
-        sorted_cats = sorted(by_category.keys())
+        sorted_cats = sorted(by_category.keys(), key=lambda k: (recent_cat_counts.get(k, 0), k))
+        logger.info(f"카테고리 우선순위 (최근 적은 순): {sorted_cats}")
 
         while len(selected) < count:
             remaining = sum(

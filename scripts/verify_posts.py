@@ -53,10 +53,12 @@ def _is_truncated(text: str) -> bool:
 
 def _fallback_short_name(name: str) -> str:
     """규칙 기반 short_name 생성 (AI 없이)"""
-    cleaned = re.sub(r"[\(\)\[\]\{\}/\\,~·]", " ", name or "")
+    cleaned = re.sub(r"[\(\[].*?[\)\]]", " ", name or "")
+    cleaned = re.sub(r"\d+_\([^\)]+\)", " ", cleaned)
+    cleaned = re.sub(r"[\(\)\[\]\{\}/\\,~·+]", " ", cleaned)
     tokens = [t for t in cleaned.split() if t and not re.match(r"^[A-Z0-9\-]+\d", t)]
-    tokens = [t for t in tokens if not re.fullmatch(r"\d+[가-힣]?", t)]
-    return " ".join(tokens[:3])[:30]
+    tokens = [t for t in tokens if not re.fullmatch(r"(\d+[가-힣]?|\d+개|\d+ml|\d+g|\d+L)", t, re.I)]
+    return " ".join(tokens[:4])[:35].strip()
 
 
 # ─────────────────────────────────────────────────────────────

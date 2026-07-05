@@ -641,7 +641,10 @@ def build_html(products: list[dict]) -> str:
 </div>
 
 <div class="control-bar">
-  <span class="count-label" id="count-label">상품 {count}개</span>
+  <div>
+    <span class="count-label" id="count-label">상품 {count}개</span>
+    <span class="count-label" id="visitor-badge" style="margin-left:6px; font-size:0.75rem; color:var(--text2); font-weight:normal;"></span>
+  </div>
   <div class="sort-tabs">
     <button class="sort-tab active" id="tab-newest" onclick="setSort('newest')">최신순</button>
     <button class="sort-tab" id="tab-popular" onclick="setSort('popular')">인기순</button>
@@ -669,6 +672,7 @@ def build_html(products: list[dict]) -> str:
       상품 가격 및 재고는 실시간으로 변동될 수 있으며, 쿠팡 페이지에서 최종 확인 후 구매해 주세요.
     </div>
   </div>
+  <div class="visitor-counter" id="visitor-counter" style="margin: 12px 0 4px; font-size: 0.82rem; color: var(--text); font-weight: 600;">👁️ 방문자 통계 로딩 중...</div>
   <div class="footer-copy"></div>
   <div class="owner-toggle">
     <button id="owner-btn" type="button" onclick="toggleOwner()" title="이 기기에서 발생한 클릭을 통계에서 제외/포함합니다">
@@ -789,6 +793,41 @@ def build_html(products: list[dict]) -> str:
   if (_params.get('owner') === '0') {{ localStorage.removeItem('kkul_owner'); }}
   const _isOwner = localStorage.getItem('kkul_owner') === '1';
 
+  async function _recordAndLoadVisit() {{
+    const vc = document.getElementById("visitor-counter");
+    const vb = document.getElementById("visitor-badge");
+    if (!_db) {{
+      if (vc) vc.textContent = `👁️ 방문자 1명`;
+      if (vb) vb.textContent = `| 👁️ 1명`;
+      return;
+    }}
+    const today = new Date().toISOString().slice(0,10).replace(/-/g,'');
+    const ref = _db.collection("stats").doc("visitors");
+    if (!_isOwner) {{
+      ref.update({{
+        total: firebase.firestore.FieldValue.increment(1),
+        [`days.${{today}}`]: firebase.firestore.FieldValue.increment(1),
+      }}).catch(() => {{
+        ref.set({{ total: 1, days: {{ [today]: 1 }} }}).catch(() => {{}});
+      }});
+    }}
+    try {{
+      const doc = await ref.get();
+      if (doc.exists) {{
+        const d = doc.data();
+        const t = d.total || 1;
+        const td = d.days?.[today] || 1;
+        if (vc) vc.textContent = `👁️ 오늘 방문자 ${{td.toLocaleString()}}명 / 총 방문자 ${{t.toLocaleString()}}명` + (_isOwner ? ' (운영자 제외)' : '');
+        if (vb) vb.textContent = `| 👁️ 방문자 ${{t.toLocaleString()}}명`;
+      }} else {{
+        if (vc) vc.textContent = `👁️ 오늘 방문자 1명 / 총 방문자 1명`;
+        if (vb) vb.textContent = `| 👁️ 1명`;
+      }}
+    }} catch(e) {{
+      if (vc) vc.textContent = '';
+    }}
+  }}
+
   function recordClick(code) {{
     if (_isOwner) return;        // 내 클릭은 집계 제외
     if (!_clicks[code]) _clicks[code] = {{ total: 0, hot7: 0 }};
@@ -865,6 +904,7 @@ def build_html(products: list[dict]) -> str:
 
   applyBadges();   // NEW 뱃지는 즉시 표시 (Firebase 없이도)
   _loadClickStats(); // BEST/HOT은 Firebase 로드 후 표시
+  _recordAndLoadVisit(); // 방문자 카운트 집계 및 로드
 
   /* ── 카테고리 필터 ── */
   let currentCat = '전체';

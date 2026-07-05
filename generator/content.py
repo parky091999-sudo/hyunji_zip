@@ -599,7 +599,7 @@ _GENERIC_TOKENS = {
 
 def _short_name_ok(result: str, name: str) -> bool:
     """short_name 검증: 너무 짧거나 일반 단어만이면 reject."""
-    if not result or len(result) < 2 or len(result) > 30:
+    if not result or len(result) < 2 or len(result) > 40:
         return False
     tokens = result.split()
     # 한 단어인데 공간/카테고리 단어면 reject (예: "욕실", "주방")
@@ -611,18 +611,23 @@ def _short_name_ok(result: str, name: str) -> bool:
     # 원본 상품명에 한 글자도 안 겹치면 reject (AI 환각)
     if not any(t in name for t in tokens):
         return False
+    # 끝 단어가 조사/접속사/어색한 절단 문자면 reject
+    if result[-1] in ("의", "와", "과", "에", "로", "+", "-", "_", "/"):
+        return False
     return True
 
 
 def _fallback_short_name(name: str) -> str:
-    """AI 실패 시 규칙 기반 폴백: 처음 2~3 의미 단어."""
+    """AI 실패 시 규칙 기반 폴백: 처음 2~4 의미 단어."""
     import re
-    # 괄호/특수문자 제거, 토큰화
-    cleaned = re.sub(r"[\(\)\[\]\{\}/\\,~·]", " ", name or "")
+    # 옵션/출고/배송 태그 및 괄호 제거
+    cleaned = re.sub(r"[\(\[].*?[\)\]]", " ", name or "")
+    cleaned = re.sub(r"\d+_\([^\)]+\)", " ", cleaned)
+    cleaned = re.sub(r"[\(\)\[\]\{\}/\\,~·+]", " ", cleaned)
     tokens = [t for t in cleaned.split() if t and not re.match(r"^[A-Z0-9\-]+\d", t)]
-    # 모델번호/숫자만 토큰 제외
-    tokens = [t for t in tokens if not re.fullmatch(r"\d+[가-힣]?", t)]
-    return " ".join(tokens[:3])[:30]
+    # 모델번호/숫자만/단순개수 토큰 제외
+    tokens = [t for t in tokens if not re.fullmatch(r"(\d+[가-힣]?|\d+개|\d+ml|\d+g|\d+L)", t, re.I)]
+    return " ".join(tokens[:4])[:35].strip()
 
 
 def generate_short_name(product: dict) -> str:
@@ -634,9 +639,10 @@ def generate_short_name(product: dict) -> str:
         "다음 쿠팡 상품명을 2~4단어의 간결한 한국어 표시 이름으로 줄여줘.\n"
         "브랜드명·모델번호·용량·색상·개수 등 부가정보는 제거하고 핵심 품목명만 남겨.\n"
         "중요: '욕실'/'주방'/'거실' 같은 공간 단어 하나만 응답하면 안 됨. 반드시 핵심 품목어(예: 선반/청소기/그라인더)를 포함해야 함.\n"
+        "중요: 한국어 단어를 중간에 자르지 말고 완결된 단어들로 구성해.\n"
         "예시: \"쿠쿠 식기세척기 6인용 CDW-A0611TW 방문설치\" → \"6인용 식기세척기\"\n"
         "예시: \"산리오 헬로키티 미니 물 정수기 디스펜서 2L 핑크\" → \"헬로키티 정수기 디스펜서\"\n"
-        "예시: \"데코아르 스마트 자동센서 스테인레스 휴지통 (20L 전용)\" → \"스마트 휴지통(20L)\"\n"
+        "예시: \"데코아르 스마트 자동센서 스테인레스 휴지통 (20L 전용)\" → \"스마트 자동센서 휴지통\"\n"
         "예시: \"스텐 무타공 욕실선반 물빠짐 부착식 삼각 코너선반 화이트 N21\" → \"무타공 욕실선반\"\n\n"
         f"상품명: {name}\n\n"
         "간결한 이름만 출력 (설명 없이):"
@@ -649,7 +655,7 @@ def generate_short_name(product: dict) -> str:
                 model="gemini-2.5-flash",
                 contents=prompt,
                 config=genai.types.GenerateContentConfig(
-                    max_output_tokens=200,
+                    max_output_tokens=100,
                     temperature=0.2,
                 ),
             )
@@ -668,7 +674,7 @@ def generate_short_name(product: dict) -> str:
             resp = client.chat.completions.create(
                 model="llama-3.3-70b-versatile",
                 messages=[{"role": "user", "content": prompt}],
-                max_tokens=30,
+                max_tokens=100,
                 temperature=0.2,
             )
             result = resp.choices[0].message.content.strip().strip("\"'")

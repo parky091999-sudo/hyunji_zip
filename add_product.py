@@ -76,10 +76,16 @@ def _search_naver(query: str) -> dict | None:
         return None
 
 
-def _is_duplicate(queue: list, url: str) -> bool:
-    if not url:
-        return False
-    return any(item.get("product", {}).get("product_url", "") == url for item in queue)
+def _is_duplicate(queue: list, url: str, name: str = "") -> bool:
+    if url and any(item.get("product", {}).get("product_url", "") == url for item in queue):
+        return True
+    if name:
+        saturated_kw = {"그라인더", "후추", "소금", "식기세척기", "식세기", "선풍기", "손풍기", "건조기", "휴지통", "쓰레기통", "마스크", "티스푼"}
+        if any(sk in name for sk in saturated_kw):
+            print(f"  ⚠️  [주의] 과포화 상품 키워드({[sk for sk in saturated_kw if sk in name]})가 포함되어 있습니다.")
+        if any(name == item.get("product", {}).get("name", "") for item in queue):
+            return True
+    return False
 
 
 def add_by_name(name: str):
@@ -118,7 +124,7 @@ def add_by_url(url: str):
 
 def _enqueue(product: dict):
     queue = load_queue()
-    if _is_duplicate(queue, product.get("product_url", "")):
+    if _is_duplicate(queue, product.get("product_url", ""), product.get("name", "")):
         print(f"  ⚠️  이미 큐에 있는 상품입니다.")
         return
     entry = {
