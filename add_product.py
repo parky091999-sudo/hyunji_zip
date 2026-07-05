@@ -127,6 +127,12 @@ def _enqueue(product: dict):
     if _is_duplicate(queue, product.get("product_url", ""), product.get("name", "")):
         print(f"  ⚠️  이미 큐에 있는 상품입니다.")
         return
+    if not product.get("short_name") and product.get("name"):
+        try:
+            from generator.content import _fallback_short_name
+            product["short_name"] = _fallback_short_name(product["name"])
+        except Exception:
+            pass
     entry = {
         "priority":  1,
         "source":    "manual",

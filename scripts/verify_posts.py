@@ -58,7 +58,10 @@ def _fallback_short_name(name: str) -> str:
     cleaned = re.sub(r"[\(\)\[\]\{\}/\\,~·+]", " ", cleaned)
     tokens = [t for t in cleaned.split() if t and not re.match(r"^[A-Z0-9\-]+\d", t)]
     tokens = [t for t in tokens if not re.fullmatch(r"(\d+[가-힣]?|\d+개|\d+ml|\d+g|\d+L)", t, re.I)]
-    return " ".join(tokens[:4])[:35].strip()
+    result = " ".join(tokens[:4]).strip()
+    while len(result) > 30 and len(result.split()) > 1:
+        result = " ".join(result.split()[:-1]).strip()
+    return result
 
 
 # ─────────────────────────────────────────────────────────────
@@ -87,7 +90,7 @@ def run_integrity_check(feed: list[dict]) -> bool:
         short_name = v.get("short_name", "")
         name = v.get("name", "")
 
-        if len(short_name) < 2:
+        if len(short_name) < 2 or short_name[-1] in ("의", "와", "과", "에", "로", "+", "-", "_", "/"):
             new_sn = _fallback_short_name(name)
             v["short_name"] = new_sn
             fixes.append(f"  [{code}] short_name 수정: {short_name!r} → {new_sn!r}")

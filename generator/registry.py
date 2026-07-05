@@ -71,10 +71,18 @@ def assign_code(product_url: str, name: str = "", image_url: str = "", category:
     if not key:
         return ""
 
+    sn = ""
+    try:
+        from generator.content import _fallback_short_name
+        sn = _fallback_short_name(name)
+    except Exception:
+        pass
+
     code = str(reg["next_code"]).zfill(3)
     reg["products"][key] = {
         "code": code,
         "name": name,
+        "short_name": sn,
         "url": product_url,
         "image_url": image_url,
         "category": category,

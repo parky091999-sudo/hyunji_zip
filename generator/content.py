@@ -619,7 +619,6 @@ def _short_name_ok(result: str, name: str) -> bool:
 
 def _fallback_short_name(name: str) -> str:
     """AI 실패 시 규칙 기반 폴백: 처음 2~4 의미 단어."""
-    import re
     # 옵션/출고/배송 태그 및 괄호 제거
     cleaned = re.sub(r"[\(\[].*?[\)\]]", " ", name or "")
     cleaned = re.sub(r"\d+_\([^\)]+\)", " ", cleaned)
@@ -627,7 +626,10 @@ def _fallback_short_name(name: str) -> str:
     tokens = [t for t in cleaned.split() if t and not re.match(r"^[A-Z0-9\-]+\d", t)]
     # 모델번호/숫자만/단순개수 토큰 제외
     tokens = [t for t in tokens if not re.fullmatch(r"(\d+[가-힣]?|\d+개|\d+ml|\d+g|\d+L)", t, re.I)]
-    return " ".join(tokens[:4])[:35].strip()
+    result = " ".join(tokens[:4]).strip()
+    while len(result) > 30 and len(result.split()) > 1:
+        result = " ".join(result.split()[:-1]).strip()
+    return result
 
 
 def generate_short_name(product: dict) -> str:
