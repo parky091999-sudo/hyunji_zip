@@ -1,5 +1,5 @@
 {
-  "next_code": 49,
+  "next_code": 50,
   "blocked_item_ids": [],
   "products": {
     "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8849967732&ctag=8849967732&lpt": {
@@ -480,6 +480,16 @@
       "registered_at": "2026-07-04T19:56:53.751527+09:00",
       "posted": true,
       "short_name": "에어프라이어"
+    },
+    "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9350784475&ctag=9350784475&lpt": {
+      "code": "049",
+      "name": "소보카 휴대폰화면확대기 1개 화이트16인치",
+      "short_name": "소보카 휴대폰화면확대기 화이트16인치",
+      "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9350784475&ctag=9350784475&lptag=I27024953339&itemId=27024953339&vendorItemId=93993558005&spec=10305198",
+      "image_url": "https://shopping-phinf.pstatic.net/main_5765679/57656797195.5.jpg",
+      "category": "생활",
+      "registered_at": "2026-07-05T16:25:34.116844+09:00",
+      "posted": true
     }
   }
 }
