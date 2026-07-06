@@ -1,5 +1,30 @@
 {
   "for_date": "2026-07-08",
-  "generated_at": "2026-07-07T02:22:20.776550+09:00",
-  "candidates": []
+  "generated_at": "2026-07-07T03:32:23.223448+09:00",
+  "candidates": [
+    {
+      "product": {
+        "name": "소가 휴대용 손선풍기 냉각 에어컨 선풍기 크림 FS16",
+        "price": "23,900원",
+        "original_price": "",
+        "discount_rate": 0,
+        "image_url": "https://shopping-phinf.pstatic.net/main_5430440/54304408894.3.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8719990594&ctag=8719990594&lptag=I25328830887&itemId=25328830887&vendorItemId=91668883746&spec=10305198",
+        "badge": "쿠팡",
+        "brand": "소가",
+        "category": "선풍기",
+        "category_hint": "디지털",
+        "mall_name": "쿠팡",
+        "source": "naver_shopping",
+        "scraped_at": "2026-07-06T18:29:30.104926"
+      },
+      "post_text": "더운 날씨에 피부 열감 때문에 화장이 뭉치거나 달아나는 거 진짜 스트레스임.. 😥\n\n그래서 나처럼 외출할 때 피부 온도 낮추는 거 중요하게 생각하는 사람한테 딱이더라. 지하철 기다릴 때나 잠깐 야외에서 시간 보낼 때 이건 진짜 필수템이야.\n\n이게 그냥 바람만 나오는 선풍기가 아니고, 뒤쪽에 냉각 패드가 있어서 진짜 시원한 바람이 나오더라고. 게다가 크림색이라 내 가방 속 어떤 아이템이랑도 찰떡같이 어울려서 더 손이 자주 감. 써본 사람들 후기 보니까 다들 '이젠 이거 없으면 못 나간다'고 입을 모으더라.\n\n✔ 나갈 때 파우치에 쏙 넣어 다니면 언제든 얼굴 열감 낮추기 좋음.\n✔ 혹시",
+      "image_url": "https://shopping-phinf.pstatic.net/main_5430440/54304408894.3.jpg",
+      "detail_images": [
+        "https://shopping-phinf.pstatic.net/main_5430440/54304408894.3.jpg"
+      ],
+      "product_code": "",
+      "status": "pending"
+    }
+  ]
 }
