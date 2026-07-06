@@ -1,7 +1,31 @@
 {
   "for_date": "2026-07-08",
-  "generated_at": "2026-07-07T04:08:02.421734+09:00",
+  "generated_at": "2026-07-07T06:49:56.362472+09:00",
   "candidates": [
+    {
+      "product": {
+        "name": "아이리버 IYF-100 전동 충전식 발 각질 제거기",
+        "price": "29,800원",
+        "original_price": "",
+        "discount_rate": 0,
+        "image_url": "https://shopping-phinf.pstatic.net/main_5896409/58964093768.2.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=6089491943&ctag=6089491943&lptag=l352218700320&itemId=57230130802&vendorItemId=92678786577&spec=10305198",
+        "badge": "쿠팡",
+        "brand": "",
+        "category": "발각질제거기",
+        "category_hint": "건강",
+        "mall_name": "쿠팡",
+        "source": "naver_shopping",
+        "scraped_at": "2026-07-06T21:49:01.633512"
+      },
+      "post_text": "발에 각질이 많아보이면 사람들이 먼저 다가오지 않더라\n그런데 각질 제거하기가 너무 번거로워서 항상 미루게 돼서\n근데 전동 충전식으로 각질 제거가 가능해서 너무 좋더라고\n리뷰 보니까 거의 다 만족하는 사람이더라\n✔ 발에 각질이 생기기 시작하면 바로 관리해야 해.✔ 각질 제거기랑 스크럽 함께쓰니까 더 좋아\n\n#건강관리 #발관리 #각질제거기 #생활꿀템 #건강템",
+      "image_url": "https://shopping-phinf.pstatic.net/main_5896409/58964093768.2.jpg",
+      "detail_images": [
+        "https://shopping-phinf.pstatic.net/main_5896409/58964093768.2.jpg"
+      ],
+      "product_code": "",
+      "status": "pending"
+    },
     {
       "product": {
         "name": "소가 휴대용 손선풍기 냉각 에어컨 선풍기 크림 FS16",
