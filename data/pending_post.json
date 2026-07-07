@@ -1,6 +1,6 @@
 {
   "for_date": "2026-07-08",
-  "generated_at": "2026-07-07T06:49:56.362472+09:00",
+  "generated_at": "2026-07-07T11:14:14.226868+09:00",
   "candidates": [
     {
       "product": {
@@ -46,6 +46,36 @@
       "image_url": "https://shopping-phinf.pstatic.net/main_5430440/54304408894.3.jpg",
       "detail_images": [
         "https://shopping-phinf.pstatic.net/main_5430440/54304408894.3.jpg"
+      ],
+      "product_code": "",
+      "status": "pending"
+    },
+    {
+      "product": {
+        "name": "실리콘 싱크대 쓰레기통 걸이 그레이 스크래퍼 개폐 9L",
+        "price": "34,310원",
+        "original_price": "",
+        "discount_rate": 0,
+        "image_url": "https://shopping-phinf.pstatic.net/main_6014736/60147367178.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8989561160&ctag=8989561160&lptag=V95277119628&itemId=28226725298&vendorItemId=95277119628&spec=10305199",
+        "badge": "쿠팡",
+        "brand": "",
+        "category": "휴지통",
+        "category_hint": "생활",
+        "mall_name": "쿠팡",
+        "source": "naver_shopping",
+        "scraped_at": "2026-07-07T02:11:54.516705",
+        "youtube_source": {
+          "title": "[광고] 주방 쓰레기통 추천 | 걸이형 접이식 싱크대 음식물 쓰레기통",
+          "video_id": "1YPCLkPnocg",
+          "views": 52702,
+          "keyword": "주방 가전 추천"
+        }
+      },
+      "post_text": "요리할 때마다 가장 스트레스 받는 게 싱크대 쓰레기통 치우는 거였어\n그런데 요즘은 싱크대에 붙일 수 있는 걸이형 쓰레기통 쓰고 있거든\n이게 실리콘으로 되어 있어서 쉽게 걸수도 있고, 스크래퍼까지 포함되어 있어서 음식물 쓰레기 넣을 때도 편리하고\n게다가 9L 용량이어서 한동안 쓰고 나서도 비워야 할 때가 오는 것도 편하더라고\n리뷰 보니까 많은 사람들이 만족해하는 거 같아\n✔ 일단 음식물 쓰레기통을 싱크대에 바로 걸면 공간도 절약되고, 깨끗해지는 느낌이드라\n✔ 또 스크래퍼 있어서 남은 음식물도 쉽게 치우고, 실리콘으로 되어 있어서 쉽게 세척할 수도 있어\n\n#살림꿀템 #자취템 #필수템 #살림템 #주방용품",
+      "image_url": "https://shopping-phinf.pstatic.net/main_6014736/60147367178.jpg",
+      "detail_images": [
+        "https://shopping-phinf.pstatic.net/main_6014736/60147367178.jpg"
       ],
       "product_code": "",
       "status": "pending"
