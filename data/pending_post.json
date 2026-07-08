@@ -1,7 +1,55 @@
 {
   "for_date": "2026-07-10",
-  "generated_at": "2026-07-09T01:19:40.860992+09:00",
+  "generated_at": "2026-07-09T03:08:07.622559+09:00",
   "candidates": [
+    {
+      "product": {
+        "name": "페이스팩토리 전동 다이아필 각질제거기 화이트 FF-27",
+        "price": "43,010원",
+        "original_price": "",
+        "discount_rate": 0,
+        "image_url": "https://shopping-phinf.pstatic.net/main_5027322/50273223171.12.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8327675475&ctag=8327675475&lptag=I24041145299&itemId=24041145299&vendorItemId=91061374698&spec=10305197",
+        "badge": "쿠팡",
+        "brand": "페이스팩토리",
+        "category": "발각질제거기",
+        "category_hint": "건강",
+        "mall_name": "쿠팡",
+        "source": "naver_shopping",
+        "scraped_at": "2026-07-08T18:06:25.518073"
+      },
+      "post_text": "내 피부 상태가 제일 안 좋을 때가 바로 지금인데 이거 쓰니까 살짝 나아진 거 같아\n그냥 얼굴에 붙여놓고 돌려버리면 각질 제거도 되고 피부 톤업 효과도 있어\n게다가 작고 가벼워서 여행갈 때도 휴대하기 편하더라고\n리뷰 보니까 산 사람들이 하나같이 피부가 밝아지고 정리돼서 기분 좋다더라\n✔ 얼굴에 각질 제거하고 마스크팩하면 더 좋을 것 같아, 화장도 잘 받더라\n✔ 아침에 일어나서 사용하고 나면 하루종일 피부가 생기 있어\n\n#건강한피부 #각질제거기 #화이트톤업 #피부관리 #테크추천",
+      "image_url": "https://shopping-phinf.pstatic.net/main_5027322/50273223171.12.jpg",
+      "detail_images": [
+        "https://shopping-phinf.pstatic.net/main_5027322/50273223171.12.jpg"
+      ],
+      "product_code": "",
+      "status": "pending"
+    },
+    {
+      "product": {
+        "name": "소가 휴대용 손선풍기 냉각 에어컨 선풍기 크림 FS16",
+        "price": "23,900원",
+        "original_price": "",
+        "discount_rate": 0,
+        "image_url": "https://shopping-phinf.pstatic.net/main_5430440/54304408894.3.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8719990594&ctag=8719990594&lptag=I25328830887&itemId=25328830887&vendorItemId=91668883746&spec=10305198",
+        "badge": "쿠팡",
+        "brand": "소가",
+        "category": "선풍기",
+        "category_hint": "디지털",
+        "mall_name": "쿠팡",
+        "source": "naver_shopping",
+        "scraped_at": "2026-07-08T18:06:08.311202"
+      },
+      "post_text": "더워지는 날씨에 갑자기 에어컨이 고장나면 어떻게 해?\n그럴 때마다 창밖으로 바람 불어오는 거 보면서 속만 타더라\n근데 요즘은 집에서만 있지 않는 사람들도 많잖아, 그러면 에어컨 고장 나도 문제지만, 밖에서는 더 더워서 어떻게 하라고?\n그래서 나처럼 집 밖에서도 시원한 바람을 느끼고 싶은 사람에게 추천하고 싶은 게 하나 있어\n이 휴대용 손선풍기, 작은 크기에 비해 엄청 시원한 바람이 불어와서 놀라더라고\n리뷰를 보니까 다른 사람들이 거의 다 만족한다고 하더라\n✔️ 이거 쓰고 나서부터는 집에서 일할 때, 밖에서 놀 때, 언제 어디서든 시원한 바람을 느끼고 있어\n✔️ 특히 여름에 여행갈 때는 이거 하나만 있어도 에어컨 안 틀고도 시원하게 잘 수 있더라\n\n#생활용품 #여행용품 #가정용품 #주방용품 #여름용품",
+      "image_url": "https://shopping-phinf.pstatic.net/main_5430440/54304408894.3.jpg",
+      "detail_images": [
+        "https://shopping-phinf.pstatic.net/main_5430440/54304408894.3.jpg"
+      ],
+      "product_code": "",
+      "status": "pending"
+    },
     {
       "product": {
         "name": "수납이야기 다용도 빨래바구니 선반 2단 그레이 1개",
