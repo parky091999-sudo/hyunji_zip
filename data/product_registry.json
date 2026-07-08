@@ -1,5 +1,5 @@
 {
-  "next_code": 52,
+  "next_code": 53,
   "blocked_item_ids": [],
   "products": {
     "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8849967732&ctag=8849967732&lpt": {
@@ -510,6 +510,15 @@
       "category": "생활",
       "registered_at": "2026-07-08T11:10:59.915044+09:00",
       "posted": true
+    },
+    "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=10184865&ctag=10184865&lptag=I": {
+      "code": "052",
+      "name": "수납이야기 다용도 빨래바구니 선반 2단 그레이 1개",
+      "short_name": "수납이야기 다용도 빨래바구니 선반",
+      "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=10184865&ctag=10184865&lptag=I44724828&itemId=44724828&vendorItemId=94297698304&spec=10305199",
+      "image_url": "https://shopping-phinf.pstatic.net/main_5994381/59943816896.1.jpg",
+      "category": "",
+      "registered_at": "2026-07-08T21:17:15.903540+09:00"
     }
   }
 }
