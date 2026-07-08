@@ -1,5 +1,5 @@
 {
-  "next_code": 51,
+  "next_code": 52,
   "blocked_item_ids": [],
   "products": {
     "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8849967732&ctag=8849967732&lpt": {
@@ -499,6 +499,16 @@
       "image_url": "https://shopping-phinf.pstatic.net/main_5618498/56184982453.24.jpg",
       "category": "생활",
       "registered_at": "2026-07-07T21:33:47.168350+09:00",
+      "posted": true
+    },
+    "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8989561160&ctag=8989561160&lpt": {
+      "code": "051",
+      "name": "실리콘 싱크대 쓰레기통 걸이 그레이 스크래퍼 개폐 9L",
+      "short_name": "실리콘 싱크대 쓰레기통 걸이",
+      "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8989561160&ctag=8989561160&lptag=V95277119628&itemId=28226725298&vendorItemId=95277119628&spec=10305199",
+      "image_url": "https://shopping-phinf.pstatic.net/main_6014736/60147367178.jpg",
+      "category": "생활",
+      "registered_at": "2026-07-08T11:10:59.915044+09:00",
       "posted": true
     }
   }
