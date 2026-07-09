@@ -1,6 +1,6 @@
 {
   "for_date": "2026-07-11",
-  "generated_at": "2026-07-10T04:00:40.599243+09:00",
+  "generated_at": "2026-07-10T06:46:51.688695+09:00",
   "candidates": [
     {
       "product": {
@@ -94,6 +94,36 @@
       "image_url": "https://shopping-phinf.pstatic.net/main_5027322/50273223171.12.jpg",
       "detail_images": [
         "https://shopping-phinf.pstatic.net/main_5027322/50273223171.12.jpg"
+      ],
+      "product_code": "",
+      "status": "pending"
+    },
+    {
+      "product": {
+        "name": "수납이야기 다용도 빨래바구니 선반 2단 그레이 1개",
+        "price": "35,900원",
+        "original_price": "",
+        "discount_rate": 0,
+        "image_url": "https://shopping-phinf.pstatic.net/main_5994381/59943816896.1.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=10184865&ctag=10184865&lptag=I44724828&itemId=44724828&vendorItemId=94297698304&spec=10305199",
+        "badge": "쿠팡",
+        "brand": "수납이야기",
+        "category": "정리함",
+        "category_hint": "생활",
+        "mall_name": "쿠팡",
+        "source": "naver_shopping",
+        "scraped_at": "2026-07-09T21:45:45.691737",
+        "youtube_source": {
+          "title": "🔥 다이소 직원도 모르는 선반 바구니 활용법(0268번)",
+          "video_id": "YV4zt09GEOI",
+          "views": 994049,
+          "keyword": "생활꿀템 추천"
+        }
+      },
+      "post_text": "집에 물건이 많으면 많을수록 정신이 산만해지는 것 같더라\n그런데 방 하나에 살면서도 수납이 제대로 안 되면 더 힘들어\n그래서 최근에 자취방을 정리하다가 하나의 물건이 내 삶을 편하게 만들어줘서 소개해보고 싶어\n그것은 바로 벽에 걸 수 있는 선반과 바구니가 합쳐진 제품이야\n게다가 바구니가 두 개라서 빨래를 분류해서 넣을 수도 있고, 세탁 후에 널어둘 수도 있더라고\n리뷰 보니까 산 사람들이 하나같이 자취방에 꼭 필요하다고 하더라\n✔ 빨래할 때는 이 바구니에 다 넣어두면 편하고, 옷이 말린 후에는 선반에 올려두면 공간을 절약할 수 있어\n✔ 또한, 이 제품을 사용하면 방이 더 깨끗해 보이고, 수납이 잘되어서 마음도 편해질 거야\n\n#자취템 #살림꿀템 #생활꿀템 #필수템 #수납템",
+      "image_url": "https://shopping-phinf.pstatic.net/main_5994381/59943816896.1.jpg",
+      "detail_images": [
+        "https://shopping-phinf.pstatic.net/main_5994381/59943816896.1.jpg"
       ],
       "product_code": "",
       "status": "pending"
