@@ -1,6 +1,6 @@
 {
   "for_date": "2026-07-11",
-  "generated_at": "2026-07-10T01:48:22.585783+09:00",
+  "generated_at": "2026-07-10T03:26:36.310446+09:00",
   "candidates": [
     {
       "product": {
@@ -22,6 +22,54 @@
       "image_url": "https://shopping-phinf.pstatic.net/main_5889797/58897974967.7.jpg",
       "detail_images": [
         "https://shopping-phinf.pstatic.net/main_5889797/58897974967.7.jpg"
+      ],
+      "product_code": "",
+      "status": "pending"
+    },
+    {
+      "product": {
+        "name": "소가 휴대용 손선풍기 냉각 에어컨 선풍기 크림 FS16",
+        "price": "23,900원",
+        "original_price": "",
+        "discount_rate": 0,
+        "image_url": "https://shopping-phinf.pstatic.net/main_5430440/54304408894.3.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8719990594&ctag=8719990594&lptag=I25328830887&itemId=25328830887&vendorItemId=91668883746&spec=10305198",
+        "badge": "쿠팡",
+        "brand": "소가",
+        "category": "선풍기",
+        "category_hint": "디지털",
+        "mall_name": "쿠팡",
+        "source": "naver_shopping",
+        "scraped_at": "2026-07-09T18:24:46.395734"
+      },
+      "post_text": "더운 여름이 되니까 매일 매일 선풍기 틀고 다니는 사람 많을 텐데\n그중에 손에 들고 다닐 수 있는 작은 선풍기는 더욱 편리하더라고\n예를 들어, 소가에서 나온 휴대용 손선풍기 같은 건데, 냉각 기능이 있어 더 시원하더라\n이거 진짜 잘 산 거 같아, 리뷰 보니까 다른 사람들도 하나같이 만족하더라고\n✔ 이거 들고 다니면 공원에서 책 읽을 때나, 지하철에서 기다릴 때 시원하고 좋더라고\n✔ 그리고 사무실에서 사용할 때도 다른 사람에게 방해되지 않아서 좋았어\n\n#생활용품 #휴대용선풍기 #여름용품 #핫써머 #선풍기추천",
+      "image_url": "https://shopping-phinf.pstatic.net/main_5430440/54304408894.3.jpg",
+      "detail_images": [
+        "https://shopping-phinf.pstatic.net/main_5430440/54304408894.3.jpg"
+      ],
+      "product_code": "",
+      "status": "pending"
+    },
+    {
+      "product": {
+        "name": "씨즌M닷컴 카카오프렌즈 휴대용 UV살균 칫솔케이스 라이언 RYAN 라이언001",
+        "price": "27,900원",
+        "original_price": "",
+        "discount_rate": 0,
+        "image_url": "https://shopping-phinf.pstatic.net/main_2386835/23868356238.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=1501239636&ctag=1501239636&lptag=P1501239636&itemId=2577588578&vendorItemId=70569850445&spec=10305199",
+        "badge": "쿠팡",
+        "brand": "",
+        "category": "구강청정기",
+        "category_hint": "생활",
+        "mall_name": "쿠팡",
+        "source": "naver_shopping",
+        "scraped_at": "2026-07-09T18:24:56.439825"
+      },
+      "post_text": "칫솔을 씻고 말리는데마다 번거로워하는 사람들이 많더라\n그럴 때마다 칫솔에 붙은 물기가 걱정돼서 말리는 시간도 오래 걸리고, 말려도 물기가 완전히 마르지 않는 경우가 많았어\n근데 이젠 그런 걱정 없이 쉽게 칫솔을 말릴 수 있는 방법이 생겼어\nUV 살균 기능이 있어 칫솔을 소독할 수 있고, 휴대용이라서 어디서나 쓸 수 있더라고\n리뷰 보니까 산 사람들이 하나같이 칫솔 관리가 편해졌다고 하더라\n✔ 칫솔을 넣고 UV 살균 버튼만 누르면 된단거야\n✔ 여행이나 출장 갈 때도 휴대용으로 들고 다니면 편리하다고 하는 거 알아?\n\n#생활꿀템 #살림템 #자취템 #필수템 #살림꿀템",
+      "image_url": "https://shopping-phinf.pstatic.net/main_2386835/23868356238.jpg",
+      "detail_images": [
+        "https://shopping-phinf.pstatic.net/main_2386835/23868356238.jpg"
       ],
       "product_code": "",
       "status": "pending"
