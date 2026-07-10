@@ -1,6 +1,6 @@
 {
   "for_date": "2026-07-12",
-  "generated_at": "2026-07-11T03:13:20.551569+09:00",
+  "generated_at": "2026-07-11T03:46:41.241060+09:00",
   "candidates": [
     {
       "product": {
@@ -22,6 +22,30 @@
       "image_url": "https://shopping-phinf.pstatic.net/main_5889797/58897974967.7.jpg",
       "detail_images": [
         "https://shopping-phinf.pstatic.net/main_5889797/58897974967.7.jpg"
+      ],
+      "product_code": "",
+      "status": "pending"
+    },
+    {
+      "product": {
+        "name": "소가 휴대용 손선풍기 냉각 에어컨 선풍기 크림 FS16",
+        "price": "23,900원",
+        "original_price": "",
+        "discount_rate": 0,
+        "image_url": "https://shopping-phinf.pstatic.net/main_5430440/54304408894.3.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8719990594&ctag=8719990594&lptag=I25328830887&itemId=25328830887&vendorItemId=91668883746&spec=10305198",
+        "badge": "쿠팡",
+        "brand": "소가",
+        "category": "선풍기",
+        "category_hint": "디지털",
+        "mall_name": "쿠팡",
+        "source": "naver_shopping",
+        "scraped_at": "2026-07-10T18:45:00.346794"
+      },
+      "post_text": "더워죽겠는데 에어컨이랑 선풍기 둘 다 틀면 전기세 폭탄 걱정되긴 하는데\n이럴 때는 휴대용 선풍기 하나면 참 좋더라\n특히 이건 냉각 기능까지 있어서 여름에 데굴데굴 구르는 피부에 바로 시원한 바람 쿨쿨 불어서 줘야했음\n리뷰 보니까 산 사람들이 하나같이 왜 이제 샀냐고 하더라고\n✔ 자기가 사용하는 공간이나 침대 앞에 두면 편하더라\n✔ 친구 생일이나 명절 선물로도 좋을 것 같아서 한 번 사봤어\n\n#\n\n#여름용품\n\n#실내용품\n\n#개인용품\n\n#화장품추천\n\n#여름맞이선물",
+      "image_url": "https://shopping-phinf.pstatic.net/main_5430440/54304408894.3.jpg",
+      "detail_images": [
+        "https://shopping-phinf.pstatic.net/main_5430440/54304408894.3.jpg"
       ],
       "product_code": "",
       "status": "pending"
