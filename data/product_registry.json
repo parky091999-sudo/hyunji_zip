@@ -509,7 +509,8 @@
       "image_url": "https://shopping-phinf.pstatic.net/main_6014736/60147367178.jpg",
       "category": "생활",
       "registered_at": "2026-07-08T11:10:59.915044+09:00",
-      "posted": true
+      "posted": true,
+      "removed": true
     },
     "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=10184865&ctag=10184865&lptag=I": {
       "code": "052",
