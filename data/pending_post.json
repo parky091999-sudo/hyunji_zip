@@ -1,7 +1,26 @@
 {
   "for_date": "2026-07-13",
-  "generated_at": "2026-07-12T02:39:54.778665+09:00",
+  "generated_at": "2026-07-12T03:09:38.658045+09:00",
   "candidates": [
+    {
+      "product": {
+        "name": "아이즈온 자외선차단 마스크 ANTI-UV PRO 스포츠 쿨링 골프, 핑크, 1개",
+        "price": "12,770원",
+        "original_price": "",
+        "discount_rate": 46,
+        "image_url": "https://thumbnail.coupangcdn.com/thumbnails/remote/292x292ex/image/vendor_inventory/7022/9dba197e29b7f2677d45baa0400f7ad140b7a106db4e9e4d3b20fe64c4b0.png",
+        "product_url": "https://www.coupang.com/vp/products/9511440755?vendorItemId=95430962191&sourceType=HOME_GW_PROMOTION&searchId=feed-4937d20c431545f4857d3c8cb5f1569d-3.33.107:gw_promotion",
+        "badge": "특가진행중",
+        "scraped_at": "2026-07-11T18:07:41.301428"
+      },
+      "post_text": "더워지니까 외출할 때마다 자외선 차단이 제일 걱정돼\n특히 얼굴은 손이 못 닿는 부분이 많아서 그런가 봐\n그럴 때 쓰기 좋은 게 자외선차단 마스크고, 그중에서도 특히 스포츠 쿨링으로 된 마스크가 더 좋더라고\n리뷰 보니까 산 사람들이 하나같이 만족도 높고, 자외선 차단 기능도 믿을 수 있더라고\n✔ 자외선차단 마스크는 외출 전에 미리 준비해두면 좋고, 운동이나골프 같은 야외 취미 활동할 때도 꼭 착용해야 해\n✔ 여름에는 더위에 시달릴 수 있으니, 쿨링 기능이 있는 마스크를 찾아보는 게 좋아\n\n#자외선차단 #쿨링마스크 #야외활동 #스포츠용품 #마스크추천",
+      "image_url": "https://thumbnail.coupangcdn.com/thumbnails/remote/292x292ex/image/vendor_inventory/7022/9dba197e29b7f2677d45baa0400f7ad140b7a106db4e9e4d3b20fe64c4b0.png",
+      "detail_images": [
+        "https://thumbnail.coupangcdn.com/thumbnails/remote/292x292ex/image/vendor_inventory/7022/9dba197e29b7f2677d45baa0400f7ad140b7a106db4e9e4d3b20fe64c4b0.png"
+      ],
+      "product_code": "",
+      "status": "pending"
+    },
     {
       "product": {
         "name": "소가 휴대용 손선풍기 냉각 에어컨 선풍기 크림 FS16",
@@ -52,6 +71,30 @@
     },
     {
       "product": {
+        "name": "벽걸이형 자동 센서 비누 디스펜서 거품기 레드 1개",
+        "price": "69,500원",
+        "original_price": "",
+        "discount_rate": 0,
+        "image_url": "https://shopping-phinf.pstatic.net/main_6080804/60808043433.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9644225776&ctag=9644225776&lptag=P9644225776&itemId=28819771118&vendorItemId=95754525530&spec=10305199",
+        "badge": "쿠팡",
+        "brand": "",
+        "category": "욕실용기/홀더",
+        "category_hint": "주방",
+        "mall_name": "쿠팡",
+        "source": "naver_shopping",
+        "scraped_at": "2026-07-11T18:07:29.207896"
+      },
+      "post_text": "손을 많이 쓸 수밖에 없는 곳이 있는데, 그 중에 비누 뿌리는 것도 은근히 번거롭더라\n그럴 때마다 비누를 뿌리는 게 아니라 비누 디스펜서를 자주 만지는 것도 불편하고, 비누를 직접 만지는 것도 싫고, 그런데 자동으로 비누가 나오면 편하더라\n게다가 거품으로 나오니까 한 번에 많이 사용하지도 않아\n리뷰 보니까 산 사람들이 하나같이 왜 이제 샀냐고 하더라\n✔ 아침에 일어나서 양치하거나, 설거지하기 전 손을 씻을 때, 이 비누 디스펜서를 사용하면 정말 편리하더라\n✔ 특히 자동 센서가 있으니까 비누가 자동으로 나오니까 손이 더럽지 않아\n\n#주방꿀템 #주방템 #자취요리 #살림템 #요리템",
+      "image_url": "https://shopping-phinf.pstatic.net/main_6080804/60808043433.jpg",
+      "detail_images": [
+        "//thumbnail.coupangcdn.com/thumbnails/remote/492x492ex/image/vendor_inventory/3547/aae6d9e4c5643cc309d058845fc249d75bdd7278d2c16095dfb8ea2cbacb.jpg"
+      ],
+      "product_code": "",
+      "status": "pending"
+    },
+    {
+      "product": {
         "name": "씨즌M닷컴 카카오프렌즈 휴대용 UV살균 칫솔케이스 라이언 RYAN 라이언001",
         "price": "27,900원",
         "original_price": "",
@@ -70,6 +113,36 @@
       "image_url": "https://shopping-phinf.pstatic.net/main_2386835/23868356238.jpg",
       "detail_images": [
         "https://shopping-phinf.pstatic.net/main_2386835/23868356238.jpg"
+      ],
+      "product_code": "",
+      "status": "pending"
+    },
+    {
+      "product": {
+        "name": "돌리 포보 베트남 쌀국수 소고기맛 코스트코 컵라면 24개 61g",
+        "price": "34,990원",
+        "original_price": "",
+        "discount_rate": 0,
+        "image_url": "https://shopping-phinf.pstatic.net/main_6068404/60684042101.2.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9609867703&ctag=9609867703&lptag=V95631628196&itemId=28690282103&vendorItemId=95631628196&spec=10305199",
+        "badge": "쿠팡",
+        "brand": "DORLY",
+        "category": "면류",
+        "category_hint": "생활",
+        "mall_name": "쿠팡",
+        "source": "naver_shopping",
+        "scraped_at": "2026-07-11T18:07:22.515334",
+        "youtube_source": {
+          "title": "코스트코 18년차 회원이 이번주 구경하고 온 제품들",
+          "video_id": "0ELOcFXZJ0o",
+          "views": 151591,
+          "keyword": "살림템 추천"
+        }
+      },
+      "post_text": "하루 종일 바빴는데 막상 음식 먹을 시간이 되니까 머리가 텅 비는 사람들이 많을 텐데\n그럴 때마다 간단하게 해결할 수 있는 게 없을까 생각했어\n그럼 간단하게 컵라면이라도 먹으면 되지 않을까? 하는 생각이 들었는데, 막상 컵라면을 고르면 맛있어 보이는 게 많아서 고르기 힘든 사람 많을 거야\n코스트코에서 파는 베트남 쌀국수 소고기맛 컵라면은 다른 후기 보니까 대체로 만족도가 높더라고\n✔ 식사 대용으로는 아니지만 때때로 간단하게 먹을 수 있는 건 좋은데, 이건 24개 들어 있어서 오랫동안 쓸 수 있더라\n✔ 그리고 소금과 조미료를 넣는 걸 걱정 안 해도 되니까, 건강에 좋은 거 같아\n\n#생활꿀템 #자취템 #살림템 #필수템 #컵라면",
+      "image_url": "https://shopping-phinf.pstatic.net/main_6068404/60684042101.2.jpg",
+      "detail_images": [
+        "//thumbnail.coupangcdn.com/thumbnails/remote/492x492ex/image/vendor_inventory/db30/f6bda8036a234719b535dfa627206b743586c8c00d5679705e3bd62c9fac.jpg"
       ],
       "product_code": "",
       "status": "pending"
