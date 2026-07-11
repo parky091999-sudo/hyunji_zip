@@ -1,6 +1,6 @@
 {
   "for_date": "2026-07-13",
-  "generated_at": "2026-07-12T00:23:33.989735+09:00",
+  "generated_at": "2026-07-12T02:39:54.778665+09:00",
   "candidates": [
     {
       "product": {
@@ -46,6 +46,30 @@
       "image_url": "https://shopping-phinf.pstatic.net/main_6080649/60806498168.jpg",
       "detail_images": [
         "//thumbnail.coupangcdn.com/thumbnails/remote/492x492ex/image/vendor_inventory/59a1/b76dab7cece364855ee5f0b833f457e53974de6149e3cbcaca028333501c.jpg"
+      ],
+      "product_code": "",
+      "status": "pending"
+    },
+    {
+      "product": {
+        "name": "씨즌M닷컴 카카오프렌즈 휴대용 UV살균 칫솔케이스 라이언 RYAN 라이언001",
+        "price": "27,900원",
+        "original_price": "",
+        "discount_rate": 0,
+        "image_url": "https://shopping-phinf.pstatic.net/main_2386835/23868356238.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=1501239636&ctag=1501239636&lptag=P1501239636&itemId=2577588578&vendorItemId=70569850445&spec=10305199",
+        "badge": "쿠팡",
+        "brand": "",
+        "category": "구강청정기",
+        "category_hint": "생활",
+        "mall_name": "쿠팡",
+        "source": "naver_shopping",
+        "scraped_at": "2026-07-11T17:38:21.435964"
+      },
+      "post_text": "칫솔 세균 때문에 찝찝해서 못 참겠다 싶었던 사람 이거 꼭 봐봐! ✨\n\n나처럼 밖에서 밥 먹고 바로 양치하는 습관 있는 사람들은 칫솔 휴대용 케이스가 진짜 필수템이잖아. 근데 그냥 케이스에 넣어두면 세균 번식할까 봐 은근 신경 쓰이더라고.\n\n이건 그냥 케이스가 아니라 UV 살균 기능까지 있어서 진짜 신세계임. 칫솔모까지 싹 소독해줘서 위생 걱정 없이 쓸 수 있더라. 게다가 귀여운 라이언 캐릭터라 볼 때마다 기분 좋아지는 건 덤이야.\n\n써본 사람들이 하나같이 '진작 살 걸 그랬다'고 하는 이유를 알겠더라고.\n\n✔ 회사나 학교, 여행 갈 때 무조건 챙겨야 해. 충전도 USB로 간단하게 되더라.\n✔ 건전지 갈 필요 없이 충전해서 쓰니까 편하고, 가볍고 작아서 가방 자리도 많이 안 차지함.\n\n내가 써본 자취템 중에 위생 관련해서 성공한 아이템들 더 많거든? 프로필 링크에 깔끔하게 정리해뒀으니까 꼭 확인해보고 돈 아껴ㅠㅠ\n\n#자취템 #생활꿀템 #필수템 #위생템 #라이언",
+      "image_url": "https://shopping-phinf.pstatic.net/main_2386835/23868356238.jpg",
+      "detail_images": [
+        "https://shopping-phinf.pstatic.net/main_2386835/23868356238.jpg"
       ],
       "product_code": "",
       "status": "pending"
