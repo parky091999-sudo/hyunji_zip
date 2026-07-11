@@ -214,6 +214,30 @@ def _is_dup_hook(candidate: str, banned: list[str] | None = None) -> bool:
     return False
 
 
+_DIARY_RE = re.compile(r"\[현지의 자취일기\s*#\s*\d+\]")
+
+
+def _seq_diary_number(text: str) -> str:
+    """[현지의 자취일기 #N] 번호를 순차 카운터로 교정 (2026-07-12).
+    기존엔 프롬프트 예시(#12)를 보고 모델이 번호를 지어내 뒤죽박죽(#24→#47→#17…).
+    이미 발행된 최대 번호가 #47이라 카운터는 48부터 시작."""
+    import json as _json
+    if not _DIARY_RE.search(text):
+        return text
+    path = os.path.join(DATA_DIR, "diary_counter.json")
+    try:
+        n = int(_json.load(open(path, encoding="utf-8")).get("next", 48))
+    except Exception:
+        n = 48
+    text = _DIARY_RE.sub(f"[현지의 자취일기 #{n}]", text, count=1)
+    text = _DIARY_RE.sub("", text)
+    try:
+        _json.dump({"next": n + 1}, open(path, "w", encoding="utf-8"))
+    except Exception:
+        pass
+    return text
+
+
 def _fix_linebreaks(text: str) -> str:
     """줄바꿈 정리: 해시태그 앞 빈 줄 보장, 연속 빈 줄 제거"""
     lines = text.split("\n")
@@ -791,7 +815,7 @@ def generate_general_post(post_type: str | None = None, trending: list[str] | No
             text = (resp.text or "").strip().strip("\"'""''")
             if text and not _has_foreign_chars(text):
                 logger.info("  [Gemini] 일상글 생성 완료")
-                return _fix_linebreaks(text)
+                return _fix_linebreaks(_seq_diary_number(text))
             logger.warning("Gemini 일상글 외국어 포함 또는 빈 응답 → Groq 폴백")
         except Exception as e:
             logger.warning(f"Gemini 일상글 생성 실패: {e}")
@@ -818,7 +842,7 @@ def generate_general_post(post_type: str | None = None, trending: list[str] | No
             logger.warning("일상글 AI 생성 실패 또는 외국어 포함 → 폴백")
             return random.choice(_CASUAL_FALLBACKS)
         logger.info("  [Groq 폴백] 일상글 생성 완료")
-        return _fix_linebreaks(text)
+        return _fix_linebreaks(_seq_diary_number(text))
     except Exception as e:
         logger.warning(f"일상글 생성 실패: {e}")
         return random.choice(_CASUAL_FALLBACKS)
