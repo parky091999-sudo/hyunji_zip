@@ -229,8 +229,9 @@ def _seq_diary_number(text: str) -> str:
         n = int(_json.load(open(path, encoding="utf-8")).get("next", 48))
     except Exception:
         n = 48
-    text = _DIARY_RE.sub(f"[현지의 자취일기 #{n}]", text, count=1)
-    text = _DIARY_RE.sub("", text)
+    text = _DIARY_RE.sub("@@DIARY@@", text, count=1)
+    text = _DIARY_RE.sub("", text)  # 두 번 이상 쓴 경우 나머지 제거
+    text = text.replace("@@DIARY@@", f"[현지의 자취일기 #{n}]")
     try:
         _json.dump({"next": n + 1}, open(path, "w", encoding="utf-8"))
     except Exception:
