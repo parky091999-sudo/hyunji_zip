@@ -1,5 +1,5 @@
 {
-  "next_code": 54,
+  "next_code": 55,
   "blocked_item_ids": [],
   "products": {
     "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8849967732&ctag=8849967732&lpt": {
@@ -528,6 +528,16 @@
       "image_url": "https://shopping-phinf.pstatic.net/main_6067597/60675974972.jpg",
       "category": "생활",
       "registered_at": "2026-07-09T21:07:25.506239+09:00",
+      "posted": true
+    },
+    "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=5386638806&ctag=5386638806&lpt": {
+      "code": "054",
+      "name": "KANGAROO 스턴트 독 로봇강아지",
+      "short_name": "KANGAROO 스턴트 독 로봇강아지",
+      "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=5386638806&ctag=5386638806&lptag=l8168384125450&itemId=53148816584&vendorItemId=83043114616&spec=10305197",
+      "image_url": "https://shopping-phinf.pstatic.net/main_5087028/50870282885.4.jpg",
+      "category": "디지털/가전",
+      "registered_at": "2026-07-11T18:52:06.329672+09:00",
       "posted": true
     }
   }
