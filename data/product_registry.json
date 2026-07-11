@@ -1,5 +1,5 @@
 {
-  "next_code": 55,
+  "next_code": 56,
   "blocked_item_ids": [],
   "products": {
     "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8849967732&ctag=8849967732&lpt": {
@@ -538,6 +538,16 @@
       "image_url": "https://shopping-phinf.pstatic.net/main_5087028/50870282885.4.jpg",
       "category": "디지털/가전",
       "registered_at": "2026-07-11T18:52:06.329672+09:00",
+      "posted": true
+    },
+    "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=58506770&ctag=58506770&lptag=I": {
+      "code": "055",
+      "name": "파울 다용도 주방가위 6879 오렌지레드",
+      "short_name": "파울 다용도 주방가위 오렌지레드",
+      "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=58506770&ctag=58506770&lptag=I204146007&itemId=204146007&vendorItemId=3483768894&spec=10305197",
+      "image_url": "https://shopping-phinf.pstatic.net/main_5241855/52418559954.jpg",
+      "category": "생활",
+      "registered_at": "2026-07-11T20:06:26.480007+09:00",
       "posted": true
     }
   }
