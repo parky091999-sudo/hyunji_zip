@@ -1,5 +1,5 @@
 {
-  "next_code": 56,
+  "next_code": 57,
   "blocked_item_ids": [],
   "products": {
     "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8849967732&ctag=8849967732&lpt": {
@@ -550,6 +550,16 @@
       "image_url": "https://shopping-phinf.pstatic.net/main_5241855/52418559954.jpg",
       "category": "생활",
       "registered_at": "2026-07-11T20:06:26.480007+09:00",
+      "posted": true
+    },
+    "https://www.coupang.com/vp/products/7942116067?itemId=21878493551": {
+      "code": "056",
+      "name": "홈플래닛 리모컨 스탠드형 서큘레이터",
+      "short_name": "홈플래닛 리모컨 스탠드형 서큘레이터",
+      "url": "https://www.coupang.com/vp/products/7942116067?itemId=21878493551",
+      "image_url": "",
+      "category": "생활",
+      "registered_at": "2026-07-12T23:09:39.881546+09:00",
       "posted": true
     }
   }
