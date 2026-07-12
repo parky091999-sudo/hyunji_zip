@@ -737,12 +737,12 @@ def build_html(products: list[dict]) -> str:
   }}
 
   function getCardCategory(card) {{
-    /* 자동 추론 우선 — 등록값은 검색 키워드 카테고리라 잘못 들어오는 경우 많음.
-       추론이 '기타'면 그때 저장된 값 폴백. */
-    const inferred = inferCategory(card.dataset.name || '');
-    if (inferred !== '기타') return inferred;
+    /* 등록값 우선(2026-07-12 레지스트리 전수 재분류 완료) — BEST 집계(pCat)와 동일 기준.
+       등록값 없을 때만 이름 추론 폴백. */
     const stored = (card.dataset.category || '').trim();
-    return stored || '기타';
+    if (stored) return stored;
+    const inferred = inferCategory(card.dataset.name || '');
+    return inferred || '기타';
   }}
 
   /* ── Firebase 클릭 트래킹 ── */
