@@ -1000,34 +1000,9 @@
   </div>
   <div class="visitor-counter" id="visitor-counter" style="margin: 12px 0 4px; font-size: 0.82rem; color: var(--text); font-weight: 600;">👁️ 방문자 통계 로딩 중...</div>
   <div class="footer-copy"></div>
-  <div class="owner-toggle">
-    <button id="owner-btn" type="button" onclick="toggleOwner()" title="이 기기에서 발생한 클릭을 통계에서 제외/포함합니다">
-      운영자 모드: <span id="owner-state">OFF</span>
-    </button>
-  </div>
+  <!-- 운영자 모드 버튼 제거(2026-07-12 사용자 지시) — 제외 기능은 ?owner=1 주소와
+       admin 접속 기기 자동 ON으로 유지됨 -->
 </footer>
-
-<script>
-  (function() {
-    function refresh() {
-      var on = localStorage.getItem('kkul_owner') === '1';
-      var s = document.getElementById('owner-state');
-      var b = document.getElementById('owner-btn');
-      if (s) s.textContent = on ? 'ON' : 'OFF';
-      if (b) b.classList.toggle('on', on);
-    }
-    window.toggleOwner = function() {
-      var on = localStorage.getItem('kkul_owner') === '1';
-      if (on) localStorage.removeItem('kkul_owner');
-      else    localStorage.setItem('kkul_owner', '1');
-      refresh();
-      alert(on
-        ? '운영자 모드 OFF\n이 기기 클릭이 통계에 집계됩니다.'
-        : '운영자 모드 ON\n이 기기 클릭은 통계에서 제외됩니다.\n(설정은 이 브라우저에만 저장됨)');
-    };
-    refresh();
-  })();
-</script>
 
 <div id="qr-modal" class="modal-overlay" onclick="hideQR()">
   <div class="modal-box" onclick="event.stopPropagation()">
