@@ -3,6 +3,11 @@ name: Casual Post (일상글, 하루 2번)
 on:
   schedule:
     - cron: '17 0 * * *'   # 09:17 KST (오전 슬롯)
+    # 저녁 슬롯 3중화(2026-07-13): 기존 21:17 단일 크론이 GH 지연(3~4h)으로 새벽 도착
+    # → 게이트(8~22시) 밖 → 저녁 일상글 전멸이었음(인사이트 실측: 발행 전부 13시대).
+    # 유진(@jiniee_log) 실측상 저녁 20~22시 질문·국룰형이 최고 성과 — 이 시간대 복구 목적.
+    - cron: '17 8 * * *'   # 17:17 KST — 지연 시 저녁 도착, 정시면 19시까지 대기
+    - cron: '17 10 * * *'  # 19:17 KST
     - cron: '17 12 * * *'  # 21:17 KST (저녁 슬롯 — question 타입 강제, 댓글 골든타임)
   workflow_dispatch:
 
@@ -36,6 +41,7 @@ jobs:
           THREADS_USER_ID:      ${{ secrets.THREADS_USER_ID }}
           GROQ_API_KEY:         ${{ secrets.GROQ_API_KEY }}
           GOOGLE_API_KEY:       ${{ secrets.GOOGLE_API_KEY }}
+          SCHEDULE_CRON:        ${{ github.event.schedule }}
         run: python scripts/casual_post.py
 
       - name: Integrity check (post_text 잘림 사후 감지)

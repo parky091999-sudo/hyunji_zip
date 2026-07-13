@@ -17,7 +17,9 @@ from config import DATA_DIR, LOG_DIR, THREADS_ACCESS_TOKEN
 
 TRACKER_PATH = os.path.join(DATA_DIR, "last_casual_post.json")
 FEED_POSTS_PATH = os.path.join(DATA_DIR, "feed_posts.json")
-INTERVAL_HOURS = 6  # 하루 2번(09시/21시 KST) — 같은 슬롯 중복 방지용 6시간 게이트
+INTERVAL_HOURS = 5  # 하루 2번(오전/저녁) — 같은 슬롯 중복 방지 게이트.
+# 6→5 하향(2026-07-13): 오전 글이 지연으로 13시대에 나가면 저녁 19시 글과 간격이
+# 6시간 미만이라 저녁 슬롯이 차단되던 문제 해소(저녁 크론 3개끼리는 간격<5h라 여전히 차단됨).
 
 KST = timezone(timedelta(hours=9))
 
@@ -72,7 +74,13 @@ def run():
     logger.info("=" * 50)
 
     from scripts.post_gate import kst_gate_sync
-    if not kst_gate_sync(8.0, 22.0, label="casual"):
+    # 저녁 슬롯(SCHEDULE_CRON으로 판별)은 19~22시 창 + 이르면 19시까지 대기 —
+    # 유진 실측 최고 성과 시간대(질문·국룰형 20~22시) 정렬 (2026-07-13)
+    _EVENING_CRONS = {"17 8 * * *", "17 10 * * *", "17 12 * * *"}
+    if os.getenv("SCHEDULE_CRON", "") in _EVENING_CRONS:
+        if not kst_gate_sync(19.0, 22.0, max_wait_h=2.0, label="casual-evening"):
+            return
+    elif not kst_gate_sync(8.0, 22.0, label="casual"):
         return
 
     if not _should_post():
