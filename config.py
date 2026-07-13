@@ -1,5 +1,6 @@
 from dotenv import load_dotenv
 import os
+from datetime import date, datetime, timezone, timedelta
 
 load_dotenv()
 
@@ -57,3 +58,31 @@ COUPANG_URLS = {
 # 데이터 저장 경로
 DATA_DIR = os.path.join(os.path.dirname(__file__), "data")
 LOG_DIR = os.path.join(os.path.dirname(__file__), "logs")
+
+# ── 수익화 전환 & 발행 비율 페이즈 (2026-07-13 사용자 지시) ─────────────────
+# 실업급여 수급 종료 → 쿠팡 파트너스 전환 예정일. 이 날짜(KST) 기준으로 상품글
+# 발행 빈도가 자동 전환된다. 일상글(casual_post)은 양 페이즈 모두 매일 유지 —
+# 성장기·수익화기 어느 쪽에도 도달/팔로워 유입에 유익하므로 줄이지 않는다.
+#
+#   growth   (~09/20): 수익 0(무태그)·계정 성장기 → 상품글 저빈도.  목표 일상 ~70 : 쿠파스 ~30
+#   monetize (09/21~): 파트너스 수익화 → 상품글 증편.               목표 일상 ~50 : 쿠파스 ~50
+#
+# 사진(hyunji auto/evening)·영상(osmu)이 각각 아래 '일 간격'으로 발행하되,
+# '하루 쿠파스 1개 상한'(post_gate.coupang_posted_today, 영상 포함)으로 서로 엇갈린다.
+# 더 공격적으로 늘리려면 monetize 값을 1로 낮추면 사진/영상이 매일 발행된다.
+MONETIZATION_DATE = date(2026, 9, 21)
+KST = timezone(timedelta(hours=9))
+
+PHOTO_GATE_DAYS = {"growth": 3, "monetize": 2}   # 사진 상품글 최소 발행 간격(일)
+VIDEO_GATE_DAYS = {"growth": 3, "monetize": 2}   # 영상 상품글 최소 간격 — osmu가 동일 값 참조(동기화 유지)
+
+
+def current_phase(today: date | None = None) -> str:
+    """오늘(KST)이 수익화 전환일 전이면 'growth', 이후면 'monetize'."""
+    today = today or datetime.now(KST).date()
+    return "monetize" if today >= MONETIZATION_DATE else "growth"
+
+
+def photo_gate_days(today: date | None = None) -> int:
+    """현재 페이즈의 사진 상품글 최소 발행 간격(일)."""
+    return PHOTO_GATE_DAYS[current_phase(today)]

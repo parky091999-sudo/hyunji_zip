@@ -13,7 +13,7 @@ from datetime import datetime, timezone, timedelta
 ROOT = os.path.dirname(os.path.dirname(__file__))
 sys.path.insert(0, ROOT)
 
-from config import DATA_DIR, LOG_DIR, MAX_PRODUCTS_PER_RUN, YOUTUBE_API_KEY, NAVER_CLIENT_ID
+from config import DATA_DIR, LOG_DIR, MAX_PRODUCTS_PER_RUN, YOUTUBE_API_KEY, NAVER_CLIENT_ID, photo_gate_days
 
 PENDING_PATH    = os.path.join(DATA_DIR, "pending_post.json")
 POSTED_IDS_PATH = os.path.join(DATA_DIR, "posted_ids.json")
@@ -155,11 +155,14 @@ async def _collect_fallback() -> dict | None:
 async def run():
     import random
     # KST 게이트: 새벽 차단, 11시 전 도착 시 11시까지 대기(최대 4h) — 점심 골든타임 정렬
-    from scripts.post_gate import kst_gate, photo_posted_within
+    from scripts.post_gate import kst_gate, photo_posted_within, coupang_posted_today
     if not await kst_gate(11.0, 23.0, max_wait_h=4.0, label="auto"):
         return
-    # 격일 게이트(2026-07-13): 영상 쿠파스 2일 1회 페이스에 맞춰 사진도 2일 1회
-    if photo_posted_within(days=2, label="auto"):
+    # 페이즈별 사진 상품글 간격(2026-07-13): growth=3일, 수익화(9/21~)=격일. config에서 자동 전환
+    if photo_posted_within(days=photo_gate_days(), label="auto"):
+        return
+    # 하루 1쿠파스 상한 — 오늘 영상(osmu)이 먼저 나갔으면 사진은 다음날로 미뤄 겹침 방지
+    if coupang_posted_today(label="auto"):
         return
     skip_delay = os.getenv("SKIP_DELAY", "false").lower() == "true"
     if not skip_delay:

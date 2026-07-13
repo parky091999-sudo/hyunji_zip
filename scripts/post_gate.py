@@ -91,3 +91,28 @@ def photo_posted_within(days: int = 2, label: str = "") -> bool:
                     f"({elapsed.days}d {elapsed.seconds // 3600}h) → 생략")
         return True
     return False
+
+
+def coupang_posted_today(label: str = "") -> bool:
+    """오늘(KST) 이미 쿠파스 상품글(사진 or 영상)이 나갔는지 — '하루 1쿠파스 상한'.
+
+    사진(hyunji auto/evening/manual)과 영상(osmu, type=video)이 모두 feed_posts.json에
+    기록되므로 이 파일 하나로 둘을 통합 판정한다. 사진·영상 발행 직전에 호출해 같은 날
+    둘이 겹치는 것을 막는다(먼저 나간 쪽이 이기고, 나중 쪽은 다음 슬롯/다음날로 미뤄짐).
+    casual(일상글)만 제외하고 나머지 posted는 전부 쿠파스로 본다.
+    """
+    import json
+    try:
+        root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        feed = json.load(open(os.path.join(root, "data", "feed_posts.json"), encoding="utf-8"))
+    except Exception:
+        return False  # 판독 불가 시 게시 허용(안전측)
+    today = datetime.now(KST).strftime("%Y-%m-%d")
+    for p in feed:
+        if p.get("status") != "posted" or p.get("post_type") == "casual":
+            continue
+        if p.get("timestamp", "")[:10] == today:
+            tag = p.get("product_code") or p.get("type", "") or "상품글"
+            logger.info(f"[{label}] 오늘 이미 쿠파스 발행({tag}) → 하루 1개 상한 도달, 생략")
+            return True
+    return False
