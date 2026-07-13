@@ -119,16 +119,16 @@ def repost(product_entry: dict, new_code: str, old_post_text: str = ""):
     from generator.content import _generate_post1_ai, _post1_fallback, _AD_DISCLOSURE
     from config import COUPANG_PARTNERS_ACTIVE
 
-    # 기존 post_text에서 코드 라인 교체
+    # 기존 post_text에서 코드 라인 교체 (구·신 포맷 모두 대응)
     if old_post_text:
         import re
         post_text = re.sub(
-            r'제품 정보는 프로필 링크에서 \[\w+\] 검색 👆',
-            f'제품 정보는 프로필 링크에서 [{new_code}] 검색 👆',
+            r'제품 정보는 프로필 링크에서 \[\w+\] 검색 👆|\[\w+\] 정보는 댓글에 👇',
+            f'[{new_code}] 정보는 댓글에 👇',
             old_post_text,
         )
-        if post_text == old_post_text and "프로필 링크에서" not in post_text:
-            post_text += f"\n\n제품 정보는 프로필 링크에서 [{new_code}] 검색 👆"
+        if post_text == old_post_text and f"[{new_code}]" not in post_text:
+            post_text += f"\n\n[{new_code}] 정보는 댓글에 👇"
     else:
         name = product_entry.get("name", "")
         post_text = _generate_post1_ai({"name": name}, new_code) or _post1_fallback(name, new_code)

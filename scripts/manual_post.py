@@ -136,9 +136,9 @@ async def run():
         except Exception as e:
             logger.warning(f"  AI 생성 실패: {e}")
 
-    # 코드 검색 문구 없으면 추가
-    if code and "프로필 링크에서" not in post_text:
-        post_text = post_text + f"\n\n제품 정보는 프로필 링크에서 [{code}] 검색 👆"
+    # 코드 안내 문구 없으면 추가
+    if code and f"[{code}]" not in post_text:
+        post_text = post_text + f"\n\n[{code}] 정보는 댓글에 👇"
 
     if not post_text.strip():
         logger.error("포스팅 텍스트 생성 실패")
@@ -186,7 +186,7 @@ async def run():
     result = None
     already = None
     if code:
-        already = find_recent_post_by_marker(f"[{code}] 검색")
+        already = find_recent_post_by_marker(f"[{code}]")
         if already:
             logger.warning(f"Threads에 [{code}] 게시글 이미 존재 → 중복 게시 차단, 기록만 복구")
             result = already

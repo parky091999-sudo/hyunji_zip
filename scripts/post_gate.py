@@ -52,3 +52,42 @@ def kst_gate_sync(window_start: float, window_end: float, max_wait_h: float = 0.
     if ok and wait:
         time.sleep(wait)
     return ok
+
+
+def photo_posted_within(days: int = 2, label: str = "") -> bool:
+    """최근 N일 내 사진 상품글 발행 여부 — 격일(2일 1회) 빈도 게이트용.
+
+    2026-07-13 사용자 지시: 영상 쿠파스가 2일 1회 페이스라 사진 쿠파스도 2일 1회로.
+    feed_posts.json에서 type=video(영상)·post_type=casual(일상글)을 제외한
+    가장 최근 posted 항목의 timestamp로 판정. 수동 큐(manual_post)는 사람 의도라
+    게이트 없이 나가되, 그 발행도 여기 기록돼 다음 자동 발행을 뒤로 민다.
+    """
+    import json
+    try:
+        root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        feed = json.load(open(os.path.join(root, "data", "feed_posts.json"), encoding="utf-8"))
+    except Exception:
+        return False  # 판독 불가 시 게시 허용(안전측: 기존 동작 유지)
+    latest = None
+    for p in feed:
+        if p.get("type") == "video" or p.get("post_type") == "casual":
+            continue
+        if p.get("status") != "posted":
+            continue
+        ts = p.get("timestamp", "")
+        if ts and (latest is None or ts > latest):
+            latest = ts
+    if not latest:
+        return False
+    try:
+        last_dt = datetime.fromisoformat(latest)
+        if last_dt.tzinfo is None:
+            last_dt = last_dt.replace(tzinfo=KST)
+    except ValueError:
+        return False
+    elapsed = datetime.now(KST) - last_dt
+    if elapsed < timedelta(days=days):
+        logger.info(f"[{label}] 최근 사진 상품글 {latest[:16]} — 격일 게이트({days}일) 미경과 "
+                    f"({elapsed.days}d {elapsed.seconds // 3600}h) → 생략")
+        return True
+    return False

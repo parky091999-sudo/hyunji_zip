@@ -207,7 +207,9 @@ def post_product_link_comment(post_id: str, code: str, product_url: str | None =
     if product_url and product_url.startswith("http"):
         text = f"🛒 상품 보러가기 👉 {product_url}\n\n* 쿠팡 파트너스 활동으로 일정 수수료를 받습니다."
     elif code:
-        text = f"상품 정보 👉 {PAGE_BASE}/r/{code}.html"
+        # 랜딩 경유여도 최종 링크는 쿠팡 파트너스 — 공정위 고지 동일 적용 (2026-07-13)
+        text = (f"상품 정보 👉 {PAGE_BASE}/r/{code}.html\n\n"
+                "* 쿠팡 파트너스 활동으로 일정 수수료를 받습니다.")
     else:
         return None
     return create_reply(post_id, text)

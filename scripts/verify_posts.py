@@ -28,8 +28,9 @@ INDEX_HTML_PATH    = os.path.join(ROOT, "docs", "index.html")
 KST = timezone(timedelta(hours=9))
 _AI_IMAGE_DOMAINS  = ("i.ibb.co", "ibb.co", "imgbb.com")
 
-_FOOTER_RE = re.compile(r'\n\n제품 정보는 프로필 링크에서 \[\d{3}\] 검색 👆\s*$')
-_SENTENCE_END_RE = re.compile(r'[다요임어야겠네봄않함봐!?~\).♥]$')
+_FOOTER_RE = re.compile(
+    r'\n\n(?:제품 정보는 프로필 링크에서 \[\d{3}\] 검색 👆|\[\d{3}\] 정보는 댓글에 👇)\s*$')
+_SENTENCE_END_RE = re.compile(r'[다요임음어야겠네봄않함봐걸래지자중듯!?~\).♥]$')
 
 
 def _shortcode(url: str) -> str:

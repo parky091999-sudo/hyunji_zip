@@ -155,8 +155,11 @@ async def _collect_fallback() -> dict | None:
 async def run():
     import random
     # KST 게이트: 새벽 차단, 11시 전 도착 시 11시까지 대기(최대 4h) — 점심 골든타임 정렬
-    from scripts.post_gate import kst_gate
+    from scripts.post_gate import kst_gate, photo_posted_within
     if not await kst_gate(11.0, 23.0, max_wait_h=4.0, label="auto"):
+        return
+    # 격일 게이트(2026-07-13): 영상 쿠파스 2일 1회 페이스에 맞춰 사진도 2일 1회
+    if photo_posted_within(days=2, label="auto"):
         return
     skip_delay = os.getenv("SKIP_DELAY", "false").lower() == "true"
     if not skip_delay:
@@ -232,8 +235,8 @@ async def run():
     ) or ""
     if not code or code == "preview":
         code = registered_code
-        if code and "프로필 링크에서" not in post_text:
-            post_text += f"\n\n제품 정보는 프로필 링크에서 [{code}] 검색 👆"
+        if code and f"[{code}]" not in post_text:
+            post_text += f"\n\n[{code}] 정보는 댓글에 👇"
 
     # 이미지 보충
     if not image_url:
@@ -278,7 +281,7 @@ async def run():
     already = None
     if code:
         from poster.threads import find_recent_post_by_marker
-        already = find_recent_post_by_marker(f"[{code}] 검색")
+        already = find_recent_post_by_marker(f"[{code}]")
         if already:
             logger.warning(f"Threads에 [{code}] 게시글 이미 존재 → 중복 게시 차단, 기록만 복구")
             result = already

@@ -1,7 +1,7 @@
 """
 콘텐츠 생성기
-- 글1: Groq AI로 상품별 맞춤 생성 (스토리텔링 + 해시태그)
-- 글2: 코드 기반 유도 — 본문에 "프로필 링크에서 [CODE] 검색" 안내
+- 글1: 짧은 훅 캡션 2~3줄 (2026-07-13 전환 — 설명은 사진/영상+첫 댓글이 대체)
+- 코드 유도: 본문 말미 "[CODE] 정보는 댓글에 👇" 1줄 (중복게시 마커 겸용)
 - COUPANG_PARTNERS_ACTIVE는 페이지 푸터 disclosure 분기에만 사용 (본문에는 안 붙임 — 첫 댓글에서 처리)
 - ★ 수정: 쿠팡 상세페이지에서 이미지 3~4장 수집 → carousel 포스팅용
 """
@@ -21,73 +21,23 @@ _AD_DISCLOSURE = "이 게시물은 쿠팡파트너스 활동의 일환으로 수
 
 # ── 글1: Groq AI 생성 ────────────────────────────────────────────────────────
 
-_POST1_SYSTEM = """
-너는 Threads(@hyunji_ssi)에서 1인 가구 일상을 적는 20대 여자 '현지'야.
-오늘은 평소에 자주 쓰는 물건 하나를 솔직하게 소개하는 글을 쓰는데, 광고 멘트가 아니라
-"나 이거 써봤는데 진짜 좋더라, 너도 알면 좋겠어" 하고 친구한테 말하듯이 따뜻하게 공유하는 톤이야.
+# (구 장문 리뷰형 _POST1_SYSTEM 프롬프트는 2026-07-13 짧은 포맷 전환으로 제거 — git 이력 참조)
 
-━━━ 말투 규칙 (가장 중요) ━━━
-전체 글을 처음부터 끝까지 완전히 같은 말투로 써.
-기본 톤: 편안한 반말 — 친구한테 카톡 보내는 것처럼 자연스럽게.
-허용 어미: ~하더라 / ~더라고 / ~거든 / ~했음 / ~임 / ~래 / ~는 거 알아? / ~인 거 알았어
-절대 금지:
-  - "~냐?" "~더냐?" "~이냐?" 로 끝내기 (건방지고 공격적으로 들림)
-  - "~지?" "~잖아?" 로 문장 끝내기 (몰아붙이는 느낌)
-  - "~이다" "~된다" "~있다" "~않다" (건조한 뉴스체 종결어미)
-  - "~있어요" "~합니다" "~입니다" (존댓말, 반말 글과 섞이면 어색함)
-  - "~같다" "~할 것 같아" "~보이더라" (추측·불확실 표현)
-  - "~노?" (일베식, 절대 금지)
-  - 한 글 안에서 반말↔존댓말 전환 금지
+# 2026-07-13 사용자 판단 요청 → 결론: 완전 삭제 대신 초경량 1줄로 교체.
+#   근거: ①직링크·공정위는 첫 댓글에 있음(전환 동선 유지) ②[코드]가 중복게시
+#   차단 마커·관리도구(fix_post_code)에 쓰여 완전 제거는 위험 ③"프로필 링크에서
+#   검색"(2단계)보다 "댓글 👇"(1클릭)이 동선 짧음.
+_CODE_LINE = "[{code}] 정보는 댓글에 👇"
 
-━━━ 이야기 흐름 ━━━
-반드시 이 순서로 자연스럽게 이어지게 써:
-① 훅 (1줄): 읽는 사람이 자기 얘기처럼 느낄 공감 or 놀라움 — 단, 매번 완전히 다른 표현으로. 이 지침이나 아래 예시의 문장을 그대로 복사하는 것 절대 금지
-② 왜 필요한지 (1~2줄): 어떤 상황에서, 어떤 사람에게 딱인지
-③ 이 상품이 특별한 이유 (1~2줄): 구체적인 기능·소재·특징. "좋다"는 말 금지, 실제로 무엇이 어떻게 다른지
-④ 리뷰 근거 (1줄): 후기 기반으로 신뢰 주기
-⑤ ✔ 팁 2줄: 언제 / 어디서 / 어떻게 쓰면 좋은지 구체적 상황
-⑥ 빈 줄 후 해시태그
+# 코드 푸터 제거용 — 구(프로필 링크 검색)·신(댓글 유도) 포맷 모두 매칭
+_CODE_FOOTER_RE = re.compile(
+    r"\n\n(?:제품 정보는 프로필 링크에서 \[(?:\d{3}|CODE)\] 검색 👆"
+    r"|\[(?:\d{3}|CODE)\] 정보는 댓글에 👇)\s*$"
+)
 
-각 문장은 앞 문장과 반드시 연결되게. "그래서", "근데", "덕분에", "게다가" 같은 연결어를 자연스럽게 써.
-읽는 사람이 "맞아맞아 → 오 진짜? → 그렇구나 → 나도 필요하다" 흐름으로 읽혀야 함.
-★[팔로우 및 프로필 방문 유도]: 글 끝부분(팁 2줄 다음)에 가끔 "내가 쓴 자취 살림 성공템 vs 실패템 리스트 프로필 링크에 표로 깔끔하게 다 정리해뒀어! 팔로우하고 꼭 확인해보고 돈 아껴ㅠㅠ" 처럼 프로필 방문(Bio link)과 팔로우를 유도하는 따뜻한 한 줄을 자연스럽게 덧붙여줘.
 
-━━━ 나쁜 예 / 좋은 예 ━━━
-나쁜 예 (건방진/딱딱한 말투):
-"식기세척기 있어도 허리아픈사람 이물건알면 속쓰리냐?
-방문설치가 포함되어 있다. 리뷰 수천개 만족도 매우 높다.
-설치 고민 덜 수 있어요. 추천합니다."
-
-좋은 예 (따뜻하고 자연스러운 반말):
-"설거지할 때마다 허리 나가는 느낌 받는 사람 이거 봐봐
-그냥 그릇 넣고 버튼 누르면 끝이래
-게다가 방문설치 포함이라 사자마자 당일 바로 쓸 수 있더라고
-리뷰 보니까 산 사람들이 하나같이 왜 이제 샀냐고 하더라"
-
-━━━ 비살림 카테고리 (디지털/가전/뷰티/의류/테크 등) 처리 ━━━
-상품이 자취 살림템이 아니어도 1인 가구 일상 맥락으로 풀어쓸 것. 절대 generic하게
-"두고두고 쓰는 템" 같은 만능 문구만 쓰지 마. 그 상품의 구체적 기능·스펙·호환성을
-일상 상황에 묶어서 설명해.
-나쁜 예 (아이패드 매직키보드): "이거 왜 이제 알았지 / 두고두고 쓰는 템 / #테크템"
-   → 매직키보드의 어떤 점도 안 드러남. 휴지통이든 화장품이든 다 통할 문구.
-좋은 예 (아이패드 매직키보드 iPad Air M4용):
-   "카페에서 노트북 꺼내기 부담스러울 때 아이패드에 키보드만 붙이면 끝
-   트랙패드까지 있어서 마우스 없이도 작업 가능하더라
-   백라이트 들어와서 어두운 데서도 오타 안 남"
-상품명에 모델명·호환 기기·소재·용량이 있으면 반드시 본문에 활용. 그 상품이
-다른 상품으로 바꿔도 그대로 통하는 문구는 절대 금지.
-
-━━━ 기타 규칙 ━━━
-- 이모지 1~2개만, 본문에 자연스럽게
-- 해시태그 총 4~5개, 상품 카테고리에 어울리게 (사용자 메시지의 추천 해시태그 풀에서 조합). 매번 #생활꿀템으로 시작하지 말고 카테고리마다 다르게
-- 가격 언급 금지
-- 제품명(상품명) 직접 언급 금지 — 기능·소재·효과·상황으로만 표현해
-- 글 전체 400~600자
-- 반드시 한국어만. 외국어(태국어·중국어·일본어 등) 절대 금지
-- 텍스트만 출력. 따옴표·메타설명·안내문구 넣지 마
-""".strip()
-
-_CODE_LINE = "제품 정보는 프로필 링크에서 [{code}] 검색 👆"
+def _strip_code_footer(text: str) -> str:
+    return _CODE_FOOTER_RE.sub("", text or "")
 
 # 외국어 탐지 — 명시적 \u 이스케이프로 인코딩 이슈 완전 차단
 # 허용: 한글(U+AC00-U+D7A3, U+1100-U+11FF, U+3130-U+318F), ASCII(0x00-0x7F), 이모지 등
@@ -150,17 +100,17 @@ has_bad_english = _has_bad_english  # 외부 모듈용 공개 별칭
 # 토큰 한도로 마지막 문장이 절단된 상태에서 그대로 게시되는 것을 막는 게이트.
 # verify_posts._is_truncated와 같은 휴리스틱(푸터/해시태그/체크마크 제외 후
 # 마지막 줄이 종결 어미로 끝나는지)을 게시 *전* 단계에서 적용한다.
-_FOOTER_RE = re.compile(r'\n\n제품 정보는 프로필 링크에서 \[(?:\d{3}|CODE)\] 검색 👆\s*$')
-_SENTENCE_END_RE = re.compile(r'[다요임어야겠네봄않함봐!?~\).♥]$')
+_SENTENCE_END_RE = re.compile(r'[다요임음어야겠네봄않함봐걸래지자중듯!?~\).♥]$')
 
 
 def looks_truncated(text: str) -> bool:
-    body = _FOOTER_RE.sub("", text or "").strip()
+    body = _strip_code_footer(text or "").strip()
     if not body:
         return False
-    # 길이 게이트: 푸터 제외 본문이 비정상적으로 짧으면(목표 400~600자) 잘림 의심.
-    # 어미 종결 통과해도 길이 부족 사례 차단 (2026-06-16 오뚜기 식초 126자 '거임' 잘림 보강).
-    if len(body) < 200:
+    # 길이 게이트: 짧은 포맷(훅 2~3줄, 2026-07-13 전환) 기준 — 한 줄도 안 되면 잘림 의심.
+    # ⚠️구 리뷰형(400~600자)의 200자 게이트는 짧은 포맷과 충돌해 폐기
+    #   (유지 시 ensure_not_truncated가 모든 정상 짧은 글을 잘림 오판 → 게시 전멸).
+    if len(body) < 15:
         return True
     last_para = body.split('\n\n')[-1].strip()
     last_line = last_para.split('\n')[-1].strip()
@@ -290,27 +240,6 @@ def _hashtag_pool(product: dict) -> list[str]:
     return _HASHTAG_POOLS.get(cat, _HASHTAG_POOLS["기타"])
 
 
-def _build_user_msg(product: dict) -> str:
-    name         = product.get("name", "")
-    brand        = product.get("brand", "")
-    category     = product.get("category_hint", "")
-    rating       = product.get("rating", "")
-    review_count = product.get("review_count", "")
-    yt_title     = (product.get("youtube_source") or {}).get("title", "")
-    msg = f"상품명: {name}"
-    if brand:        msg += f"\n브랜드: {brand}"
-    if category:     msg += f"\n카테고리: {category}"
-    if rating:       msg += f"\n별점: {rating}"
-    if review_count: msg += f"\n리뷰 수: {review_count}"
-    if yt_title:     msg += f"\n참고 유튜브 제목: {yt_title[:60]}"
-    msg += "\n추천 해시태그 풀(이 중 4~5개 자유 조합, 어울리는 태그 1개 추가 가능): " + " ".join(_hashtag_pool(product))
-    msg += "\n\n위 상품을 소개하는 Threads 게시글을 써줘. 첫 줄은 스크롤을 멈추게 하는 강력한 훅으로 시작해."
-    banned = _recent_first_lines()
-    if banned:
-        msg += "\n\n[중요] 아래는 최근 게시글들의 첫 문장이야. 이것들과 같거나 비슷한 첫 문장으로 시작하지 마:\n"
-        msg += "\n".join(f"- {b}" for b in banned)
-    return msg
-
 _VARIETY_ONLY = "\n\n[필수] 첫 문장을 금지 목록과 완전히 다른 새로운 패턴으로 시작해."
 
 _KOREAN_ONLY = (
@@ -321,126 +250,51 @@ _KOREAN_ONLY = (
 )
 
 
-def _generate_with_gemini(product: dict, product_code: str) -> str | None:
-    try:
-        from google import genai
-        client = genai.Client(api_key=GOOGLE_API_KEY)
-        user_msg = _build_user_msg(product)
-        body_and_tags = None
-        for attempt in range(3):
-            extra = (_KOREAN_ONLY + _VARIETY_ONLY) if attempt > 0 else ""
-            resp = client.models.generate_content(
-                model="gemini-2.5-flash",
-                contents=user_msg + extra,
-                config=genai.types.GenerateContentConfig(
-                    system_instruction=_POST1_SYSTEM,
-                    max_output_tokens=2000,
-                    temperature=0.9,
-                ),
-            )
-            candidate = (resp.text or "").strip().strip("\"'""''")
-            if not candidate:
-                continue
-            if _has_foreign_chars(candidate):
-                logger.warning(f"Gemini 외국어 감지 → 재시도 {attempt + 1}/3")
-                continue
-            if _has_bad_english(candidate):
-                logger.warning(f"Gemini 영어 혼입 감지 → 재시도 {attempt + 1}/3")
-                continue
-            if _is_dup_hook(candidate):
-                logger.warning(f"Gemini 첫 문장 반복 감지 → 재시도 {attempt + 1}/3")
-                continue
-            if looks_truncated(candidate):
-                logger.warning(f"Gemini 본문 잘림 감지 → 재시도 {attempt + 1}/3")
-                continue
-            body_and_tags = candidate
-            break
-        if not body_and_tags:
-            logger.warning("Gemini 3회 재시도 후 외국어 포함 → Groq 폴백")
-            return None
-        body_and_tags = _fix_linebreaks(body_and_tags)
-        return f"{body_and_tags}\n\n{_CODE_LINE.format(code=product_code)}"
-    except Exception as e:
-        logger.warning(f"Gemini 생성 실패: {e}")
-        return None
-
-
-def _generate_with_groq(product: dict, product_code: str) -> str | None:
-    try:
-        import httpx, urllib3
-        urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
-        from groq import Groq
-        client = Groq(api_key=GROQ_API_KEY, http_client=httpx.Client(verify=False))
-        user_msg = _build_user_msg(product)
-        body_and_tags = None
-        for attempt in range(3):
-            temp = 0.9 if attempt == 0 else 0.6
-            extra = (_KOREAN_ONLY + _VARIETY_ONLY) if attempt > 0 else ""
-            resp = client.chat.completions.create(
-                model="llama-3.3-70b-versatile",
-                messages=[
-                    {"role": "system", "content": _POST1_SYSTEM},
-                    {"role": "user", "content": user_msg + extra},
-                ],
-                max_tokens=1600,
-                temperature=temp,
-            )
-            candidate = resp.choices[0].message.content.strip().strip("\"'""''")
-            if not candidate:
-                continue
-            if _has_foreign_chars(candidate):
-                logger.warning(f"Groq 외국어 감지 → 재시도 {attempt + 1}/3")
-                continue
-            if _has_bad_english(candidate):
-                logger.warning(f"Groq 영어 혼입 감지 → 재시도 {attempt + 1}/3")
-                continue
-            if _is_dup_hook(candidate):
-                logger.warning(f"Groq 첫 문장 반복 감지 → 재시도 {attempt + 1}/3")
-                continue
-            if looks_truncated(candidate):
-                logger.warning(f"Groq 본문 잘림 감지 → 재시도 {attempt + 1}/3")
-                continue
-            body_and_tags = candidate
-            break
-        if not body_and_tags:
-            logger.warning("Groq 3회 재시도 후 외국어 포함 → 폴백 사용")
-            return None
-        body_and_tags = _fix_linebreaks(body_and_tags)
-        return f"{body_and_tags}\n\n{_CODE_LINE.format(code=product_code)}"
-    except Exception as e:
-        logger.warning(f"Groq 생성 실패: {e}")
-        return None
-
-
 def _generate_post1_ai(product: dict, product_code: str) -> str | None:
-    if GOOGLE_API_KEY:
-        result = _generate_with_gemini(product, product_code)
-        if result:
-            logger.info("  [Gemini 2.0 Flash] 본문 생성 완료")
-            return result
-    if GROQ_API_KEY:
-        result = _generate_with_groq(product, product_code)
-        if result:
-            logger.info("  [Groq 폴백] 본문 생성 완료")
-            return result
-    return None
+    """사진 상품글 — 2026-07-13부터 짧은 훅 포맷(사진 매체) 위임. 시그니처는 호환 유지."""
+    return _generate_short_post(product, product_code, media="photo")
 
 
-# ── 영상 상품글: Threads 짧은 포맷 ───────────────────────────────────────────
-# 2026-07-13 사용자 지시: 영상 게시는 리뷰형 장문 금지 — 후킹 첫줄 포함 2~3줄.
-# 상품 설명은 영상이 대체하므로 캡션은 재생을 유도하는 미끼 역할만 한다.
+# ── 짧은 상품글 (사진·영상 공용, Threads 포맷) ───────────────────────────────
+# 2026-07-13 사용자 지시: 사진·영상 모두 리뷰형 장문 금지 — 후킹 첫줄 포함 2~3줄.
+# "스레드는 긴 글 안 읽는다" — 설명은 매체(사진 캐러셀/영상)+첫 댓글이 대체,
+# 캡션은 스크롤을 멈추는 미끼 역할만 한다.
 
-_VIDEO_POST_SYSTEM = """
+_SHORT_MEDIA = {
+    "video": {
+        "intro": "지금 물건 쓰는 모습이 담긴 짧은 영상을 올리면서 소개글을 붙여.\n상품 설명은 영상이 다 하니까, 글은 스크롤을 멈추고 영상을 재생하게 만드는 미끼야.",
+        "hook_goal": "'어? 뭐지' 하고 영상을 누르게 만드는 단 한 줄",
+        "second": "영상을 보라고 등 떠미는 말, 또는 짧은 감탄 한 줄",
+        "user_ask": "이 상품 영상에 붙일 2~3줄 소개글을 써줘.",
+        "fallback": [
+            "이거 쓰는 영상 보고 바로 홀렸음\n궁금하면 끝까지 봐봐",
+            "요즘 내 살림 최애가 뭐냐면\n영상 보면 바로 알걸",
+            "이 영상 보고 안 사고 버틸 수 있나\n나는 실패했음",
+        ],
+    },
+    "photo": {
+        "intro": "지금 요즘 잘 쓰는 물건 사진 몇 장을 올리면서 소개글을 붙여.\n자세한 정보는 사진이랑 첫 댓글이 보여주니까, 글은 스크롤을 멈추게 만드는 미끼야.",
+        "hook_goal": "'어? 뭐지' 하고 사진을 넘겨보게 만드는 단 한 줄",
+        "second": "사진이나 댓글을 확인하게 만드는 말, 또는 짧은 감탄 한 줄",
+        "user_ask": "이 상품 사진들에 붙일 2~3줄 소개글을 써줘.",
+        "fallback": [
+            "이거 왜 이제 알았지 싶은 물건 발견함\n사진 보면 무슨 말인지 알걸",
+            "장바구니에 넣고 고민만 삼일 하다 삼\n결론: 더 빨리 살걸 그랬음",
+            "요즘 집에서 제일 손 많이 가는 애가 이거임\n궁금하면 댓글 봐봐",
+        ],
+    },
+}
+
+_SHORT_POST_SYSTEM_TMPL = """
 너는 Threads(@hyunji_ssi)에서 1인 가구 일상을 적는 20대 여자 '현지'야.
-지금 물건 쓰는 모습이 담긴 짧은 영상을 올리면서 소개글을 붙여.
-상품 설명은 영상이 다 하니까, 글은 스크롤을 멈추고 영상을 재생하게 만드는 미끼야.
+{intro}
 
 ━━━ 형식 (가장 중요) ━━━
 - 전체 2~3줄. 한 줄 40자 이내. 그 이상 절대 금지.
-- 1줄째 = 훅: '어? 뭐지' 하고 영상을 누르게 만드는 단 한 줄.
+- 1줄째 = 훅: {hook_goal}.
   (공감 상황·놀라움·궁금증 중 하나 — 매번 완전히 다른 표현으로. 예시 복사 금지)
-- 2~3줄째(선택): 영상을 보라고 등 떠미는 말, 또는 짧은 감탄 한 줄.
-- 해시태그 금지. 기능 나열 금지. 리뷰 인용 금지 — 그건 영상이 함.
+- 2~3줄째(선택): {second}.
+- 해시태그 금지. 기능 나열 금지. 리뷰 인용 금지.
 - 이모지 0~1개.
 
 ━━━ 말투 규칙 ━━━
@@ -450,10 +304,9 @@ _VIDEO_POST_SYSTEM = """
 반드시 한국어만. 텍스트만 출력(따옴표·메타설명·안내문구 금지).
 
 ━━━ 좋은 예 (그대로 복사 금지) ━━━
-설거지하다 허리 나갈 뻔한 사람 이 영상 꼭 봐
+설거지하다 허리 나갈 뻔한 사람 이거 꼭 봐
 나 이거 보고 바로 주문했잖아
 """.strip()
-
 
 # 존댓말·높임 혼입 탐지 — 현지 페르소나는 반말 고정 (Groq 폴백이 특히 자주 어김)
 _HONORIFIC_RE = re.compile(
@@ -462,9 +315,9 @@ _HONORIFIC_RE = re.compile(
 )
 
 
-def _video_caption_gate(cand: str) -> str | None:
-    """영상 캡션 게이트 — 2~3줄·줄당 50자·해시태그 제거·존댓말 차단·기존 품질 게이트."""
-    cand = (cand or "").strip().strip("\"'""''")
+def _short_caption_gate(cand: str) -> str | None:
+    """짧은 캡션 게이트 — 2~3줄·줄당 50자·해시태그 제거·존댓말 차단·기존 품질 게이트."""
+    cand = (cand or "").strip().strip("\"'“”‘’")
     if not cand or _has_foreign_chars(cand) or _has_bad_english(cand) or _is_dup_hook(cand):
         return None
     if _HONORIFIC_RE.search(cand):
@@ -476,10 +329,13 @@ def _video_caption_gate(cand: str) -> str | None:
     return "\n".join(lines)
 
 
-def generate_video_post_text(product: dict, product_code: str) -> str:
-    """영상 게시용 짧은 본문 — 훅 2~3줄 + 코드 라인. 전부 실패 시 고정 훅 폴백."""
+def _generate_short_post(product: dict, product_code: str, media: str = "photo") -> str:
+    """사진·영상 공용 짧은 본문 — 훅 2~3줄 + 코드 라인. 전부 실패 시 고정 훅 폴백."""
+    m = _SHORT_MEDIA.get(media, _SHORT_MEDIA["photo"])
+    system = _SHORT_POST_SYSTEM_TMPL.format(
+        intro=m["intro"], hook_goal=m["hook_goal"], second=m["second"])
     name = product.get("name", "")
-    user_msg = f"상품명: {name}\n\n이 상품 영상에 붙일 2~3줄 소개글을 써줘."
+    user_msg = f"상품명: {name}\n\n{m['user_ask']}"
     banned = _recent_first_lines()
     if banned:
         user_msg += "\n\n[중요] 아래 최근 첫 문장들과 같거나 비슷하게 시작 금지:\n"
@@ -495,18 +351,18 @@ def generate_video_post_text(product: dict, product_code: str) -> str:
                     model="gemini-2.5-flash",
                     contents=user_msg + extra,
                     config=genai.types.GenerateContentConfig(
-                        system_instruction=_VIDEO_POST_SYSTEM,
+                        system_instruction=system,
                         max_output_tokens=300,
                         temperature=0.95,
                     ),
                 )
-                body = _video_caption_gate(resp.text)
+                body = _short_caption_gate(resp.text)
                 if body:
-                    logger.info("  [Gemini] 영상 캡션 생성 완료")
+                    logger.info(f"  [Gemini] 짧은 캡션({media}) 생성 완료")
                     return f"{body}\n\n{_CODE_LINE.format(code=product_code)}"
-                logger.warning(f"영상 캡션 게이트 탈락 → 재시도 {attempt + 1}/3")
+                logger.warning(f"짧은 캡션 게이트 탈락 → 재시도 {attempt + 1}/3")
         except Exception as e:
-            logger.warning(f"Gemini 영상 캡션 실패: {e}")
+            logger.warning(f"Gemini 짧은 캡션 실패: {e}")
     if GROQ_API_KEY:
         try:
             import httpx, urllib3
@@ -517,41 +373,32 @@ def generate_video_post_text(product: dict, product_code: str) -> str:
                 extra = (_KOREAN_ONLY + _VARIETY_ONLY) if attempt > 0 else ""
                 resp = client.chat.completions.create(
                     model="llama-3.3-70b-versatile",
-                    messages=[{"role": "system", "content": _VIDEO_POST_SYSTEM},
+                    messages=[{"role": "system", "content": system},
                               {"role": "user", "content": user_msg + extra}],
                     max_tokens=300,
                     temperature=0.9 if attempt == 0 else 0.6,
                 )
-                body = _video_caption_gate(resp.choices[0].message.content)
+                body = _short_caption_gate(resp.choices[0].message.content)
                 if body:
-                    logger.info("  [Groq 폴백] 영상 캡션 생성 완료")
+                    logger.info(f"  [Groq 폴백] 짧은 캡션({media}) 생성 완료")
                     return f"{body}\n\n{_CODE_LINE.format(code=product_code)}"
-                logger.warning(f"영상 캡션(Groq) 게이트 탈락 → 재시도 {attempt + 1}/3")
+                logger.warning(f"짧은 캡션(Groq) 게이트 탈락 → 재시도 {attempt + 1}/3")
         except Exception as e:
-            logger.warning(f"Groq 영상 캡션 실패: {e}")
-    hooks = [
-        "이거 쓰는 영상 보고 바로 홀렸음\n궁금하면 끝까지 봐봐",
-        "요즘 내 살림 최애가 뭐냐면\n영상 보면 바로 알걸",
-        "이 영상 보고 안 사고 버틸 수 있나\n나는 실패했음",
-    ]
-    logger.warning("영상 캡션 AI 생성 전부 실패 — 고정 훅 폴백")
-    return f"{random.choice(hooks)}\n\n{_CODE_LINE.format(code=product_code)}"
+            logger.warning(f"Groq 짧은 캡션 실패: {e}")
+    logger.warning(f"짧은 캡션({media}) AI 생성 전부 실패 — 고정 훅 폴백")
+    return f"{random.choice(m['fallback'])}\n\n{_CODE_LINE.format(code=product_code)}"
+
+
+def generate_video_post_text(product: dict, product_code: str) -> str:
+    """영상 게시용 짧은 본문 (osmu publish_video_product.py가 호출)."""
+    return _generate_short_post(product, product_code, media="video")
 
 
 # ── 글1: 폴백 템플릿 ──────────────────────────────────────────────────────────
 
 def _post1_fallback(name: str, product_code: str) -> str:
-    variations = [
-        "이거 왜 이제 알았지 싶은 물건 발견함\n후기 보니까 한 번 쓰면 못 돌아간다더라\n\n✔ 생각날 때마다 바로바로 쓰기 좋고\n✔ 하나 사두면 두고두고 쓰는 템\n\n#생활꿀템 #살림템 #아이디어상품 #꿀템추천",
-        "이거 본 사람들 다 장바구니로 직행한 거\n괜히 후기 많은 게 아니더라\n\n✔ 막상 써보면 없을 때가 더 불편함\n✔ 자취·신혼 살림에 딱\n\n#생활꿀템 #자취템 #살림템 #주방꿀템 #필수템",
-        "진작 알았으면 좋았을 텐데 싶은 거\n리뷰 평점 보고 바로 믿고 사는 물건\n\n✔ 사용법 간단해서 누구나 OK\n✔ 선물용으로도 반응 좋음\n\n#생활꿀템 #아이디어상품 #꿀템 #추천템 #살림꿀템",
-    ]
-    body_and_tags = random.choice(variations)
-    # 카테고리 기반 해시태그로 교체 (#생활꿀템 고정 탈피)
-    pool = _hashtag_pool({"name": name})
-    tags = " ".join(random.sample(pool, k=min(4, len(pool))))
-    body_and_tags = re.sub(r"\n#[^\n]+$", "\n" + tags, body_and_tags)
-    return f"{body_and_tags}\n\n{_CODE_LINE.format(code=product_code)}"
+    """짧은 포맷 고정 훅 폴백 (fix_post_code 등 외부 호환용, 2026-07-13 단축)."""
+    return f"{random.choice(_SHORT_MEDIA['photo']['fallback'])}\n\n{_CODE_LINE.format(code=product_code)}"
 
 
 # ── 쿠팡 상세 이미지 수집 ────────────────────────────────────────────────────
@@ -625,7 +472,7 @@ def generate_post(product: dict, assign_code_now: bool = True) -> dict:
         if not post_text_1:
             logger.warning(f"AI 본문 생성 실패 — preselect skip: {name[:40]}")
             return {}
-        post_text_1 = re.sub(r'\n\n제품 정보는 프로필 링크에서 \[CODE\] 검색 👆', '', post_text_1)
+        post_text_1 = _strip_code_footer(post_text_1)
         style = "ai"
 
     logger.info(f"생성 완료 [{style}]{('['+product_code+']') if product_code else '[코드미정]'}: {name[:30]}")
@@ -651,12 +498,12 @@ def ensure_not_truncated(text: str, product: dict, product_code: str = "") -> st
         return text
     reason = "비어있음" if is_empty else ("외국어" if foreign else "잘림")
     logger.warning(f"포스팅 직전 본문 {reason} 감지 → 재생성 시도")
-    m = re.search(r"\[(\d{3})\] 검색", text or "")
+    m = re.search(r"\[(\d{3})\]", text or "")
     code = product_code or (m.group(1) if m else "")
     regen = _generate_post1_ai(product, code or "CODE")
     if regen and not looks_truncated(regen) and not _has_foreign_chars(regen):
         if not code:
-            regen = re.sub(r"\n\n제품 정보는 프로필 링크에서 \[CODE\] 검색 👆", "", regen)
+            regen = _strip_code_footer(regen)
         return regen
     # fallback은 generic해서 게시 금지 — 빈 본문 반환, 호출부에서 skip 판단
     logger.warning("본문 재생성 실패 → 빈 본문 반환 (호출부에서 게시 skip)")
@@ -674,19 +521,19 @@ def ensure_korean(text: str, product: dict, product_code: str = "") -> str:
     if fixed and not _has_foreign_chars(fixed) and not _has_bad_english(fixed):
         return fixed
 
-    m = re.search(r"\[(\d{3})\] 검색", text)
+    m = re.search(r"\[(\d{3})\]", text)
     code = product_code or (m.group(1) if m else "")
     logger.warning("정제 실패 → 본문 재생성")
     regen = _generate_post1_ai(product, code or "CODE")
     if regen and not _has_foreign_chars(regen) and not _has_bad_english(regen):
         if not code:
-            regen = re.sub(r"\n\n제품 정보는 프로필 링크에서 \[CODE\] 검색 👆", "", regen)
+            regen = _strip_code_footer(regen)
         return regen
 
     logger.warning("재생성 실패 → 안전 템플릿 사용")
     fb = _post1_fallback(product.get("name", ""), code or "CODE")
     if not code:
-        fb = re.sub(r"\n\n제품 정보는 프로필 링크에서 \[CODE\] 검색 👆", "", fb)
+        fb = _strip_code_footer(fb)
     return fb
 
 
