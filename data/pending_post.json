@@ -1,6 +1,6 @@
 {
   "for_date": "2026-07-15",
-  "generated_at": "2026-07-14T03:20:32.453786+09:00",
+  "generated_at": "2026-07-14T03:50:57.260285+09:00",
   "candidates": [
     {
       "product": {
@@ -94,6 +94,36 @@
       "image_url": "https://shopping-phinf.pstatic.net/main_6077786/60777860442.jpg",
       "detail_images": [
         "https://shopping-phinf.pstatic.net/main_6077786/60777860442.jpg"
+      ],
+      "product_code": "",
+      "status": "pending"
+    },
+    {
+      "product": {
+        "name": "신일전자 SHINIL 이동식 에어컨 SMA-TS900 냉방기 리모콘",
+        "price": "485,000원",
+        "original_price": "",
+        "discount_rate": 0,
+        "image_url": "https://shopping-phinf.pstatic.net/main_5971101/59711014581.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8909690050&ctag=8909690050&lptag=I26025719091&itemId=26025719091&vendorItemId=93007364478&spec=10305199",
+        "badge": "쿠팡",
+        "brand": "신일전자",
+        "category": "에어컨",
+        "category_hint": "생활",
+        "mall_name": "쿠팡",
+        "source": "naver_shopping",
+        "scraped_at": "2026-07-13T18:50:25.444308",
+        "youtube_source": {
+          "title": "신일 이동식 에어컨 집주인 허락, 실외기 필요 없어요. 자취생 필수템 SMA-TS900, SMA-S9000",
+          "video_id": "fa618xUGkQM",
+          "views": 2091,
+          "keyword": "자취 필수템 추천"
+        }
+      },
+      "post_text": "밤에 에어컨 켜고 자",
+      "image_url": "https://shopping-phinf.pstatic.net/main_5971101/59711014581.jpg",
+      "detail_images": [
+        "https://shopping-phinf.pstatic.net/main_5971101/59711014581.jpg"
       ],
       "product_code": "",
       "status": "pending"
