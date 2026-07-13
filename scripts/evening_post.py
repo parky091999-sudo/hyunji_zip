@@ -273,19 +273,24 @@ async def run():
         logger.warning(f"본문 게이트 실패 → 게시 skip [{code}]: {product.get('name','')[:40]}")
         return
 
-    # 이미지 구성: 원본 image_url(메인, 1번 자리) + AI 비스듬 보조 컷
-    try:
-        from generator.image_gen import generate_and_upload_images
-        ai_imgs = generate_and_upload_images(product, post_text)
-        base = [image_url] if (image_url and image_url.startswith("http")) else []
-        if ai_imgs:
-            detail_imgs = base + ai_imgs
-            logger.info(f"원본 1장 + AI 보조 {len(ai_imgs)}장 = {len(detail_imgs)}장 carousel")
-        elif base:
-            detail_imgs = base
-            logger.info("AI 생성 실패 → 원본만 단일 이미지 게시")
-    except Exception as e:
-        logger.warning(f"AI 이미지 생성 오류: {e}")
+    # 이미지 구성(2026-07-13 개편): 실사진 우선, AI는 폴백 — auto_post와 동일
+    base = [image_url] if (image_url and image_url.startswith("http")) else []
+    real_carousel = [u for u in (detail_imgs or []) if u and u.startswith("http")]
+    if len(real_carousel) >= 2:
+        detail_imgs = real_carousel
+        logger.info(f"실사진 carousel {len(detail_imgs)}장 — AI 생성 생략")
+    else:
+        try:
+            from generator.image_gen import generate_and_upload_images
+            ai_imgs = generate_and_upload_images(product, post_text)
+            if ai_imgs:
+                detail_imgs = base + ai_imgs
+                logger.info(f"실사진 부족 → 원본 1장 + AI 보조 {len(ai_imgs)}장 = {len(detail_imgs)}장 carousel")
+            elif base:
+                detail_imgs = base
+                logger.info("AI 생성 실패 → 원본만 단일 이미지 게시")
+        except Exception as e:
+            logger.warning(f"AI 이미지 생성 오류: {e}")
 
     logger.info(f"포스팅: {product.get('name', '')[:40]} [{code}]")
 
