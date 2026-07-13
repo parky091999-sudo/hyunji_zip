@@ -426,6 +426,118 @@ def _generate_post1_ai(product: dict, product_code: str) -> str | None:
     return None
 
 
+# ── 영상 상품글: Threads 짧은 포맷 ───────────────────────────────────────────
+# 2026-07-13 사용자 지시: 영상 게시는 리뷰형 장문 금지 — 후킹 첫줄 포함 2~3줄.
+# 상품 설명은 영상이 대체하므로 캡션은 재생을 유도하는 미끼 역할만 한다.
+
+_VIDEO_POST_SYSTEM = """
+너는 Threads(@hyunji_ssi)에서 1인 가구 일상을 적는 20대 여자 '현지'야.
+지금 물건 쓰는 모습이 담긴 짧은 영상을 올리면서 소개글을 붙여.
+상품 설명은 영상이 다 하니까, 글은 스크롤을 멈추고 영상을 재생하게 만드는 미끼야.
+
+━━━ 형식 (가장 중요) ━━━
+- 전체 2~3줄. 한 줄 40자 이내. 그 이상 절대 금지.
+- 1줄째 = 훅: '어? 뭐지' 하고 영상을 누르게 만드는 단 한 줄.
+  (공감 상황·놀라움·궁금증 중 하나 — 매번 완전히 다른 표현으로. 예시 복사 금지)
+- 2~3줄째(선택): 영상을 보라고 등 떠미는 말, 또는 짧은 감탄 한 줄.
+- 해시태그 금지. 기능 나열 금지. 리뷰 인용 금지 — 그건 영상이 함.
+- 이모지 0~1개.
+
+━━━ 말투 규칙 ━━━
+편안한 반말 — 친구한테 카톡 보내듯. 허용 어미: ~하더라 / ~더라고 / ~거든 / ~했음 / ~임
+절대 금지: "~냐?"류 공격조 / "~이다"·"~된다" 뉴스체 / 존댓말 / "~같다" 추측 / 반말↔존댓말 혼용
+가격 언급 금지. 상품명 직접 언급 금지 — 상황·효과로만 표현해.
+반드시 한국어만. 텍스트만 출력(따옴표·메타설명·안내문구 금지).
+
+━━━ 좋은 예 (그대로 복사 금지) ━━━
+설거지하다 허리 나갈 뻔한 사람 이 영상 꼭 봐
+나 이거 보고 바로 주문했잖아
+""".strip()
+
+
+# 존댓말·높임 혼입 탐지 — 현지 페르소나는 반말 고정 (Groq 폴백이 특히 자주 어김)
+_HONORIFIC_RE = re.compile(
+    r"(?:세요|셔요|습니다|입니다|합니다|이에요|예요|에요|해요|드려요|드릴게요|보세요|하세요|"
+    r"보시면|하시면|주시면|드시면|보실|하실)"
+)
+
+
+def _video_caption_gate(cand: str) -> str | None:
+    """영상 캡션 게이트 — 2~3줄·줄당 50자·해시태그 제거·존댓말 차단·기존 품질 게이트."""
+    cand = (cand or "").strip().strip("\"'""''")
+    if not cand or _has_foreign_chars(cand) or _has_bad_english(cand) or _is_dup_hook(cand):
+        return None
+    if _HONORIFIC_RE.search(cand):
+        return None
+    lines = [l for l in (x.strip() for x in cand.split("\n")) if l]
+    lines = [l for l in lines if not l.startswith("#")]
+    if not (1 <= len(lines) <= 3) or any(len(l) > 50 for l in lines):
+        return None
+    return "\n".join(lines)
+
+
+def generate_video_post_text(product: dict, product_code: str) -> str:
+    """영상 게시용 짧은 본문 — 훅 2~3줄 + 코드 라인. 전부 실패 시 고정 훅 폴백."""
+    name = product.get("name", "")
+    user_msg = f"상품명: {name}\n\n이 상품 영상에 붙일 2~3줄 소개글을 써줘."
+    banned = _recent_first_lines()
+    if banned:
+        user_msg += "\n\n[중요] 아래 최근 첫 문장들과 같거나 비슷하게 시작 금지:\n"
+        user_msg += "\n".join(f"- {b}" for b in banned)
+
+    if GOOGLE_API_KEY:
+        try:
+            from google import genai
+            client = genai.Client(api_key=GOOGLE_API_KEY)
+            for attempt in range(3):
+                extra = (_KOREAN_ONLY + _VARIETY_ONLY) if attempt > 0 else ""
+                resp = client.models.generate_content(
+                    model="gemini-2.5-flash",
+                    contents=user_msg + extra,
+                    config=genai.types.GenerateContentConfig(
+                        system_instruction=_VIDEO_POST_SYSTEM,
+                        max_output_tokens=300,
+                        temperature=0.95,
+                    ),
+                )
+                body = _video_caption_gate(resp.text)
+                if body:
+                    logger.info("  [Gemini] 영상 캡션 생성 완료")
+                    return f"{body}\n\n{_CODE_LINE.format(code=product_code)}"
+                logger.warning(f"영상 캡션 게이트 탈락 → 재시도 {attempt + 1}/3")
+        except Exception as e:
+            logger.warning(f"Gemini 영상 캡션 실패: {e}")
+    if GROQ_API_KEY:
+        try:
+            import httpx, urllib3
+            urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+            from groq import Groq
+            client = Groq(api_key=GROQ_API_KEY, http_client=httpx.Client(verify=False))
+            for attempt in range(3):
+                extra = (_KOREAN_ONLY + _VARIETY_ONLY) if attempt > 0 else ""
+                resp = client.chat.completions.create(
+                    model="llama-3.3-70b-versatile",
+                    messages=[{"role": "system", "content": _VIDEO_POST_SYSTEM},
+                              {"role": "user", "content": user_msg + extra}],
+                    max_tokens=300,
+                    temperature=0.9 if attempt == 0 else 0.6,
+                )
+                body = _video_caption_gate(resp.choices[0].message.content)
+                if body:
+                    logger.info("  [Groq 폴백] 영상 캡션 생성 완료")
+                    return f"{body}\n\n{_CODE_LINE.format(code=product_code)}"
+                logger.warning(f"영상 캡션(Groq) 게이트 탈락 → 재시도 {attempt + 1}/3")
+        except Exception as e:
+            logger.warning(f"Groq 영상 캡션 실패: {e}")
+    hooks = [
+        "이거 쓰는 영상 보고 바로 홀렸음\n궁금하면 끝까지 봐봐",
+        "요즘 내 살림 최애가 뭐냐면\n영상 보면 바로 알걸",
+        "이 영상 보고 안 사고 버틸 수 있나\n나는 실패했음",
+    ]
+    logger.warning("영상 캡션 AI 생성 전부 실패 — 고정 훅 폴백")
+    return f"{random.choice(hooks)}\n\n{_CODE_LINE.format(code=product_code)}"
+
+
 # ── 글1: 폴백 템플릿 ──────────────────────────────────────────────────────────
 
 def _post1_fallback(name: str, product_code: str) -> str:
