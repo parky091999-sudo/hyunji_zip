@@ -24,21 +24,29 @@ async def manual_login():
         page = await context.new_page()
 
         print("브라우저가 열립니다. 직접 로그인해주세요.")
-        print("로그인 완료 후 메인 피드가 보이면 Enter를 누르세요.")
+        print("로그인 완료(메인 피드 도달) 시 자동으로 쿠키가 저장됩니다. (최대 6분 대기)")
 
         await page.goto("https://www.threads.com/login")
 
-        # 사용자가 직접 로그인할 때까지 대기
-        input("\n로그인 완료 후 Enter 누르세요...")
-
-        # 쿠키 저장
-        cookies = await context.cookies()
-        os.makedirs(os.path.dirname(COOKIE_PATH), exist_ok=True)
-        with open(COOKIE_PATH, "w") as f:
-            json.dump(cookies, f)
-
-        print(f"쿠키 저장 완료: {COOKIE_PATH}")
-        print(f"저장된 쿠키: {len(cookies)}개")
+        # 로그인 완료 자동 감지 — 세션 쿠키(sessionid/ig_did) 확보되면 저장 (input 불필요)
+        saved = False
+        for _ in range(180):
+            await page.wait_for_timeout(2000)
+            if "/login" in page.url:
+                continue
+            cookies = await context.cookies()
+            names = {c.get("name") for c in cookies}
+            if "sessionid" in names or "ig_did" in names:
+                await page.wait_for_timeout(3000)  # 세션 안정화 후 재수집
+                cookies = await context.cookies()
+                os.makedirs(os.path.dirname(COOKIE_PATH), exist_ok=True)
+                with open(COOKIE_PATH, "w") as f:
+                    json.dump(cookies, f)
+                print(f"쿠키 저장 완료: {COOKIE_PATH} ({len(cookies)}개)")
+                saved = True
+                break
+        if not saved:
+            print("로그인 감지 실패(시간 초과) — 스크립트를 다시 실행해주세요")
 
         await browser.close()
 
