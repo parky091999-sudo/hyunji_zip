@@ -1,6 +1,8 @@
-name: Check Insights (수동)
+name: Check Insights (일 1회 + 수동)
 
 on:
+  schedule:
+    - cron: '0 14 * * *'  # 매일 23:00 KST — 하루치 조회수 스냅샷을 data/insights.json에 저장
   workflow_dispatch:
 
 env:
@@ -9,6 +11,8 @@ env:
 jobs:
   insights:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -21,3 +25,12 @@ jobs:
           THREADS_ACCESS_TOKEN: ${{ secrets.THREADS_ACCESS_TOKEN }}
           THREADS_USER_ID:      ${{ secrets.THREADS_USER_ID }}
         run: python scripts/check_insights.py
+
+      - name: Commit insights.json
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/insights.json || true
+          git diff --staged --quiet || git commit -m "insights: 조회수 스냅샷 갱신 $(date -u +%Y-%m-%d)"
+          git pull --rebase -X theirs origin main
+          git push || (git pull --rebase -X theirs origin main && git push)

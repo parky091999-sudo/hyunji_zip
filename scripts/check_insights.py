@@ -42,6 +42,35 @@ def fetch_insights(media_id: str) -> dict:
     return out
 
 
+def save_insights(rows: list, account: str = "@hyunji_ssi", platform: str = "threads") -> str:
+    """조회 성공한 rows를 표준 insights.json 스냅샷으로 저장 — 총괄 대시보드 취합용.
+
+    포맷: {updated, account, platform, posts:[{id,ts,type,code,title,url,views,likes,replies,reposts,quotes}]}
+    """
+    posts = []
+    for r in rows:
+        if r.get("views") is None:
+            continue  # 조회 실패(API 매칭 없음/에러) 건은 제외
+        sc = r.get("sc", "")
+        posts.append({
+            "id": sc,
+            "ts": r.get("ts", ""),
+            "type": r.get("type", ""),
+            "code": r.get("code", ""),
+            "title": r.get("name", ""),
+            "url": f"https://www.threads.com/{account}/post/{sc}" if sc else "",
+            "views": r.get("views"), "likes": r.get("likes"),
+            "replies": r.get("replies"), "reposts": r.get("reposts"), "quotes": r.get("quotes"),
+        })
+    out = {
+        "updated": datetime.now(KST).isoformat(timespec="minutes"),
+        "account": account, "platform": platform, "posts": posts,
+    }
+    path = os.path.join(DATA_DIR, "insights.json")
+    json.dump(out, open(path, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+    return path
+
+
 def main():
     if not THREADS_ACCESS_TOKEN or not THREADS_USER_ID:
         print("THREADS_ACCESS_TOKEN/USER_ID 없음", flush=True)
@@ -106,6 +135,9 @@ def main():
     top_l = sorted([r for r in rows if r.get("likes") is not None], key=lambda r: r["likes"] or 0, reverse=True)[:5]
     for r in top_l:
         print(f"  [{r['code']}] likes={r['likes']} views={r['views']} replies={r['replies']}  {r['name']}  ({r['ts']})", flush=True)
+
+    saved = save_insights(rows)
+    print(f"\n💾 저장: {saved} ({sum(1 for r in rows if r.get('views') is not None)}건)", flush=True)
 
 
 if __name__ == "__main__":
