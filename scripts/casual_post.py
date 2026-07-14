@@ -78,7 +78,9 @@ def run():
     # 유진 실측 최고 성과 시간대(질문·국룰형 20~22시) 정렬 (2026-07-13)
     _EVENING_CRONS = {"17 8 * * *", "17 10 * * *", "17 12 * * *"}
     if os.getenv("SCHEDULE_CRON", "") in _EVENING_CRONS:
-        if not kst_gate_sync(19.0, 22.0, max_wait_h=2.0, label="casual-evening"):
+        # 상한 22.5(2026-07-14): 21:42 도착 런이 의존성 설치 22분 소요로 22:04 판정
+        # → 4분 차이 생략된 실측 보완. 22시대 초반 게시도 골든타임 범위.
+        if not kst_gate_sync(19.0, 22.5, max_wait_h=2.0, label="casual-evening"):
             return
     elif not kst_gate_sync(8.0, 22.0, label="casual"):
         return
