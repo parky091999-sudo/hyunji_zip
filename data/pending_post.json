@@ -1,6 +1,6 @@
 {
   "for_date": "2026-07-16",
-  "generated_at": "2026-07-15T00:50:34.632208+09:00",
+  "generated_at": "2026-07-15T02:45:04.212695+09:00",
   "candidates": [
     {
       "product": {
@@ -100,6 +100,36 @@
       "image_url": "https://shopping-phinf.pstatic.net/main_5634717/56347172178.3.jpg",
       "detail_images": [
         "https://shopping-phinf.pstatic.net/main_5634717/56347172178.3.jpg"
+      ],
+      "product_code": "",
+      "status": "pending"
+    },
+    {
+      "product": {
+        "name": "돌리 포보 베트남 쌀국수 소고기맛 코스트코 컵라면 1박스",
+        "price": "18,780원",
+        "original_price": "",
+        "discount_rate": 0,
+        "image_url": "https://shopping-phinf.pstatic.net/main_6052460/60524600781.1.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9607616158&ctag=9607616158&lptag=I28682598746&itemId=28682598746&vendorItemId=95688078631&spec=10305199",
+        "badge": "쿠팡",
+        "brand": "DORLY",
+        "category": "면류",
+        "category_hint": "생활",
+        "mall_name": "쿠팡",
+        "source": "naver_shopping",
+        "scraped_at": "2026-07-14T17:44:37.089638",
+        "youtube_source": {
+          "title": "코스트코 18년차 회원이 이번주 구경하고 온 제품들",
+          "video_id": "0ELOcFXZJ0o",
+          "views": 158921,
+          "keyword": "살림템 추천"
+        }
+      },
+      "post_text": "집에 쟁여두면 든든한 국",
+      "image_url": "https://shopping-phinf.pstatic.net/main_6052460/60524600781.1.jpg",
+      "detail_images": [
+        "https://shopping-phinf.pstatic.net/main_6052460/60524600781.1.jpg"
       ],
       "product_code": "",
       "status": "pending"
