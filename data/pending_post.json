@@ -1,31 +1,7 @@
 {
-  "for_date": "2026-07-15",
-  "generated_at": "2026-07-14T11:01:18.589373+09:00",
+  "for_date": "2026-07-16",
+  "generated_at": "2026-07-15T00:50:34.632208+09:00",
   "candidates": [
-    {
-      "product": {
-        "name": "페이스팩토리 전동 다이아필 각질제거기 화이트 FF-27",
-        "price": "43,010원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_5027322/50273223171.12.jpg",
-        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8327675475&ctag=8327675475&lptag=I24041145299&itemId=24041145299&vendorItemId=91061374698&spec=10305197",
-        "badge": "쿠팡",
-        "brand": "페이스팩토리",
-        "category": "발각질제거기",
-        "category_hint": "건강",
-        "mall_name": "쿠팡",
-        "source": "naver_shopping",
-        "scraped_at": "2026-07-13T16:45:52.387043"
-      },
-      "post_text": "건조해서 각질 파티 열리는 내 피부 구",
-      "image_url": "https://shopping-phinf.pstatic.net/main_5027322/50273223171.12.jpg",
-      "detail_images": [
-        "https://shopping-phinf.pstatic.net/main_5027322/50273223171.12.jpg"
-      ],
-      "product_code": "",
-      "status": "pending"
-    },
     {
       "product": {
         "name": "소가 휴대용 손선풍기 냉각 에어컨 선풍기 크림 FS16",
@@ -40,12 +16,42 @@
         "category_hint": "디지털",
         "mall_name": "쿠팡",
         "source": "naver_shopping",
-        "scraped_at": "2026-07-13T16:45:36.325624"
+        "scraped_at": "2026-07-14T15:49:26.482235"
       },
-      "post_text": "더운 날씨에 내 체감온",
+      "post_text": "손이 맨날 열 일 하는 사람 이거",
       "image_url": "https://shopping-phinf.pstatic.net/main_5430440/54304408894.3.jpg",
       "detail_images": [
         "https://shopping-phinf.pstatic.net/main_5430440/54304408894.3.jpg"
+      ],
+      "product_code": "",
+      "status": "pending"
+    },
+    {
+      "product": {
+        "name": "쏘우체 펌핑식출액함 주방수세미 냄비세제백지청소브러쉬자동주입기 1개",
+        "price": "18,800원",
+        "original_price": "",
+        "discount_rate": 0,
+        "image_url": "https://shopping-phinf.pstatic.net/main_6023478/60234781322.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=6758630930&ctag=6758630930&lptag=I19657867159&itemId=19657867159&vendorItemId=86763706995&spec=10305199",
+        "badge": "쿠팡",
+        "brand": "",
+        "category": "욕실용기/홀더",
+        "category_hint": "생활",
+        "mall_name": "쿠팡",
+        "source": "naver_shopping",
+        "scraped_at": "2026-07-14T15:49:21.856383",
+        "youtube_source": {
+          "title": "이거 하나면 설거지가 너무 쉬워져요 #주방용품추천 #꿀템",
+          "video_id": "yMdEc3MudIE",
+          "views": 1497,
+          "keyword": "신박한 주방용품"
+        }
+      },
+      "post_text": "설거지통에 늘어난 세제",
+      "image_url": "https://shopping-phinf.pstatic.net/main_6023478/60234781322.jpg",
+      "detail_images": [
+        "https://shopping-phinf.pstatic.net/main_6023478/60234781322.jpg"
       ],
       "product_code": "",
       "status": "pending"
@@ -64,9 +70,9 @@
         "category_hint": "생활",
         "mall_name": "쿠팡",
         "source": "naver_shopping",
-        "scraped_at": "2026-07-13T16:45:45.894854"
+        "scraped_at": "2026-07-14T15:49:36.228428"
       },
-      "post_text": "밖에서 칫솔 보관하는 거 찝",
+      "post_text": "칫솔 위생 생각보다 신경 많이 쓰게 되지 않아",
       "image_url": "https://shopping-phinf.pstatic.net/main_2386835/23868356238.jpg",
       "detail_images": [
         "https://shopping-phinf.pstatic.net/main_2386835/23868356238.jpg"
@@ -76,54 +82,24 @@
     },
     {
       "product": {
-        "name": "도도풋케어 발각질제거기 전동멀티케어 무선전동",
-        "price": "68,990원",
+        "name": "제노벤 스팀청소기 고압 살균 올인원 가정용 차량용 화이트 CNT-QX-SXYT",
+        "price": "144,900원",
         "original_price": "",
         "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_6077786/60777860442.jpg",
-        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=0188760267&ctag=0188760267&lptag=l172822042741&itemId=21217874042&vendorItemId=90287969284&spec=10305198",
+        "image_url": "https://shopping-phinf.pstatic.net/main_5634717/56347172178.3.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8867649453&ctag=8867649453&lptag=I25865217656&itemId=25865217656&vendorItemId=93203771805&spec=10305198",
         "badge": "쿠팡",
-        "brand": "도도풋케어",
-        "category": "발각질제거기",
-        "category_hint": "건강",
-        "mall_name": "쿠팡",
-        "source": "naver_shopping",
-        "scraped_at": "2026-07-13T16:45:52.387334"
-      },
-      "post_text": "발바닥 관리 누가 이 돈 주고 해? 하는",
-      "image_url": "https://shopping-phinf.pstatic.net/main_6077786/60777860442.jpg",
-      "detail_images": [
-        "https://shopping-phinf.pstatic.net/main_6077786/60777860442.jpg"
-      ],
-      "product_code": "",
-      "status": "pending"
-    },
-    {
-      "product": {
-        "name": "신일전자 SHINIL 이동식 에어컨 SMA-TS900 냉방기 리모콘",
-        "price": "485,000원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_5971101/59711014581.jpg",
-        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8909690050&ctag=8909690050&lptag=I26025719091&itemId=26025719091&vendorItemId=93007364478&spec=10305199",
-        "badge": "쿠팡",
-        "brand": "신일전자",
-        "category": "에어컨",
+        "brand": "",
+        "category": "스팀청소기",
         "category_hint": "생활",
         "mall_name": "쿠팡",
         "source": "naver_shopping",
-        "scraped_at": "2026-07-13T18:50:25.444308",
-        "youtube_source": {
-          "title": "신일 이동식 에어컨 집주인 허락, 실외기 필요 없어요. 자취생 필수템 SMA-TS900, SMA-S9000",
-          "video_id": "fa618xUGkQM",
-          "views": 2091,
-          "keyword": "자취 필수템 추천"
-        }
+        "scraped_at": "2026-07-14T15:49:38.315876"
       },
-      "post_text": "밤에 에어컨 켜고 자",
-      "image_url": "https://shopping-phinf.pstatic.net/main_5971101/59711014581.jpg",
+      "post_text": "바닥 닦는 거 매번 귀찮아서 미",
+      "image_url": "https://shopping-phinf.pstatic.net/main_5634717/56347172178.3.jpg",
       "detail_images": [
-        "https://shopping-phinf.pstatic.net/main_5971101/59711014581.jpg"
+        "https://shopping-phinf.pstatic.net/main_5634717/56347172178.3.jpg"
       ],
       "product_code": "",
       "status": "pending"
