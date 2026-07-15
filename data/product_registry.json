@@ -1,5 +1,5 @@
 {
-  "next_code": 58,
+  "next_code": 59,
   "blocked_item_ids": [],
   "products": {
     "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8849967732&ctag=8849967732&lpt": {
@@ -570,6 +570,15 @@
       "image_url": "https://shopping-phinf.pstatic.net/main_6085433/60854339230.jpg",
       "category": "",
       "registered_at": "2026-07-15T19:55:27.997393+09:00"
+    },
+    "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=7069533036&ctag=7069533036&lpt": {
+      "code": "058",
+      "name": "SK매직 미니 Green41 무전원 정수기 고객직접설치",
+      "short_name": "SK매직 미니 Green41 무전원",
+      "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=7069533036&ctag=7069533036&lptag=l801178265968&itemId=58107869681&vendorItemId=82998959480&spec=10305197",
+      "image_url": "https://shopping-phinf.pstatic.net/main_5529193/55291936448.10.jpg",
+      "category": "",
+      "registered_at": "2026-07-15T20:34:15.461515+09:00"
     }
   }
 }
