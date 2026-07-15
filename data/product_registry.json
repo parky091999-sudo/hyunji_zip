@@ -1,5 +1,5 @@
 {
-  "next_code": 57,
+  "next_code": 58,
   "blocked_item_ids": [],
   "products": {
     "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8849967732&ctag=8849967732&lpt": {
@@ -561,6 +561,15 @@
       "category": "생활",
       "registered_at": "2026-07-12T23:09:39.881546+09:00",
       "posted": true
+    },
+    "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9644225776&ctag=9644225776&lpt": {
+      "code": "057",
+      "name": "벽걸이형 자동 센서 비누 디스펜서 거품기 크림색 1개",
+      "short_name": "벽걸이형 자동 센서 비누",
+      "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9644225776&ctag=9644225776&lptag=V95754525531&itemId=28819771121&vendorItemId=95754525531&spec=10305199",
+      "image_url": "https://shopping-phinf.pstatic.net/main_6085433/60854339230.jpg",
+      "category": "",
+      "registered_at": "2026-07-15T19:55:27.997393+09:00"
     }
   }
 }
