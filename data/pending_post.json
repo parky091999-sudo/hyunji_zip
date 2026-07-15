@@ -1,6 +1,6 @@
 {
-  "for_date": "2026-07-16",
-  "generated_at": "2026-07-15T11:00:25.208749+09:00",
+  "for_date": "2026-07-17",
+  "generated_at": "2026-07-16T00:55:25.460976+09:00",
   "candidates": [
     {
       "product": {
@@ -16,9 +16,9 @@
         "category_hint": "디지털",
         "mall_name": "쿠팡",
         "source": "naver_shopping",
-        "scraped_at": "2026-07-14T15:49:26.482235"
+        "scraped_at": "2026-07-15T15:54:04.176469"
       },
-      "post_text": "손이 맨날 열 일 하는 사람 이거",
+      "post_text": "버스 기다리다 땀 흘리는 거",
       "image_url": "https://shopping-phinf.pstatic.net/main_5430440/54304408894.3.jpg",
       "detail_images": [
         "https://shopping-phinf.pstatic.net/main_5430440/54304408894.3.jpg"
@@ -28,30 +28,84 @@
     },
     {
       "product": {
-        "name": "쏘우체 펌핑식출액함 주방수세미 냄비세제백지청소브러쉬자동주입기 1개",
-        "price": "18,800원",
+        "name": "신일전자 SHINIL 이동식 에어컨 SMA-TS900 냉방기 리모콘",
+        "price": "485,000원",
         "original_price": "",
         "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_6023478/60234781322.jpg",
-        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=6758630930&ctag=6758630930&lptag=I19657867159&itemId=19657867159&vendorItemId=86763706995&spec=10305199",
+        "image_url": "https://shopping-phinf.pstatic.net/main_5971101/59711014581.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8909690050&ctag=8909690050&lptag=I26025719091&itemId=26025719091&vendorItemId=93007364478&spec=10305199",
         "badge": "쿠팡",
-        "brand": "",
-        "category": "욕실용기/홀더",
+        "brand": "신일전자",
+        "category": "에어컨",
         "category_hint": "생활",
         "mall_name": "쿠팡",
         "source": "naver_shopping",
-        "scraped_at": "2026-07-14T15:49:21.856383",
+        "scraped_at": "2026-07-15T15:53:28.229332",
         "youtube_source": {
-          "title": "이거 하나면 설거지가 너무 쉬워져요 #주방용품추천 #꿀템",
-          "video_id": "yMdEc3MudIE",
-          "views": 1497,
-          "keyword": "신박한 주방용품"
+          "title": "신일 이동식 에어컨 집주인 허락, 실외기 필요 없어요. 자취생 필수템 SMA-TS900, SMA-S9000",
+          "video_id": "fa618xUGkQM",
+          "views": 11940,
+          "keyword": "자취 필수템 추천"
         }
       },
-      "post_text": "설거지통에 늘어난 세제",
-      "image_url": "https://shopping-phinf.pstatic.net/main_6023478/60234781322.jpg",
+      "post_text": "집에 더운 공기가 맴돌 때",
+      "image_url": "https://shopping-phinf.pstatic.net/main_5971101/59711014581.jpg",
       "detail_images": [
-        "https://shopping-phinf.pstatic.net/main_6023478/60234781322.jpg"
+        "https://shopping-phinf.pstatic.net/main_5971101/59711014581.jpg"
+      ],
+      "product_code": "",
+      "status": "pending"
+    },
+    {
+      "product": {
+        "name": "벽걸이형 자동 센서 비누 디스펜서 거품기 크림색 1개",
+        "price": "69,500원",
+        "original_price": "",
+        "discount_rate": 0,
+        "image_url": "https://shopping-phinf.pstatic.net/main_6085433/60854339230.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9644225776&ctag=9644225776&lptag=V95754525531&itemId=28819771121&vendorItemId=95754525531&spec=10305199",
+        "badge": "쿠팡",
+        "brand": "",
+        "category": "욕실용기/홀더",
+        "category_hint": "주방",
+        "mall_name": "쿠팡",
+        "source": "naver_shopping",
+        "scraped_at": "2026-07-15T15:54:08.344246"
+      },
+      "post_text": "손에 비누 묻히기 싫어서",
+      "image_url": "https://shopping-phinf.pstatic.net/main_6085433/60854339230.jpg",
+      "detail_images": [
+        "https://shopping-phinf.pstatic.net/main_6085433/60854339230.jpg"
+      ],
+      "product_code": "",
+      "status": "pending"
+    },
+    {
+      "product": {
+        "name": "비스카 미니 세탁기 3kg",
+        "price": "69,800원",
+        "original_price": "",
+        "discount_rate": 0,
+        "image_url": "https://shopping-phinf.pstatic.net/main_6002783/60027832876.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=4313751653&ctag=4313751653&lptag=l51305220221&itemId=5225320101&vendorItemId=70524811557&spec=10305197",
+        "badge": "쿠팡",
+        "brand": "비스카",
+        "category": "세탁/건조기",
+        "category_hint": "생활",
+        "mall_name": "쿠팡",
+        "source": "naver_shopping",
+        "scraped_at": "2026-07-15T15:53:33.284395",
+        "youtube_source": {
+          "title": "아직도 속옷 양말 같이 빠세요? #미니세탁기 #분리세탁기 #속옷세탁기 #양말세탁기 #소형세탁기",
+          "video_id": "5Hievtq_krU",
+          "views": 4001,
+          "keyword": "자취 필수템 추천"
+        }
+      },
+      "post_text": "손빨래하기 싫어서 모아뒀던 양말",
+      "image_url": "https://shopping-phinf.pstatic.net/main_6002783/60027832876.jpg",
+      "detail_images": [
+        "https://shopping-phinf.pstatic.net/main_6002783/60027832876.jpg"
       ],
       "product_code": "",
       "status": "pending"
@@ -70,66 +124,12 @@
         "category_hint": "생활",
         "mall_name": "쿠팡",
         "source": "naver_shopping",
-        "scraped_at": "2026-07-14T15:49:36.228428"
+        "scraped_at": "2026-07-15T15:54:17.118766"
       },
-      "post_text": "칫솔 위생 생각보다 신경 많이 쓰게 되지 않아",
+      "post_text": "칫솔 위생 걱정돼서 여행",
       "image_url": "https://shopping-phinf.pstatic.net/main_2386835/23868356238.jpg",
       "detail_images": [
         "https://shopping-phinf.pstatic.net/main_2386835/23868356238.jpg"
-      ],
-      "product_code": "",
-      "status": "pending"
-    },
-    {
-      "product": {
-        "name": "제노벤 스팀청소기 고압 살균 올인원 가정용 차량용 화이트 CNT-QX-SXYT",
-        "price": "144,900원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_5634717/56347172178.3.jpg",
-        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8867649453&ctag=8867649453&lptag=I25865217656&itemId=25865217656&vendorItemId=93203771805&spec=10305198",
-        "badge": "쿠팡",
-        "brand": "",
-        "category": "스팀청소기",
-        "category_hint": "생활",
-        "mall_name": "쿠팡",
-        "source": "naver_shopping",
-        "scraped_at": "2026-07-14T15:49:38.315876"
-      },
-      "post_text": "바닥 닦는 거 매번 귀찮아서 미",
-      "image_url": "https://shopping-phinf.pstatic.net/main_5634717/56347172178.3.jpg",
-      "detail_images": [
-        "https://shopping-phinf.pstatic.net/main_5634717/56347172178.3.jpg"
-      ],
-      "product_code": "",
-      "status": "pending"
-    },
-    {
-      "product": {
-        "name": "돌리 포보 베트남 쌀국수 소고기맛 코스트코 컵라면 1박스",
-        "price": "18,780원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_6052460/60524600781.1.jpg",
-        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9607616158&ctag=9607616158&lptag=I28682598746&itemId=28682598746&vendorItemId=95688078631&spec=10305199",
-        "badge": "쿠팡",
-        "brand": "DORLY",
-        "category": "면류",
-        "category_hint": "생활",
-        "mall_name": "쿠팡",
-        "source": "naver_shopping",
-        "scraped_at": "2026-07-14T17:44:37.089638",
-        "youtube_source": {
-          "title": "코스트코 18년차 회원이 이번주 구경하고 온 제품들",
-          "video_id": "0ELOcFXZJ0o",
-          "views": 158921,
-          "keyword": "살림템 추천"
-        }
-      },
-      "post_text": "집에 쟁여두면 든든한 국",
-      "image_url": "https://shopping-phinf.pstatic.net/main_6052460/60524600781.1.jpg",
-      "detail_images": [
-        "https://shopping-phinf.pstatic.net/main_6052460/60524600781.1.jpg"
       ],
       "product_code": "",
       "status": "pending"
