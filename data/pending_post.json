@@ -1,6 +1,6 @@
 {
   "for_date": "2026-07-18",
-  "generated_at": "2026-07-17T02:50:09.033664+09:00",
+  "generated_at": "2026-07-17T03:20:09.591853+09:00",
   "candidates": [
     {
       "product": {
@@ -94,6 +94,36 @@
       "image_url": "https://shopping-phinf.pstatic.net/main_5634717/56347172178.3.jpg",
       "detail_images": [
         "https://shopping-phinf.pstatic.net/main_5634717/56347172178.3.jpg"
+      ],
+      "product_code": "",
+      "status": "pending"
+    },
+    {
+      "product": {
+        "name": "SK매직 미니 Green41 무전원 정수기 고객직접설치",
+        "price": "139,000원",
+        "original_price": "",
+        "discount_rate": 0,
+        "image_url": "https://shopping-phinf.pstatic.net/main_5529193/55291936448.10.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=7069533036&ctag=7069533036&lptag=l801178265968&itemId=58107869681&vendorItemId=82998959480&spec=10305197",
+        "badge": "쿠팡",
+        "brand": "SK매직",
+        "category": "정수기",
+        "category_hint": "생활",
+        "mall_name": "쿠팡",
+        "source": "naver_shopping",
+        "scraped_at": "2026-07-16T18:19:28.315869",
+        "youtube_source": {
+          "title": "진작 바꿀 걸… 싱크대 골칫덩어리 해결하는 방법 #살림꿀템 #주방정리 #쿠팡추천템",
+          "video_id": "mdBbp0iVwpE",
+          "views": 420226,
+          "keyword": "살림템 추천"
+        }
+      },
+      "post_text": "물이 제일 중요한데\n정수기는 꼭 있어야 해서\n이거 쓰고 물 맛이 달라졌어",
+      "image_url": "https://shopping-phinf.pstatic.net/main_5529193/55291936448.10.jpg",
+      "detail_images": [
+        "https://shopping-phinf.pstatic.net/main_5529193/55291936448.10.jpg"
       ],
       "product_code": "",
       "status": "pending"
