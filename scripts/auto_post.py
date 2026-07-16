@@ -161,9 +161,11 @@ async def _collect_fallback() -> dict | None:
 
 async def run():
     import random
-    # KST 게이트: 새벽 차단, 11시 전 도착 시 11시까지 대기(최대 4h) — 점심 골든타임 정렬
+    # KST 게이트: 새벽 차단, 창 시작 전 도착 시 대기(최대 4h).
+    # 2026-07-16 인사이트 실측(74건): 13시 평균 403뷰·14시 538뷰(히트작 제외) vs 11시 20뷰
+    # → 창 시작 11시→13시. 되돌리려면 13.0을 11.0으로.
     from scripts.post_gate import kst_gate, photo_posted_within, coupang_posted_today
-    if not await kst_gate(11.0, 23.0, max_wait_h=4.0, label="auto"):
+    if not await kst_gate(13.0, 23.0, max_wait_h=4.0, label="auto"):
         return
     # 페이즈별 사진 상품글 간격(2026-07-13): growth=3일, 수익화(9/21~)=격일. config에서 자동 전환
     if photo_posted_within(days=photo_gate_days(), label="auto"):
