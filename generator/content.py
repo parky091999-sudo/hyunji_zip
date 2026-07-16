@@ -512,11 +512,14 @@ def ensure_not_truncated(text: str, product: dict, product_code: str = "") -> st
     m = re.search(r"\[(\d{3})\]", text or "")
     code = product_code or (m.group(1) if m else "")
     regen = _generate_post1_ai(product, code or "CODE")
-    if regen and not looks_truncated(regen) and not _has_foreign_chars(regen):
+    # regen은 _short_caption_gate(2~3줄·외국어·존댓말·중복 차단)를 이미 통과한 결과라
+    # looks_truncated로 재검열하지 않는다 — 정상 짧은 캡션의 자연스러운 종결(…거/…네/명사/이모지)을
+    # '잘림'으로 오판해 유효한 본문까지 버리고 게시가 통째로 skip되던 문제(2026-07-16) 방지.
+    # (실측: Gemini가 새 캡션을 정상 생성했는데도 looks_truncated 재검열에 걸려 [060] skip.)
+    if regen and not _has_foreign_chars(regen):
         if not code:
             regen = _strip_code_footer(regen)
         return regen
-    # fallback은 generic해서 게시 금지 — 빈 본문 반환, 호출부에서 skip 판단
     logger.warning("본문 재생성 실패 → 빈 본문 반환 (호출부에서 게시 skip)")
     return ""
 
