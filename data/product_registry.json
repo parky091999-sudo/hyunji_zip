@@ -1,5 +1,5 @@
 {
-  "next_code": 59,
+  "next_code": 60,
   "blocked_item_ids": [],
   "products": {
     "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8849967732&ctag=8849967732&lpt": {
@@ -579,6 +579,15 @@
       "image_url": "https://shopping-phinf.pstatic.net/main_5529193/55291936448.10.jpg",
       "category": "",
       "registered_at": "2026-07-15T20:34:15.461515+09:00"
+    },
+    "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=6758630930&ctag=6758630930&lpt": {
+      "code": "059",
+      "name": "쏘우체 펌핑식출액함 주방수세미 냄비세제백지청소브러쉬자동주입기 1개",
+      "short_name": "쏘우체 펌핑식출액함 주방수세미",
+      "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=6758630930&ctag=6758630930&lptag=I19657867159&itemId=19657867159&vendorItemId=86763706995&spec=10305199",
+      "image_url": "https://shopping-phinf.pstatic.net/main_6023478/60234781322.jpg",
+      "category": "",
+      "registered_at": "2026-07-16T11:01:42.222823+09:00"
     }
   }
 }
