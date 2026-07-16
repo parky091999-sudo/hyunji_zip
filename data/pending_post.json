@@ -1,31 +1,7 @@
 {
   "for_date": "2026-07-17",
-  "generated_at": "2026-07-16T02:51:40.177316+09:00",
+  "generated_at": "2026-07-16T12:55:56.413829+09:00",
   "candidates": [
-    {
-      "product": {
-        "name": "소가 휴대용 손선풍기 냉각 에어컨 선풍기 크림 FS16",
-        "price": "23,900원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_5430440/54304408894.3.jpg",
-        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8719990594&ctag=8719990594&lptag=I25328830887&itemId=25328830887&vendorItemId=91668883746&spec=10305198",
-        "badge": "쿠팡",
-        "brand": "소가",
-        "category": "선풍기",
-        "category_hint": "디지털",
-        "mall_name": "쿠팡",
-        "source": "naver_shopping",
-        "scraped_at": "2026-07-15T15:54:04.176469"
-      },
-      "post_text": "버스 기다리다 땀 흘리는 거",
-      "image_url": "https://shopping-phinf.pstatic.net/main_5430440/54304408894.3.jpg",
-      "detail_images": [
-        "https://shopping-phinf.pstatic.net/main_5430440/54304408894.3.jpg"
-      ],
-      "product_code": "",
-      "status": "pending"
-    },
     {
       "product": {
         "name": "신일전자 SHINIL 이동식 에어컨 SMA-TS900 냉방기 리모콘",
