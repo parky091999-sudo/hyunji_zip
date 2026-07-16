@@ -1,5 +1,5 @@
 {
-  "next_code": 63,
+  "next_code": 64,
   "blocked_item_ids": [],
   "products": {
     "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8849967732&ctag=8849967732&lpt": {
@@ -619,6 +619,16 @@
       "image_url": "https://shopping-phinf.pstatic.net/main_9086826/90868264588.4.jpg",
       "category": "주방",
       "registered_at": "2026-07-16T19:51:34.794421+09:00",
+      "posted": true
+    },
+    "https://www.coupang.com/vp/products/9285123744": {
+      "code": "063",
+      "name": "접이식 매트리스 소파베드",
+      "short_name": "접이식 매트리스 소파베드",
+      "url": "https://www.coupang.com/vp/products/9285123744",
+      "image_url": "https://shopping-phinf.pstatic.net/main_8252137/82521376304.7.jpg",
+      "category": "인테리어",
+      "registered_at": "2026-07-16T19:51:37.336653+09:00",
       "posted": true
     }
   }
