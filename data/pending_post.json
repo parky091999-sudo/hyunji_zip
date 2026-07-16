@@ -1,36 +1,30 @@
 {
-  "for_date": "2026-07-17",
-  "generated_at": "2026-07-16T15:43:44.681575+09:00",
+  "for_date": "2026-07-18",
+  "generated_at": "2026-07-17T00:51:18.121337+09:00",
   "candidates": [
     {
       "product": {
-        "name": "비스카 미니 세탁기 3kg",
-        "price": "69,800원",
+        "name": "마이웰 국산 가정용 혈압계 디지털 자동전자 혈압측정기 MY-1999",
+        "price": "54,900원",
         "original_price": "",
         "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_6002783/60027832876.jpg",
-        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=4313751653&ctag=4313751653&lptag=l51305220221&itemId=5225320101&vendorItemId=70524811557&spec=10305197",
+        "image_url": "https://shopping-phinf.pstatic.net/main_6077731/60777317333.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=1289359384&ctag=1289359384&lptag=l235209900831&itemId=39200893051&vendorItemId=90478067034&spec=10305198",
         "badge": "쿠팡",
-        "brand": "비스카",
-        "category": "세탁/건조기",
-        "category_hint": "생활",
+        "brand": "마이웰",
+        "category": "혈압계",
+        "category_hint": "건강",
         "mall_name": "쿠팡",
         "source": "naver_shopping",
-        "scraped_at": "2026-07-15T15:53:33.284395",
-        "youtube_source": {
-          "title": "아직도 속옷 양말 같이 빠세요? #미니세탁기 #분리세탁기 #속옷세탁기 #양말세탁기 #소형세탁기",
-          "video_id": "5Hievtq_krU",
-          "views": 4001,
-          "keyword": "자취 필수템 추천"
-        }
+        "scraped_at": "2026-07-16T15:50:03.541549"
       },
-      "post_text": "손빨래하기 싫어서 모아뒀던 양말",
-      "image_url": "https://shopping-phinf.pstatic.net/main_6002783/60027832876.jpg",
+      "post_text": "병원 가기 전부터 상태 체크하는 게 도움이 더라고\n이거 있어야 제대로 관리할 수 있겠더라\n가끔씩 확인하고 있어",
+      "image_url": "https://shopping-phinf.pstatic.net/main_6077731/60777317333.jpg",
       "detail_images": [
-        "https://shopping-phinf.pstatic.net/main_6002783/60027832876.jpg"
+        "https://shopping-phinf.pstatic.net/main_6077731/60777317333.jpg"
       ],
       "product_code": "",
-      "status": "used"
+      "status": "pending"
     },
     {
       "product": {
@@ -38,20 +32,20 @@
         "price": "69,500원",
         "original_price": "",
         "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_6085433/60854339230.jpg",
-        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9644225776&ctag=9644225776&lptag=V95754525531&itemId=28819771121&vendorItemId=95754525531&spec=10305199",
+        "image_url": "https://shopping-phinf.pstatic.net/main_6086601/60866010994.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9644225776&ctag=9644225776&lptag=I28819771121&itemId=28819771121&vendorItemId=95754525531&spec=10305199",
         "badge": "쿠팡",
         "brand": "",
         "category": "욕실용기/홀더",
         "category_hint": "주방",
         "mall_name": "쿠팡",
         "source": "naver_shopping",
-        "scraped_at": "2026-07-15T15:54:08.344246"
+        "scraped_at": "2026-07-16T15:49:48.351450"
       },
-      "post_text": "손에 비누 묻히기 싫어서",
-      "image_url": "https://shopping-phinf.pstatic.net/main_6085433/60854339230.jpg",
+      "post_text": "손님 오면 세면대가 엉망인 거 봐\n사진 보니까 더 만족스러워\n손님 오거나 혼자 살거나 이건 필수임",
+      "image_url": "https://shopping-phinf.pstatic.net/main_6086601/60866010994.jpg",
       "detail_images": [
-        "https://shopping-phinf.pstatic.net/main_6085433/60854339230.jpg"
+        "https://shopping-phinf.pstatic.net/main_6086601/60866010994.jpg"
       ],
       "product_code": "",
       "status": "pending"
@@ -70,9 +64,9 @@
         "category_hint": "생활",
         "mall_name": "쿠팡",
         "source": "naver_shopping",
-        "scraped_at": "2026-07-15T15:54:17.118766"
+        "scraped_at": "2026-07-16T15:49:57.206104"
       },
-      "post_text": "칫솔 위생 걱정돼서 여행",
+      "post_text": "씻은 칫솔을 그냥 두는 건 위생적인가 싶어\n칫솔 관리하는 게 중요하다는 생각했어\n그럴 때 사용하기 좋은 물건이야",
       "image_url": "https://shopping-phinf.pstatic.net/main_2386835/23868356238.jpg",
       "detail_images": [
         "https://shopping-phinf.pstatic.net/main_2386835/23868356238.jpg"
@@ -82,30 +76,24 @@
     },
     {
       "product": {
-        "name": "SK매직 미니 Green41 무전원 정수기 고객직접설치",
-        "price": "139,000원",
+        "name": "제노벤 스팀청소기 고압 살균 올인원 가정용 차량용 화이트 CNT-QX-SXYT",
+        "price": "144,900원",
         "original_price": "",
         "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_5529193/55291936448.10.jpg",
-        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=7069533036&ctag=7069533036&lptag=l801178265968&itemId=58107869681&vendorItemId=82998959480&spec=10305197",
+        "image_url": "https://shopping-phinf.pstatic.net/main_5634717/56347172178.3.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8867649453&ctag=8867649453&lptag=I25865217656&itemId=25865217656&vendorItemId=93203771805&spec=10305198",
         "badge": "쿠팡",
-        "brand": "SK매직",
-        "category": "정수기",
+        "brand": "",
+        "category": "스팀청소기",
         "category_hint": "생활",
         "mall_name": "쿠팡",
         "source": "naver_shopping",
-        "scraped_at": "2026-07-15T17:51:27.674392",
-        "youtube_source": {
-          "title": "진작 바꿀 걸… 싱크대 골칫덩어리 해결하는 방법 #살림꿀템 #주방정리 #쿠팡추천템",
-          "video_id": "mdBbp0iVwpE",
-          "views": 349232,
-          "keyword": "살림템 추천"
-        }
+        "scraped_at": "2026-07-16T15:49:59.998191"
       },
-      "post_text": "물통에 물 채우는 것도 일인데 정",
-      "image_url": "https://shopping-phinf.pstatic.net/main_5529193/55291936448.10.jpg",
+      "post_text": "요즘 집 구석구석 청소하기가 너무 귀찮더라\n이거 때문에 마음이 편해졌음\n청소하기 전에 이 사진 먼저 보고 주문했어",
+      "image_url": "https://shopping-phinf.pstatic.net/main_5634717/56347172178.3.jpg",
       "detail_images": [
-        "https://shopping-phinf.pstatic.net/main_5529193/55291936448.10.jpg"
+        "https://shopping-phinf.pstatic.net/main_5634717/56347172178.3.jpg"
       ],
       "product_code": "",
       "status": "pending"
