@@ -7,6 +7,7 @@ import asyncio
 import json
 import logging
 import os
+import re
 import sys
 from datetime import datetime, timezone, timedelta
 
@@ -68,12 +69,18 @@ def _pick_from_pending() -> dict | None:
     today = datetime.now(KST).strftime("%Y-%m-%d")
     yesterday = (datetime.now(KST) - timedelta(days=1)).strftime("%Y-%m-%d")
 
-    file_date = pending.get("for_date", "없음")
-    if file_date not in (today, yesterday):
-        logger.info(f"  pending_post 날짜 불일치 (기대: {today}, 파일: {file_date})")
+    # 크론 지연(실측 7~12h)으로 preselect가 저장한 for_date(=내일)가 실제 게시일보다
+    # 앞서는 드리프트가 상시 발생 → today/yesterday 고정 비교는 매일 불일치해 실시간
+    # 폴백(저품질 상품 → 본문 게이트 실패 → 미발행)으로 샜다(2026-07-16 규명).
+    # 후보는 날짜와 무관하게 유효(posted_ids가 재게시 차단)하므로 '어제 이후'를 폭넓게 수용.
+    file_date = pending.get("for_date", "")
+    if not re.match(r"^\d{4}-\d{2}-\d{2}$", file_date) or file_date < yesterday:
+        logger.info(f"  pending_post 날짜 부적합 (기대: >={yesterday}, 파일: {file_date or '없음'})")
         return None
-    if file_date == yesterday:
-        logger.info(f"  pending_post 날짜 1일 초과 (어제 후보 사용)")
+    if file_date < today:
+        logger.info(f"  pending_post 과거 후보 사용 (파일: {file_date})")
+    elif file_date > today:
+        logger.info(f"  pending_post 선행 후보 사용 (파일: {file_date}) — 크론 지연 드리프트 흡수")
 
     candidates = pending.get("candidates", [])
     if not candidates:

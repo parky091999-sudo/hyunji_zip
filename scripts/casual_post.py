@@ -110,9 +110,11 @@ def run():
         logger.warning("일상글 생성 실패 — 종료")
         return
 
-    # 잘림 안전망: 100자 미만이거나 문장 미완성으로 끝나면 게시 차단
+    # 잘림 안전망: 사실상 빈/잘린 응답이거나 문장 미완성으로 끝나면 게시 차단.
+    # 임계 100→20 하향(2026-07-16): 스레드 일상글은 짧을수록 잘 읽혀 2~3줄 훅 포맷을
+    # 허용해야 함 — 100자 하한이 오히려 긴 글을 강제했다. 진짜 잘림은 아래 문장완결 검사가 잡는다.
     body = post_text.strip()
-    if len(body) < 100:
+    if len(body) < 20:
         logger.warning(f"일상글 너무 짧음({len(body)}자) — 잘림 의심으로 게시 차단")
         return
     # 끝 이모지 제거 후 마지막 의미 문자 확인 (이모지 장식 뒤 '?' 등 정상 종결 오탐 방지)
@@ -121,9 +123,16 @@ def run():
     )
     body_no_emoji = _EMOJI_TAIL_RE.sub("", body).rstrip("#가-힣 \n").rstrip()
     last_char = body_no_emoji[-1:] if body_no_emoji else ""
-    if last_char and last_char not in "다요임어야겠네봄않함봐!?~)♥.…":
+    # ㅋㅎㅠㅜ 추가(2026-07-16): 짧은 반말 일상글은 'ㅋㅋ/ㅎㅎ/ㅠㅠ'로 끝나는 게 자연스러운데
+    # 기존 집합엔 없어 정상 글이 '미완성'으로 오탐 차단됐다.
+    if last_char and last_char not in "다요임어야겠네봄않함봐!?~)♥.…ㅋㅎㅠㅜ":
         logger.warning(f"일상글 문장 미완성('...{body[-15:]}') — 잘림 의심으로 게시 차단")
         return
+
+    # 자취일기 시리즈 번호는 '게시 성공 후'에만 카운터를 소비 — 게이트 차단·발행 실패로
+    # 안 올라간 글이 번호만 먹어 발행 시리즈가 띄엄띄엄 어긋나던 문제(2026-07-16) 방지.
+    from generator.content import renumber_diary, commit_diary_number
+    post_text, diary_n = renumber_diary(post_text)
 
     logger.info(f"생성된 글:\n{post_text}")
 
@@ -142,6 +151,8 @@ def run():
     if result:
         post_url = result.get("post_url")
         post_id = result.get("post_id")
+        if diary_n is not None:
+            commit_diary_number(diary_n)  # 발행 성공 시에만 다음 번호로 확정
         _save_json(TRACKER_PATH, {"last_posted_at": now_str})
         if post_url and post_id:
             add_recent_post(post_url, post_id, "story")
