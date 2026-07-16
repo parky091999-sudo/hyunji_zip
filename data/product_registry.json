@@ -608,7 +608,8 @@
       "image_url": "https://shopping-phinf.pstatic.net/main_5971101/59711014581.jpg",
       "category": "생활",
       "registered_at": "2026-07-16T15:41:28.022898+09:00",
-      "posted": true
+      "posted": true,
+      "removed": true
     }
   }
 }
