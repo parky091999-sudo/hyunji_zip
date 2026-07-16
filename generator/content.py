@@ -102,6 +102,26 @@ has_bad_english = _has_bad_english  # 외부 모듈용 공개 별칭
 # 마지막 줄이 종결 어미로 끝나는지)을 게시 *전* 단계에서 적용한다.
 _SENTENCE_END_RE = re.compile(r'[다요임음어야겠네봄않함봐걸래지자중듯!?~\).♥]$')
 
+# 연결어미·조사에서 끊긴 '미완성 꼬리' — 짧은 캡션이 여기서 끝나면 잘림으로 간주.
+# (2026-07-16: "…흘리고 들어" 1줄 파편이 게시된 사고. _SENTENCE_END_RE만으론 '들어'가
+#  '어' 종결로 보여 완성 오판 → 연결형/조사 종결을 별도로 잡는다.)
+_DANGLING_TAIL_RE = re.compile(
+    r"(?:"
+    r"들어|들어와|나와|"                                     # 동사 연결 파편
+    r"[가-힣]*고|"                                          # …고 (흘리고/하고)
+    r"[가-힣]*(?:아서|어서|여서|해서|라서)|"                    # …서 연결
+    r"[가-힣]*(?:는데|은데|던데)|"                            # …는데
+    r"[가-힣]*(?:다가|려고|으려고|면서|으면서|지만|거나|든지|든가)|"  # 기타 연결어미
+    r"[가-힣]*(?:으로|에서|에게|한테|부터|까지|처럼|보다)|"        # 서술 필요 조사
+    r"[가-힣]*(?:을|를|의|와|과|랑|이랑)"                      # 목적·속격 조사
+    r")\s*$"
+)
+
+# 끝에 붙은 이모지·장식 — 완결 판정 전에 떼어낸다(이모지로 끝나는 정상 캡션 오탐 방지)
+_TRAIL_EMOJI_RE = re.compile(
+    r'[\U0001F000-\U0010FFFF☀-➿←-⇿⬀-⯿️‍⭐✅❤]+\s*$'
+)
+
 
 def looks_truncated(text: str) -> bool:
     body = _strip_code_footer(text or "").strip()
@@ -118,7 +138,13 @@ def looks_truncated(text: str) -> bool:
         return False
     if re.search(r'(spec|itemId|vendorItemId|pageKey|ctag|lptag)=\d+\s*$', last_line):
         return False
-    return not bool(_SENTENCE_END_RE.search(last_line))
+    # 끝 이모지 제외 후 완결 판정 (이모지로 끝나는 정상 캡션의 오탐 방지)
+    core = _TRAIL_EMOJI_RE.sub("", last_line).strip()
+    if not core:
+        return False  # 이모지만 남는 끝줄은 의도된 마무리
+    if _DANGLING_TAIL_RE.search(core):   # 연결어미/조사에서 끊긴 미완성
+        return True
+    return not bool(_SENTENCE_END_RE.search(core))
 
 
 def _recent_first_lines(limit: int = 8) -> list[str]:
@@ -301,10 +327,12 @@ _SHORT_POST_SYSTEM_TMPL = """
 {intro}
 
 ━━━ 형식 (가장 중요) ━━━
-- 전체 2~3줄. 한 줄 40자 이내. 그 이상 절대 금지.
+- 반드시 2~3줄(1줄로 끝내지 마). 한 줄 40자 이내. 그 이상 절대 금지.
 - 1줄째 = 훅: {hook_goal}.
   (공감 상황·놀라움·궁금증 중 하나 — 매번 완전히 다른 표현으로. 예시 복사 금지)
-- 2~3줄째(선택): {second}.
+- 2~3줄째: {second}.
+- ★반드시 완성된 문장으로 끝내. 연결어미(…흘리고/…들어와서/…하는데)나 조사(…을/…를/…으로)에서
+  문장을 끊지 마 — 중간에 잘린 것처럼 보이면 안 됨.
 - 해시태그 금지. 기능 나열 금지. 리뷰 인용 금지.
 - 이모지 0~1개.
 
@@ -327,7 +355,7 @@ _HONORIFIC_RE = re.compile(
 
 
 def _short_caption_gate(cand: str) -> str | None:
-    """짧은 캡션 게이트 — 2~3줄·줄당 50자·해시태그 제거·존댓말 차단·기존 품질 게이트."""
+    """짧은 캡션 게이트 — 2~3줄·줄당 50자·해시태그 제거·존댓말 차단·완성문장·기존 품질 게이트."""
     cand = (cand or "").strip().strip("\"'“”‘’")
     if not cand or _has_foreign_chars(cand) or _has_bad_english(cand) or _is_dup_hook(cand):
         return None
@@ -335,7 +363,11 @@ def _short_caption_gate(cand: str) -> str | None:
         return None
     lines = [l for l in (x.strip() for x in cand.split("\n")) if l]
     lines = [l for l in lines if not l.startswith("#")]
-    if not (1 <= len(lines) <= 3) or any(len(l) > 50 for l in lines):
+    # 2~3줄 강제 — 1줄짜리는 대개 잘린 파편("…흘리고 들어" 사고, 2026-07-16). 줄당 50자.
+    if not (2 <= len(lines) <= 3) or any(len(l) > 50 for l in lines):
+        return None
+    # 마지막 줄이 연결어미/조사에서 끊기면 미완성 → 탈락(재생성 유도, 최종 폴백은 완성문장)
+    if _DANGLING_TAIL_RE.search(lines[-1]):
         return None
     return "\n".join(lines)
 
