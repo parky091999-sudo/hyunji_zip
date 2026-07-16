@@ -1,5 +1,5 @@
 {
-  "next_code": 67,
+  "next_code": 68,
   "blocked_item_ids": [],
   "products": {
     "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8849967732&ctag=8849967732&lpt": {
@@ -659,6 +659,16 @@
       "image_url": "https://shopping-phinf.pstatic.net/main_9061287/9061287968.19.jpg",
       "category": "인테리어",
       "registered_at": "2026-07-16T19:51:44.662850+09:00",
+      "posted": true
+    },
+    "https://www.coupang.com/vp/products/6296437697?itemId=12996300148": {
+      "code": "067",
+      "name": "WD-40 다목적 윤활 방청제",
+      "short_name": "다목적 윤활 방청제",
+      "url": "https://www.coupang.com/vp/products/6296437697?itemId=12996300148",
+      "image_url": "https://shopping-phinf.pstatic.net/main_5436873/54368734336.20260106120732.jpg",
+      "category": "생활",
+      "registered_at": "2026-07-16T19:51:47.050266+09:00",
       "posted": true
     }
   }
