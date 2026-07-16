@@ -1,5 +1,5 @@
 {
-  "next_code": 71,
+  "next_code": 72,
   "blocked_item_ids": [],
   "products": {
     "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8849967732&ctag=8849967732&lpt": {
@@ -699,6 +699,16 @@
       "image_url": "https://shopping-phinf.pstatic.net/main_1023268/10232680014.15.jpg",
       "category": "식품",
       "registered_at": "2026-07-16T19:51:54.373772+09:00",
+      "posted": true
+    },
+    "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=4313751653&ctag=4313751653&lpt": {
+      "code": "071",
+      "name": "비스카 미니 세탁기 3kg",
+      "short_name": "비스카 미니 세탁기 3kg",
+      "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=4313751653&ctag=4313751653&lptag=l51305220221&itemId=5225320101&vendorItemId=70524811557&spec=10305197",
+      "image_url": "https://shopping-phinf.pstatic.net/main_6002783/60027832876.jpg",
+      "category": "생활",
+      "registered_at": "2026-07-16T20:09:57.349482+09:00",
       "posted": true
     }
   }
