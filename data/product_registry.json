@@ -1,5 +1,5 @@
 {
-  "next_code": 70,
+  "next_code": 71,
   "blocked_item_ids": [],
   "products": {
     "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8849967732&ctag=8849967732&lpt": {
@@ -689,6 +689,16 @@
       "image_url": "https://shopping-phinf.pstatic.net/main_9107702/91077025912.jpg",
       "category": "주방",
       "registered_at": "2026-07-16T19:51:51.922846+09:00",
+      "posted": true
+    },
+    "https://www.coupang.com/vp/products/9182041550?itemId=27079751460": {
+      "code": "070",
+      "name": "레몬청",
+      "short_name": "레몬청",
+      "url": "https://www.coupang.com/vp/products/9182041550?itemId=27079751460",
+      "image_url": "https://shopping-phinf.pstatic.net/main_1023268/10232680014.15.jpg",
+      "category": "식품",
+      "registered_at": "2026-07-16T19:51:54.373772+09:00",
       "posted": true
     }
   }
