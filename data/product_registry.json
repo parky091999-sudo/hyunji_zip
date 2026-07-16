@@ -1,5 +1,5 @@
 {
-  "next_code": 61,
+  "next_code": 62,
   "blocked_item_ids": [],
   "products": {
     "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8849967732&ctag=8849967732&lpt": {
@@ -599,6 +599,16 @@
       "registered_at": "2026-07-16T12:47:00.066201+09:00",
       "posted": true,
       "removed": true
+    },
+    "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8909690050&ctag=8909690050&lpt": {
+      "code": "061",
+      "name": "신일전자 SHINIL 이동식 에어컨 SMA-TS900 냉방기 리모콘",
+      "short_name": "신일전자 SHINIL 이동식 에어컨",
+      "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8909690050&ctag=8909690050&lptag=I26025719091&itemId=26025719091&vendorItemId=93007364478&spec=10305199",
+      "image_url": "https://shopping-phinf.pstatic.net/main_5971101/59711014581.jpg",
+      "category": "생활",
+      "registered_at": "2026-07-16T15:41:28.022898+09:00",
+      "posted": true
     }
   }
 }

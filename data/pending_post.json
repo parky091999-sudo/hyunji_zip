@@ -1,61 +1,7 @@
 {
   "for_date": "2026-07-17",
-  "generated_at": "2026-07-16T12:55:56.413829+09:00",
+  "generated_at": "2026-07-16T15:43:44.681575+09:00",
   "candidates": [
-    {
-      "product": {
-        "name": "신일전자 SHINIL 이동식 에어컨 SMA-TS900 냉방기 리모콘",
-        "price": "485,000원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_5971101/59711014581.jpg",
-        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8909690050&ctag=8909690050&lptag=I26025719091&itemId=26025719091&vendorItemId=93007364478&spec=10305199",
-        "badge": "쿠팡",
-        "brand": "신일전자",
-        "category": "에어컨",
-        "category_hint": "생활",
-        "mall_name": "쿠팡",
-        "source": "naver_shopping",
-        "scraped_at": "2026-07-15T15:53:28.229332",
-        "youtube_source": {
-          "title": "신일 이동식 에어컨 집주인 허락, 실외기 필요 없어요. 자취생 필수템 SMA-TS900, SMA-S9000",
-          "video_id": "fa618xUGkQM",
-          "views": 11940,
-          "keyword": "자취 필수템 추천"
-        }
-      },
-      "post_text": "집에 더운 공기가 맴돌 때",
-      "image_url": "https://shopping-phinf.pstatic.net/main_5971101/59711014581.jpg",
-      "detail_images": [
-        "https://shopping-phinf.pstatic.net/main_5971101/59711014581.jpg"
-      ],
-      "product_code": "",
-      "status": "pending"
-    },
-    {
-      "product": {
-        "name": "벽걸이형 자동 센서 비누 디스펜서 거품기 크림색 1개",
-        "price": "69,500원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_6085433/60854339230.jpg",
-        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9644225776&ctag=9644225776&lptag=V95754525531&itemId=28819771121&vendorItemId=95754525531&spec=10305199",
-        "badge": "쿠팡",
-        "brand": "",
-        "category": "욕실용기/홀더",
-        "category_hint": "주방",
-        "mall_name": "쿠팡",
-        "source": "naver_shopping",
-        "scraped_at": "2026-07-15T15:54:08.344246"
-      },
-      "post_text": "손에 비누 묻히기 싫어서",
-      "image_url": "https://shopping-phinf.pstatic.net/main_6085433/60854339230.jpg",
-      "detail_images": [
-        "https://shopping-phinf.pstatic.net/main_6085433/60854339230.jpg"
-      ],
-      "product_code": "",
-      "status": "pending"
-    },
     {
       "product": {
         "name": "비스카 미니 세탁기 3kg",
@@ -82,6 +28,30 @@
       "image_url": "https://shopping-phinf.pstatic.net/main_6002783/60027832876.jpg",
       "detail_images": [
         "https://shopping-phinf.pstatic.net/main_6002783/60027832876.jpg"
+      ],
+      "product_code": "",
+      "status": "pending"
+    },
+    {
+      "product": {
+        "name": "벽걸이형 자동 센서 비누 디스펜서 거품기 크림색 1개",
+        "price": "69,500원",
+        "original_price": "",
+        "discount_rate": 0,
+        "image_url": "https://shopping-phinf.pstatic.net/main_6085433/60854339230.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9644225776&ctag=9644225776&lptag=V95754525531&itemId=28819771121&vendorItemId=95754525531&spec=10305199",
+        "badge": "쿠팡",
+        "brand": "",
+        "category": "욕실용기/홀더",
+        "category_hint": "주방",
+        "mall_name": "쿠팡",
+        "source": "naver_shopping",
+        "scraped_at": "2026-07-15T15:54:08.344246"
+      },
+      "post_text": "손에 비누 묻히기 싫어서",
+      "image_url": "https://shopping-phinf.pstatic.net/main_6085433/60854339230.jpg",
+      "detail_images": [
+        "https://shopping-phinf.pstatic.net/main_6085433/60854339230.jpg"
       ],
       "product_code": "",
       "status": "pending"
