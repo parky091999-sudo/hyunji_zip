@@ -304,10 +304,11 @@ _SHORT_MEDIA = {
         "hook_goal": "'어? 뭐지' 하고 영상을 누르게 만드는 단 한 줄",
         "second": "영상을 보라고 등 떠미는 말, 또는 짧은 감탄 한 줄",
         "user_ask": "이 상품 영상에 붙일 2~3줄 소개글을 써줘.",
+        # 폴백도 상품이 드러나게 — "아무 영상에나 붙는 범용 문구" 금지(2026-07-17 사용자 피드백)
         "fallback": [
-            "이거 쓰는 영상 보고 바로 홀렸음\n궁금하면 끝까지 봐봐",
-            "요즘 내 살림 최애가 뭐냐면\n영상 보면 바로 알걸",
-            "이 영상 보고 안 사고 버틸 수 있나\n나는 실패했음",
+            "{noun} 이렇게 쓰는 거 처음 봤음\n영상 끝까지 봐봐",
+            "요즘 {noun} 이걸로 바꿨는데\n영상 보면 왜인지 알 거임",
+            "{noun} 영상 보고 안 사고 버티나 봐라\n나는 실패했음",
         ],
     },
     "photo": {
@@ -316,12 +317,25 @@ _SHORT_MEDIA = {
         "second": "사진이나 댓글을 확인하게 만드는 말, 또는 짧은 감탄 한 줄",
         "user_ask": "이 상품 사진들에 붙일 2~3줄 소개글을 써줘.",
         "fallback": [
-            "이거 왜 이제 알았지 싶은 물건 발견함\n사진 보면 무슨 말인지 알걸",
-            "장바구니에 넣고 고민만 삼일 하다 삼\n결론: 더 빨리 살걸 그랬음",
-            "요즘 집에서 제일 손 많이 가는 애가 이거임\n궁금하면 댓글 봐봐",
+            "{noun} 이거 왜 이제 알았지 싶음\n사진 보면 무슨 말인지 알걸",
+            "{noun} 장바구니에 넣고 고민만 삼일 함\n결론: 더 빨리 살걸 그랬음",
+            "요즘 집에서 제일 손 많이 가는 게 이 {noun}\n궁금하면 댓글 봐봐",
         ],
     },
 }
+
+# 제품군 단어 추출 — 캡션이 '어떤 물건 얘긴지'는 드러나야 한다(2026-07-17 사용자 피드백:
+# 상품명 전체 금지 규칙이 범용 미끼문구·모호문을 양산). 브랜드/수식어를 떼고
+# 이름 끝쪽의 한글 명사(예: '비스카 미니 세탁기 3kg'→'세탁기', '매직 행주'→'행주')를 쓴다.
+_NOUN_STOP = {"세트", "구성", "개입", "택1", "모음", "사이즈", "리필", "본품"}
+
+
+def _product_noun(name: str) -> str:
+    tokens = re.findall(r"[가-힣]{2,}", name or "")
+    for t in reversed(tokens):
+        if t not in _NOUN_STOP:
+            return t
+    return ""
 
 _SHORT_POST_SYSTEM_TMPL = """
 너는 Threads(@hyunji_ssi)에서 1인 가구 일상을 적는 20대 여자 '현지'야.
@@ -340,7 +354,10 @@ _SHORT_POST_SYSTEM_TMPL = """
 ━━━ 말투 규칙 ━━━
 편안한 반말 — 친구한테 카톡 보내듯. 허용 어미: ~하더라 / ~더라고 / ~거든 / ~했음 / ~임
 절대 금지: "~냐?"류 공격조 / "~이다"·"~된다" 뉴스체 / 존댓말 / "~같다" 추측 / 반말↔존댓말 혼용
-가격 언급 금지. 상품명 직접 언급 금지 — 상황·효과로만 표현해.
+★실제 한국인이 매일 쓰는 자연스러운 입말만. 번역투·꼬인 어미 금지
+  (나쁜 예: "느낌도 든단 거 같더라", "~하는 거 같단 거"). 소리 내 읽어 어색하면 다시 써.
+가격·브랜드명·모델명 언급 금지. 대신 아래 [제품 종류] 단어는 본문에 딱 1번 자연스럽게 넣어 —
+  무슨 물건 얘긴지는 글만 봐도 알게(아무 상품에나 붙는 범용 문구 금지).
 반드시 한국어만. 텍스트만 출력(따옴표·메타설명·안내문구 금지).
 
 ━━━ 좋은 예 (그대로 복사 금지) ━━━
@@ -355,12 +372,15 @@ _HONORIFIC_RE = re.compile(
 )
 
 
-def _short_caption_gate(cand: str) -> str | None:
-    """짧은 캡션 게이트 — 2~3줄·줄당 50자·해시태그 제거·존댓말 차단·완성문장·기존 품질 게이트."""
+def _short_caption_gate(cand: str, noun: str = "") -> str | None:
+    """짧은 캡션 게이트 — 2~3줄·줄당 50자·해시태그 제거·존댓말 차단·완성문장·제품군 언급."""
     cand = (cand or "").strip().strip("\"'“”‘’")
     if not cand or _has_foreign_chars(cand) or _has_bad_english(cand) or _is_dup_hook(cand):
         return None
     if _HONORIFIC_RE.search(cand):
+        return None
+    # 제품군 단어 필수 — 무슨 물건인지 안 드러나는 범용 미끼문구 차단(2026-07-17)
+    if noun and noun not in cand:
         return None
     lines = [l for l in (x.strip() for x in cand.split("\n")) if l]
     lines = [l for l in lines if not l.startswith("#")]
@@ -381,7 +401,10 @@ def _generate_short_post(product: dict, product_code: str, media: str = "photo")
     system = _SHORT_POST_SYSTEM_TMPL.format(
         intro=m["intro"], hook_goal=m["hook_goal"], second=m["second"])
     name = product.get("name", "")
-    user_msg = f"상품명: {name}\n\n{m['user_ask']}"
+    noun = _product_noun(name)
+    user_msg = f"상품명: {name}\n[제품 종류] {noun or '(추출 실패 — 상품명에서 물건 종류를 파악해 그 단어를 넣어)'}\n\n{m['user_ask']}"
+    if noun:
+        user_msg += f"\n- 본문에 '{noun}' 단어를 딱 1번 자연스럽게 포함해."
     banned = _recent_first_lines()
     if banned:
         user_msg += "\n\n[중요] 아래 최근 첫 문장들과 같거나 비슷하게 시작 금지:\n"
@@ -402,7 +425,7 @@ def _generate_short_post(product: dict, product_code: str, media: str = "photo")
                         temperature=0.95,
                     ),
                 )
-                body = _short_caption_gate(resp.text)
+                body = _short_caption_gate(resp.text, noun=noun)
                 if body:
                     logger.info(f"  [Gemini] 짧은 캡션({media}) 생성 완료")
                     return f"{body}\n\n{_CODE_LINE.format(code=product_code)}"
@@ -424,15 +447,16 @@ def _generate_short_post(product: dict, product_code: str, media: str = "photo")
                     max_tokens=300,
                     temperature=0.9 if attempt == 0 else 0.6,
                 )
-                body = _short_caption_gate(resp.choices[0].message.content)
+                body = _short_caption_gate(resp.choices[0].message.content, noun=noun)
                 if body:
                     logger.info(f"  [Groq 폴백] 짧은 캡션({media}) 생성 완료")
                     return f"{body}\n\n{_CODE_LINE.format(code=product_code)}"
                 logger.warning(f"짧은 캡션(Groq) 게이트 탈락 → 재시도 {attempt + 1}/3")
         except Exception as e:
             logger.warning(f"Groq 짧은 캡션 실패: {e}")
-    logger.warning(f"짧은 캡션({media}) AI 생성 전부 실패 — 고정 훅 폴백")
-    return f"{random.choice(m['fallback'])}\n\n{_CODE_LINE.format(code=product_code)}"
+    logger.warning(f"짧은 캡션({media}) AI 생성 전부 실패 — 상품 인지 폴백")
+    fb = random.choice(m["fallback"]).format(noun=noun or "이거")
+    return f"{fb}\n\n{_CODE_LINE.format(code=product_code)}"
 
 
 def generate_video_post_text(product: dict, product_code: str) -> str:
@@ -444,7 +468,8 @@ def generate_video_post_text(product: dict, product_code: str) -> str:
 
 def _post1_fallback(name: str, product_code: str) -> str:
     """짧은 포맷 고정 훅 폴백 (fix_post_code 등 외부 호환용, 2026-07-13 단축)."""
-    return f"{random.choice(_SHORT_MEDIA['photo']['fallback'])}\n\n{_CODE_LINE.format(code=product_code)}"
+    fb = random.choice(_SHORT_MEDIA["photo"]["fallback"]).format(noun=_product_noun(name) or "이거")
+    return f"{fb}\n\n{_CODE_LINE.format(code=product_code)}"
 
 
 # ── 쿠팡 상세 이미지 수집 ────────────────────────────────────────────────────

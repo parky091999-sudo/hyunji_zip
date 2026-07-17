@@ -93,6 +93,23 @@ def photo_posted_within(days: int = 2, label: str = "") -> bool:
     return False
 
 
+def refresh_shared_feed(label: str = "") -> None:
+    """공유 상태(feed_posts.json)를 원격 최신으로 당김 — 발행 '직전' 재판정용 (best-effort).
+
+    2026-07-17 실사고: 저녁 사진 워크플로가 게이트 통과 후 생성하는 몇 분 사이에
+    osmu 영상이 먼저 발행돼 같은 날 사진+영상이 겹침(판정 시점의 체크아웃이 스테일).
+    발행 직전 git pull 후 coupang_posted_today()를 한 번 더 호출해 레이스 창을 좁힌다.
+    """
+    import subprocess
+    try:
+        root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        subprocess.run(["git", "pull", "--rebase", "--autostash", "-q"],
+                       cwd=root, timeout=60, check=False,
+                       capture_output=True)
+    except Exception as e:
+        logger.info(f"[{label}] 공유 피드 pull 실패(무시하고 로컬 판정): {e}")
+
+
 def coupang_posted_today(label: str = "") -> bool:
     """오늘(KST) 이미 쿠파스 상품글(사진 or 영상)이 나갔는지 — '하루 1쿠파스 상한'.
 

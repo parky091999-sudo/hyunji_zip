@@ -304,6 +304,13 @@ async def run():
 
     logger.info(f"포스팅: {product.get('name', '')[:40]} [{code}]")
 
+    # 발행 직전 재판정 — 게이트 통과 후 생성하는 몇 분 사이 osmu 영상이 먼저 나가는
+    # 레이스 차단(2026-07-16 사진+영상 같은 날 겹침 실사고). 최신 feed를 당겨 다시 확인.
+    from scripts.post_gate import refresh_shared_feed
+    refresh_shared_feed(label="evening")
+    if coupang_posted_today(label="evening(직전 재판정)"):
+        return
+
     # 멱등 가드
     result = None
     already = None
