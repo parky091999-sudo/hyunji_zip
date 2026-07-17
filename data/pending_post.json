@@ -1,99 +1,27 @@
 {
-  "for_date": "2026-07-18",
-  "generated_at": "2026-07-17T13:01:10.345853+09:00",
+  "for_date": "2026-07-19",
+  "generated_at": "2026-07-18T00:45:29.901496+09:00",
   "candidates": [
     {
       "product": {
-        "name": "마이웰 국산 가정용 혈압계 디지털 자동전자 혈압측정기 MY-1999",
-        "price": "54,900원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_6077731/60777317333.jpg",
-        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=1289359384&ctag=1289359384&lptag=l235209900831&itemId=39200893051&vendorItemId=90478067034&spec=10305198",
-        "badge": "쿠팡",
-        "brand": "마이웰",
-        "category": "혈압계",
-        "category_hint": "건강",
-        "mall_name": "쿠팡",
-        "source": "naver_shopping",
-        "scraped_at": "2026-07-16T15:50:03.541549"
-      },
-      "post_text": "병원 가기 전부터 상태 체크하는 게 도움이 더라고\n이거 있어야 제대로 관리할 수 있겠더라\n가끔씩 확인하고 있어",
-      "image_url": "https://shopping-phinf.pstatic.net/main_6077731/60777317333.jpg",
-      "detail_images": [
-        "https://shopping-phinf.pstatic.net/main_6077731/60777317333.jpg"
-      ],
-      "product_code": "",
-      "status": "pending"
-    },
-    {
-      "product": {
-        "name": "벽걸이형 자동 센서 비누 디스펜서 거품기 크림색 1개",
+        "name": "벽걸이형 자동 센서 비누 디스펜서 거품기 레드 1개",
         "price": "69,500원",
         "original_price": "",
         "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_6086601/60866010994.jpg",
-        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9644225776&ctag=9644225776&lptag=I28819771121&itemId=28819771121&vendorItemId=95754525531&spec=10305199",
+        "image_url": "https://shopping-phinf.pstatic.net/main_6085374/60853745518.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9644225776&ctag=9644225776&lptag=V95754525530&itemId=28819771118&vendorItemId=95754525530&spec=10305199",
         "badge": "쿠팡",
         "brand": "",
         "category": "욕실용기/홀더",
         "category_hint": "주방",
         "mall_name": "쿠팡",
         "source": "naver_shopping",
-        "scraped_at": "2026-07-16T15:49:48.351450"
+        "scraped_at": "2026-07-17T15:44:02.168151"
       },
-      "post_text": "손님 오면 세면대가 엉망인 거 봐\n사진 보니까 더 만족스러워\n손님 오거나 혼자 살거나 이건 필수임",
-      "image_url": "https://shopping-phinf.pstatic.net/main_6086601/60866010994.jpg",
+      "post_text": "설거지할 때 비누 만지다가 손에 비누 묻어나면 귀찮더라\n이거 있으니 그런 걱정 없잖아\n레드 색상이랑 디자인이 예쁘게 보여서 만족스럽더라",
+      "image_url": "https://shopping-phinf.pstatic.net/main_6085374/60853745518.jpg",
       "detail_images": [
-        "https://shopping-phinf.pstatic.net/main_6086601/60866010994.jpg"
-      ],
-      "product_code": "",
-      "status": "pending"
-    },
-    {
-      "product": {
-        "name": "씨즌M닷컴 카카오프렌즈 휴대용 UV살균 칫솔케이스 라이언 RYAN 라이언001",
-        "price": "27,900원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_2386835/23868356238.jpg",
-        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=1501239636&ctag=1501239636&lptag=P1501239636&itemId=2577588578&vendorItemId=70569850445&spec=10305199",
-        "badge": "쿠팡",
-        "brand": "",
-        "category": "구강청정기",
-        "category_hint": "생활",
-        "mall_name": "쿠팡",
-        "source": "naver_shopping",
-        "scraped_at": "2026-07-16T15:49:57.206104"
-      },
-      "post_text": "씻은 칫솔을 그냥 두는 건 위생적인가 싶어\n칫솔 관리하는 게 중요하다는 생각했어\n그럴 때 사용하기 좋은 물건이야",
-      "image_url": "https://shopping-phinf.pstatic.net/main_2386835/23868356238.jpg",
-      "detail_images": [
-        "https://shopping-phinf.pstatic.net/main_2386835/23868356238.jpg"
-      ],
-      "product_code": "",
-      "status": "pending"
-    },
-    {
-      "product": {
-        "name": "제노벤 스팀청소기 고압 살균 올인원 가정용 차량용 화이트 CNT-QX-SXYT",
-        "price": "144,900원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_5634717/56347172178.3.jpg",
-        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8867649453&ctag=8867649453&lptag=I25865217656&itemId=25865217656&vendorItemId=93203771805&spec=10305198",
-        "badge": "쿠팡",
-        "brand": "",
-        "category": "스팀청소기",
-        "category_hint": "생활",
-        "mall_name": "쿠팡",
-        "source": "naver_shopping",
-        "scraped_at": "2026-07-16T15:49:59.998191"
-      },
-      "post_text": "요즘 집 구석구석 청소하기가 너무 귀찮더라\n이거 때문에 마음이 편해졌음\n청소하기 전에 이 사진 먼저 보고 주문했어",
-      "image_url": "https://shopping-phinf.pstatic.net/main_5634717/56347172178.3.jpg",
-      "detail_images": [
-        "https://shopping-phinf.pstatic.net/main_5634717/56347172178.3.jpg"
+        "https://shopping-phinf.pstatic.net/main_6085374/60853745518.jpg"
       ],
       "product_code": "",
       "status": "pending"
@@ -112,18 +40,72 @@
         "category_hint": "생활",
         "mall_name": "쿠팡",
         "source": "naver_shopping",
-        "scraped_at": "2026-07-16T18:19:28.315869",
+        "scraped_at": "2026-07-17T15:43:22.317093",
         "youtube_source": {
           "title": "진작 바꿀 걸… 싱크대 골칫덩어리 해결하는 방법 #살림꿀템 #주방정리 #쿠팡추천템",
           "video_id": "mdBbp0iVwpE",
-          "views": 420226,
-          "keyword": "살림템 추천"
+          "views": 439508,
+          "keyword": "주방 가전 추천"
         }
       },
-      "post_text": "물이 제일 중요한데\n정수기는 꼭 있어야 해서\n이거 쓰고 물 맛이 달라졌어",
+      "post_text": "요즘 집에서 제일 손 많이 가는 게 이 고객직접설치\n궁금하면 댓글 봐봐",
       "image_url": "https://shopping-phinf.pstatic.net/main_5529193/55291936448.10.jpg",
       "detail_images": [
         "https://shopping-phinf.pstatic.net/main_5529193/55291936448.10.jpg"
+      ],
+      "product_code": "",
+      "status": "pending"
+    },
+    {
+      "product": {
+        "name": "제노벤 스팀청소기 고압 살균 올인원 가정용 차량용 화이트 CNT-QX-SXYT",
+        "price": "144,900원",
+        "original_price": "",
+        "discount_rate": 0,
+        "image_url": "https://shopping-phinf.pstatic.net/main_5634717/56347172178.3.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8867649453&ctag=8867649453&lptag=I25865217656&itemId=25865217656&vendorItemId=93203771805&spec=10305198",
+        "badge": "쿠팡",
+        "brand": "",
+        "category": "스팀청소기",
+        "category_hint": "생활",
+        "mall_name": "쿠팡",
+        "source": "naver_shopping",
+        "scraped_at": "2026-07-17T15:44:13.855363"
+      },
+      "post_text": "이거 보니까 청소하기 전보다 후가 더 좋더라\n사진 보니까 더 자세히 나오네\n이 화이트색이랑 잘 어울리는 거 같음!",
+      "image_url": "https://shopping-phinf.pstatic.net/main_5634717/56347172178.3.jpg",
+      "detail_images": [
+        "https://shopping-phinf.pstatic.net/main_5634717/56347172178.3.jpg"
+      ],
+      "product_code": "",
+      "status": "pending"
+    },
+    {
+      "product": {
+        "name": "싱크대 쓰레기통 걸이 그레이 9L 걸이형 실리콘 flo3+1tFt",
+        "price": "36,540원",
+        "original_price": "",
+        "discount_rate": 0,
+        "image_url": "https://shopping-phinf.pstatic.net/main_6086431/60864317877.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=6791164569&ctag=6791164569&lptag=l227820775931&itemId=81237277059&vendorItemId=95657912104&spec=10305199",
+        "badge": "쿠팡",
+        "brand": "",
+        "category": "휴지통",
+        "category_hint": "생활",
+        "mall_name": "쿠팡",
+        "source": "naver_shopping",
+        "scraped_at": "2026-07-17T15:43:25.234953",
+        "youtube_source": {
+          "title": "[광고] 주방 쓰레기통 추천 | 걸이형 접이식 싱크대 음식물 쓰레기통",
+          "video_id": "1YPCLkPnocg",
+          "views": 256393,
+          "keyword": "주방 가전 추천"
+        }
+      },
+      "post_text": "요리하다 보면 설거지하기 전부터 막막한 사람들이 많더라\n그럴 때마다 이거 사용해서 공간활용 제대로 하고 있으니까 좋더라\n이 물건은 실리콘으로 되어 있어서 깨지거나 할 걱정이 없다고 생각해.",
+      "image_url": "https://shopping-phinf.pstatic.net/main_6086431/60864317877.jpg",
+      "detail_images": [
+        "https://shopping-phinf.pstatic.net/main_6086431/60864317877.jpg"
       ],
       "product_code": "",
       "status": "pending"
