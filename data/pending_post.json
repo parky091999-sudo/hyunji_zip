@@ -1,6 +1,6 @@
 {
   "for_date": "2026-07-19",
-  "generated_at": "2026-07-18T02:43:24.444210+09:00",
+  "generated_at": "2026-07-18T03:17:25.594806+09:00",
   "candidates": [
     {
       "product": {
@@ -106,6 +106,36 @@
       "image_url": "https://shopping-phinf.pstatic.net/main_4586335/45863350538.11.jpg",
       "detail_images": [
         "https://shopping-phinf.pstatic.net/main_4586335/45863350538.11.jpg"
+      ],
+      "product_code": "",
+      "status": "pending"
+    },
+    {
+      "product": {
+        "name": "세미 원데이 극세사 수세미 핑크 60개 1개",
+        "price": "15,790원",
+        "original_price": "",
+        "discount_rate": 0,
+        "image_url": "https://shopping-phinf.pstatic.net/main_5849045/58490454091.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=22511285&ctag=22511285&lptag=I87389835&itemId=87389835&vendorItemId=94555914635&spec=10305199",
+        "badge": "쿠팡",
+        "brand": "",
+        "category": "주방잡화",
+        "category_hint": "생활",
+        "mall_name": "쿠팡",
+        "source": "naver_shopping",
+        "scraped_at": "2026-07-17T18:17:05.877379",
+        "youtube_source": {
+          "title": "제조사도 당황한 미친 아이디어 #생활용품 #청소 #청소용품 #찌든때",
+          "video_id": "MOFJdOIC1no",
+          "views": 4988,
+          "keyword": "아이디어 생활용품"
+        }
+      },
+      "post_text": "손이 많이 가는 집안일이 하나씩 줄어드는 기분이 좋더라\n이거 쓰고 나서 설거지하기가 편해졌어\n이제는 설거지할 때 핑크 수세미를 꼭 들고 하는 거 같아",
+      "image_url": "https://shopping-phinf.pstatic.net/main_5849045/58490454091.jpg",
+      "detail_images": [
+        "https://shopping-phinf.pstatic.net/main_5849045/58490454091.jpg"
       ],
       "product_code": "",
       "status": "pending"
