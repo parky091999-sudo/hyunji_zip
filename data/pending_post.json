@@ -1,6 +1,6 @@
 {
   "for_date": "2026-07-19",
-  "generated_at": "2026-07-18T00:45:29.901496+09:00",
+  "generated_at": "2026-07-18T02:43:24.444210+09:00",
   "candidates": [
     {
       "product": {
@@ -76,6 +76,36 @@
       "image_url": "https://shopping-phinf.pstatic.net/main_5634717/56347172178.3.jpg",
       "detail_images": [
         "https://shopping-phinf.pstatic.net/main_5634717/56347172178.3.jpg"
+      ],
+      "product_code": "",
+      "status": "pending"
+    },
+    {
+      "product": {
+        "name": "세리토 미니세탁기 속옷 양말 살균 터치 디스플레이 5세대 12L",
+        "price": "74,000원",
+        "original_price": "",
+        "discount_rate": 0,
+        "image_url": "https://shopping-phinf.pstatic.net/main_4586335/45863350538.11.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=7858498807&ctag=7858498807&lptag=I21618772585&itemId=21618772585&vendorItemId=92135896800&spec=10305199",
+        "badge": "쿠팡",
+        "brand": "",
+        "category": "세탁/건조기",
+        "category_hint": "생활",
+        "mall_name": "쿠팡",
+        "source": "naver_shopping",
+        "scraped_at": "2026-07-17T17:42:52.705906",
+        "youtube_source": {
+          "title": "아직도 속옷 양말 같이 빠세요? #미니세탁기 #분리세탁기 #속옷세탁기 #양말세탁기 #소형세탁기",
+          "video_id": "5Hievtq_krU",
+          "views": 7828,
+          "keyword": "자취 필수템 추천"
+        }
+      },
+      "post_text": "요즘 빨래하면 이거 만한 게 없더라\n빨래 개수도 많아지고 해서 작은 세탁기는 필요하다고 생각했어\n이제는 세대가 바뀐 제품들도 많이 나왔어",
+      "image_url": "https://shopping-phinf.pstatic.net/main_4586335/45863350538.11.jpg",
+      "detail_images": [
+        "https://shopping-phinf.pstatic.net/main_4586335/45863350538.11.jpg"
       ],
       "product_code": "",
       "status": "pending"
