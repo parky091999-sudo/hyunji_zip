@@ -1,81 +1,27 @@
 {
-  "for_date": "2026-07-19",
-  "generated_at": "2026-07-18T03:17:25.594806+09:00",
+  "for_date": "2026-07-20",
+  "generated_at": "2026-07-19T00:19:20.762110+09:00",
   "candidates": [
     {
       "product": {
-        "name": "벽걸이형 자동 센서 비누 디스펜서 거품기 레드 1개",
+        "name": "벽걸이형 자동 센서 비누 디스펜서 거품기 크림색 1개",
         "price": "69,500원",
         "original_price": "",
         "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_6085374/60853745518.jpg",
-        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9644225776&ctag=9644225776&lptag=V95754525530&itemId=28819771118&vendorItemId=95754525530&spec=10305199",
+        "image_url": "https://shopping-phinf.pstatic.net/main_6086601/60866010994.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9644225776&ctag=9644225776&lptag=I28819771121&itemId=28819771121&vendorItemId=95754525531&spec=10305199",
         "badge": "쿠팡",
         "brand": "",
         "category": "욕실용기/홀더",
         "category_hint": "주방",
         "mall_name": "쿠팡",
         "source": "naver_shopping",
-        "scraped_at": "2026-07-17T15:44:02.168151"
+        "scraped_at": "2026-07-18T15:18:03.266222"
       },
-      "post_text": "설거지할 때 비누 만지다가 손에 비누 묻어나면 귀찮더라\n이거 있으니 그런 걱정 없잖아\n레드 색상이랑 디자인이 예쁘게 보여서 만족스럽더라",
-      "image_url": "https://shopping-phinf.pstatic.net/main_6085374/60853745518.jpg",
+      "post_text": "손이 부들부들 해지는 날이 많아\n거실에 두고 쓰는 비누 디스펜서가 정말 편하더라\n이런 거품기가 크림색이라서 데코처럼 보이는 거 같아",
+      "image_url": "https://shopping-phinf.pstatic.net/main_6086601/60866010994.jpg",
       "detail_images": [
-        "https://shopping-phinf.pstatic.net/main_6085374/60853745518.jpg"
-      ],
-      "product_code": "",
-      "status": "pending"
-    },
-    {
-      "product": {
-        "name": "SK매직 미니 Green41 무전원 정수기 고객직접설치",
-        "price": "139,000원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_5529193/55291936448.10.jpg",
-        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=7069533036&ctag=7069533036&lptag=l801178265968&itemId=58107869681&vendorItemId=82998959480&spec=10305197",
-        "badge": "쿠팡",
-        "brand": "SK매직",
-        "category": "정수기",
-        "category_hint": "생활",
-        "mall_name": "쿠팡",
-        "source": "naver_shopping",
-        "scraped_at": "2026-07-17T15:43:22.317093",
-        "youtube_source": {
-          "title": "진작 바꿀 걸… 싱크대 골칫덩어리 해결하는 방법 #살림꿀템 #주방정리 #쿠팡추천템",
-          "video_id": "mdBbp0iVwpE",
-          "views": 439508,
-          "keyword": "주방 가전 추천"
-        }
-      },
-      "post_text": "요즘 집에서 제일 손 많이 가는 게 이 고객직접설치\n궁금하면 댓글 봐봐",
-      "image_url": "https://shopping-phinf.pstatic.net/main_5529193/55291936448.10.jpg",
-      "detail_images": [
-        "https://shopping-phinf.pstatic.net/main_5529193/55291936448.10.jpg"
-      ],
-      "product_code": "",
-      "status": "pending"
-    },
-    {
-      "product": {
-        "name": "제노벤 스팀청소기 고압 살균 올인원 가정용 차량용 화이트 CNT-QX-SXYT",
-        "price": "144,900원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_5634717/56347172178.3.jpg",
-        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8867649453&ctag=8867649453&lptag=I25865217656&itemId=25865217656&vendorItemId=93203771805&spec=10305198",
-        "badge": "쿠팡",
-        "brand": "",
-        "category": "스팀청소기",
-        "category_hint": "생활",
-        "mall_name": "쿠팡",
-        "source": "naver_shopping",
-        "scraped_at": "2026-07-17T15:44:13.855363"
-      },
-      "post_text": "이거 보니까 청소하기 전보다 후가 더 좋더라\n사진 보니까 더 자세히 나오네\n이 화이트색이랑 잘 어울리는 거 같음!",
-      "image_url": "https://shopping-phinf.pstatic.net/main_5634717/56347172178.3.jpg",
-      "detail_images": [
-        "https://shopping-phinf.pstatic.net/main_5634717/56347172178.3.jpg"
+        "https://shopping-phinf.pstatic.net/main_6086601/60866010994.jpg"
       ],
       "product_code": "",
       "status": "pending"
@@ -94,15 +40,15 @@
         "category_hint": "생활",
         "mall_name": "쿠팡",
         "source": "naver_shopping",
-        "scraped_at": "2026-07-17T17:42:52.705906",
+        "scraped_at": "2026-07-18T15:17:23.476486",
         "youtube_source": {
           "title": "아직도 속옷 양말 같이 빠세요? #미니세탁기 #분리세탁기 #속옷세탁기 #양말세탁기 #소형세탁기",
           "video_id": "5Hievtq_krU",
-          "views": 7828,
+          "views": 8176,
           "keyword": "자취 필수템 추천"
         }
       },
-      "post_text": "요즘 빨래하면 이거 만한 게 없더라\n빨래 개수도 많아지고 해서 작은 세탁기는 필요하다고 생각했어\n이제는 세대가 바뀐 제품들도 많이 나왔어",
+      "post_text": "요즘 집에서 제일 손 많이 가는 게 이 세대\n궁금하면 댓글 봐봐",
       "image_url": "https://shopping-phinf.pstatic.net/main_4586335/45863350538.11.jpg",
       "detail_images": [
         "https://shopping-phinf.pstatic.net/main_4586335/45863350538.11.jpg"
@@ -112,60 +58,60 @@
     },
     {
       "product": {
-        "name": "세미 원데이 극세사 수세미 핑크 60개 1개",
-        "price": "15,790원",
+        "name": "쿠쿠 에코웨일 건조분쇄 음식물처리기 가정용",
+        "price": "323,920원",
         "original_price": "",
         "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_5849045/58490454091.jpg",
-        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=22511285&ctag=22511285&lptag=I87389835&itemId=87389835&vendorItemId=94555914635&spec=10305199",
+        "image_url": "https://shopping-phinf.pstatic.net/main_5529342/55293421525.26.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=7281394943&ctag=7281394943&lptag=l132559396427&itemId=57293641953&vendorItemId=92369085881&spec=10305197",
         "badge": "쿠팡",
-        "brand": "",
-        "category": "주방잡화",
+        "brand": "CUCKOO",
+        "category": "음식물처리기",
         "category_hint": "생활",
         "mall_name": "쿠팡",
         "source": "naver_shopping",
-        "scraped_at": "2026-07-17T18:17:05.877379",
+        "scraped_at": "2026-07-18T15:17:27.590579",
         "youtube_source": {
-          "title": "제조사도 당황한 미친 아이디어 #생활용품 #청소 #청소용품 #찌든때",
-          "video_id": "MOFJdOIC1no",
-          "views": 4988,
-          "keyword": "아이디어 생활용품"
+          "title": "자취 국밥템으로 임명 #제품제공 #쿠쿠 #음식물처리기",
+          "video_id": "_mMFypQdBDQ",
+          "views": 2342,
+          "keyword": "자취 필수템 추천"
         }
       },
-      "post_text": "손이 많이 가는 집안일이 하나씩 줄어드는 기분이 좋더라\n이거 쓰고 나서 설거지하기가 편해졌어\n이제는 설거지할 때 핑크 수세미를 꼭 들고 하는 거 같아",
-      "image_url": "https://shopping-phinf.pstatic.net/main_5849045/58490454091.jpg",
+      "post_text": "요즘 집에서 음식물 쓰레기 어떻게 처리하냐고 묻는 친구가 많더라\n이제는 음식물 쓰레기 처리도 편해졌어\n가정용으로 쓰기 좋은 거 같음",
+      "image_url": "https://shopping-phinf.pstatic.net/main_5529342/55293421525.26.jpg",
       "detail_images": [
-        "https://shopping-phinf.pstatic.net/main_5849045/58490454091.jpg"
+        "https://shopping-phinf.pstatic.net/main_5529342/55293421525.26.jpg"
       ],
       "product_code": "",
       "status": "pending"
     },
     {
       "product": {
-        "name": "싱크대 쓰레기통 걸이 그레이 9L 걸이형 실리콘 flo3+1tFt",
-        "price": "36,540원",
+        "name": "SK매직 미니 Green41 무전원 정수기 고객직접설치",
+        "price": "139,000원",
         "original_price": "",
         "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_6086431/60864317877.jpg",
-        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=6791164569&ctag=6791164569&lptag=l227820775931&itemId=81237277059&vendorItemId=95657912104&spec=10305199",
+        "image_url": "https://shopping-phinf.pstatic.net/main_5529193/55291936448.10.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=7069533036&ctag=7069533036&lptag=l801178265968&itemId=58107869681&vendorItemId=82998959480&spec=10305197",
         "badge": "쿠팡",
-        "brand": "",
-        "category": "휴지통",
+        "brand": "SK매직",
+        "category": "정수기",
         "category_hint": "생활",
         "mall_name": "쿠팡",
         "source": "naver_shopping",
-        "scraped_at": "2026-07-17T15:43:25.234953",
+        "scraped_at": "2026-07-18T15:17:55.317402",
         "youtube_source": {
-          "title": "[광고] 주방 쓰레기통 추천 | 걸이형 접이식 싱크대 음식물 쓰레기통",
-          "video_id": "1YPCLkPnocg",
-          "views": 256393,
+          "title": "진작 바꿀 걸… 싱크대 골칫덩어리 해결하는 방법 #살림꿀템 #주방정리 #쿠팡추천템",
+          "video_id": "mdBbp0iVwpE",
+          "views": 456396,
           "keyword": "주방 가전 추천"
         }
       },
-      "post_text": "요리하다 보면 설거지하기 전부터 막막한 사람들이 많더라\n그럴 때마다 이거 사용해서 공간활용 제대로 하고 있으니까 좋더라\n이 물건은 실리콘으로 되어 있어서 깨지거나 할 걱정이 없다고 생각해.",
-      "image_url": "https://shopping-phinf.pstatic.net/main_6086431/60864317877.jpg",
+      "post_text": "물이 제일 중요한데\n이거 때문에 물 마시기 편해졌어\n고객직접설치도 간단하고",
+      "image_url": "https://shopping-phinf.pstatic.net/main_5529193/55291936448.10.jpg",
       "detail_images": [
-        "https://shopping-phinf.pstatic.net/main_6086431/60864317877.jpg"
+        "https://shopping-phinf.pstatic.net/main_5529193/55291936448.10.jpg"
       ],
       "product_code": "",
       "status": "pending"
