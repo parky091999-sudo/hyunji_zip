@@ -1,6 +1,6 @@
 {
   "for_date": "2026-07-20",
-  "generated_at": "2026-07-19T02:38:22.160498+09:00",
+  "generated_at": "2026-07-19T03:07:40.870904+09:00",
   "candidates": [
     {
       "product": {
@@ -112,6 +112,36 @@
       "image_url": "https://shopping-phinf.pstatic.net/main_5529193/55291936448.10.jpg",
       "detail_images": [
         "https://shopping-phinf.pstatic.net/main_5529193/55291936448.10.jpg"
+      ],
+      "product_code": "",
+      "status": "pending"
+    },
+    {
+      "product": {
+        "name": "WoWo 미니 세탁기 일체형 휴대용 가정용 접이식 세탁기 X20(다크그레이)",
+        "price": "43,300원",
+        "original_price": "",
+        "discount_rate": 0,
+        "image_url": "https://shopping-phinf.pstatic.net/main_5691780/56917805061.11.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9074464230&ctag=9074464230&lptag=I26653208509&itemId=26653208509&vendorItemId=94651191452&spec=10305198",
+        "badge": "쿠팡",
+        "brand": "",
+        "category": "세탁/건조기",
+        "category_hint": "생활",
+        "mall_name": "쿠팡",
+        "source": "naver_shopping",
+        "scraped_at": "2026-07-18T18:07:06.721604",
+        "youtube_source": {
+          "title": "와이프가 좋아하는 신박한 아이템 TOP3",
+          "video_id": "VE3VYj7-1vY",
+          "views": 1773,
+          "keyword": "신박한 주방용품"
+        }
+      },
+      "post_text": "세탁기를 찾았다!\n이건 집에서 사용하기 좋은 크고\n다크그레이 색상이 깔끔해 보여.",
+      "image_url": "https://shopping-phinf.pstatic.net/main_5691780/56917805061.11.jpg",
+      "detail_images": [
+        "https://shopping-phinf.pstatic.net/main_5691780/56917805061.11.jpg"
       ],
       "product_code": "",
       "status": "pending"
