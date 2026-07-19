@@ -1,8 +1,8 @@
 name: Comment Check & Auto-Reply (6시간마다)
 
 on:
-  schedule:
-    - cron: '23 */6 * * *' # 6시간마다 (혼잡 분 회피)
+  # schedule:  # 2026-07-19 EC2 크론 이관 — 재개 시 주석 해제
+    # - cron: '23 */6 * * *' # 6시간마다 (혼잡 분 회피)
   workflow_dispatch:
 
 env:

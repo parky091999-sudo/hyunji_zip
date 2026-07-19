@@ -1,11 +1,11 @@
 name: Auto Post (08:05 KST)
 
 on:
-  schedule:
-    - cron: '17 14 * * *'  # 23:17 KST — 지연(실측 7~12h) 시 다음날 점심대 도착
-    - cron: '17 17 * * *'  # 02:17 KST
-    - cron: '17 20 * * *'  # 05:17 KST
-    - cron: '17 23 * * *'  # 08:17 KST — 지연 0이어도 게이트가 11시까지 대기 후 게시
+  # schedule:  # 2026-07-19 EC2 크론 이관 — 재개 시 주석 해제
+    # - cron: '17 14 * * *'  # 23:17 KST — 지연(실측 7~12h) 시 다음날 점심대 도착
+    # - cron: '17 17 * * *'  # 02:17 KST
+    # - cron: '17 20 * * *'  # 05:17 KST
+    # - cron: '17 23 * * *'  # 08:17 KST — 지연 0이어도 게이트가 11시까지 대기 후 게시
   workflow_dispatch:
     inputs:
       skip_delay:

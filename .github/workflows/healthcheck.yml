@@ -1,8 +1,8 @@
 name: Healthcheck & Auto-Recover (17:00 KST)
 
 on:
-  schedule:
-    - cron: '17 10 * * *'  # 19:17 KST — auto 미게시 시 저녁 내 복구
+  # schedule:  # 2026-07-19 EC2 크론 이관 — 재개 시 주석 해제
+    # - cron: '17 10 * * *'  # 19:17 KST — auto 미게시 시 저녁 내 복구
   workflow_dispatch:
 
 # 포스팅 워크플로 동시 실행 금지 — 크론 지연으로 겹칠 때 중복 게시 방지

@@ -1,11 +1,11 @@
 name: Manual Post (12:05 KST)
 
 on:
-  schedule:
-    - cron: '17 2 * * *'   # 11:17 KST — 지연 시 저녁(21시대) 도착, 정시면 생략
-    - cron: '17 5 * * *'   # 14:17 KST — 정시면 19시까지 대기 후 게시
-    - cron: '17 8 * * *'   # 17:17 KST
-    - cron: '17 11 * * *'  # 20:17 KST — 저녁 골든 직격
+  # schedule:  # 2026-07-19 EC2 크론 이관 — 재개 시 주석 해제
+    # - cron: '17 2 * * *'   # 11:17 KST — 지연 시 저녁(21시대) 도착, 정시면 생략
+    # - cron: '17 5 * * *'   # 14:17 KST — 정시면 19시까지 대기 후 게시
+    # - cron: '17 8 * * *'   # 17:17 KST
+    # - cron: '17 11 * * *'  # 20:17 KST — 저녁 골든 직격
   workflow_dispatch:
     inputs:
       skip_delay:

@@ -1,8 +1,8 @@
 name: Check Insights (일 1회 + 수동)
 
 on:
-  schedule:
-    - cron: '0 14 * * *'  # 매일 23:00 KST — 하루치 조회수 스냅샷을 data/insights.json에 저장
+  # schedule:  # 2026-07-19 EC2 크론 이관 — 재개 시 주석 해제
+    # - cron: '0 14 * * *'  # 매일 23:00 KST — 하루치 조회수 스냅샷을 data/insights.json에 저장
   workflow_dispatch:
 
 env:

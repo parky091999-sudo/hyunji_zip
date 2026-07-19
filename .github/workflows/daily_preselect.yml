@@ -1,8 +1,8 @@
 name: Pre-Select Products (09:00 KST)
 
 on:
-  schedule:
-    - cron: '37 16 * * *'  # 01:37 KST — 혼잡 분(:00) 회피, 실행 시점 무관 작업
+  # schedule:  # 2026-07-19 EC2 크론 이관 — 재개 시 주석 해제
+    # - cron: '37 16 * * *'  # 01:37 KST — 혼잡 분(:00) 회피, 실행 시점 무관 작업
   workflow_dispatch:
 
 env:
