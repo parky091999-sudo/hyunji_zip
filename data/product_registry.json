@@ -579,7 +579,9 @@
       "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=7069533036&ctag=7069533036&lptag=l801178265968&itemId=58107869681&vendorItemId=82998959480&spec=10305197",
       "image_url": "https://shopping-phinf.pstatic.net/main_5529193/55291936448.10.jpg",
       "category": "",
-      "registered_at": "2026-07-15T20:34:15.461515+09:00"
+      "registered_at": "2026-07-15T20:34:15.461515+09:00",
+      "removed": true,
+      "removed_reason": "미발행 고아 정리 (2026-07-19, 영상 전환 이전 등록분 — 발행 경로 없음)"
     },
     "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=6758630930&ctag=6758630930&lpt": {
       "code": "059",
@@ -588,7 +590,9 @@
       "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=6758630930&ctag=6758630930&lptag=I19657867159&itemId=19657867159&vendorItemId=86763706995&spec=10305199",
       "image_url": "https://shopping-phinf.pstatic.net/main_6023478/60234781322.jpg",
       "category": "",
-      "registered_at": "2026-07-16T11:01:42.222823+09:00"
+      "registered_at": "2026-07-16T11:01:42.222823+09:00",
+      "removed": true,
+      "removed_reason": "미발행 고아 정리 (2026-07-19, 영상 전환 이전 등록분 — 발행 경로 없음)"
     },
     "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8719990594&ctag=8719990594&lpt": {
       "code": "060",
