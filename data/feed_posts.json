@@ -1015,5 +1015,18 @@
     "instagram_url": "https://www.instagram.com/reel/Da2fLDAFbku/",
     "status": "posted",
     "type": "video"
+  },
+  {
+    "timestamp": "2026-07-19T19:01:33.270982+09:00",
+    "product_code": "063",
+    "product_name": "접이식 매트리스 소파베드",
+    "product_image": "",
+    "product_url": "https://www.coupang.com/vp/products/9285123744",
+    "post_text": "[063] 정보는 댓글에",
+    "threads_url": "",
+    "instagram_url": "",
+    "status": "posted",
+    "type": "video",
+    "published_from": "ec2"
   }
 ]
