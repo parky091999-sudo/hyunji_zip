@@ -69,7 +69,7 @@ LOG_DIR = os.path.join(os.path.dirname(__file__), "logs")
 #
 # 2026-07-19 정책: 상품글(사진) 1건 + 영상 1건을 매일 병행 (사용자 지시).
 # coupang_posted_today는 사진끼리만, 영상 상한은 osmu stock_publisher가 관리.
-MONETIZATION_DATE = date(2026, 9, 21)
+MONETIZATION_DATE = date(2026, 7, 31)  # 2026-07-19 사용자 정정: 광고 수익화 9/21→7/31 (osmu MONETIZE_FROM과 동기화)
 KST = timezone(timedelta(hours=9))
 
 PHOTO_GATE_DAYS = {"growth": 1, "monetize": 1}   # 사진 상품글 최소 발행 간격(일)
