@@ -1,40 +1,21 @@
 {
-  "scanned_at": "2026-07-12T23:43:06.964320+09:00",
+  "scanned_at": "2026-07-19T23:40:39.158847+09:00",
   "candidates": [
     {
       "product": {
-        "name": "BAS 바스 휴대용 의류건조기&amp;신발 건조기 제습 베이지 JFA-CSD230W",
-        "price": "49,800원",
+        "name": "찹쌀누룽지 무가당 쌀과자 검은콩 더고소한맛 50개 25g",
+        "price": "19,900원",
         "original_price": "",
         "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_6025563/60255630053.jpg",
-        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9573910414&ctag=9573910414&lptag=I28576892990&itemId=28576892990&vendorItemId=95377764405&spec=10305199",
-        "badge": "쿠팡",
-        "brand": "BAS",
-        "category": "세탁/건조기",
-        "category_hint": "디지털/가전",
-        "mall_name": "쿠팡",
-        "source": "naver_shopping",
-        "scraped_at": "2026-07-12T14:42:40.535750"
-      },
-      "source_account": "검색:휴대용 의류건조기",
-      "selected": false
-    },
-    {
-      "product": {
-        "name": "금풍제과 보리건빵",
-        "price": "24,560원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_5885463/58854637269.62.jpg",
-        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=2591853059&ctag=2591853059&lptag=l41507713221&itemId=3120547711&vendorItemId=70348203523&spec=10305197",
+        "image_url": "https://shopping-phinf.pstatic.net/main_5998595/59985951997.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9533505338&ctag=9533505338&lptag=I28432621623&itemId=28432621623&vendorItemId=95383485305&spec=10305198",
         "badge": "쿠팡",
         "brand": "",
-        "category": "기타과자",
+        "category": "일반스낵",
         "category_hint": "먹는거",
         "mall_name": "쿠팡",
         "source": "naver_shopping",
-        "scraped_at": "2026-07-12T14:42:41.713656"
+        "scraped_at": "2026-07-19T14:40:16.891618"
       },
       "source_account": "검색:간식 추천 쿠팡",
       "selected": false
@@ -53,26 +34,7 @@
         "category_hint": "먹는거",
         "mall_name": "쿠팡",
         "source": "naver_shopping",
-        "scraped_at": "2026-07-12T14:42:41.713788"
-      },
-      "source_account": "검색:간식 추천 쿠팡",
-      "selected": false
-    },
-    {
-      "product": {
-        "name": "국산 콩으로 만든 잣 두부과자",
-        "price": "17,920원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_5984484/59844846509.jpg",
-        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8372604778&ctag=8372604778&lptag=l464715839222&itemId=16284234957&vendorItemId=86204448370&spec=10305199",
-        "badge": "쿠팡",
-        "brand": "더싱싱",
-        "category": "기타과자",
-        "category_hint": "먹는거",
-        "mall_name": "쿠팡",
-        "source": "naver_shopping",
-        "scraped_at": "2026-07-12T14:42:41.713902"
+        "scraped_at": "2026-07-19T14:40:16.891818"
       },
       "source_account": "검색:간식 추천 쿠팡",
       "selected": false
@@ -91,7 +53,45 @@
         "category_hint": "먹는거",
         "mall_name": "쿠팡",
         "source": "naver_shopping",
-        "scraped_at": "2026-07-12T14:42:41.714092"
+        "scraped_at": "2026-07-19T14:40:16.891916"
+      },
+      "source_account": "검색:간식 추천 쿠팡",
+      "selected": false
+    },
+    {
+      "product": {
+        "name": "한봄 과자선물세트 간식꾸러미 단체선물 종합 간식 세트",
+        "price": "25,990원",
+        "original_price": "",
+        "discount_rate": 0,
+        "image_url": "https://shopping-phinf.pstatic.net/main_5994426/59944269875.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=6580974790&ctag=6580974790&lptag=l787140265227&itemId=54272170678&vendorItemId=92243724572&spec=10305198",
+        "badge": "쿠팡",
+        "brand": "한봄",
+        "category": "기타과자",
+        "category_hint": "먹는거",
+        "mall_name": "쿠팡",
+        "source": "naver_shopping",
+        "scraped_at": "2026-07-19T14:40:16.892070"
+      },
+      "source_account": "검색:간식 추천 쿠팡",
+      "selected": false
+    },
+    {
+      "product": {
+        "name": "국산 콩으로 만든 잣 두부과자",
+        "price": "17,920원",
+        "original_price": "",
+        "discount_rate": 0,
+        "image_url": "https://shopping-phinf.pstatic.net/main_5984484/59844846509.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8372604778&ctag=8372604778&lptag=l464715839222&itemId=16284234957&vendorItemId=86204448370&spec=10305199",
+        "badge": "쿠팡",
+        "brand": "더싱싱",
+        "category": "기타과자",
+        "category_hint": "먹는거",
+        "mall_name": "쿠팡",
+        "source": "naver_shopping",
+        "scraped_at": "2026-07-19T14:40:16.892177"
       },
       "source_account": "검색:간식 추천 쿠팡",
       "selected": false
@@ -99,7 +99,7 @@
     {
       "product": {
         "name": "초코과자 15종 2호",
-        "price": "24,730원",
+        "price": "25,500원",
         "original_price": "",
         "discount_rate": 0,
         "image_url": "https://shopping-phinf.pstatic.net/main_6067987/60679874460.jpg",
@@ -110,7 +110,7 @@
         "category_hint": "먹는거",
         "mall_name": "쿠팡",
         "source": "naver_shopping",
-        "scraped_at": "2026-07-12T14:42:41.714185"
+        "scraped_at": "2026-07-19T14:40:16.892283"
       },
       "source_account": "검색:간식 추천 쿠팡",
       "selected": false
@@ -129,26 +129,7 @@
         "category_hint": "먹는거",
         "mall_name": "쿠팡",
         "source": "naver_shopping",
-        "scraped_at": "2026-07-12T14:42:41.714345"
-      },
-      "source_account": "검색:간식 추천 쿠팡",
-      "selected": false
-    },
-    {
-      "product": {
-        "name": "해태제과 종합선물세트 11종 1세트",
-        "price": "25,900원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_5895196/58951969605.6.jpg",
-        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8610893945&ctag=8610893945&lptag=I21019335686&itemId=21019335686&vendorItemId=94600948531&spec=10305199",
-        "badge": "쿠팡",
-        "brand": "해태제과",
-        "category": "기타과자",
-        "category_hint": "먹는거",
-        "mall_name": "쿠팡",
-        "source": "naver_shopping",
-        "scraped_at": "2026-07-12T14:42:41.714529"
+        "scraped_at": "2026-07-19T14:40:16.892507"
       },
       "source_account": "검색:간식 추천 쿠팡",
       "selected": false
@@ -156,10 +137,10 @@
     {
       "product": {
         "name": "올레놀샷 NMN 1개 15ml",
-        "price": "29,440원",
+        "price": "28,940원",
         "original_price": "",
         "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_5760148/57601483053.140.jpg",
+        "image_url": "https://shopping-phinf.pstatic.net/main_5760148/57601483053.142.jpg",
         "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9164207296&ctag=9164207296&lptag=I26998880761&itemId=26998880761&vendorItemId=95364967268&spec=10305199",
         "badge": "쿠팡",
         "brand": "",
@@ -167,7 +148,7 @@
         "category_hint": "뷰티",
         "mall_name": "쿠팡",
         "source": "naver_shopping",
-        "scraped_at": "2026-07-12T14:42:44.242702"
+        "scraped_at": "2026-07-19T14:40:18.954235"
       },
       "source_account": "검색:미백 앰플",
       "selected": false
@@ -175,7 +156,7 @@
     {
       "product": {
         "name": "LG전자 프라엘 더마 LED 마스크 BWJ1 스틸 핑크",
-        "price": "334,890원",
+        "price": "334,730원",
         "original_price": "",
         "discount_rate": 0,
         "image_url": "https://shopping-phinf.pstatic.net/main_6027279/60272791476.2.jpg",
@@ -186,7 +167,7 @@
         "category_hint": "뷰티",
         "mall_name": "쿠팡",
         "source": "naver_shopping",
-        "scraped_at": "2026-07-12T14:42:49.673784"
+        "scraped_at": "2026-07-19T14:40:23.977481"
       },
       "source_account": "검색:LED 마스크",
       "selected": false
