@@ -1,10 +1,12 @@
 name: Evening Auto Post (19:00 KST)
 
 on:
-  schedule:
-    - cron: '0 9 * * *'   # 18:00 KST — 지연 시 다음날 10시대 도착 가능
-    - cron: '0 10 * * *'  # 19:00 KST — 목표 시간
-    - cron: '0 11 * * *'  # 20:00 KST
+  # 2026-07-19 스케줄 정지: 상품글 매일 1건(13시 auto)으로 통합 — 저녁 슬롯은 영상(osmu, 19시)이 차지.
+  # 재개하려면 아래 schedule 주석 해제.
+  # schedule:
+  #   - cron: '0 9 * * *'   # 18:00 KST — 지연 시 다음날 10시대 도착 가능
+  #   - cron: '0 10 * * *'  # 19:00 KST — 목표 시간
+  #   - cron: '0 11 * * *'  # 20:00 KST
   workflow_dispatch:
     inputs:
       skip_delay:

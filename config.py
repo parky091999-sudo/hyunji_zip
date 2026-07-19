@@ -67,14 +67,13 @@ LOG_DIR = os.path.join(os.path.dirname(__file__), "logs")
 #   growth   (~09/20): 수익 0(무태그)·계정 성장기 → 상품글 저빈도.  목표 일상 ~70 : 쿠파스 ~30
 #   monetize (09/21~): 파트너스 수익화 → 상품글 증편.               목표 일상 ~50 : 쿠파스 ~50
 #
-# 사진(hyunji auto/evening)·영상(osmu)이 각각 아래 '일 간격'으로 발행하되,
-# '하루 쿠파스 1개 상한'(post_gate.coupang_posted_today, 영상 포함)으로 서로 엇갈린다.
-# 더 공격적으로 늘리려면 monetize 값을 1로 낮추면 사진/영상이 매일 발행된다.
+# 2026-07-19 정책: 상품글(사진) 1건 + 영상 1건을 매일 병행 (사용자 지시).
+# coupang_posted_today는 사진끼리만, 영상 상한은 osmu stock_publisher가 관리.
 MONETIZATION_DATE = date(2026, 9, 21)
 KST = timezone(timedelta(hours=9))
 
-PHOTO_GATE_DAYS = {"growth": 3, "monetize": 2}   # 사진 상품글 최소 발행 간격(일)
-VIDEO_GATE_DAYS = {"growth": 3, "monetize": 2}   # 영상 상품글 최소 간격 — osmu가 동일 값 참조(동기화 유지)
+PHOTO_GATE_DAYS = {"growth": 1, "monetize": 1}   # 사진 상품글 최소 발행 간격(일)
+VIDEO_GATE_DAYS = {"growth": 1, "monetize": 1}   # 영상 상품글 최소 간격 — osmu가 동일 값 참조(동기화 유지)
 
 
 def current_phase(today: date | None = None) -> str:

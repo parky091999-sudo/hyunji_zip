@@ -85,10 +85,12 @@ def photo_posted_within(days: int = 2, label: str = "") -> bool:
             last_dt = last_dt.replace(tzinfo=KST)
     except ValueError:
         return False
-    elapsed = datetime.now(KST) - last_dt
-    if elapsed < timedelta(days=days):
-        logger.info(f"[{label}] 최근 사진 상품글 {latest[:16]} — 격일 게이트({days}일) 미경과 "
-                    f"({elapsed.days}d {elapsed.seconds // 3600}h) → 생략")
+    # 2026-07-19: 시간차가 아니라 달력 날짜 차이로 판정 — 매일 1건(days=1) 정책에서
+    # 어제 지연 도착(예: 15시 발행) 때문에 오늘 13시 창이 24h 미경과로 밀리는 드리프트 방지.
+    day_gap = (datetime.now(KST).date() - last_dt.date()).days
+    if day_gap < days:
+        logger.info(f"[{label}] 최근 사진 상품글 {latest[:16]} — 빈도 게이트({days}일) 미경과 "
+                    f"(날짜차 {day_gap}d) → 생략")
         return True
     return False
 
@@ -111,12 +113,11 @@ def refresh_shared_feed(label: str = "") -> None:
 
 
 def coupang_posted_today(label: str = "") -> bool:
-    """오늘(KST) 이미 쿠파스 상품글(사진 or 영상)이 나갔는지 — '하루 1쿠파스 상한'.
+    """오늘(KST) 이미 '사진' 쿠파스 상품글이 나갔는지 — '하루 사진 1건 상한'.
 
-    사진(hyunji auto/evening/manual)과 영상(osmu, type=video)이 모두 feed_posts.json에
-    기록되므로 이 파일 하나로 둘을 통합 판정한다. 사진·영상 발행 직전에 호출해 같은 날
-    둘이 겹치는 것을 막는다(먼저 나간 쪽이 이기고, 나중 쪽은 다음 슬롯/다음날로 미뤄짐).
-    casual(일상글)만 제외하고 나머지 posted는 전부 쿠파스로 본다.
+    2026-07-19 정책 전환: 상품글 1건 + 영상 1건을 매일 병행하므로 영상(type=video)은
+    여기서 세지 않는다(영상 하루 1건 상한은 osmu stock_publisher 게이트가 관리).
+    사진(hyunji auto/evening/manual)끼리의 같은 날 중복만 막는다.
     """
     import json
     try:
@@ -126,7 +127,8 @@ def coupang_posted_today(label: str = "") -> bool:
         return False  # 판독 불가 시 게시 허용(안전측)
     today = datetime.now(KST).strftime("%Y-%m-%d")
     for p in feed:
-        if p.get("status") != "posted" or p.get("post_type") == "casual":
+        if p.get("status") != "posted" or p.get("post_type") == "casual" \
+                or p.get("type") == "video":
             continue
         if p.get("timestamp", "")[:10] == today:
             tag = p.get("product_code") or p.get("type", "") or "상품글"
