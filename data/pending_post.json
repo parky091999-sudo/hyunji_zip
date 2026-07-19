@@ -1,177 +1,99 @@
 {
-  "for_date": "2026-07-20",
-  "generated_at": "2026-07-19T06:07:45.736891+09:00",
+  "for_date": "2026-07-21",
+  "generated_at": "2026-07-20T01:38:18.752525+09:00",
   "candidates": [
     {
       "product": {
-        "name": "벽걸이형 자동 센서 비누 디스펜서 거품기 크림색 1개",
-        "price": "69,500원",
+        "name": "마이웰 국산 가정용 혈압계 디지털 자동전자 혈압측정기 MY-1999",
+        "price": "54,900원",
         "original_price": "",
         "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_6086601/60866010994.jpg",
-        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9644225776&ctag=9644225776&lptag=I28819771121&itemId=28819771121&vendorItemId=95754525531&spec=10305199",
+        "image_url": "https://shopping-phinf.pstatic.net/main_6077731/60777317333.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=1289359384&ctag=1289359384&lptag=l235209900831&itemId=39200893051&vendorItemId=90478067034&spec=10305198",
+        "badge": "쿠팡",
+        "brand": "마이웰",
+        "category": "혈압계",
+        "category_hint": "건강",
+        "mall_name": "쿠팡",
+        "source": "naver_shopping",
+        "scraped_at": "2026-07-19T16:37:08.885044"
+      },
+      "post_text": "요즘 건강 체크에 신경 더 많이 쓰게 된 사람 많을 거 같아\n나도 최근에 혈압측정기 샀어\n정말 편리하고 정확하더라",
+      "image_url": "https://shopping-phinf.pstatic.net/main_6077731/60777317333.jpg",
+      "detail_images": [
+        "https://shopping-phinf.pstatic.net/main_6077731/60777317333.jpg"
+      ],
+      "product_code": "",
+      "status": "pending"
+    },
+    {
+      "product": {
+        "name": "전동그라인더 2개 MS3361 소금 후추 전용 그라인더 코스트코",
+        "price": "35,980원",
+        "original_price": "",
+        "discount_rate": 0,
+        "image_url": "https://shopping-phinf.pstatic.net/main_5979414/59794141083.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9507766006&ctag=9507766006&lptag=I28330825814&itemId=28330825814&vendorItemId=95283211257&spec=10305199",
         "badge": "쿠팡",
         "brand": "",
-        "category": "욕실용기/홀더",
+        "category": "보관/밀폐용기",
         "category_hint": "주방",
         "mall_name": "쿠팡",
         "source": "naver_shopping",
-        "scraped_at": "2026-07-18T15:18:03.266222"
+        "scraped_at": "2026-07-19T16:37:05.833661"
       },
-      "post_text": "손이 부들부들 해지는 날이 많아\n거실에 두고 쓰는 비누 디스펜서가 정말 편하더라\n이런 거품기가 크림색이라서 데코처럼 보이는 거 같아",
-      "image_url": "https://shopping-phinf.pstatic.net/main_6086601/60866010994.jpg",
+      "post_text": "요즘 집에서 제일 손 많이 가는 게 이 코스트코\n궁금하면 댓글 봐봐",
+      "image_url": "https://shopping-phinf.pstatic.net/main_5979414/59794141083.jpg",
       "detail_images": [
-        "https://shopping-phinf.pstatic.net/main_6086601/60866010994.jpg"
+        "https://shopping-phinf.pstatic.net/main_5979414/59794141083.jpg"
       ],
       "product_code": "",
-      "status": "used"
+      "status": "pending"
     },
     {
       "product": {
-        "name": "세리토 미니세탁기 속옷 양말 살균 터치 디스플레이 5세대 12L",
-        "price": "74,000원",
+        "name": "씨즌M닷컴 카카오프렌즈 휴대용 UV살균 칫솔케이스 라이언 RYAN 라이언001",
+        "price": "27,900원",
         "original_price": "",
         "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_4586335/45863350538.11.jpg",
-        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=7858498807&ctag=7858498807&lptag=I21618772585&itemId=21618772585&vendorItemId=92135896800&spec=10305199",
+        "image_url": "https://shopping-phinf.pstatic.net/main_2386835/23868356238.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=1501239636&ctag=1501239636&lptag=P1501239636&itemId=2577588578&vendorItemId=70569850445&spec=10305199",
         "badge": "쿠팡",
         "brand": "",
-        "category": "세탁/건조기",
+        "category": "구강청정기",
         "category_hint": "생활",
         "mall_name": "쿠팡",
         "source": "naver_shopping",
-        "scraped_at": "2026-07-18T15:17:23.476486",
-        "youtube_source": {
-          "title": "아직도 속옷 양말 같이 빠세요? #미니세탁기 #분리세탁기 #속옷세탁기 #양말세탁기 #소형세탁기",
-          "video_id": "5Hievtq_krU",
-          "views": 8176,
-          "keyword": "자취 필수템 추천"
-        }
+        "scraped_at": "2026-07-19T16:37:07.466953"
       },
-      "post_text": "요즘 집에서 제일 손 많이 가는 게 이 세대\n궁금하면 댓글 봐봐",
-      "image_url": "https://shopping-phinf.pstatic.net/main_4586335/45863350538.11.jpg",
+      "post_text": "칫솔 관리가 귀찮을 때 이거 쓰면 간편하더라\n사진에 나와있는 제품은 라이언 케이스야\n이거 쓰고 칫솔 관리가 확 쉬워졌음",
+      "image_url": "https://shopping-phinf.pstatic.net/main_2386835/23868356238.jpg",
       "detail_images": [
-        "https://shopping-phinf.pstatic.net/main_4586335/45863350538.11.jpg"
+        "https://shopping-phinf.pstatic.net/main_2386835/23868356238.jpg"
       ],
       "product_code": "",
       "status": "pending"
     },
     {
       "product": {
-        "name": "쿠쿠 에코웨일 건조분쇄 음식물처리기 가정용",
-        "price": "323,920원",
+        "name": "제노벤 스팀청소기 고압 살균 올인원 가정용 차량용 화이트 CNT-QX-SXYT",
+        "price": "144,900원",
         "original_price": "",
         "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_5529342/55293421525.26.jpg",
-        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=7281394943&ctag=7281394943&lptag=l132559396427&itemId=57293641953&vendorItemId=92369085881&spec=10305197",
-        "badge": "쿠팡",
-        "brand": "CUCKOO",
-        "category": "음식물처리기",
-        "category_hint": "생활",
-        "mall_name": "쿠팡",
-        "source": "naver_shopping",
-        "scraped_at": "2026-07-18T15:17:27.590579",
-        "youtube_source": {
-          "title": "자취 국밥템으로 임명 #제품제공 #쿠쿠 #음식물처리기",
-          "video_id": "_mMFypQdBDQ",
-          "views": 2342,
-          "keyword": "자취 필수템 추천"
-        }
-      },
-      "post_text": "요즘 집에서 음식물 쓰레기 어떻게 처리하냐고 묻는 친구가 많더라\n이제는 음식물 쓰레기 처리도 편해졌어\n가정용으로 쓰기 좋은 거 같음",
-      "image_url": "https://shopping-phinf.pstatic.net/main_5529342/55293421525.26.jpg",
-      "detail_images": [
-        "https://shopping-phinf.pstatic.net/main_5529342/55293421525.26.jpg"
-      ],
-      "product_code": "",
-      "status": "pending"
-    },
-    {
-      "product": {
-        "name": "SK매직 미니 Green41 무전원 정수기 고객직접설치",
-        "price": "139,000원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_5529193/55291936448.10.jpg",
-        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=7069533036&ctag=7069533036&lptag=l801178265968&itemId=58107869681&vendorItemId=82998959480&spec=10305197",
-        "badge": "쿠팡",
-        "brand": "SK매직",
-        "category": "정수기",
-        "category_hint": "생활",
-        "mall_name": "쿠팡",
-        "source": "naver_shopping",
-        "scraped_at": "2026-07-18T15:17:55.317402",
-        "youtube_source": {
-          "title": "진작 바꿀 걸… 싱크대 골칫덩어리 해결하는 방법 #살림꿀템 #주방정리 #쿠팡추천템",
-          "video_id": "mdBbp0iVwpE",
-          "views": 456396,
-          "keyword": "주방 가전 추천"
-        }
-      },
-      "post_text": "물이 제일 중요한데\n이거 때문에 물 마시기 편해졌어\n고객직접설치도 간단하고",
-      "image_url": "https://shopping-phinf.pstatic.net/main_5529193/55291936448.10.jpg",
-      "detail_images": [
-        "https://shopping-phinf.pstatic.net/main_5529193/55291936448.10.jpg"
-      ],
-      "product_code": "",
-      "status": "pending"
-    },
-    {
-      "product": {
-        "name": "WoWo 미니 세탁기 일체형 휴대용 가정용 접이식 세탁기 X20(다크그레이)",
-        "price": "43,300원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_5691780/56917805061.11.jpg",
-        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9074464230&ctag=9074464230&lptag=I26653208509&itemId=26653208509&vendorItemId=94651191452&spec=10305198",
+        "image_url": "https://shopping-phinf.pstatic.net/main_5634717/56347172178.3.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8867649453&ctag=8867649453&lptag=I25865217656&itemId=25865217656&vendorItemId=93203771805&spec=10305198",
         "badge": "쿠팡",
         "brand": "",
-        "category": "세탁/건조기",
+        "category": "스팀청소기",
         "category_hint": "생활",
         "mall_name": "쿠팡",
         "source": "naver_shopping",
-        "scraped_at": "2026-07-18T18:07:06.721604",
-        "youtube_source": {
-          "title": "와이프가 좋아하는 신박한 아이템 TOP3",
-          "video_id": "VE3VYj7-1vY",
-          "views": 1773,
-          "keyword": "신박한 주방용품"
-        }
+        "scraped_at": "2026-07-19T16:37:08.081991"
       },
-      "post_text": "세탁기를 찾았다!\n이건 집에서 사용하기 좋은 크고\n다크그레이 색상이 깔끔해 보여.",
-      "image_url": "https://shopping-phinf.pstatic.net/main_5691780/56917805061.11.jpg",
+      "post_text": "청소하기가 너무 귀찮을 때 이런 게 있었으면 좋겠다 싶었어\n사진 보니까 이거 쓰면 청소하기가 쉬울 것 같고\n화이트색상이 되게 깨끗해 보여서 좋더라",
+      "image_url": "https://shopping-phinf.pstatic.net/main_5634717/56347172178.3.jpg",
       "detail_images": [
-        "https://shopping-phinf.pstatic.net/main_5691780/56917805061.11.jpg"
-      ],
-      "product_code": "",
-      "status": "pending"
-    },
-    {
-      "product": {
-        "name": "세미 원데이 극세사 수세미 핑크 60개 1개",
-        "price": "15,790원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_5849045/58490454091.jpg",
-        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=22511285&ctag=22511285&lptag=I87389835&itemId=87389835&vendorItemId=94555914635&spec=10305199",
-        "badge": "쿠팡",
-        "brand": "",
-        "category": "주방잡화",
-        "category_hint": "생활",
-        "mall_name": "쿠팡",
-        "source": "naver_shopping",
-        "scraped_at": "2026-07-18T21:07:28.165412",
-        "youtube_source": {
-          "title": "제조사도 당황한 미친 아이디어 #생활용품 #청소 #청소용품 #찌든때",
-          "video_id": "MOFJdOIC1no",
-          "views": 7420,
-          "keyword": "아이디어 생활용품"
-        }
-      },
-      "post_text": "일상에서 손이 많이 가는 물건이 하나 있는데\n그게 바로 수세미야\n요즘은 핑크 수세미를 쓸 때가 많더라",
-      "image_url": "https://shopping-phinf.pstatic.net/main_5849045/58490454091.jpg",
-      "detail_images": [
-        "https://shopping-phinf.pstatic.net/main_5849045/58490454091.jpg"
+        "https://shopping-phinf.pstatic.net/main_5634717/56347172178.3.jpg"
       ],
       "product_code": "",
       "status": "pending"
