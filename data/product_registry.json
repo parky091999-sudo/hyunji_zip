@@ -1,5 +1,5 @@
 {
-  "next_code": 72,
+  "next_code": 73,
   "blocked_item_ids": [],
   "products": {
     "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8849967732&ctag=8849967732&lpt": {
@@ -714,6 +714,16 @@
       "image_url": "https://shopping-phinf.pstatic.net/main_6002783/60027832876.jpg",
       "category": "생활",
       "registered_at": "2026-07-16T20:09:57.349482+09:00",
+      "posted": true
+    },
+    "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=1289359384&ctag=1289359384&lpt": {
+      "code": "072",
+      "name": "마이웰 국산 가정용 혈압계 디지털 자동전자 혈압측정기 MY-1999",
+      "short_name": "마이웰 국산 가정용 혈압계",
+      "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=1289359384&ctag=1289359384&lptag=l235209900831&itemId=39200893051&vendorItemId=90478067034&spec=10305198",
+      "image_url": "https://shopping-phinf.pstatic.net/main_6077731/60777317333.jpg",
+      "category": "건강",
+      "registered_at": "2026-07-20T13:09:04.398771+09:00",
       "posted": true
     }
   }
