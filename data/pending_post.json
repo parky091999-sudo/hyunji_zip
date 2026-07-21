@@ -1,31 +1,7 @@
 {
-  "for_date": "2026-07-22",
-  "generated_at": "2026-07-21T01:38:04.445821+09:00",
+  "for_date": "2026-07-23",
+  "generated_at": "2026-07-22T01:37:47.629929+09:00",
   "candidates": [
-    {
-      "product": {
-        "name": "전동그라인더 2개 MS3361 소금 후추 전용 그라인더 코스트코",
-        "price": "34,280원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_5979414/59794141083.jpg",
-        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9507766006&ctag=9507766006&lptag=I28330825814&itemId=28330825814&vendorItemId=95283211257&spec=10305199",
-        "badge": "쿠팡",
-        "brand": "",
-        "category": "보관/밀폐용기",
-        "category_hint": "주방",
-        "mall_name": "쿠팡",
-        "source": "naver_shopping",
-        "scraped_at": "2026-07-20T16:37:08.195146"
-      },
-      "post_text": "설거지하다 허리 나갈 뻔한 사람 이거 꼭 봐\n나 이거 보고 바로 주문했잖아\n이제는 이런 그라인더가 따로 있다고? 코스트코에서 산 거야",
-      "image_url": "https://shopping-phinf.pstatic.net/main_5979414/59794141083.jpg",
-      "detail_images": [
-        "https://shopping-phinf.pstatic.net/main_5979414/59794141083.jpg"
-      ],
-      "product_code": "",
-      "status": "used"
-    },
     {
       "product": {
         "name": "씨즌M닷컴 카카오프렌즈 휴대용 UV살균 칫솔케이스 라이언 RYAN 라이언001",
@@ -40,9 +16,9 @@
         "category_hint": "생활",
         "mall_name": "쿠팡",
         "source": "naver_shopping",
-        "scraped_at": "2026-07-20T16:37:09.774566"
+        "scraped_at": "2026-07-21T16:37:07.674715"
       },
-      "post_text": "씻은 칫솔을 넣어두는 칫솔케이스가 깨지면 불편하더라\n나 이거 보고 바로 주문했잖아\n이제는 라이언 칫솔케이스랑 항상 다니는 거임",
+      "post_text": "이제는 칫솔도 잘 관리해야 한다는 생각이 더 많이 드는 거 같아\n사진 보니까 라이언 케이스 너무 귀여운데\n이건 꼭 봐야겠어",
       "image_url": "https://shopping-phinf.pstatic.net/main_2386835/23868356238.jpg",
       "detail_images": [
         "https://shopping-phinf.pstatic.net/main_2386835/23868356238.jpg"
@@ -64,9 +40,9 @@
         "category_hint": "생활",
         "mall_name": "쿠팡",
         "source": "naver_shopping",
-        "scraped_at": "2026-07-20T16:37:10.406022"
+        "scraped_at": "2026-07-21T16:37:08.345392"
       },
-      "post_text": "집안 구석구석을 깨끗하게 청소하고 싶었어\n이거 보니까 너무 좋아 보여서 바로 샀음\n이제 집이 화이트 톤의 물건들로 깔끔해졌어",
+      "post_text": "스트레스 쌓이던 날이 매일이었어\n이제는 이런 날이 훨씬 줄었음\n화이트 스팀청소기로 바뀐 집 상태가 믿기지가 않단 거 같아",
       "image_url": "https://shopping-phinf.pstatic.net/main_5634717/56347172178.3.jpg",
       "detail_images": [
         "https://shopping-phinf.pstatic.net/main_5634717/56347172178.3.jpg"
