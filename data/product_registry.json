@@ -1,5 +1,5 @@
 {
-  "next_code": 73,
+  "next_code": 74,
   "blocked_item_ids": [],
   "products": {
     "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8849967732&ctag=8849967732&lpt": {
@@ -724,6 +724,16 @@
       "image_url": "https://shopping-phinf.pstatic.net/main_6077731/60777317333.jpg",
       "category": "건강",
       "registered_at": "2026-07-20T13:09:04.398771+09:00",
+      "posted": true
+    },
+    "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9507766006&ctag=9507766006&lpt": {
+      "code": "073",
+      "name": "전동그라인더 2개 MS3361 소금 후추 전용 그라인더 코스트코",
+      "short_name": "전동그라인더 소금 후추 전용",
+      "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9507766006&ctag=9507766006&lptag=I28330825814&itemId=28330825814&vendorItemId=95283211257&spec=10305199",
+      "image_url": "https://shopping-phinf.pstatic.net/main_5979414/59794141083.jpg",
+      "category": "주방",
+      "registered_at": "2026-07-21T13:14:04.047970+09:00",
       "posted": true
     }
   }
