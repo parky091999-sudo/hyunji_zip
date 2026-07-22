@@ -167,7 +167,7 @@ async def run():
     from scripts.post_gate import kst_gate, photo_posted_within, coupang_posted_today
     if not await kst_gate(13.0, 23.0, max_wait_h=4.0, label="auto"):
         return
-    # 페이즈별 사진 상품글 간격(2026-07-13): growth=3일, 수익화(9/21~)=격일. config에서 자동 전환
+    # 페이즈별 사진 상품글 간격(2026-07-13): growth=3일, 수익화(7/31~)=격일. config에서 자동 전환
     if photo_posted_within(days=photo_gate_days(), label="auto"):
         return
     # 하루 1쿠파스 상한 — 오늘 영상(osmu)이 먼저 나갔으면 사진은 다음날로 미뤄 겹침 방지
