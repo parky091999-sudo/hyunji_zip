@@ -1,31 +1,7 @@
 {
-  "for_date": "2026-07-23",
-  "generated_at": "2026-07-22T01:37:47.629929+09:00",
+  "for_date": "2026-07-24",
+  "generated_at": "2026-07-23T01:37:29.634235+09:00",
   "candidates": [
-    {
-      "product": {
-        "name": "씨즌M닷컴 카카오프렌즈 휴대용 UV살균 칫솔케이스 라이언 RYAN 라이언001",
-        "price": "27,900원",
-        "original_price": "",
-        "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_2386835/23868356238.jpg",
-        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=1501239636&ctag=1501239636&lptag=P1501239636&itemId=2577588578&vendorItemId=70569850445&spec=10305199",
-        "badge": "쿠팡",
-        "brand": "",
-        "category": "구강청정기",
-        "category_hint": "생활",
-        "mall_name": "쿠팡",
-        "source": "naver_shopping",
-        "scraped_at": "2026-07-21T16:37:07.674715"
-      },
-      "post_text": "이제는 칫솔도 잘 관리해야 한다는 생각이 더 많이 드는 거 같아\n사진 보니까 라이언 케이스 너무 귀여운데\n이건 꼭 봐야겠어",
-      "image_url": "https://shopping-phinf.pstatic.net/main_2386835/23868356238.jpg",
-      "detail_images": [
-        "https://shopping-phinf.pstatic.net/main_2386835/23868356238.jpg"
-      ],
-      "product_code": "",
-      "status": "used"
-    },
     {
       "product": {
         "name": "제노벤 스팀청소기 고압 살균 올인원 가정용 차량용 화이트 CNT-QX-SXYT",
@@ -40,9 +16,9 @@
         "category_hint": "생활",
         "mall_name": "쿠팡",
         "source": "naver_shopping",
-        "scraped_at": "2026-07-21T16:37:08.345392"
+        "scraped_at": "2026-07-22T16:37:08.787391"
       },
-      "post_text": "스트레스 쌓이던 날이 매일이었어\n이제는 이런 날이 훨씬 줄었음\n화이트 스팀청소기로 바뀐 집 상태가 믿기지가 않단 거 같아",
+      "post_text": "제대로 된 청소기는 정말 사고 싶었어\n이제 집에 이거 있으면 청소하기가 간단해질 듯\n화이트 색상도 너무 예쁘고",
       "image_url": "https://shopping-phinf.pstatic.net/main_5634717/56347172178.3.jpg",
       "detail_images": [
         "https://shopping-phinf.pstatic.net/main_5634717/56347172178.3.jpg"
