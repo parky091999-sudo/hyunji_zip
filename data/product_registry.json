@@ -1,5 +1,5 @@
 {
-  "next_code": 74,
+  "next_code": 75,
   "blocked_item_ids": [],
   "products": {
     "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8849967732&ctag=8849967732&lpt": {
@@ -734,6 +734,16 @@
       "image_url": "https://shopping-phinf.pstatic.net/main_5979414/59794141083.jpg",
       "category": "주방",
       "registered_at": "2026-07-21T13:14:04.047970+09:00",
+      "posted": true
+    },
+    "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=1501239636&ctag=1501239636&lpt": {
+      "code": "074",
+      "name": "씨즌M닷컴 카카오프렌즈 휴대용 UV살균 칫솔케이스 라이언 RYAN 라이언001",
+      "short_name": "씨즌M닷컴 카카오프렌즈 휴대용 UV살균",
+      "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=1501239636&ctag=1501239636&lptag=P1501239636&itemId=2577588578&vendorItemId=70569850445&spec=10305199",
+      "image_url": "https://shopping-phinf.pstatic.net/main_2386835/23868356238.jpg",
+      "category": "생활",
+      "registered_at": "2026-07-22T13:01:04.764956+09:00",
       "posted": true
     }
   }
