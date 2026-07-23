@@ -405,6 +405,14 @@ def _generate_short_post(product: dict, product_code: str, media: str = "photo")
     user_msg = f"상품명: {name}\n[제품 종류] {noun or '(추출 실패 — 상품명에서 물건 종류를 파악해 그 단어를 넣어)'}\n\n{m['user_ask']}"
     if noun:
         user_msg += f"\n- 본문에 '{noun}' 단어를 딱 1번 자연스럽게 포함해."
+    # 원본 영상(스레드 소싱분)의 게시글 본문을 참고로 제공 — 영상↔본문 불일치 방지(2026-07-23).
+    #   ★참고만: 표현·CTA를 베끼지 말고, 영상이 뭘 보여주는지 파악용으로만.
+    src_cap = (product.get("source_caption") or "").strip()
+    if src_cap:
+        user_msg += ("\n\n[원본 영상 설명 — 참고용, 절대 베끼지 말 것] 이 영상의 원본 게시글 본문이야. "
+                     "영상이 무엇을·왜 보여주는지 파악하는 데만 참고하고, 문구·표현·이모지·링크 안내는 "
+                     "그대로 쓰지 말고 위 규칙대로 새로 써(제품이 원본 설명과 다르면 상품명을 우선):\n"
+                     f"«{src_cap[:400]}»")
     banned = _recent_first_lines()
     if banned:
         user_msg += "\n\n[중요] 아래 최근 첫 문장들과 같거나 비슷하게 시작 금지:\n"
