@@ -309,6 +309,13 @@ def post_thread_api(
     if post_url:
         logger.info(f"  게시 URL: {post_url}")
 
+    # 발행 후 QC(2026-07-23): 캡션 기호누출 점검·qc_log 기록
+    try:
+        from generator.publish_qc import record as _qc_record
+        _qc_record("coupang_threads", post_id or (post_text or "")[:20], post_text)
+    except Exception as e:
+        logger.warning(f"QC(caption) 오류(무시): {e}")
+
     return {"post_id": post_id, "post_url": post_url}
 
 
