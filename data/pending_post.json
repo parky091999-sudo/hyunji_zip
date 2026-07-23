@@ -1,30 +1,30 @@
 {
-  "for_date": "2026-07-24",
-  "generated_at": "2026-07-23T01:37:29.634235+09:00",
+  "for_date": "2026-07-25",
+  "generated_at": "2026-07-24T01:37:31.129472+09:00",
   "candidates": [
     {
       "product": {
-        "name": "제노벤 스팀청소기 고압 살균 올인원 가정용 차량용 화이트 CNT-QX-SXYT",
-        "price": "144,900원",
+        "name": "유비아클 펫드라이룸 반려동물 털말리기 강아지 고양이 건조기 퓨어화이트",
+        "price": "199,000원",
         "original_price": "",
         "discount_rate": 0,
-        "image_url": "https://shopping-phinf.pstatic.net/main_5634717/56347172178.3.jpg",
-        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8867649453&ctag=8867649453&lptag=I25865217656&itemId=25865217656&vendorItemId=93203771805&spec=10305198",
+        "image_url": "https://shopping-phinf.pstatic.net/main_5728312/57283122578.2.jpg",
+        "product_url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9128826809&ctag=9128826809&lptag=I26858837778&itemId=26858837778&vendorItemId=91923761682&spec=10305199",
         "badge": "쿠팡",
         "brand": "",
-        "category": "스팀청소기",
-        "category_hint": "생활",
+        "category": "미용/목욕",
+        "category_hint": "반려동물",
         "mall_name": "쿠팡",
         "source": "naver_shopping",
-        "scraped_at": "2026-07-22T16:37:08.787391"
+        "scraped_at": "2026-07-23T16:37:10.608572"
       },
-      "post_text": "제대로 된 청소기는 정말 사고 싶었어\n이제 집에 이거 있으면 청소하기가 간단해질 듯\n화이트 색상도 너무 예쁘고",
-      "image_url": "https://shopping-phinf.pstatic.net/main_5634717/56347172178.3.jpg",
+      "post_text": "내 방에 넣으면 딱일 것 같은 물건\n이거 보니까 바로 사고 싶어\n퓨어화이트 색상이 너무 예쁜 거 같더라",
+      "image_url": "https://shopping-phinf.pstatic.net/main_5728312/57283122578.2.jpg",
       "detail_images": [
-        "https://shopping-phinf.pstatic.net/main_5634717/56347172178.3.jpg"
+        "https://shopping-phinf.pstatic.net/main_5728312/57283122578.2.jpg"
       ],
       "product_code": "",
-      "status": "used"
+      "status": "pending"
     }
   ]
 }
