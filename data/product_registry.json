@@ -1,5 +1,5 @@
 {
-  "next_code": 75,
+  "next_code": 76,
   "blocked_item_ids": [],
   "products": {
     "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8849967732&ctag=8849967732&lpt": {
@@ -744,6 +744,16 @@
       "image_url": "https://shopping-phinf.pstatic.net/main_2386835/23868356238.jpg",
       "category": "생활",
       "registered_at": "2026-07-22T13:01:04.764956+09:00",
+      "posted": true
+    },
+    "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8867649453&ctag=8867649453&lpt": {
+      "code": "075",
+      "name": "제노벤 스팀청소기 고압 살균 올인원 가정용 차량용 화이트 CNT-QX-SXYT",
+      "short_name": "제노벤 스팀청소기 고압 살균",
+      "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8867649453&ctag=8867649453&lptag=I25865217656&itemId=25865217656&vendorItemId=93203771805&spec=10305198",
+      "image_url": "https://shopping-phinf.pstatic.net/main_5634717/56347172178.3.jpg",
+      "category": "생활",
+      "registered_at": "2026-07-23T13:08:04.309412+09:00",
       "posted": true
     }
   }
