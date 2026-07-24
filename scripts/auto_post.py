@@ -371,6 +371,15 @@ async def run():
 
     logger.info(f"포스팅 완료: {status} | {post_url or '(URL 없음)'}")
 
+    # (옵트인 QC_LLM_JUDGE=1) 훅↔상품 의미 불일치 판정 — 불일치일 때만 qc_log 기록([073] 대응)
+    try:
+        from generator.publish_qc import qc_llm_relevance, record as _qc_rec
+        rel = qc_llm_relevance(post_text, product.get("name", ""))
+        if rel:
+            _qc_rec("coupang_relevance", code or (post_url or "")[-12:], post_text, extra_issues=rel)
+    except Exception as e:
+        logger.warning(f"QC 훅점검 오류(무시): {e}")
+
     # 댓글 대댓글
     try:
         await check_and_reply_comments()
