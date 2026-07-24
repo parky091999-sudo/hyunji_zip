@@ -1,5 +1,5 @@
 {
-  "next_code": 76,
+  "next_code": 77,
   "blocked_item_ids": [],
   "products": {
     "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8849967732&ctag=8849967732&lpt": {
@@ -754,6 +754,16 @@
       "image_url": "https://shopping-phinf.pstatic.net/main_5634717/56347172178.3.jpg",
       "category": "생활",
       "registered_at": "2026-07-23T13:08:04.309412+09:00",
+      "posted": true
+    },
+    "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9128826809&ctag=9128826809&lpt": {
+      "code": "076",
+      "name": "유비아클 펫드라이룸 반려동물 털말리기 강아지 고양이 건조기 퓨어화이트",
+      "short_name": "유비아클 펫드라이룸 반려동물 털말리기",
+      "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9128826809&ctag=9128826809&lptag=I26858837778&itemId=26858837778&vendorItemId=91923761682&spec=10305199",
+      "image_url": "https://shopping-phinf.pstatic.net/main_5728312/57283122578.2.jpg",
+      "category": "반려동물",
+      "registered_at": "2026-07-24T13:15:04.273638+09:00",
       "posted": true
     }
   }
